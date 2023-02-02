@@ -10,6 +10,7 @@ import {
   CountryControllerServiceProxy,
   CountrySector,
   CountryStatus,
+  Indicator,
   Methodology,
   MethodologyData,
   Project,
@@ -19,6 +20,7 @@ import {
   ProjectStatus,
   Sector,
   ServiceProxy,
+  SectorControllerServiceProxy
 
 } from 'shared/service-proxies/service-proxies';
 
@@ -40,20 +42,27 @@ export class AssignMethodologyComponent implements OnInit, AfterViewInit {
 
   countryList: Country[] = [];
   selectedSectors: Sector[] = [];
+  selectedIndicators: Indicator[] = [];
   selectedMethodSelected: MethodologyData[];
   methodologyList: MethodologyData[] = [];
   countryMethList: Methodology[] = [];
   oldCountryMeth: Methodology[] = [];
   oldMethName = new Array();
   cou: Country = new Country();
+  sec: Sector = new Sector();
   country: Country;
   sector: Sector;
+  indicator : Indicator;
   countryId: number;
   sectorId: number;
+
+  sectornID:number;
+  sectorn:Sector;
 
   constructor(
     private serviceProxy: ServiceProxy,
     private countryProxy: CountryControllerServiceProxy,
+    private sectorproxy :SectorControllerServiceProxy,
     private cdr: ChangeDetectorRef,
     private router: Router,
     private messageService: MessageService,
@@ -81,6 +90,26 @@ export class AssignMethodologyComponent implements OnInit, AfterViewInit {
       for (let x = 0; x < this.cou.countrysector.length; x++) {
         this.selectedSectors.push(this.cou.countrysector[x].sector);
       }
+    });
+
+
+  }
+
+
+  selectIndicator(event: any) {
+
+    this.sectornID = event.id
+    this.sectorn = event;
+
+
+    this.sectorproxy.getSector(event.id).subscribe((res: any) => {
+      this.sec = res;
+      console.log("seccccccccccccc")
+      console.log(this.sec)
+      this.selectedIndicators = [];
+       for (let x = 0; x < this.sec.sectorindicator.length; x++) {
+        this.selectedIndicators.push(this.sec.sectorindicator[x].indicator);
+      } 
     });
 
 

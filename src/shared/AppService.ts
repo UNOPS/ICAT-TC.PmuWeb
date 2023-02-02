@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { UsersControllerServiceProxy } from './service-proxies/service-proxies';
+import { AuditControllerServiceProxy } from './service-proxies-auditlog/service-proxies';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,8 @@ export class AppService {
   public isDataupdated = new BehaviorSubject<boolean>(true);
 
   constructor(
-    private usersControllerServiceProxy: UsersControllerServiceProxy
+    private usersControllerServiceProxy: UsersControllerServiceProxy,
+    private auditControllerServiceProxy : AuditControllerServiceProxy
   ) {
     //this.update();
 

@@ -7,7 +7,8 @@ export const environment = {
   baseUrlAPI: 'http://localhost:7081',
   baseUrlAPIDocUploadAPI: 'http://localhost:7081/document/upload2',
   baseUrlAPIDocdownloadAPI: 'http://localhost:7081/document/downloadDocument',
-  baseUrlCountryAPI: 'http://localhost:7080',
+  baseUrlCountryAPI: 'http://localhost:7081',
+  baseUrlAuditlog :  'http://localhost:7000',
 
   baseSyncAPI: 'http://localhost:3001',
   // baseUrlCountryAPI: 'http://3.110.47.158:7080',//	3.110.108.98
