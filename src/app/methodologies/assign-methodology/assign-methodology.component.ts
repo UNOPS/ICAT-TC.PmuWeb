@@ -55,9 +55,12 @@ export class AssignMethodologyComponent implements OnInit, AfterViewInit {
   indicator : Indicator;
   countryId: number;
   sectorId: number;
-
+  indicatorId: number;
   sectornID:number;
+
   sectorn:Sector;
+  indicatorList :any = [];
+  
 
   constructor(
     private serviceProxy: ServiceProxy,
@@ -101,6 +104,7 @@ export class AssignMethodologyComponent implements OnInit, AfterViewInit {
     this.sectornID = event.id
     this.sectorn = event;
 
+    this.selectedIndicators = [];
 
     this.sectorproxy.getSector(event.id).subscribe((res: any) => {
       this.sec = res;
@@ -109,6 +113,8 @@ export class AssignMethodologyComponent implements OnInit, AfterViewInit {
       this.selectedIndicators = [];
        for (let x = 0; x < this.sec.sectorindicator.length; x++) {
         this.selectedIndicators.push(this.sec.sectorindicator[x].indicator);
+       this.indicatorList =  this.selectedIndicators ;
+       
       } 
     });
 
@@ -117,13 +123,30 @@ export class AssignMethodologyComponent implements OnInit, AfterViewInit {
 
 
   async selectMeth(event: any) {
-    this.sectorId = event.id
+    console.log("eventssssssssssss")
+    console.log(event)
+
+    console.log("eventssssssssssss iddd")
+    console.log(event[0].id)
+
+    
+
+   // this.indicatorId = event[0].id
     let methFilter: string[] = [];
     this.methodologyList = [];
     let filter: string[] = new Array();
     filter.push('Methodology.countryId||$eq||' + this.countryId);
+    console.log("filterrrr")
+    console.log(filter)
 
-    methFilter.push('MethodologyData.sectorId||$eq||' + event.id);
+for(let i=0; i<event.length; i++){
+
+  this.indicatorId = event[i].id
+
+   // methFilter.push('MethodologyData.sectorId||$eq||' + event.id);
+   methFilter.push('MethodologyData.indicatorId||$eq||' + this.indicatorId);
+   console.log("meth filterr")
+   console.log(methFilter)
 
     await this.serviceProxy.getManyBaseMethodologyDataControllerMethodologyData(
       undefined,
@@ -137,8 +160,12 @@ export class AssignMethodologyComponent implements OnInit, AfterViewInit {
       0,
       0
     ).subscribe((res: any) => {
+     
       this.methodologyList = res.data;
+      console.log("methlisttt : ",  this.methodologyList)
     });
+    
+ 
 
     this.serviceProxy.getManyBaseMethodologyControllerMethodology(
       undefined,
@@ -153,15 +180,19 @@ export class AssignMethodologyComponent implements OnInit, AfterViewInit {
       0
     ).subscribe((ress: any) => {
       this.selectedMethodSelected = [];
+      this.countryMethList = []; //////////////////////////////
       this.oldCountryMeth = ress.data;
       this.oldCountryMeth.forEach(a => {
         if (!this.oldMethName.includes(a.name)) {
           this.oldMethName.push(a.name)
         }
-        if (a.sector) {
-          this.selectedSectors.forEach(b => {
-            if (a.sector.id == b.id && a.isActive == 1) {
+        if (a.indicator) {
+          this.selectedIndicators.forEach(b => {
+            if (a.indicator.id == b.id && a.isActive == 1) {
               this.countryMethList.push(a)
+
+          //    console.log("countryMethList")
+           //   console.log(this.countryMethList)
             }
           })
         }
@@ -172,6 +203,9 @@ export class AssignMethodologyComponent implements OnInit, AfterViewInit {
           this.methodologyList.forEach(a => {
             if (a.id == p1.method.id) {
               this.selectedMethodSelected.push(a);
+
+           ///   console.log("selectedMethodSelected")
+            //  console.log(this.selectedMethodSelected)
             }
           })
         }
@@ -181,6 +215,8 @@ export class AssignMethodologyComponent implements OnInit, AfterViewInit {
 
     // await 
   }
+
+}
 
 
   onBackClick() {
@@ -194,7 +230,8 @@ export class AssignMethodologyComponent implements OnInit, AfterViewInit {
     await this.oldCountryMeth.forEach(async old => {
       old.isActive = 2;
       this.serviceProxy.updateOneBaseMethodologyControllerMethodology(old.id, old).subscribe((res) => {
-        console.log('done++++')
+        console.log('doneeee')
+        console.log(res)
       });
 
     });
@@ -223,6 +260,7 @@ export class AssignMethodologyComponent implements OnInit, AfterViewInit {
           newone.upstream_downstream = a.upstream_downstream;
           newone.ghgIncluded = a.ghgIncluded;
           newone.documents = a.documents;
+          newone.indicator = a.indicator;
 
           newone.method = a;
           await this.serviceProxy.createOneBaseMethodologyControllerMethodology(newone).subscribe((res) => {

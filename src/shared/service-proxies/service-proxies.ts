@@ -27,7 +27,7 @@ export class AppControllerServiceProxy {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    getHello(): Observable<any> {
+    getHello(): Observable<string> {
         let url_ = this.baseUrl + "/";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -35,6 +35,7 @@ export class AppControllerServiceProxy {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Accept": "application/json"
             })
         };
 
@@ -45,14 +46,14 @@ export class AppControllerServiceProxy {
                 try {
                     return this.processGetHello(<any>response_);
                 } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
+                    return <Observable<string>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<any>><any>_observableThrow(response_);
+                return <Observable<string>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetHello(response: HttpResponseBase): Observable<any> {
+    protected processGetHello(response: HttpResponseBase): Observable<string> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -61,11 +62,11 @@ export class AppControllerServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -279,7 +280,7 @@ export class ServiceProxy {
      * Delete a single FinancingScheme
      * @return Delete one base response
      */
-    deleteOneBaseFinancingSchemeControllerFinancingScheme(id: number): Observable<any> {
+    deleteOneBaseFinancingSchemeControllerFinancingScheme(id: number): Observable<void> {
         let url_ = this.baseUrl + "/financing-scheme/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -300,14 +301,14 @@ export class ServiceProxy {
                 try {
                     return this.processDeleteOneBaseFinancingSchemeControllerFinancingScheme(<any>response_);
                 } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
+                    return <Observable<void>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<any>><any>_observableThrow(response_);
+                return <Observable<void>><any>_observableThrow(response_);
         }));
     }
 
-    protected processDeleteOneBaseFinancingSchemeControllerFinancingScheme(response: HttpResponseBase): Observable<any> {
+    protected processDeleteOneBaseFinancingSchemeControllerFinancingScheme(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -316,11 +317,7 @@ export class ServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            return _observableOf(<any>null);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -743,7 +740,7 @@ export class ServiceProxy {
      * Delete a single MethodologyData
      * @return Delete one base response
      */
-    deleteOneBaseMethodologyDataControllerMethodologyData(id: number): Observable<any> {
+    deleteOneBaseMethodologyDataControllerMethodologyData(id: number): Observable<void> {
         let url_ = this.baseUrl + "/methodology-data/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -764,14 +761,14 @@ export class ServiceProxy {
                 try {
                     return this.processDeleteOneBaseMethodologyDataControllerMethodologyData(<any>response_);
                 } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
+                    return <Observable<void>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<any>><any>_observableThrow(response_);
+                return <Observable<void>><any>_observableThrow(response_);
         }));
     }
 
-    protected processDeleteOneBaseMethodologyDataControllerMethodologyData(response: HttpResponseBase): Observable<any> {
+    protected processDeleteOneBaseMethodologyDataControllerMethodologyData(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -780,11 +777,7 @@ export class ServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            return _observableOf(<any>null);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -1207,7 +1200,7 @@ export class ServiceProxy {
      * Delete a single Methodology
      * @return Delete one base response
      */
-    deleteOneBaseMethodologyControllerMethodology(id: number): Observable<any> {
+    deleteOneBaseMethodologyControllerMethodology(id: number): Observable<void> {
         let url_ = this.baseUrl + "/methodology/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -1228,14 +1221,14 @@ export class ServiceProxy {
                 try {
                     return this.processDeleteOneBaseMethodologyControllerMethodology(<any>response_);
                 } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
+                    return <Observable<void>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<any>><any>_observableThrow(response_);
+                return <Observable<void>><any>_observableThrow(response_);
         }));
     }
 
-    protected processDeleteOneBaseMethodologyControllerMethodology(response: HttpResponseBase): Observable<any> {
+    protected processDeleteOneBaseMethodologyControllerMethodology(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -1244,11 +1237,7 @@ export class ServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            return _observableOf(<any>null);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -1671,7 +1660,7 @@ export class ServiceProxy {
      * Delete a single EmissionReductioDraftDataEntity
      * @return Delete one base response
      */
-    deleteOneBaseEmissionReductionDraftdataControllerEmissionReductioDraftDataEntity(id: number): Observable<any> {
+    deleteOneBaseEmissionReductionDraftdataControllerEmissionReductioDraftDataEntity(id: number): Observable<void> {
         let url_ = this.baseUrl + "/emission-reduction-draftdata/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -1692,14 +1681,14 @@ export class ServiceProxy {
                 try {
                     return this.processDeleteOneBaseEmissionReductionDraftdataControllerEmissionReductioDraftDataEntity(<any>response_);
                 } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
+                    return <Observable<void>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<any>><any>_observableThrow(response_);
+                return <Observable<void>><any>_observableThrow(response_);
         }));
     }
 
-    protected processDeleteOneBaseEmissionReductionDraftdataControllerEmissionReductioDraftDataEntity(response: HttpResponseBase): Observable<any> {
+    protected processDeleteOneBaseEmissionReductionDraftdataControllerEmissionReductioDraftDataEntity(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -1708,11 +1697,7 @@ export class ServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            return _observableOf(<any>null);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -2135,7 +2120,7 @@ export class ServiceProxy {
      * Delete a single Report
      * @return Delete one base response
      */
-    deleteOneBaseReportControllerReport(id: number): Observable<any> {
+    deleteOneBaseReportControllerReport(id: number): Observable<void> {
         let url_ = this.baseUrl + "/report/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -2156,14 +2141,14 @@ export class ServiceProxy {
                 try {
                     return this.processDeleteOneBaseReportControllerReport(<any>response_);
                 } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
+                    return <Observable<void>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<any>><any>_observableThrow(response_);
+                return <Observable<void>><any>_observableThrow(response_);
         }));
     }
 
-    protected processDeleteOneBaseReportControllerReport(response: HttpResponseBase): Observable<any> {
+    protected processDeleteOneBaseReportControllerReport(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -2172,11 +2157,7 @@ export class ServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            return _observableOf(<any>null);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -2599,7 +2580,7 @@ export class ServiceProxy {
      * Delete a single ApplicabilityEntity
      * @return Delete one base response
      */
-    deleteOneBaseApplicabilityControllerApplicabilityEntity(id: number): Observable<any> {
+    deleteOneBaseApplicabilityControllerApplicabilityEntity(id: number): Observable<void> {
         let url_ = this.baseUrl + "/applicability/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -2620,14 +2601,14 @@ export class ServiceProxy {
                 try {
                     return this.processDeleteOneBaseApplicabilityControllerApplicabilityEntity(<any>response_);
                 } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
+                    return <Observable<void>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<any>><any>_observableThrow(response_);
+                return <Observable<void>><any>_observableThrow(response_);
         }));
     }
 
-    protected processDeleteOneBaseApplicabilityControllerApplicabilityEntity(response: HttpResponseBase): Observable<any> {
+    protected processDeleteOneBaseApplicabilityControllerApplicabilityEntity(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -2636,11 +2617,7 @@ export class ServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            return _observableOf(<any>null);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -3221,7 +3198,7 @@ export class ServiceProxy {
      * Delete a single Audit
      * @return Delete one base response
      */
-    deleteOneBaseAuditControllerAudit(id: number): Observable<any> {
+    deleteOneBaseAuditControllerAudit(id: number): Observable<void> {
         let url_ = this.baseUrl + "/audit/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -3242,14 +3219,14 @@ export class ServiceProxy {
                 try {
                     return this.processDeleteOneBaseAuditControllerAudit(<any>response_);
                 } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
+                    return <Observable<void>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<any>><any>_observableThrow(response_);
+                return <Observable<void>><any>_observableThrow(response_);
         }));
     }
 
-    protected processDeleteOneBaseAuditControllerAudit(response: HttpResponseBase): Observable<any> {
+    protected processDeleteOneBaseAuditControllerAudit(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -3258,11 +3235,7 @@ export class ServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            return _observableOf(<any>null);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -3337,7 +3310,6 @@ export class ServiceProxy {
 
     /**
      * Create a single Project
-     * @return Get create one base response
      */
     createOneBaseProjectControllerProject(body: Project): Observable<Project> {
         let url_ = this.baseUrl + "/project";
@@ -3376,7 +3348,14 @@ export class ServiceProxy {
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 201) {
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = Project.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 201) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             let result201: any = null;
             let resultData201 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
@@ -3495,9 +3474,8 @@ export class ServiceProxy {
 
     /**
      * Update a single Project
-     * @return Response
      */
-    updateOneBaseProjectControllerProject(id: number, body: Project): Observable<Project> {
+    updateOneBaseProjectControllerProject(id: number, body: Project): Observable<void> {
         let url_ = this.baseUrl + "/project/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -3512,7 +3490,6 @@ export class ServiceProxy {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
-                "Accept": "application/json"
             })
         };
 
@@ -3523,14 +3500,14 @@ export class ServiceProxy {
                 try {
                     return this.processUpdateOneBaseProjectControllerProject(<any>response_);
                 } catch (e) {
-                    return <Observable<Project>><any>_observableThrow(e);
+                    return <Observable<void>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<Project>><any>_observableThrow(response_);
+                return <Observable<void>><any>_observableThrow(response_);
         }));
     }
 
-    protected processUpdateOneBaseProjectControllerProject(response: HttpResponseBase): Observable<Project> {
+    protected processUpdateOneBaseProjectControllerProject(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -3539,10 +3516,7 @@ export class ServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = Project.fromJS(resultData200);
-            return _observableOf(result200);
+            return _observableOf(<any>null);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -3685,7 +3659,7 @@ export class ServiceProxy {
      * Delete a single Project
      * @return Delete one base response
      */
-    deleteOneBaseProjectControllerProject(id: number): Observable<any> {
+    deleteOneBaseProjectControllerProject(id: number): Observable<void> {
         let url_ = this.baseUrl + "/project/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -3706,14 +3680,14 @@ export class ServiceProxy {
                 try {
                     return this.processDeleteOneBaseProjectControllerProject(<any>response_);
                 } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
+                    return <Observable<void>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<any>><any>_observableThrow(response_);
+                return <Observable<void>><any>_observableThrow(response_);
         }));
     }
 
-    protected processDeleteOneBaseProjectControllerProject(response: HttpResponseBase): Observable<any> {
+    protected processDeleteOneBaseProjectControllerProject(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -3722,11 +3696,7 @@ export class ServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            return _observableOf(<any>null);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -3801,7 +3771,6 @@ export class ServiceProxy {
 
     /**
      * Update a single Country
-     * @return Response
      */
     updateOneBaseCountryControllerCountry(id: number, body: Country): Observable<Country> {
         let url_ = this.baseUrl + "/country/{id}";
@@ -3991,7 +3960,7 @@ export class ServiceProxy {
      * Delete a single Country
      * @return Delete one base response
      */
-    deleteOneBaseCountryControllerCountry(id: number): Observable<any> {
+    deleteOneBaseCountryControllerCountry(id: number): Observable<void> {
         let url_ = this.baseUrl + "/country/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -4012,14 +3981,14 @@ export class ServiceProxy {
                 try {
                     return this.processDeleteOneBaseCountryControllerCountry(<any>response_);
                 } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
+                    return <Observable<void>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<any>><any>_observableThrow(response_);
+                return <Observable<void>><any>_observableThrow(response_);
         }));
     }
 
-    protected processDeleteOneBaseCountryControllerCountry(response: HttpResponseBase): Observable<any> {
+    protected processDeleteOneBaseCountryControllerCountry(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -4028,11 +3997,7 @@ export class ServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            return _observableOf(<any>null);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -4044,7 +4009,6 @@ export class ServiceProxy {
 
     /**
      * Create a single Country
-     * @return Get create one base response
      */
     createOneBaseCountryControllerCountry(body: Country): Observable<Country> {
         let url_ = this.baseUrl + "/country";
@@ -4083,7 +4047,14 @@ export class ServiceProxy {
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 201) {
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = Country.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 201) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             let result201: any = null;
             let resultData201 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
@@ -4275,9 +4246,8 @@ export class ServiceProxy {
      * @param offset (optional) Offset amount of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#offset" target="_blank">Docs</a>
      * @param page (optional) Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>
      * @param cache (optional) Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
-     * @return Get many base response
      */
-    getManyBaseNdcControllerNdc(fields: string[] | undefined, s: string | undefined, filter: string[] | undefined, or: string[] | undefined, sort: string[] | undefined, join: string[] | undefined, limit: number | undefined, offset: number | undefined, page: number | undefined, cache: number | undefined): Observable<GetManyNdcResponseDto> {
+    getManyBaseNdcControllerNdc(fields: string[] | undefined, s: string | undefined, filter: string[] | undefined, or: string[] | undefined, sort: string[] | undefined, join: string[] | undefined, limit: number | undefined, offset: number | undefined, page: number | undefined, cache: number | undefined): Observable<any> {
         let url_ = this.baseUrl + "/ndc?";
         if (fields === null)
             throw new Error("The parameter 'fields' cannot be null.");
@@ -4336,14 +4306,14 @@ export class ServiceProxy {
                 try {
                     return this.processGetManyBaseNdcControllerNdc(<any>response_);
                 } catch (e) {
-                    return <Observable<GetManyNdcResponseDto>><any>_observableThrow(e);
+                    return <Observable<any>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<GetManyNdcResponseDto>><any>_observableThrow(response_);
+                return <Observable<any>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetManyBaseNdcControllerNdc(response: HttpResponseBase): Observable<GetManyNdcResponseDto> {
+    protected processGetManyBaseNdcControllerNdc(response: HttpResponseBase): Observable<any> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -4354,7 +4324,8 @@ export class ServiceProxy {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = GetManyNdcResponseDto.fromJS(resultData200);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -4613,7 +4584,7 @@ export class ServiceProxy {
      * Delete a single Ndc
      * @return Delete one base response
      */
-    deleteOneBaseNdcControllerNdc(id: number): Observable<any> {
+    deleteOneBaseNdcControllerNdc(id: number): Observable<void> {
         let url_ = this.baseUrl + "/ndc/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -4634,14 +4605,14 @@ export class ServiceProxy {
                 try {
                     return this.processDeleteOneBaseNdcControllerNdc(<any>response_);
                 } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
+                    return <Observable<void>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<any>><any>_observableThrow(response_);
+                return <Observable<void>><any>_observableThrow(response_);
         }));
     }
 
-    protected processDeleteOneBaseNdcControllerNdc(response: HttpResponseBase): Observable<any> {
+    protected processDeleteOneBaseNdcControllerNdc(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -4650,11 +4621,7 @@ export class ServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            return _observableOf(<any>null);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -4919,7 +4886,7 @@ export class ServiceProxy {
      * Delete a single NdcSet
      * @return Delete one base response
      */
-    deleteOneBaseNdcSetControllerNdcSet(id: number): Observable<any> {
+    deleteOneBaseNdcSetControllerNdcSet(id: number): Observable<void> {
         let url_ = this.baseUrl + "/ndc-set/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -4940,14 +4907,14 @@ export class ServiceProxy {
                 try {
                     return this.processDeleteOneBaseNdcSetControllerNdcSet(<any>response_);
                 } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
+                    return <Observable<void>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<any>><any>_observableThrow(response_);
+                return <Observable<void>><any>_observableThrow(response_);
         }));
     }
 
-    protected processDeleteOneBaseNdcSetControllerNdcSet(response: HttpResponseBase): Observable<any> {
+    protected processDeleteOneBaseNdcSetControllerNdcSet(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -4956,11 +4923,7 @@ export class ServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            return _observableOf(<any>null);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -5383,7 +5346,7 @@ export class ServiceProxy {
      * Delete a single SubNdc
      * @return Delete one base response
      */
-    deleteOneBaseSubNdcControllerSubNdc(id: number): Observable<any> {
+    deleteOneBaseSubNdcControllerSubNdc(id: number): Observable<void> {
         let url_ = this.baseUrl + "/sub-ndc/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -5404,14 +5367,14 @@ export class ServiceProxy {
                 try {
                     return this.processDeleteOneBaseSubNdcControllerSubNdc(<any>response_);
                 } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
+                    return <Observable<void>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<any>><any>_observableThrow(response_);
+                return <Observable<void>><any>_observableThrow(response_);
         }));
     }
 
-    protected processDeleteOneBaseSubNdcControllerSubNdc(response: HttpResponseBase): Observable<any> {
+    protected processDeleteOneBaseSubNdcControllerSubNdc(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -5420,11 +5383,7 @@ export class ServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            return _observableOf(<any>null);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -5847,7 +5806,7 @@ export class ServiceProxy {
      * Delete a single MitigationActionType
      * @return Delete one base response
      */
-    deleteOneBaseMitigationActionControllerMitigationActionType(id: number): Observable<any> {
+    deleteOneBaseMitigationActionControllerMitigationActionType(id: number): Observable<void> {
         let url_ = this.baseUrl + "/mitigation-action/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -5868,14 +5827,14 @@ export class ServiceProxy {
                 try {
                     return this.processDeleteOneBaseMitigationActionControllerMitigationActionType(<any>response_);
                 } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
+                    return <Observable<void>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<any>><any>_observableThrow(response_);
+                return <Observable<void>><any>_observableThrow(response_);
         }));
     }
 
-    protected processDeleteOneBaseMitigationActionControllerMitigationActionType(response: HttpResponseBase): Observable<any> {
+    protected processDeleteOneBaseMitigationActionControllerMitigationActionType(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -5884,11 +5843,7 @@ export class ServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            return _observableOf(<any>null);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -6311,7 +6266,7 @@ export class ServiceProxy {
      * Delete a single ProjectOwner
      * @return Delete one base response
      */
-    deleteOneBaseProjectOwnerControllerProjectOwner(id: number): Observable<any> {
+    deleteOneBaseProjectOwnerControllerProjectOwner(id: number): Observable<void> {
         let url_ = this.baseUrl + "/project-owner/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -6332,14 +6287,14 @@ export class ServiceProxy {
                 try {
                     return this.processDeleteOneBaseProjectOwnerControllerProjectOwner(<any>response_);
                 } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
+                    return <Observable<void>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<any>><any>_observableThrow(response_);
+                return <Observable<void>><any>_observableThrow(response_);
         }));
     }
 
-    protected processDeleteOneBaseProjectOwnerControllerProjectOwner(response: HttpResponseBase): Observable<any> {
+    protected processDeleteOneBaseProjectOwnerControllerProjectOwner(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -6348,11 +6303,7 @@ export class ServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            return _observableOf(<any>null);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -6595,9 +6546,8 @@ export class ServiceProxy {
      * @param offset (optional) Offset amount of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#offset" target="_blank">Docs</a>
      * @param page (optional) Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>
      * @param cache (optional) Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
-     * @return Get many base response
      */
-    getManyBaseSectorControllerSector(fields: string[] | undefined, s: string | undefined, filter: string[] | undefined, or: string[] | undefined, sort: string[] | undefined, join: string[] | undefined, limit: number | undefined, offset: number | undefined, page: number | undefined, cache: number | undefined): Observable<GetManySectorResponseDto> {
+    getManyBaseSectorControllerSector(fields: string[] | undefined, s: string | undefined, filter: string[] | undefined, or: string[] | undefined, sort: string[] | undefined, join: string[] | undefined, limit: number | undefined, offset: number | undefined, page: number | undefined, cache: number | undefined): Observable<any> {
         let url_ = this.baseUrl + "/sector?";
         if (fields === null)
             throw new Error("The parameter 'fields' cannot be null.");
@@ -6656,14 +6606,14 @@ export class ServiceProxy {
                 try {
                     return this.processGetManyBaseSectorControllerSector(<any>response_);
                 } catch (e) {
-                    return <Observable<GetManySectorResponseDto>><any>_observableThrow(e);
+                    return <Observable<any>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<GetManySectorResponseDto>><any>_observableThrow(response_);
+                return <Observable<any>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetManyBaseSectorControllerSector(response: HttpResponseBase): Observable<GetManySectorResponseDto> {
+    protected processGetManyBaseSectorControllerSector(response: HttpResponseBase): Observable<any> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -6674,7 +6624,8 @@ export class ServiceProxy {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = GetManySectorResponseDto.fromJS(resultData200);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -6687,7 +6638,6 @@ export class ServiceProxy {
 
     /**
      * Create a single Sector
-     * @return Get create one base response
      */
     createOneBaseSectorControllerSector(body: Sector): Observable<Sector> {
         let url_ = this.baseUrl + "/sector";
@@ -6726,7 +6676,14 @@ export class ServiceProxy {
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 201) {
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = Sector.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 201) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             let result201: any = null;
             let resultData201 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
@@ -6933,7 +6890,7 @@ export class ServiceProxy {
      * Delete a single Sector
      * @return Delete one base response
      */
-    deleteOneBaseSectorControllerSector(id: number): Observable<any> {
+    deleteOneBaseSectorControllerSector(id: number): Observable<void> {
         let url_ = this.baseUrl + "/sector/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -6954,14 +6911,14 @@ export class ServiceProxy {
                 try {
                     return this.processDeleteOneBaseSectorControllerSector(<any>response_);
                 } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
+                    return <Observable<void>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<any>><any>_observableThrow(response_);
+                return <Observable<void>><any>_observableThrow(response_);
         }));
     }
 
-    protected processDeleteOneBaseSectorControllerSector(response: HttpResponseBase): Observable<any> {
+    protected processDeleteOneBaseSectorControllerSector(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -6970,11 +6927,7 @@ export class ServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            return _observableOf(<any>null);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -7239,7 +7192,7 @@ export class ServiceProxy {
      * Delete a single ProjectStatus
      * @return Delete one base response
      */
-    deleteOneBaseProjectStatusControllerProjectStatus(id: number): Observable<any> {
+    deleteOneBaseProjectStatusControllerProjectStatus(id: number): Observable<void> {
         let url_ = this.baseUrl + "/project-status/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -7260,14 +7213,14 @@ export class ServiceProxy {
                 try {
                     return this.processDeleteOneBaseProjectStatusControllerProjectStatus(<any>response_);
                 } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
+                    return <Observable<void>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<any>><any>_observableThrow(response_);
+                return <Observable<void>><any>_observableThrow(response_);
         }));
     }
 
-    protected processDeleteOneBaseProjectStatusControllerProjectStatus(response: HttpResponseBase): Observable<any> {
+    protected processDeleteOneBaseProjectStatusControllerProjectStatus(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -7276,11 +7229,7 @@ export class ServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            return _observableOf(<any>null);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -7703,7 +7652,7 @@ export class ServiceProxy {
      * Delete a single Documents
      * @return Delete one base response
      */
-    deleteOneBaseDocumentControllerDocuments(id: number): Observable<any> {
+    deleteOneBaseDocumentControllerDocuments(id: number): Observable<void> {
         let url_ = this.baseUrl + "/document/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -7724,14 +7673,14 @@ export class ServiceProxy {
                 try {
                     return this.processDeleteOneBaseDocumentControllerDocuments(<any>response_);
                 } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
+                    return <Observable<void>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<any>><any>_observableThrow(response_);
+                return <Observable<void>><any>_observableThrow(response_);
         }));
     }
 
-    protected processDeleteOneBaseDocumentControllerDocuments(response: HttpResponseBase): Observable<any> {
+    protected processDeleteOneBaseDocumentControllerDocuments(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -7740,11 +7689,7 @@ export class ServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            return _observableOf(<any>null);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -8043,9 +7988,8 @@ export class ServiceProxy {
      * @param offset (optional) Offset amount of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#offset" target="_blank">Docs</a>
      * @param page (optional) Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>
      * @param cache (optional) Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
-     * @return Get many base response
      */
-    getManyBaseUsersControllerUser(fields: string[] | undefined, s: string | undefined, filter: string[] | undefined, or: string[] | undefined, sort: string[] | undefined, join: string[] | undefined, limit: number | undefined, offset: number | undefined, page: number | undefined, cache: number | undefined): Observable<GetManyUserResponseDto> {
+    getManyBaseUsersControllerUser(fields: string[] | undefined, s: string | undefined, filter: string[] | undefined, or: string[] | undefined, sort: string[] | undefined, join: string[] | undefined, limit: number | undefined, offset: number | undefined, page: number | undefined, cache: number | undefined): Observable<any> {
         let url_ = this.baseUrl + "/users?";
         if (fields === null)
             throw new Error("The parameter 'fields' cannot be null.");
@@ -8104,14 +8048,14 @@ export class ServiceProxy {
                 try {
                     return this.processGetManyBaseUsersControllerUser(<any>response_);
                 } catch (e) {
-                    return <Observable<GetManyUserResponseDto>><any>_observableThrow(e);
+                    return <Observable<any>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<GetManyUserResponseDto>><any>_observableThrow(response_);
+                return <Observable<any>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetManyBaseUsersControllerUser(response: HttpResponseBase): Observable<GetManyUserResponseDto> {
+    protected processGetManyBaseUsersControllerUser(response: HttpResponseBase): Observable<any> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -8122,7 +8066,8 @@ export class ServiceProxy {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = GetManyUserResponseDto.fromJS(resultData200);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -8207,7 +8152,7 @@ export class ServiceProxy {
      * Delete a single User
      * @return Delete one base response
      */
-    deleteOneBaseUsersControllerUser(id: number): Observable<any> {
+    deleteOneBaseUsersControllerUser(id: number): Observable<void> {
         let url_ = this.baseUrl + "/users/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -8228,14 +8173,14 @@ export class ServiceProxy {
                 try {
                     return this.processDeleteOneBaseUsersControllerUser(<any>response_);
                 } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
+                    return <Observable<void>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<any>><any>_observableThrow(response_);
+                return <Observable<void>><any>_observableThrow(response_);
         }));
     }
 
-    protected processDeleteOneBaseUsersControllerUser(response: HttpResponseBase): Observable<any> {
+    protected processDeleteOneBaseUsersControllerUser(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -8244,11 +8189,7 @@ export class ServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            return _observableOf(<any>null);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -8441,7 +8382,6 @@ export class ServiceProxy {
 
     /**
      * Create a single Institution
-     * @return Get create one base response
      */
     createOneBaseInstitutionControllerInstitution(body: Institution): Observable<Institution> {
         let url_ = this.baseUrl + "/institution";
@@ -8480,7 +8420,14 @@ export class ServiceProxy {
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 201) {
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = Institution.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 201) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             let result201: any = null;
             let resultData201 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
@@ -8599,7 +8546,6 @@ export class ServiceProxy {
 
     /**
      * Update a single Institution
-     * @return Response
      */
     updateOneBaseInstitutionControllerInstitution(id: number, body: Institution): Observable<Institution> {
         let url_ = this.baseUrl + "/institution/{id}";
@@ -8789,7 +8735,7 @@ export class ServiceProxy {
      * Delete a single Institution
      * @return Delete one base response
      */
-    deleteOneBaseInstitutionControllerInstitution(id: number): Observable<any> {
+    deleteOneBaseInstitutionControllerInstitution(id: number): Observable<void> {
         let url_ = this.baseUrl + "/institution/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -8810,14 +8756,14 @@ export class ServiceProxy {
                 try {
                     return this.processDeleteOneBaseInstitutionControllerInstitution(<any>response_);
                 } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
+                    return <Observable<void>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<any>><any>_observableThrow(response_);
+                return <Observable<void>><any>_observableThrow(response_);
         }));
     }
 
-    protected processDeleteOneBaseInstitutionControllerInstitution(response: HttpResponseBase): Observable<any> {
+    protected processDeleteOneBaseInstitutionControllerInstitution(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -8826,11 +8772,7 @@ export class ServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            return _observableOf(<any>null);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -9095,7 +9037,7 @@ export class ServiceProxy {
      * Delete a single InstitutionType
      * @return Delete one base response
      */
-    deleteOneBaseInstitutionTypeControllerInstitutionType(id: number): Observable<any> {
+    deleteOneBaseInstitutionTypeControllerInstitutionType(id: number): Observable<void> {
         let url_ = this.baseUrl + "/institution-type/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -9116,14 +9058,14 @@ export class ServiceProxy {
                 try {
                     return this.processDeleteOneBaseInstitutionTypeControllerInstitutionType(<any>response_);
                 } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
+                    return <Observable<void>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<any>><any>_observableThrow(response_);
+                return <Observable<void>><any>_observableThrow(response_);
         }));
     }
 
-    protected processDeleteOneBaseInstitutionTypeControllerInstitutionType(response: HttpResponseBase): Observable<any> {
+    protected processDeleteOneBaseInstitutionTypeControllerInstitutionType(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -9132,11 +9074,7 @@ export class ServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            return _observableOf(<any>null);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -9559,7 +9497,7 @@ export class ServiceProxy {
      * Delete a single InstitutionCategory
      * @return Delete one base response
      */
-    deleteOneBaseInstitutionCategoryControllerInstitutionCategory(id: number): Observable<any> {
+    deleteOneBaseInstitutionCategoryControllerInstitutionCategory(id: number): Observable<void> {
         let url_ = this.baseUrl + "/institution-category/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -9580,14 +9518,14 @@ export class ServiceProxy {
                 try {
                     return this.processDeleteOneBaseInstitutionCategoryControllerInstitutionCategory(<any>response_);
                 } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
+                    return <Observable<void>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<any>><any>_observableThrow(response_);
+                return <Observable<void>><any>_observableThrow(response_);
         }));
     }
 
-    protected processDeleteOneBaseInstitutionCategoryControllerInstitutionCategory(response: HttpResponseBase): Observable<any> {
+    protected processDeleteOneBaseInstitutionCategoryControllerInstitutionCategory(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -9596,11 +9534,7 @@ export class ServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            return _observableOf(<any>null);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -10023,7 +9957,7 @@ export class ServiceProxy {
      * Delete a single ProjectApprovalStatus
      * @return Delete one base response
      */
-    deleteOneBaseProjectApprovalStatusControllerProjectApprovalStatus(id: number): Observable<any> {
+    deleteOneBaseProjectApprovalStatusControllerProjectApprovalStatus(id: number): Observable<void> {
         let url_ = this.baseUrl + "/project-approval-status/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -10044,14 +9978,14 @@ export class ServiceProxy {
                 try {
                     return this.processDeleteOneBaseProjectApprovalStatusControllerProjectApprovalStatus(<any>response_);
                 } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
+                    return <Observable<void>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<any>><any>_observableThrow(response_);
+                return <Observable<void>><any>_observableThrow(response_);
         }));
     }
 
-    protected processDeleteOneBaseProjectApprovalStatusControllerProjectApprovalStatus(response: HttpResponseBase): Observable<any> {
+    protected processDeleteOneBaseProjectApprovalStatusControllerProjectApprovalStatus(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -10060,11 +9994,7 @@ export class ServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            return _observableOf(<any>null);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -10487,7 +10417,7 @@ export class ServiceProxy {
      * Delete a single UserType
      * @return Delete one base response
      */
-    deleteOneBaseUserTypeControllerUserType(id: number): Observable<any> {
+    deleteOneBaseUserTypeControllerUserType(id: number): Observable<void> {
         let url_ = this.baseUrl + "/usertype/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -10508,14 +10438,14 @@ export class ServiceProxy {
                 try {
                     return this.processDeleteOneBaseUserTypeControllerUserType(<any>response_);
                 } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
+                    return <Observable<void>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<any>><any>_observableThrow(response_);
+                return <Observable<void>><any>_observableThrow(response_);
         }));
     }
 
-    protected processDeleteOneBaseUserTypeControllerUserType(response: HttpResponseBase): Observable<any> {
+    protected processDeleteOneBaseUserTypeControllerUserType(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -10524,11 +10454,7 @@ export class ServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            return _observableOf(<any>null);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -10761,9 +10687,8 @@ export class ServiceProxy {
 
     /**
      * Delete a single LearningMaterial
-     * @return Delete one base response
      */
-    deleteOneBaseLearningMaterialControllerLearningMaterial(id: number): Observable<any> {
+    deleteOneBaseLearningMaterialControllerLearningMaterial(id: number): Observable<number> {
         let url_ = this.baseUrl + "/learning-material/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -10774,6 +10699,7 @@ export class ServiceProxy {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Accept": "application/json"
             })
         };
 
@@ -10784,14 +10710,14 @@ export class ServiceProxy {
                 try {
                     return this.processDeleteOneBaseLearningMaterialControllerLearningMaterial(<any>response_);
                 } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
+                    return <Observable<number>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<any>><any>_observableThrow(response_);
+                return <Observable<number>><any>_observableThrow(response_);
         }));
     }
 
-    protected processDeleteOneBaseLearningMaterialControllerLearningMaterial(response: HttpResponseBase): Observable<any> {
+    protected processDeleteOneBaseLearningMaterialControllerLearningMaterial(response: HttpResponseBase): Observable<number> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -10800,11 +10726,11 @@ export class ServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -11004,7 +10930,6 @@ export class ServiceProxy {
 
     /**
      * Create a single LearningMaterial
-     * @return Get create one base response
      */
     createOneBaseLearningMaterialControllerLearningMaterial(body: LearningMaterial): Observable<LearningMaterial> {
         let url_ = this.baseUrl + "/learning-material";
@@ -11043,7 +10968,14 @@ export class ServiceProxy {
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 201) {
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = LearningMaterial.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 201) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             let result201: any = null;
             let resultData201 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
@@ -11235,8 +11167,8 @@ export class MethodologyControllerServiceProxy {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    getMethoDetails(page: number, limit: number, filterText: string, sectorId: number, developedBy: string): Observable<any> {
-        let url_ = this.baseUrl + "/methodology/methodology/methodologyinfo/{page}/{limit}/{sectorId}/{filterText}/{developedBy}?";
+    getMethoDetails(page: number, limit: number, filterText: string, indicatorId: number, developedBy: string): Observable<any> {
+        let url_ = this.baseUrl + "/methodology/methodology/methodologyinfo/{page}/{limit}/{indicatorId}/{filterText}/{developedBy}?";
         if (page === undefined || page === null)
             throw new Error("The parameter 'page' must be defined and cannot be null.");
         else
@@ -11249,10 +11181,10 @@ export class MethodologyControllerServiceProxy {
             throw new Error("The parameter 'filterText' must be defined and cannot be null.");
         else
             url_ += "filterText=" + encodeURIComponent("" + filterText) + "&";
-        if (sectorId === undefined || sectorId === null)
-            throw new Error("The parameter 'sectorId' must be defined and cannot be null.");
+        if (indicatorId === undefined || indicatorId === null)
+            throw new Error("The parameter 'indicatorId' must be defined and cannot be null.");
         else
-            url_ += "sectorId=" + encodeURIComponent("" + sectorId) + "&";
+            url_ += "indicatorId=" + encodeURIComponent("" + indicatorId) + "&";
         if (developedBy === undefined || developedBy === null)
             throw new Error("The parameter 'developedBy' must be defined and cannot be null.");
         else
@@ -11263,6 +11195,7 @@ export class MethodologyControllerServiceProxy {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Accept": "application/json"
             })
         };
 
@@ -11289,11 +11222,11 @@ export class MethodologyControllerServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -11351,6 +11284,7 @@ export class AuditControllerServiceProxy {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Accept": "application/json"
             })
         };
 
@@ -11377,11 +11311,11 @@ export class AuditControllerServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -11439,6 +11373,7 @@ export class ProjectControllerServiceProxy {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Accept": "application/json"
             })
         };
 
@@ -11465,11 +11400,11 @@ export class ProjectControllerServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -11515,6 +11450,7 @@ export class ProjectControllerServiceProxy {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Accept": "application/json"
             })
         };
 
@@ -11541,11 +11477,11 @@ export class ProjectControllerServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -11599,6 +11535,7 @@ export class ProjectControllerServiceProxy {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Accept": "application/json"
             })
         };
 
@@ -11625,11 +11562,11 @@ export class ProjectControllerServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -11663,6 +11600,7 @@ export class CountryControllerServiceProxy {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Accept": "application/json"
             })
         };
 
@@ -11689,11 +11627,11 @@ export class CountryControllerServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -11711,6 +11649,7 @@ export class CountryControllerServiceProxy {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Accept": "application/json"
             })
         };
 
@@ -11737,11 +11676,11 @@ export class CountryControllerServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -11783,6 +11722,7 @@ export class SectorControllerServiceProxy {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Accept": "application/json"
             })
         };
 
@@ -11809,11 +11749,11 @@ export class SectorControllerServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -11835,6 +11775,7 @@ export class SectorControllerServiceProxy {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Accept": "application/json"
             })
         };
 
@@ -11861,11 +11802,11 @@ export class SectorControllerServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -11887,7 +11828,7 @@ export class DocumentControllerServiceProxy {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    uploadFile(body: Documents): Observable<any> {
+    uploadFile(body: Documents): Observable<void> {
         let url_ = this.baseUrl + "/document/upload";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -11909,14 +11850,14 @@ export class DocumentControllerServiceProxy {
                 try {
                     return this.processUploadFile(<any>response_);
                 } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
+                    return <Observable<void>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<any>><any>_observableThrow(response_);
+                return <Observable<void>><any>_observableThrow(response_);
         }));
     }
 
-    protected processUploadFile(response: HttpResponseBase): Observable<any> {
+    protected processUploadFile(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -11935,7 +11876,7 @@ export class DocumentControllerServiceProxy {
         return _observableOf(<any>null);
     }
 
-    uploadFile2(): Observable<any> {
+    uploadFile2(): Observable<void> {
         let url_ = this.baseUrl + "/document/upload2/{oid}/{owner}";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -11953,14 +11894,14 @@ export class DocumentControllerServiceProxy {
                 try {
                     return this.processUploadFile2(<any>response_);
                 } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
+                    return <Observable<void>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<any>><any>_observableThrow(response_);
+                return <Observable<void>><any>_observableThrow(response_);
         }));
     }
 
-    protected processUploadFile2(response: HttpResponseBase): Observable<any> {
+    protected processUploadFile2(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -11979,7 +11920,7 @@ export class DocumentControllerServiceProxy {
         return _observableOf(<any>null);
     }
 
-    uploadFile3(): Observable<any> {
+    uploadFile3(): Observable<void> {
         let url_ = this.baseUrl + "/document/upload3/{oid}";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -11997,14 +11938,14 @@ export class DocumentControllerServiceProxy {
                 try {
                     return this.processUploadFile3(<any>response_);
                 } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
+                    return <Observable<void>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<any>><any>_observableThrow(response_);
+                return <Observable<void>><any>_observableThrow(response_);
         }));
     }
 
-    protected processUploadFile3(response: HttpResponseBase): Observable<any> {
+    protected processUploadFile3(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -12023,7 +11964,7 @@ export class DocumentControllerServiceProxy {
         return _observableOf(<any>null);
     }
 
-    deleteDoc(docId: number): Observable<any> {
+    deleteDoc(docId: number): Observable<void> {
         let url_ = this.baseUrl + "/document/delete/{docId}";
         if (docId === undefined || docId === null)
             throw new Error("The parameter 'docId' must be defined.");
@@ -12044,14 +11985,14 @@ export class DocumentControllerServiceProxy {
                 try {
                     return this.processDeleteDoc(<any>response_);
                 } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
+                    return <Observable<void>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<any>><any>_observableThrow(response_);
+                return <Observable<void>><any>_observableThrow(response_);
         }));
     }
 
-    protected processDeleteDoc(response: HttpResponseBase): Observable<any> {
+    protected processDeleteDoc(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -12070,7 +12011,7 @@ export class DocumentControllerServiceProxy {
         return _observableOf(<any>null);
     }
 
-    getDocuments(oid: number, owner: number): Observable<any> {
+    getDocuments(oid: number, owner: number): Observable<Documents[]> {
         let url_ = this.baseUrl + "/document/getDocument/{oid}/{owner}";
         if (oid === undefined || oid === null)
             throw new Error("The parameter 'oid' must be defined.");
@@ -12084,6 +12025,7 @@ export class DocumentControllerServiceProxy {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Accept": "application/json"
             })
         };
 
@@ -12094,14 +12036,14 @@ export class DocumentControllerServiceProxy {
                 try {
                     return this.processGetDocuments(<any>response_);
                 } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
+                    return <Observable<Documents[]>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<any>><any>_observableThrow(response_);
+                return <Observable<Documents[]>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetDocuments(response: HttpResponseBase): Observable<any> {
+    protected processGetDocuments(response: HttpResponseBase): Observable<Documents[]> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -12110,11 +12052,17 @@ export class DocumentControllerServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200.push(Documents.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -12124,7 +12072,7 @@ export class DocumentControllerServiceProxy {
         return _observableOf(<any>null);
     }
 
-    downloadDocuments(did: number, state: string): Observable<any> {
+    downloadDocuments(did: number, state: string): Observable<void> {
         let url_ = this.baseUrl + "/document/downloadDocument/{state}/{did}";
         if (did === undefined || did === null)
             throw new Error("The parameter 'did' must be defined.");
@@ -12148,14 +12096,14 @@ export class DocumentControllerServiceProxy {
                 try {
                     return this.processDownloadDocuments(<any>response_);
                 } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
+                    return <Observable<void>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<any>><any>_observableThrow(response_);
+                return <Observable<void>><any>_observableThrow(response_);
         }));
     }
 
-    protected processDownloadDocuments(response: HttpResponseBase): Observable<any> {
+    protected processDownloadDocuments(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -12164,11 +12112,7 @@ export class DocumentControllerServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            return _observableOf(<any>null);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -12202,6 +12146,7 @@ export class AuthControllerServiceProxy {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
+                "Accept": "application/json"
             })
         };
 
@@ -12228,7 +12173,11 @@ export class AuthControllerServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 201) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return _observableOf(<any>null);
+            let result201: any = null;
+            let resultData201 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result201 = resultData201 !== undefined ? resultData201 : <any>null;
+    
+            return _observableOf(result201);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -12238,7 +12187,7 @@ export class AuthControllerServiceProxy {
         return _observableOf(<any>null);
     }
 
-    validateResetPassword(email: string, token: string): Observable<any> {
+    validateResetPassword(email: string, token: string): Observable<boolean> {
         let url_ = this.baseUrl + "/auth/auth/validate-reset-password/{email}/{token}";
         if (email === undefined || email === null)
             throw new Error("The parameter 'email' must be defined.");
@@ -12252,6 +12201,7 @@ export class AuthControllerServiceProxy {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Accept": "application/json"
             })
         };
 
@@ -12262,14 +12212,14 @@ export class AuthControllerServiceProxy {
                 try {
                     return this.processValidateResetPassword(<any>response_);
                 } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
+                    return <Observable<boolean>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<any>><any>_observableThrow(response_);
+                return <Observable<boolean>><any>_observableThrow(response_);
         }));
     }
 
-    protected processValidateResetPassword(response: HttpResponseBase): Observable<any> {
+    protected processValidateResetPassword(response: HttpResponseBase): Observable<boolean> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -12278,11 +12228,11 @@ export class AuthControllerServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -12292,7 +12242,7 @@ export class AuthControllerServiceProxy {
         return _observableOf(<any>null);
     }
 
-    resetPassword(body: ResetPassword): Observable<any> {
+    resetPassword(body: ResetPassword): Observable<boolean> {
         let url_ = this.baseUrl + "/auth/auth/reset-password";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -12304,6 +12254,7 @@ export class AuthControllerServiceProxy {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
+                "Accept": "application/json"
             })
         };
 
@@ -12314,14 +12265,14 @@ export class AuthControllerServiceProxy {
                 try {
                     return this.processResetPassword(<any>response_);
                 } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
+                    return <Observable<boolean>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<any>><any>_observableThrow(response_);
+                return <Observable<boolean>><any>_observableThrow(response_);
         }));
     }
 
-    protected processResetPassword(response: HttpResponseBase): Observable<any> {
+    protected processResetPassword(response: HttpResponseBase): Observable<boolean> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -12330,11 +12281,11 @@ export class AuthControllerServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -12356,6 +12307,7 @@ export class AuthControllerServiceProxy {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
+                "Accept": "application/json"
             })
         };
 
@@ -12382,7 +12334,11 @@ export class AuthControllerServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 201) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return _observableOf(<any>null);
+            let result201: any = null;
+            let resultData201 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result201 = resultData201 !== undefined ? resultData201 : <any>null;
+    
+            return _observableOf(result201);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -12404,7 +12360,7 @@ export class UsersControllerServiceProxy {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    changeStatus(id: number, status: number): Observable<any> {
+    changeStatus(id: number, status: number): Observable<User> {
         let url_ = this.baseUrl + "/users/changeStatus?";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined and cannot be null.");
@@ -12420,6 +12376,7 @@ export class UsersControllerServiceProxy {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Accept": "application/json"
             })
         };
 
@@ -12430,14 +12387,14 @@ export class UsersControllerServiceProxy {
                 try {
                     return this.processChangeStatus(<any>response_);
                 } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
+                    return <Observable<User>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<any>><any>_observableThrow(response_);
+                return <Observable<User>><any>_observableThrow(response_);
         }));
     }
 
-    protected processChangeStatus(response: HttpResponseBase): Observable<any> {
+    protected processChangeStatus(response: HttpResponseBase): Observable<User> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -12446,11 +12403,10 @@ export class UsersControllerServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = User.fromJS(resultData200);
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -12468,6 +12424,7 @@ export class UsersControllerServiceProxy {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Accept": "application/json"
             })
         };
 
@@ -12494,11 +12451,11 @@ export class UsersControllerServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -12508,7 +12465,7 @@ export class UsersControllerServiceProxy {
         return _observableOf(<any>null);
     }
 
-    isUserAvailable(userName: string): Observable<any> {
+    isUserAvailable(userName: string): Observable<boolean> {
         let url_ = this.baseUrl + "/users/isUserAvailable/{userName}";
         if (userName === undefined || userName === null)
             throw new Error("The parameter 'userName' must be defined.");
@@ -12519,6 +12476,7 @@ export class UsersControllerServiceProxy {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Accept": "application/json"
             })
         };
 
@@ -12529,14 +12487,14 @@ export class UsersControllerServiceProxy {
                 try {
                     return this.processIsUserAvailable(<any>response_);
                 } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
+                    return <Observable<boolean>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<any>><any>_observableThrow(response_);
+                return <Observable<boolean>><any>_observableThrow(response_);
         }));
     }
 
-    protected processIsUserAvailable(response: HttpResponseBase): Observable<any> {
+    protected processIsUserAvailable(response: HttpResponseBase): Observable<boolean> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -12545,11 +12503,11 @@ export class UsersControllerServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -12570,6 +12528,7 @@ export class UsersControllerServiceProxy {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Accept": "application/json"
             })
         };
 
@@ -12596,11 +12555,11 @@ export class UsersControllerServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -12630,6 +12589,7 @@ export class UsersControllerServiceProxy {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Accept": "application/json"
             })
         };
 
@@ -12656,11 +12616,11 @@ export class UsersControllerServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -12706,6 +12666,7 @@ export class InstitutionControllerServiceProxy {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Accept": "application/json"
             })
         };
 
@@ -12732,11 +12693,11 @@ export class InstitutionControllerServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -12754,6 +12715,7 @@ export class InstitutionControllerServiceProxy {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Accept": "application/json"
             })
         };
 
@@ -12780,11 +12742,11 @@ export class InstitutionControllerServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -12806,6 +12768,7 @@ export class InstitutionControllerServiceProxy {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Accept": "application/json"
             })
         };
 
@@ -12832,11 +12795,11 @@ export class InstitutionControllerServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -12870,6 +12833,7 @@ export class InstitutionTypeControllerServiceProxy {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Accept": "application/json"
             })
         };
 
@@ -12896,11 +12860,239 @@ export class InstitutionTypeControllerServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(<any>null);
+    }
+}
+
+@Injectable()
+export class IndicatorControllerServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    create(body: CreateIndicatorDto): Observable<string> {
+        let url_ = this.baseUrl + "/indicator";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreate(<any>response_);
+                } catch (e) {
+                    return <Observable<string>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<string>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processCreate(response: HttpResponseBase): Observable<string> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 201) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result201: any = null;
+            let resultData201 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result201 = resultData201 !== undefined ? resultData201 : <any>null;
+    
+            return _observableOf(result201);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(<any>null);
+    }
+
+    findAll(): Observable<Indicator[]> {
+        let url_ = this.baseUrl + "/indicator";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processFindAll(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processFindAll(<any>response_);
+                } catch (e) {
+                    return <Observable<Indicator[]>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<Indicator[]>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processFindAll(response: HttpResponseBase): Observable<Indicator[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200.push(Indicator.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(<any>null);
+    }
+
+    update(id: string, body: UpdateIndicatorDto): Observable<string> {
+        let url_ = this.baseUrl + "/indicator/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("patch", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processUpdate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processUpdate(<any>response_);
+                } catch (e) {
+                    return <Observable<string>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<string>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processUpdate(response: HttpResponseBase): Observable<string> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(<any>null);
+    }
+
+    remove(id: string): Observable<string> {
+        let url_ = this.baseUrl + "/indicator/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processRemove(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processRemove(<any>response_);
+                } catch (e) {
+                    return <Observable<string>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<string>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processRemove(response: HttpResponseBase): Observable<string> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -12958,6 +13150,7 @@ export class LearningMaterialControllerServiceProxy {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Accept": "application/json"
             })
         };
 
@@ -12984,11 +13177,11 @@ export class LearningMaterialControllerServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -12998,7 +13191,7 @@ export class LearningMaterialControllerServiceProxy {
         return _observableOf(<any>null);
     }
 
-    getalluserType(): Observable<any> {
+    getalluserType(): Observable<LearningMaterialUserType[]> {
         let url_ = this.baseUrl + "/learning-material/user-type";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -13006,6 +13199,7 @@ export class LearningMaterialControllerServiceProxy {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Accept": "application/json"
             })
         };
 
@@ -13016,14 +13210,14 @@ export class LearningMaterialControllerServiceProxy {
                 try {
                     return this.processGetalluserType(<any>response_);
                 } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
+                    return <Observable<LearningMaterialUserType[]>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<any>><any>_observableThrow(response_);
+                return <Observable<LearningMaterialUserType[]>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetalluserType(response: HttpResponseBase): Observable<any> {
+    protected processGetalluserType(response: HttpResponseBase): Observable<LearningMaterialUserType[]> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -13032,11 +13226,17 @@ export class LearningMaterialControllerServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200.push(LearningMaterialUserType.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -13046,7 +13246,7 @@ export class LearningMaterialControllerServiceProxy {
         return _observableOf(<any>null);
     }
 
-    getallsector(): Observable<any> {
+    getallsector(): Observable<LearningMaterialSector[]> {
         let url_ = this.baseUrl + "/learning-material/sector";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -13054,6 +13254,7 @@ export class LearningMaterialControllerServiceProxy {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Accept": "application/json"
             })
         };
 
@@ -13064,14 +13265,14 @@ export class LearningMaterialControllerServiceProxy {
                 try {
                     return this.processGetallsector(<any>response_);
                 } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
+                    return <Observable<LearningMaterialSector[]>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<any>><any>_observableThrow(response_);
+                return <Observable<LearningMaterialSector[]>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetallsector(response: HttpResponseBase): Observable<any> {
+    protected processGetallsector(response: HttpResponseBase): Observable<LearningMaterialSector[]> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -13080,276 +13281,17 @@ export class LearningMaterialControllerServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf(<any>null);
-    }
-}
-
-@Injectable()
-export class IndicatorControllerServiceProxy {
-    private http: HttpClient;
-    private baseUrl: string;
-    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
-
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
-        this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
-    }
-
-    create(body: CreateIndicatorDto): Observable<any> {
-        let url_ = this.baseUrl + "/indicator";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(body);
-
-        let options_ : any = {
-            body: content_,
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Content-Type": "application/json",
-            })
-        };
-
-        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processCreate(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processCreate(<any>response_);
-                } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<any>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processCreate(response: HttpResponseBase): Observable<any> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 201) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return _observableOf(<any>null);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf(<any>null);
-    }
-
-    findAll(): Observable<any> {
-        let url_ = this.baseUrl + "/indicator";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ : any = {
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-            })
-        };
-
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processFindAll(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processFindAll(<any>response_);
-                } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<any>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processFindAll(response: HttpResponseBase): Observable<any> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf(<any>null);
-    }
-
-    findOne(id: string): Observable<any> {
-        let url_ = this.baseUrl + "/indicator/{id}";
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ : any = {
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-            })
-        };
-
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processFindOne(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processFindOne(<any>response_);
-                } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<any>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processFindOne(response: HttpResponseBase): Observable<any> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf(<any>null);
-    }
-
-    update(id: string, body: UpdateIndicatorDto): Observable<any> {
-        let url_ = this.baseUrl + "/indicator/{id}";
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(body);
-
-        let options_ : any = {
-            body: content_,
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Content-Type": "application/json",
-            })
-        };
-
-        return this.http.request("patch", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processUpdate(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processUpdate(<any>response_);
-                } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<any>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processUpdate(response: HttpResponseBase): Observable<any> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf(<any>null);
-    }
-
-    remove(id: string): Observable<any> {
-        let url_ = this.baseUrl + "/indicator/{id}";
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ : any = {
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-            })
-        };
-
-        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processRemove(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processRemove(<any>response_);
-                } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<any>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processRemove(response: HttpResponseBase): Observable<any> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-                let result200: any = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                    result200 = resultData200 !== undefined ? resultData200 : <any>null;
-        
-                return _observableOf(result200);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200.push(LearningMaterialSector.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -15530,6 +15472,7 @@ export class MethodologyData implements IMethodologyData {
     ghgIncluded: string;
     uniqueIdentification: string;
     sector: Sector;
+    indicator: Indicator;
     mitigationActionType: MitigationActionType;
     applicability: ApplicabilityEntity;
     baselineImage: string;
@@ -15568,6 +15511,7 @@ export class MethodologyData implements IMethodologyData {
             this.ghgIncluded = _data["ghgIncluded"];
             this.uniqueIdentification = _data["uniqueIdentification"];
             this.sector = _data["sector"] ? Sector.fromJS(_data["sector"]) : <any>undefined;
+            this.indicator = _data["indicator"] ? Indicator.fromJS(_data["indicator"]) : <any>undefined;
             this.mitigationActionType = _data["mitigationActionType"] ? MitigationActionType.fromJS(_data["mitigationActionType"]) : <any>undefined;
             this.applicability = _data["applicability"] ? ApplicabilityEntity.fromJS(_data["applicability"]) : <any>undefined;
             this.baselineImage = _data["baselineImage"];
@@ -15606,6 +15550,7 @@ export class MethodologyData implements IMethodologyData {
         data["ghgIncluded"] = this.ghgIncluded;
         data["uniqueIdentification"] = this.uniqueIdentification;
         data["sector"] = this.sector ? this.sector.toJSON() : <any>undefined;
+        data["indicator"] = this.indicator ? this.indicator.toJSON() : <any>undefined;
         data["mitigationActionType"] = this.mitigationActionType ? this.mitigationActionType.toJSON() : <any>undefined;
         data["applicability"] = this.applicability ? this.applicability.toJSON() : <any>undefined;
         data["baselineImage"] = this.baselineImage;
@@ -15644,6 +15589,7 @@ export interface IMethodologyData {
     ghgIncluded: string;
     uniqueIdentification: string;
     sector: Sector;
+    indicator: Indicator;
     mitigationActionType: MitigationActionType;
     applicability: ApplicabilityEntity;
     baselineImage: string;
@@ -15799,6 +15745,7 @@ export class Methodology implements IMethodology {
     uniqueIdentification: string;
     country: Country;
     sector: Sector;
+    indicator: Indicator;
     mitigationActionType: MitigationActionType;
     applicability: ApplicabilityEntity;
     method: MethodologyData;
@@ -15835,6 +15782,7 @@ export class Methodology implements IMethodology {
             this.uniqueIdentification = _data["uniqueIdentification"];
             this.country = _data["country"] ? Country.fromJS(_data["country"]) : <any>undefined;
             this.sector = _data["sector"] ? Sector.fromJS(_data["sector"]) : <any>undefined;
+            this.indicator = _data["indicator"] ? Indicator.fromJS(_data["indicator"]) : <any>undefined;
             this.mitigationActionType = _data["mitigationActionType"] ? MitigationActionType.fromJS(_data["mitigationActionType"]) : <any>undefined;
             this.applicability = _data["applicability"] ? ApplicabilityEntity.fromJS(_data["applicability"]) : <any>undefined;
             this.method = _data["method"] ? MethodologyData.fromJS(_data["method"]) : <any>undefined;
@@ -15871,6 +15819,7 @@ export class Methodology implements IMethodology {
         data["uniqueIdentification"] = this.uniqueIdentification;
         data["country"] = this.country ? this.country.toJSON() : <any>undefined;
         data["sector"] = this.sector ? this.sector.toJSON() : <any>undefined;
+        data["indicator"] = this.indicator ? this.indicator.toJSON() : <any>undefined;
         data["mitigationActionType"] = this.mitigationActionType ? this.mitigationActionType.toJSON() : <any>undefined;
         data["applicability"] = this.applicability ? this.applicability.toJSON() : <any>undefined;
         data["method"] = this.method ? this.method.toJSON() : <any>undefined;
@@ -15907,6 +15856,7 @@ export interface IMethodology {
     uniqueIdentification: string;
     country: Country;
     sector: Sector;
+    indicator: Indicator;
     mitigationActionType: MitigationActionType;
     applicability: ApplicabilityEntity;
     method: MethodologyData;
@@ -19462,6 +19412,80 @@ export interface ICreateManyInstitutionCategoryDto {
     bulk: InstitutionCategory[];
 }
 
+export class CreateIndicatorDto implements ICreateIndicatorDto {
+
+    constructor(data?: ICreateIndicatorDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+    }
+
+    static fromJS(data: any): CreateIndicatorDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateIndicatorDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        return data;
+    }
+
+    clone(): CreateIndicatorDto {
+        const json = this.toJSON();
+        let result = new CreateIndicatorDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreateIndicatorDto {
+}
+
+export class UpdateIndicatorDto implements IUpdateIndicatorDto {
+
+    constructor(data?: IUpdateIndicatorDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+    }
+
+    static fromJS(data: any): UpdateIndicatorDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new UpdateIndicatorDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        return data;
+    }
+
+    clone(): UpdateIndicatorDto {
+        const json = this.toJSON();
+        let result = new UpdateIndicatorDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IUpdateIndicatorDto {
+}
+
 export class CreateManyProjectApprovalStatusDto implements ICreateManyProjectApprovalStatusDto {
     bulk: ProjectApprovalStatus[];
 
@@ -19622,80 +19646,6 @@ export class CreateManyLearningMaterialDto implements ICreateManyLearningMateria
 
 export interface ICreateManyLearningMaterialDto {
     bulk: LearningMaterial[];
-}
-
-export class CreateIndicatorDto implements ICreateIndicatorDto {
-
-    constructor(data?: ICreateIndicatorDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-    }
-
-    static fromJS(data: any): CreateIndicatorDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new CreateIndicatorDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        return data;
-    }
-
-    clone(): CreateIndicatorDto {
-        const json = this.toJSON();
-        let result = new CreateIndicatorDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICreateIndicatorDto {
-}
-
-export class UpdateIndicatorDto implements IUpdateIndicatorDto {
-
-    constructor(data?: IUpdateIndicatorDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-    }
-
-    static fromJS(data: any): UpdateIndicatorDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new UpdateIndicatorDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        return data;
-    }
-
-    clone(): UpdateIndicatorDto {
-        const json = this.toJSON();
-        let result = new UpdateIndicatorDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IUpdateIndicatorDto {
 }
 
 export enum CountryStatus {
