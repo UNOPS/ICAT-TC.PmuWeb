@@ -64,6 +64,8 @@ import {
   CountryControllerServiceProxy,
   // AssesmentControllerServiceProxy,
 } from 'shared/service-proxies/service-proxies';
+
+import {AuditControllerServiceProxy as auditControllerServiceProxy} from 'shared/service-proxies-auditlog/service-proxies' 
 import { HttpClient } from '@angular/common/http';
 import { ProjectInformationComponent } from './climate-action/project-information/project-information.component';
 import { MethodologiesComponent } from './methodologies/methodologies.component';
@@ -243,6 +245,7 @@ export function getRemoteServiceBaseUrl(): string {
     // AssesmentControllerServiceProxy,
     RoleGuardService,
     SharedDataService,
+    auditControllerServiceProxy,
 
     { provide: API_BASE_URL, useFactory: getRemoteServiceBaseUrl },
     HttpClientModule,

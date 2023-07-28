@@ -11167,8 +11167,8 @@ export class MethodologyControllerServiceProxy {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    getMethoDetails(page: number, limit: number, filterText: string, sectorId: number, developedBy: string): Observable<any> {
-        let url_ = this.baseUrl + "/methodology/methodology/methodologyinfo/{page}/{limit}/{sectorId}/{filterText}/{developedBy}?";
+    getMethoDetails(page: number, limit: number, filterText: string, indicatorId: number, developedBy: string): Observable<any> {
+        let url_ = this.baseUrl + "/methodology/methodology/methodologyinfo/{page}/{limit}/{indicatorId}/{filterText}/{developedBy}?";
         if (page === undefined || page === null)
             throw new Error("The parameter 'page' must be defined and cannot be null.");
         else
@@ -11181,10 +11181,10 @@ export class MethodologyControllerServiceProxy {
             throw new Error("The parameter 'filterText' must be defined and cannot be null.");
         else
             url_ += "filterText=" + encodeURIComponent("" + filterText) + "&";
-        if (sectorId === undefined || sectorId === null)
-            throw new Error("The parameter 'sectorId' must be defined and cannot be null.");
+        if (indicatorId === undefined || indicatorId === null)
+            throw new Error("The parameter 'indicatorId' must be defined and cannot be null.");
         else
-            url_ += "sectorId=" + encodeURIComponent("" + sectorId) + "&";
+            url_ += "indicatorId=" + encodeURIComponent("" + indicatorId) + "&";
         if (developedBy === undefined || developedBy === null)
             throw new Error("The parameter 'developedBy' must be defined and cannot be null.");
         else
@@ -11741,6 +11741,59 @@ export class SectorControllerServiceProxy {
     }
 
     protected processGetSectorDetails(response: HttpResponseBase): Observable<any> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(<any>null);
+    }
+
+    getSector(sectorId: number): Observable<any> {
+        let url_ = this.baseUrl + "/sector/sector1?";
+        if (sectorId === undefined || sectorId === null)
+            throw new Error("The parameter 'sectorId' must be defined and cannot be null.");
+        else
+            url_ += "sectorId=" + encodeURIComponent("" + sectorId) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetSector(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetSector(<any>response_);
+                } catch (e) {
+                    return <Observable<any>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<any>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetSector(response: HttpResponseBase): Observable<any> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -12799,6 +12852,234 @@ export class InstitutionTypeControllerServiceProxy {
     }
 
     protected processFindInstitutionTypeByUserType(response: HttpResponseBase): Observable<any> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(<any>null);
+    }
+}
+
+@Injectable()
+export class IndicatorControllerServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    create(body: CreateIndicatorDto): Observable<string> {
+        let url_ = this.baseUrl + "/indicator";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreate(<any>response_);
+                } catch (e) {
+                    return <Observable<string>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<string>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processCreate(response: HttpResponseBase): Observable<string> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 201) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result201: any = null;
+            let resultData201 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result201 = resultData201 !== undefined ? resultData201 : <any>null;
+    
+            return _observableOf(result201);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(<any>null);
+    }
+
+    findAll(): Observable<Indicator[]> {
+        let url_ = this.baseUrl + "/indicator";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processFindAll(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processFindAll(<any>response_);
+                } catch (e) {
+                    return <Observable<Indicator[]>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<Indicator[]>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processFindAll(response: HttpResponseBase): Observable<Indicator[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200.push(Indicator.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(<any>null);
+    }
+
+    update(id: string, body: UpdateIndicatorDto): Observable<string> {
+        let url_ = this.baseUrl + "/indicator/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("patch", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processUpdate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processUpdate(<any>response_);
+                } catch (e) {
+                    return <Observable<string>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<string>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processUpdate(response: HttpResponseBase): Observable<string> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(<any>null);
+    }
+
+    remove(id: string): Observable<string> {
+        let url_ = this.baseUrl + "/indicator/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processRemove(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processRemove(<any>response_);
+                } catch (e) {
+                    return <Observable<string>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<string>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processRemove(response: HttpResponseBase): Observable<string> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -14000,6 +14281,123 @@ export interface ICountrySector {
     uniqueIdentification: string;
 }
 
+export class Indicator implements IIndicator {
+    id: number;
+    name: string;
+    sectors: Sector[];
+
+    constructor(data?: IIndicator) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.sectors = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.name = _data["name"];
+            if (Array.isArray(_data["sectors"])) {
+                this.sectors = [] as any;
+                for (let item of _data["sectors"])
+                    this.sectors.push(Sector.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): Indicator {
+        data = typeof data === 'object' ? data : {};
+        let result = new Indicator();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        if (Array.isArray(this.sectors)) {
+            data["sectors"] = [];
+            for (let item of this.sectors)
+                data["sectors"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): Indicator {
+        const json = this.toJSON();
+        let result = new Indicator();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IIndicator {
+    id: number;
+    name: string;
+    sectors: Sector[];
+}
+
+export class SectorIndicator implements ISectorIndicator {
+    id: number;
+    sector: Sector;
+    indicator: Indicator;
+
+    constructor(data?: ISectorIndicator) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.sector = new Sector();
+            this.indicator = new Indicator();
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.sector = _data["sector"] ? Sector.fromJS(_data["sector"]) : new Sector();
+            this.indicator = _data["indicator"] ? Indicator.fromJS(_data["indicator"]) : new Indicator();
+        }
+    }
+
+    static fromJS(data: any): SectorIndicator {
+        data = typeof data === 'object' ? data : {};
+        let result = new SectorIndicator();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["sector"] = this.sector ? this.sector.toJSON() : <any>undefined;
+        data["indicator"] = this.indicator ? this.indicator.toJSON() : <any>undefined;
+        return data;
+    }
+
+    clone(): SectorIndicator {
+        const json = this.toJSON();
+        let result = new SectorIndicator();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ISectorIndicator {
+    id: number;
+    sector: Sector;
+    indicator: Indicator;
+}
+
 export class GetManyLearningMaterialResponseDto implements IGetManyLearningMaterialResponseDto {
     data: LearningMaterial[];
     count: number;
@@ -14604,9 +15002,11 @@ export class Sector implements ISector {
     description: string;
     sortOrder: number;
     countrysector: CountrySector[];
+    sectorindicator: SectorIndicator[];
     learningMaterialsector: LearningMaterialSector[];
     subSector: SubSector[];
     uniqueIdentification: string;
+    indicators: Indicator[];
 
     constructor(data?: ISector) {
         if (data) {
@@ -14617,8 +15017,10 @@ export class Sector implements ISector {
         }
         if (!data) {
             this.countrysector = [];
+            this.sectorindicator = [];
             this.learningMaterialsector = [];
             this.subSector = [];
+            this.indicators = [];
         }
     }
 
@@ -14638,6 +15040,11 @@ export class Sector implements ISector {
                 for (let item of _data["countrysector"])
                     this.countrysector.push(CountrySector.fromJS(item));
             }
+            if (Array.isArray(_data["sectorindicator"])) {
+                this.sectorindicator = [] as any;
+                for (let item of _data["sectorindicator"])
+                    this.sectorindicator.push(SectorIndicator.fromJS(item));
+            }
             if (Array.isArray(_data["learningMaterialsector"])) {
                 this.learningMaterialsector = [] as any;
                 for (let item of _data["learningMaterialsector"])
@@ -14649,6 +15056,11 @@ export class Sector implements ISector {
                     this.subSector.push(SubSector.fromJS(item));
             }
             this.uniqueIdentification = _data["uniqueIdentification"];
+            if (Array.isArray(_data["indicators"])) {
+                this.indicators = [] as any;
+                for (let item of _data["indicators"])
+                    this.indicators.push(Indicator.fromJS(item));
+            }
         }
     }
 
@@ -14675,6 +15087,11 @@ export class Sector implements ISector {
             for (let item of this.countrysector)
                 data["countrysector"].push(item.toJSON());
         }
+        if (Array.isArray(this.sectorindicator)) {
+            data["sectorindicator"] = [];
+            for (let item of this.sectorindicator)
+                data["sectorindicator"].push(item.toJSON());
+        }
         if (Array.isArray(this.learningMaterialsector)) {
             data["learningMaterialsector"] = [];
             for (let item of this.learningMaterialsector)
@@ -14686,6 +15103,11 @@ export class Sector implements ISector {
                 data["subSector"].push(item.toJSON());
         }
         data["uniqueIdentification"] = this.uniqueIdentification;
+        if (Array.isArray(this.indicators)) {
+            data["indicators"] = [];
+            for (let item of this.indicators)
+                data["indicators"].push(item.toJSON());
+        }
         return data;
     }
 
@@ -14708,9 +15130,11 @@ export interface ISector {
     description: string;
     sortOrder: number;
     countrysector: CountrySector[];
+    sectorindicator: SectorIndicator[];
     learningMaterialsector: LearningMaterialSector[];
     subSector: SubSector[];
     uniqueIdentification: string;
+    indicators: Indicator[];
 }
 
 export class GetManyMitigationActionTypeResponseDto implements IGetManyMitigationActionTypeResponseDto {
@@ -15031,6 +15455,7 @@ export class MethodologyData implements IMethodologyData {
     ghgIncluded: string;
     uniqueIdentification: string;
     sector: Sector;
+    indicator: Indicator;
     mitigationActionType: MitigationActionType;
     applicability: ApplicabilityEntity;
     baselineImage: string;
@@ -15069,6 +15494,7 @@ export class MethodologyData implements IMethodologyData {
             this.ghgIncluded = _data["ghgIncluded"];
             this.uniqueIdentification = _data["uniqueIdentification"];
             this.sector = _data["sector"] ? Sector.fromJS(_data["sector"]) : <any>undefined;
+            this.indicator = _data["indicator"] ? Indicator.fromJS(_data["indicator"]) : <any>undefined;
             this.mitigationActionType = _data["mitigationActionType"] ? MitigationActionType.fromJS(_data["mitigationActionType"]) : <any>undefined;
             this.applicability = _data["applicability"] ? ApplicabilityEntity.fromJS(_data["applicability"]) : <any>undefined;
             this.baselineImage = _data["baselineImage"];
@@ -15107,6 +15533,7 @@ export class MethodologyData implements IMethodologyData {
         data["ghgIncluded"] = this.ghgIncluded;
         data["uniqueIdentification"] = this.uniqueIdentification;
         data["sector"] = this.sector ? this.sector.toJSON() : <any>undefined;
+        data["indicator"] = this.indicator ? this.indicator.toJSON() : <any>undefined;
         data["mitigationActionType"] = this.mitigationActionType ? this.mitigationActionType.toJSON() : <any>undefined;
         data["applicability"] = this.applicability ? this.applicability.toJSON() : <any>undefined;
         data["baselineImage"] = this.baselineImage;
@@ -15145,6 +15572,7 @@ export interface IMethodologyData {
     ghgIncluded: string;
     uniqueIdentification: string;
     sector: Sector;
+    indicator: Indicator;
     mitigationActionType: MitigationActionType;
     applicability: ApplicabilityEntity;
     baselineImage: string;
@@ -15246,6 +15674,7 @@ export class Methodology implements IMethodology {
     uniqueIdentification: string;
     country: Country;
     sector: Sector;
+    indicator: Indicator;
     mitigationActionType: MitigationActionType;
     applicability: ApplicabilityEntity;
     method: MethodologyData;
@@ -15282,6 +15711,7 @@ export class Methodology implements IMethodology {
             this.uniqueIdentification = _data["uniqueIdentification"];
             this.country = _data["country"] ? Country.fromJS(_data["country"]) : <any>undefined;
             this.sector = _data["sector"] ? Sector.fromJS(_data["sector"]) : <any>undefined;
+            this.indicator = _data["indicator"] ? Indicator.fromJS(_data["indicator"]) : <any>undefined;
             this.mitigationActionType = _data["mitigationActionType"] ? MitigationActionType.fromJS(_data["mitigationActionType"]) : <any>undefined;
             this.applicability = _data["applicability"] ? ApplicabilityEntity.fromJS(_data["applicability"]) : <any>undefined;
             this.method = _data["method"] ? MethodologyData.fromJS(_data["method"]) : <any>undefined;
@@ -15318,6 +15748,7 @@ export class Methodology implements IMethodology {
         data["uniqueIdentification"] = this.uniqueIdentification;
         data["country"] = this.country ? this.country.toJSON() : <any>undefined;
         data["sector"] = this.sector ? this.sector.toJSON() : <any>undefined;
+        data["indicator"] = this.indicator ? this.indicator.toJSON() : <any>undefined;
         data["mitigationActionType"] = this.mitigationActionType ? this.mitigationActionType.toJSON() : <any>undefined;
         data["applicability"] = this.applicability ? this.applicability.toJSON() : <any>undefined;
         data["method"] = this.method ? this.method.toJSON() : <any>undefined;
@@ -15354,6 +15785,7 @@ export interface IMethodology {
     uniqueIdentification: string;
     country: Country;
     sector: Sector;
+    indicator: Indicator;
     mitigationActionType: MitigationActionType;
     applicability: ApplicabilityEntity;
     method: MethodologyData;
@@ -17881,6 +18313,80 @@ export interface IInstitutionCategory {
     name: string;
     description: string;
     sortOrder: number;
+}
+
+export class CreateIndicatorDto implements ICreateIndicatorDto {
+
+    constructor(data?: ICreateIndicatorDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+    }
+
+    static fromJS(data: any): CreateIndicatorDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateIndicatorDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        return data;
+    }
+
+    clone(): CreateIndicatorDto {
+        const json = this.toJSON();
+        let result = new CreateIndicatorDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreateIndicatorDto {
+}
+
+export class UpdateIndicatorDto implements IUpdateIndicatorDto {
+
+    constructor(data?: IUpdateIndicatorDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+    }
+
+    static fromJS(data: any): UpdateIndicatorDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new UpdateIndicatorDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        return data;
+    }
+
+    clone(): UpdateIndicatorDto {
+        const json = this.toJSON();
+        let result = new UpdateIndicatorDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IUpdateIndicatorDto {
 }
 
 export enum CountryStatus {

@@ -25,12 +25,54 @@
                             <label for="sector">Sector *</label>
                             <p-dropdown name="sector" appendTo="body" [options]="selectedSectors" optionLabel="name"
                                 placeholder="Select .." [(ngModel)]="sector" [showClear]="true" #sec="ngModel"
-                                (ngModelChange)="selectMeth($event)">
+                                (ngModelChange)="selectIndicator($event)">
                             </p-dropdown>
                         </div>
+                        
                     </div>
                 </div>
             </div>
+
+            <div class="p-grid p-fluid col-md-9 col-sm-12">
+                <div class="row p-2">
+                    <div class="col-12 col-md-8">
+
+                   <!--      <div class="p-field">
+                            <label for="indicator">Indicator *</label>
+                            <p-dropdown name="indicator" appendTo="body" [options]="selectedIndicators" optionLabel="name"
+                                placeholder="Select .." [(ngModel)]="indicator" [showClear]="true" #sec="ngModel"
+                                (ngModelChange)="selectMeth($event)">
+                            </p-dropdown>
+                        </div>
+ -->
+
+                      <div class="p-field">
+                            <label for="indicator">Indicator *</label>
+                            <p-multiSelect name="indicator" appendTo="body" [options]="indicatorList" optionLabel="name"
+                                placeholder="Select .." [(ngModel)]="selectedIndicators" multiple="true" [showClear]="true" #sec="ngModel"
+                                (ngModelChange)="selectMeth($event)">
+                            </p-multiSelect>
+                          </div> 
+
+
+                <!--           <div class="p-field">
+                            <label for="indicator">Indicator *</label>
+                            <p-multiSelect [options]="indicatorList" [(ngModel)]="selectedIndicators" optionLabel="name" 
+                            placeholder="Select Indicator(s) .." multiple="true" [showClear]="true" #sec="ngModel"
+                            (ngModelChange)="selectMeth($event)">
+                          </p-multiSelect>
+                          </div>
+
+ -->
+                         
+
+                          
+
+                    </div>
+                </div>
+            </div>
+
+
         </div>
 
     </form>
@@ -44,8 +86,11 @@
                     <div class="p-field">
                         <label for="nameClimate">Select Methodologie(s) *</label>
                         <p-listbox [options]="methodologyList" [(ngModel)]="selectedMethodSelected"
-                            [metaKeySelection]="false" optionLabel="displayName" [checkbox]="true" [filter]="true"
+                            [metaKeySelection]="false"  [checkbox]="true" [filter]="true"
                             [multiple]="true" [listStyle]="{ 'max-height': '350px' }">
+                            <ng-template let-option pTemplate="item">
+                                {{ option.displayName }} : {{ option.indicator.name }}
+                              </ng-template>
                             <ng-template let-group pTemplate="group">
                                 <div class="p-d-flex p-ai-center">
                                     <span>{{ group.label }}</span>
@@ -58,8 +103,11 @@
                     <div class="p-field">
                         <label for="nameClimate">Selected Methodologie(s)</label>
                         <p-listbox [options]="selectedMethodSelected" [(ngModel)]="selectedMethodSelected"
-                            [metaKeySelection]="false" optionLabel="displayName" [filter]="true" [multiple]="true"
+                            [metaKeySelection]="false"  [filter]="true" [multiple]="true"
                             [readonly]="true" [listStyle]="{ 'max-height': '350px' }">
+                            <ng-template let-option pTemplate="item">
+                                {{ option.displayName }} : {{ option.indicator.name }}
+                              </ng-template>
                             <ng-template let-group pTemplate="group">
                                 <div class="p-d-flex p-ai-center">
                                     <span>{{ group.label }}</span>

@@ -1,6 +1,6 @@
 <nb-layout>
   <nb-layout-column class="p-0">
-    <div class="wrapper d-flex flex-row flex-grow-1">
+    <div class="wrapper d-flex flex-row flex-grow-1"  >
       <div
         *ngIf="showLeftMenu"
         class="sidebar d-flex flex-column customSB d-print-none"
@@ -13,7 +13,7 @@
           <i class="pi pi-arrow-right" *ngIf="!togglemenu"></i>
           <i class="pi pi-arrow-left" *ngIf="togglemenu"></i>
         </div>
-        <div class="sidebar--header">
+        <div class="sidebar--header" style="background-color: #5393e0;">
           <!-- <img src="../../../assets/images/logo.png" width="33" />  -->
           <!-- <img src="./assets/images/logo-new.png" /> -->
 
@@ -32,7 +32,7 @@
             <p class="m-0"><small>{{userType}}</small></p>
           </div>    
         </div> -->
-        <div class="sidebar-items flex-grow-1">
+        <div class="sidebar-items flex-grow-1" style="background-color: #5393e0;">
           <!-- <div data-ccs-admin-menu *ngIf="userRole.role == 1"> -->
           <div data-ccs-admin-menu>
             <div

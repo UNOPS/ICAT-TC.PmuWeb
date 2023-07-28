@@ -3,7 +3,7 @@
   "defaultVariables": null,
   "documentGenerator": {
     "fromDocument": {
-      "url": "http://localhost:7081/api-json",
+      "url": "http://localhost:7000/api-json",
       "output": null
     }
   },
@@ -18,7 +18,7 @@
       "httpClass": "HttpClient",
       "useSingletonProvider": false,
       "injectionTokenType": "InjectionToken",
-      "rxJsVersion": 6.0,
+      "rxJsVersion": 7.0,
       "dateTimeType": "MomentJS",
       "nullValue": "Undefined",
       "generateClientClasses": true,
@@ -62,7 +62,7 @@
       "enumNameGeneratorType": null,
       "serviceHost": null,
       "serviceSchemes": null,
-      "output": "../src/shared/service-proxies/service-proxies.ts"
+      "output": "../src/shared/service-proxies-auditlog/service-proxies.ts"
     },
     "openApiToCSharpClient": {
       "clientBaseClass": null,
