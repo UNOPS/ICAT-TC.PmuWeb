@@ -489,7 +489,7 @@ export class ServiceProxy {
      * Create multiple FinancingSchemes
      * @return Get create many base response
      */
-    createManyBaseFinancingSchemeControllerFinancingScheme(body: CreateManyFinancingSchemeDto): Observable<FinancingScheme[]> {
+    createManyBaseFinancingSchemeControllerFinancingScheme(body: BulkDto): Observable<FinancingScheme[]> {
         let url_ = this.baseUrl + "/financing-scheme/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -949,7 +949,7 @@ export class ServiceProxy {
      * Create multiple MethodologyData
      * @return Get create many base response
      */
-    createManyBaseMethodologyDataControllerMethodologyData(body: CreateManyMethodologyDataDto): Observable<MethodologyData[]> {
+    createManyBaseMethodologyDataControllerMethodologyData(body: BulkDto): Observable<MethodologyData[]> {
         let url_ = this.baseUrl + "/methodology-data/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1409,7 +1409,7 @@ export class ServiceProxy {
      * Create multiple Methodologies
      * @return Get create many base response
      */
-    createManyBaseMethodologyControllerMethodology(body: CreateManyMethodologyDto): Observable<Methodology[]> {
+    createManyBaseMethodologyControllerMethodology(body: BulkDto): Observable<Methodology[]> {
         let url_ = this.baseUrl + "/methodology/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1869,7 +1869,7 @@ export class ServiceProxy {
      * Create multiple EmissionReductioDraftDataEntities
      * @return Get create many base response
      */
-    createManyBaseEmissionReductionDraftdataControllerEmissionReductioDraftDataEntity(body: CreateManyEmissionReductioDraftDataEntityDto): Observable<EmissionReductioDraftDataEntity[]> {
+    createManyBaseEmissionReductionDraftdataControllerEmissionReductioDraftDataEntity(body: BulkDto): Observable<EmissionReductioDraftDataEntity[]> {
         let url_ = this.baseUrl + "/emission-reduction-draftdata/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -2329,7 +2329,7 @@ export class ServiceProxy {
      * Create multiple Reports
      * @return Get create many base response
      */
-    createManyBaseReportControllerReport(body: CreateManyReportDto): Observable<Report[]> {
+    createManyBaseReportControllerReport(body: BulkDto): Observable<Report[]> {
         let url_ = this.baseUrl + "/report/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -2789,7 +2789,7 @@ export class ServiceProxy {
      * Create multiple ApplicabilityEntities
      * @return Get create many base response
      */
-    createManyBaseApplicabilityControllerApplicabilityEntity(body: CreateManyApplicabilityEntityDto): Observable<ApplicabilityEntity[]> {
+    createManyBaseApplicabilityControllerApplicabilityEntity(body: BulkDto): Observable<ApplicabilityEntity[]> {
         let url_ = this.baseUrl + "/applicability/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -3249,7 +3249,7 @@ export class ServiceProxy {
      * Create multiple Audits
      * @return Get create many base response
      */
-    createManyBaseAuditControllerAudit(body: CreateManyAuditDto): Observable<Audit[]> {
+    createManyBaseAuditControllerAudit(body: BulkDto): Observable<Audit[]> {
         let url_ = this.baseUrl + "/audit/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -3710,7 +3710,7 @@ export class ServiceProxy {
      * Create multiple Projects
      * @return Get create many base response
      */
-    createManyBaseProjectControllerProject(body: CreateManyProjectDto): Observable<Project[]> {
+    createManyBaseProjectControllerProject(body: BulkDto): Observable<Project[]> {
         let url_ = this.baseUrl + "/project/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -4175,7 +4175,7 @@ export class ServiceProxy {
      * Create multiple Countries
      * @return Get create many base response
      */
-    createManyBaseCountryControllerCountry(body: CreateManyCountryDto): Observable<Country[]> {
+    createManyBaseCountryControllerCountry(body: BulkDto): Observable<Country[]> {
         let url_ = this.baseUrl + "/country/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -4635,7 +4635,7 @@ export class ServiceProxy {
      * Create multiple Ndcs
      * @return Get create many base response
      */
-    createManyBaseNdcControllerNdc(body: CreateManyNdcDto): Observable<Ndc[]> {
+    createManyBaseNdcControllerNdc(body: BulkDto): Observable<Ndc[]> {
         let url_ = this.baseUrl + "/ndc/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -5095,7 +5095,7 @@ export class ServiceProxy {
      * Create multiple NdcSets
      * @return Get create many base response
      */
-    createManyBaseNdcSetControllerNdcSet(body: CreateManyNdcSetDto): Observable<NdcSet[]> {
+    createManyBaseNdcSetControllerNdcSet(body: BulkDto): Observable<NdcSet[]> {
         let url_ = this.baseUrl + "/ndc-set/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -5555,7 +5555,7 @@ export class ServiceProxy {
      * Create multiple SubNdcs
      * @return Get create many base response
      */
-    createManyBaseSubNdcControllerSubNdc(body: CreateManySubNdcDto): Observable<SubNdc[]> {
+    createManyBaseSubNdcControllerSubNdc(body: BulkDto): Observable<SubNdc[]> {
         let url_ = this.baseUrl + "/sub-ndc/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -6015,7 +6015,7 @@ export class ServiceProxy {
      * Create multiple MitigationActionTypes
      * @return Get create many base response
      */
-    createManyBaseMitigationActionControllerMitigationActionType(body: CreateManyMitigationActionTypeDto): Observable<MitigationActionType[]> {
+    createManyBaseMitigationActionControllerMitigationActionType(body: BulkDto): Observable<MitigationActionType[]> {
         let url_ = this.baseUrl + "/mitigation-action/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -6475,7 +6475,7 @@ export class ServiceProxy {
      * Create multiple ProjectOwners
      * @return Get create many base response
      */
-    createManyBaseProjectOwnerControllerProjectOwner(body: CreateManyProjectOwnerDto): Observable<ProjectOwner[]> {
+    createManyBaseProjectOwnerControllerProjectOwner(body: BulkDto): Observable<ProjectOwner[]> {
         let url_ = this.baseUrl + "/project-owner/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -6941,7 +6941,7 @@ export class ServiceProxy {
      * Create multiple Sectors
      * @return Get create many base response
      */
-    createManyBaseSectorControllerSector(body: CreateManySectorDto): Observable<Sector[]> {
+    createManyBaseSectorControllerSector(body: BulkDto): Observable<Sector[]> {
         let url_ = this.baseUrl + "/sector/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -7401,7 +7401,7 @@ export class ServiceProxy {
      * Create multiple ProjectStatuses
      * @return Get create many base response
      */
-    createManyBaseProjectStatusControllerProjectStatus(body: CreateManyProjectStatusDto): Observable<ProjectStatus[]> {
+    createManyBaseProjectStatusControllerProjectStatus(body: BulkDto): Observable<ProjectStatus[]> {
         let url_ = this.baseUrl + "/project-status/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -7861,7 +7861,7 @@ export class ServiceProxy {
      * Create multiple Documents
      * @return Get create many base response
      */
-    createManyBaseDocumentControllerDocuments(body: CreateManyDocumentsDto): Observable<Documents[]> {
+    createManyBaseDocumentControllerDocuments(body: BulkDto): Observable<Documents[]> {
         let url_ = this.baseUrl + "/document/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -8321,7 +8321,7 @@ export class ServiceProxy {
      * Create multiple Users
      * @return Get create many base response
      */
-    createManyBaseUsersControllerUser(body: CreateManyUserDto): Observable<User[]> {
+    createManyBaseUsersControllerUser(body: BulkDto): Observable<User[]> {
         let url_ = this.baseUrl + "/users/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -8786,7 +8786,7 @@ export class ServiceProxy {
      * Create multiple Institutions
      * @return Get create many base response
      */
-    createManyBaseInstitutionControllerInstitution(body: CreateManyInstitutionDto): Observable<Institution[]> {
+    createManyBaseInstitutionControllerInstitution(body: BulkDto): Observable<Institution[]> {
         let url_ = this.baseUrl + "/institution/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -9246,7 +9246,7 @@ export class ServiceProxy {
      * Create multiple InstitutionTypes
      * @return Get create many base response
      */
-    createManyBaseInstitutionTypeControllerInstitutionType(body: CreateManyInstitutionTypeDto): Observable<InstitutionType[]> {
+    createManyBaseInstitutionTypeControllerInstitutionType(body: BulkDto): Observable<InstitutionType[]> {
         let url_ = this.baseUrl + "/institution-type/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -9706,7 +9706,7 @@ export class ServiceProxy {
      * Create multiple InstitutionCategories
      * @return Get create many base response
      */
-    createManyBaseInstitutionCategoryControllerInstitutionCategory(body: CreateManyInstitutionCategoryDto): Observable<InstitutionCategory[]> {
+    createManyBaseInstitutionCategoryControllerInstitutionCategory(body: BulkDto): Observable<InstitutionCategory[]> {
         let url_ = this.baseUrl + "/institution-category/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -10166,7 +10166,7 @@ export class ServiceProxy {
      * Create multiple ProjectApprovalStatuses
      * @return Get create many base response
      */
-    createManyBaseProjectApprovalStatusControllerProjectApprovalStatus(body: CreateManyProjectApprovalStatusDto): Observable<ProjectApprovalStatus[]> {
+    createManyBaseProjectApprovalStatusControllerProjectApprovalStatus(body: BulkDto): Observable<ProjectApprovalStatus[]> {
         let url_ = this.baseUrl + "/project-approval-status/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -10626,7 +10626,7 @@ export class ServiceProxy {
      * Create multiple UserTypes
      * @return Get create many base response
      */
-    createManyBaseUserTypeControllerUserType(body: CreateManyUserTypeDto): Observable<UserType[]> {
+    createManyBaseUserTypeControllerUserType(body: BulkDto): Observable<UserType[]> {
         let url_ = this.baseUrl + "/usertype/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -11096,7 +11096,7 @@ export class ServiceProxy {
      * Create multiple LearningMaterials
      * @return Get create many base response
      */
-    createManyBaseLearningMaterialControllerLearningMaterial(body: CreateManyLearningMaterialDto): Observable<LearningMaterial[]> {
+    createManyBaseLearningMaterialControllerLearningMaterial(body: BulkDto): Observable<LearningMaterial[]> {
         let url_ = this.baseUrl + "/learning-material/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -13447,58 +13447,41 @@ export interface IFinancingScheme {
     sortOrder: number;
 }
 
-export class CreateManyFinancingSchemeDto implements ICreateManyFinancingSchemeDto {
-    bulk: FinancingScheme[];
+export class BulkDto implements IBulkDto {
 
-    constructor(data?: ICreateManyFinancingSchemeDto) {
+    constructor(data?: IBulkDto) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
         }
-        if (!data) {
-            this.bulk = [];
-        }
     }
 
     init(_data?: any) {
-        if (_data) {
-            if (Array.isArray(_data["bulk"])) {
-                this.bulk = [] as any;
-                for (let item of _data["bulk"])
-                    this.bulk.push(FinancingScheme.fromJS(item));
-            }
-        }
     }
 
-    static fromJS(data: any): CreateManyFinancingSchemeDto {
+    static fromJS(data: any): BulkDto {
         data = typeof data === 'object' ? data : {};
-        let result = new CreateManyFinancingSchemeDto();
+        let result = new BulkDto();
         result.init(data);
         return result;
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.bulk)) {
-            data["bulk"] = [];
-            for (let item of this.bulk)
-                data["bulk"].push(item.toJSON());
-        }
         return data;
     }
 
-    clone(): CreateManyFinancingSchemeDto {
+    clone(): BulkDto {
         const json = this.toJSON();
-        let result = new CreateManyFinancingSchemeDto();
+        let result = new BulkDto();
         result.init(json);
         return result;
     }
 }
 
-export interface ICreateManyFinancingSchemeDto {
-    bulk: FinancingScheme[];
+export interface IBulkDto {
 }
 
 export class GetManyMethodologyDataResponseDto implements IGetManyMethodologyDataResponseDto {
@@ -15599,60 +15582,6 @@ export interface IMethodologyData {
     resultImage: string;
 }
 
-export class CreateManyMethodologyDataDto implements ICreateManyMethodologyDataDto {
-    bulk: MethodologyData[];
-
-    constructor(data?: ICreateManyMethodologyDataDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.bulk = [];
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            if (Array.isArray(_data["bulk"])) {
-                this.bulk = [] as any;
-                for (let item of _data["bulk"])
-                    this.bulk.push(MethodologyData.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): CreateManyMethodologyDataDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new CreateManyMethodologyDataDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.bulk)) {
-            data["bulk"] = [];
-            for (let item of this.bulk)
-                data["bulk"].push(item.toJSON());
-        }
-        return data;
-    }
-
-    clone(): CreateManyMethodologyDataDto {
-        const json = this.toJSON();
-        let result = new CreateManyMethodologyDataDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICreateManyMethodologyDataDto {
-    bulk: MethodologyData[];
-}
-
 export class GetManyMethodologyResponseDto implements IGetManyMethodologyResponseDto {
     data: Methodology[];
     count: number;
@@ -15862,60 +15791,6 @@ export interface IMethodology {
     method: MethodologyData;
 }
 
-export class CreateManyMethodologyDto implements ICreateManyMethodologyDto {
-    bulk: Methodology[];
-
-    constructor(data?: ICreateManyMethodologyDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.bulk = [];
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            if (Array.isArray(_data["bulk"])) {
-                this.bulk = [] as any;
-                for (let item of _data["bulk"])
-                    this.bulk.push(Methodology.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): CreateManyMethodologyDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new CreateManyMethodologyDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.bulk)) {
-            data["bulk"] = [];
-            for (let item of this.bulk)
-                data["bulk"].push(item.toJSON());
-        }
-        return data;
-    }
-
-    clone(): CreateManyMethodologyDto {
-        const json = this.toJSON();
-        let result = new CreateManyMethodologyDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICreateManyMethodologyDto {
-    bulk: Methodology[];
-}
-
 export class GetManyEmissionReductioDraftDataEntityResponseDto implements IGetManyEmissionReductioDraftDataEntityResponseDto {
     data: EmissionReductioDraftDataEntity[];
     count: number;
@@ -16097,60 +15972,6 @@ export interface IEmissionReductioDraftDataEntity {
     sortOrder: number;
 }
 
-export class CreateManyEmissionReductioDraftDataEntityDto implements ICreateManyEmissionReductioDraftDataEntityDto {
-    bulk: EmissionReductioDraftDataEntity[];
-
-    constructor(data?: ICreateManyEmissionReductioDraftDataEntityDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.bulk = [];
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            if (Array.isArray(_data["bulk"])) {
-                this.bulk = [] as any;
-                for (let item of _data["bulk"])
-                    this.bulk.push(EmissionReductioDraftDataEntity.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): CreateManyEmissionReductioDraftDataEntityDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new CreateManyEmissionReductioDraftDataEntityDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.bulk)) {
-            data["bulk"] = [];
-            for (let item of this.bulk)
-                data["bulk"].push(item.toJSON());
-        }
-        return data;
-    }
-
-    clone(): CreateManyEmissionReductioDraftDataEntityDto {
-        const json = this.toJSON();
-        let result = new CreateManyEmissionReductioDraftDataEntityDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICreateManyEmissionReductioDraftDataEntityDto {
-    bulk: EmissionReductioDraftDataEntity[];
-}
-
 export class GetManyReportResponseDto implements IGetManyReportResponseDto {
     data: Report[];
     count: number;
@@ -16309,114 +16130,6 @@ export interface IReport {
     description: string;
     isPublish: number;
     thumbnail: string;
-}
-
-export class CreateManyReportDto implements ICreateManyReportDto {
-    bulk: Report[];
-
-    constructor(data?: ICreateManyReportDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.bulk = [];
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            if (Array.isArray(_data["bulk"])) {
-                this.bulk = [] as any;
-                for (let item of _data["bulk"])
-                    this.bulk.push(Report.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): CreateManyReportDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new CreateManyReportDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.bulk)) {
-            data["bulk"] = [];
-            for (let item of this.bulk)
-                data["bulk"].push(item.toJSON());
-        }
-        return data;
-    }
-
-    clone(): CreateManyReportDto {
-        const json = this.toJSON();
-        let result = new CreateManyReportDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICreateManyReportDto {
-    bulk: Report[];
-}
-
-export class CreateManyApplicabilityEntityDto implements ICreateManyApplicabilityEntityDto {
-    bulk: ApplicabilityEntity[];
-
-    constructor(data?: ICreateManyApplicabilityEntityDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.bulk = [];
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            if (Array.isArray(_data["bulk"])) {
-                this.bulk = [] as any;
-                for (let item of _data["bulk"])
-                    this.bulk.push(ApplicabilityEntity.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): CreateManyApplicabilityEntityDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new CreateManyApplicabilityEntityDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.bulk)) {
-            data["bulk"] = [];
-            for (let item of this.bulk)
-                data["bulk"].push(item.toJSON());
-        }
-        return data;
-    }
-
-    clone(): CreateManyApplicabilityEntityDto {
-        const json = this.toJSON();
-        let result = new CreateManyApplicabilityEntityDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICreateManyApplicabilityEntityDto {
-    bulk: ApplicabilityEntity[];
 }
 
 export class AuditDto implements IAuditDto {
@@ -16823,60 +16536,6 @@ export interface IAudit {
     comment: string;
     actionStatus: string;
     userType: string;
-}
-
-export class CreateManyAuditDto implements ICreateManyAuditDto {
-    bulk: Audit[];
-
-    constructor(data?: ICreateManyAuditDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.bulk = [];
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            if (Array.isArray(_data["bulk"])) {
-                this.bulk = [] as any;
-                for (let item of _data["bulk"])
-                    this.bulk.push(Audit.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): CreateManyAuditDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new CreateManyAuditDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.bulk)) {
-            data["bulk"] = [];
-            for (let item of this.bulk)
-                data["bulk"].push(item.toJSON());
-        }
-        return data;
-    }
-
-    clone(): CreateManyAuditDto {
-        const json = this.toJSON();
-        let result = new CreateManyAuditDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICreateManyAuditDto {
-    bulk: Audit[];
 }
 
 export class GetManyProjectResponseDto implements IGetManyProjectResponseDto {
@@ -18122,492 +17781,6 @@ export interface IProject {
     projectDataRequsetComment: string;
 }
 
-export class CreateManyProjectDto implements ICreateManyProjectDto {
-    bulk: Project[];
-
-    constructor(data?: ICreateManyProjectDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.bulk = [];
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            if (Array.isArray(_data["bulk"])) {
-                this.bulk = [] as any;
-                for (let item of _data["bulk"])
-                    this.bulk.push(Project.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): CreateManyProjectDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new CreateManyProjectDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.bulk)) {
-            data["bulk"] = [];
-            for (let item of this.bulk)
-                data["bulk"].push(item.toJSON());
-        }
-        return data;
-    }
-
-    clone(): CreateManyProjectDto {
-        const json = this.toJSON();
-        let result = new CreateManyProjectDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICreateManyProjectDto {
-    bulk: Project[];
-}
-
-export class CreateManyCountryDto implements ICreateManyCountryDto {
-    bulk: Country[];
-
-    constructor(data?: ICreateManyCountryDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.bulk = [];
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            if (Array.isArray(_data["bulk"])) {
-                this.bulk = [] as any;
-                for (let item of _data["bulk"])
-                    this.bulk.push(Country.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): CreateManyCountryDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new CreateManyCountryDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.bulk)) {
-            data["bulk"] = [];
-            for (let item of this.bulk)
-                data["bulk"].push(item.toJSON());
-        }
-        return data;
-    }
-
-    clone(): CreateManyCountryDto {
-        const json = this.toJSON();
-        let result = new CreateManyCountryDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICreateManyCountryDto {
-    bulk: Country[];
-}
-
-export class CreateManyNdcDto implements ICreateManyNdcDto {
-    bulk: Ndc[];
-
-    constructor(data?: ICreateManyNdcDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.bulk = [];
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            if (Array.isArray(_data["bulk"])) {
-                this.bulk = [] as any;
-                for (let item of _data["bulk"])
-                    this.bulk.push(Ndc.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): CreateManyNdcDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new CreateManyNdcDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.bulk)) {
-            data["bulk"] = [];
-            for (let item of this.bulk)
-                data["bulk"].push(item.toJSON());
-        }
-        return data;
-    }
-
-    clone(): CreateManyNdcDto {
-        const json = this.toJSON();
-        let result = new CreateManyNdcDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICreateManyNdcDto {
-    bulk: Ndc[];
-}
-
-export class CreateManyNdcSetDto implements ICreateManyNdcSetDto {
-    bulk: NdcSet[];
-
-    constructor(data?: ICreateManyNdcSetDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.bulk = [];
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            if (Array.isArray(_data["bulk"])) {
-                this.bulk = [] as any;
-                for (let item of _data["bulk"])
-                    this.bulk.push(NdcSet.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): CreateManyNdcSetDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new CreateManyNdcSetDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.bulk)) {
-            data["bulk"] = [];
-            for (let item of this.bulk)
-                data["bulk"].push(item.toJSON());
-        }
-        return data;
-    }
-
-    clone(): CreateManyNdcSetDto {
-        const json = this.toJSON();
-        let result = new CreateManyNdcSetDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICreateManyNdcSetDto {
-    bulk: NdcSet[];
-}
-
-export class CreateManySubNdcDto implements ICreateManySubNdcDto {
-    bulk: SubNdc[];
-
-    constructor(data?: ICreateManySubNdcDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.bulk = [];
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            if (Array.isArray(_data["bulk"])) {
-                this.bulk = [] as any;
-                for (let item of _data["bulk"])
-                    this.bulk.push(SubNdc.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): CreateManySubNdcDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new CreateManySubNdcDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.bulk)) {
-            data["bulk"] = [];
-            for (let item of this.bulk)
-                data["bulk"].push(item.toJSON());
-        }
-        return data;
-    }
-
-    clone(): CreateManySubNdcDto {
-        const json = this.toJSON();
-        let result = new CreateManySubNdcDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICreateManySubNdcDto {
-    bulk: SubNdc[];
-}
-
-export class CreateManyMitigationActionTypeDto implements ICreateManyMitigationActionTypeDto {
-    bulk: MitigationActionType[];
-
-    constructor(data?: ICreateManyMitigationActionTypeDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.bulk = [];
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            if (Array.isArray(_data["bulk"])) {
-                this.bulk = [] as any;
-                for (let item of _data["bulk"])
-                    this.bulk.push(MitigationActionType.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): CreateManyMitigationActionTypeDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new CreateManyMitigationActionTypeDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.bulk)) {
-            data["bulk"] = [];
-            for (let item of this.bulk)
-                data["bulk"].push(item.toJSON());
-        }
-        return data;
-    }
-
-    clone(): CreateManyMitigationActionTypeDto {
-        const json = this.toJSON();
-        let result = new CreateManyMitigationActionTypeDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICreateManyMitigationActionTypeDto {
-    bulk: MitigationActionType[];
-}
-
-export class CreateManyProjectOwnerDto implements ICreateManyProjectOwnerDto {
-    bulk: ProjectOwner[];
-
-    constructor(data?: ICreateManyProjectOwnerDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.bulk = [];
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            if (Array.isArray(_data["bulk"])) {
-                this.bulk = [] as any;
-                for (let item of _data["bulk"])
-                    this.bulk.push(ProjectOwner.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): CreateManyProjectOwnerDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new CreateManyProjectOwnerDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.bulk)) {
-            data["bulk"] = [];
-            for (let item of this.bulk)
-                data["bulk"].push(item.toJSON());
-        }
-        return data;
-    }
-
-    clone(): CreateManyProjectOwnerDto {
-        const json = this.toJSON();
-        let result = new CreateManyProjectOwnerDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICreateManyProjectOwnerDto {
-    bulk: ProjectOwner[];
-}
-
-export class CreateManySectorDto implements ICreateManySectorDto {
-    bulk: Sector[];
-
-    constructor(data?: ICreateManySectorDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.bulk = [];
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            if (Array.isArray(_data["bulk"])) {
-                this.bulk = [] as any;
-                for (let item of _data["bulk"])
-                    this.bulk.push(Sector.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): CreateManySectorDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new CreateManySectorDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.bulk)) {
-            data["bulk"] = [];
-            for (let item of this.bulk)
-                data["bulk"].push(item.toJSON());
-        }
-        return data;
-    }
-
-    clone(): CreateManySectorDto {
-        const json = this.toJSON();
-        let result = new CreateManySectorDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICreateManySectorDto {
-    bulk: Sector[];
-}
-
-export class CreateManyProjectStatusDto implements ICreateManyProjectStatusDto {
-    bulk: ProjectStatus[];
-
-    constructor(data?: ICreateManyProjectStatusDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.bulk = [];
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            if (Array.isArray(_data["bulk"])) {
-                this.bulk = [] as any;
-                for (let item of _data["bulk"])
-                    this.bulk.push(ProjectStatus.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): CreateManyProjectStatusDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new CreateManyProjectStatusDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.bulk)) {
-            data["bulk"] = [];
-            for (let item of this.bulk)
-                data["bulk"].push(item.toJSON());
-        }
-        return data;
-    }
-
-    clone(): CreateManyProjectStatusDto {
-        const json = this.toJSON();
-        let result = new CreateManyProjectStatusDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICreateManyProjectStatusDto {
-    bulk: ProjectStatus[];
-}
-
 export class GetManyDocumentsResponseDto implements IGetManyDocumentsResponseDto {
     data: Documents[];
     count: number;
@@ -18763,60 +17936,6 @@ export interface IDocuments {
     fileName: string;
     relativePath: string;
     url: string;
-}
-
-export class CreateManyDocumentsDto implements ICreateManyDocumentsDto {
-    bulk: Documents[];
-
-    constructor(data?: ICreateManyDocumentsDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.bulk = [];
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            if (Array.isArray(_data["bulk"])) {
-                this.bulk = [] as any;
-                for (let item of _data["bulk"])
-                    this.bulk.push(Documents.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): CreateManyDocumentsDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new CreateManyDocumentsDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.bulk)) {
-            data["bulk"] = [];
-            for (let item of this.bulk)
-                data["bulk"].push(item.toJSON());
-        }
-        return data;
-    }
-
-    clone(): CreateManyDocumentsDto {
-        const json = this.toJSON();
-        let result = new CreateManyDocumentsDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICreateManyDocumentsDto {
-    bulk: Documents[];
 }
 
 export class AuthCredentialDto implements IAuthCredentialDto {
@@ -19051,168 +18170,6 @@ export interface ICreateUserDto {
     country: number;
 }
 
-export class CreateManyUserDto implements ICreateManyUserDto {
-    bulk: User[];
-
-    constructor(data?: ICreateManyUserDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.bulk = [];
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            if (Array.isArray(_data["bulk"])) {
-                this.bulk = [] as any;
-                for (let item of _data["bulk"])
-                    this.bulk.push(User.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): CreateManyUserDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new CreateManyUserDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.bulk)) {
-            data["bulk"] = [];
-            for (let item of this.bulk)
-                data["bulk"].push(item.toJSON());
-        }
-        return data;
-    }
-
-    clone(): CreateManyUserDto {
-        const json = this.toJSON();
-        let result = new CreateManyUserDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICreateManyUserDto {
-    bulk: User[];
-}
-
-export class CreateManyInstitutionDto implements ICreateManyInstitutionDto {
-    bulk: Institution[];
-
-    constructor(data?: ICreateManyInstitutionDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.bulk = [];
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            if (Array.isArray(_data["bulk"])) {
-                this.bulk = [] as any;
-                for (let item of _data["bulk"])
-                    this.bulk.push(Institution.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): CreateManyInstitutionDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new CreateManyInstitutionDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.bulk)) {
-            data["bulk"] = [];
-            for (let item of this.bulk)
-                data["bulk"].push(item.toJSON());
-        }
-        return data;
-    }
-
-    clone(): CreateManyInstitutionDto {
-        const json = this.toJSON();
-        let result = new CreateManyInstitutionDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICreateManyInstitutionDto {
-    bulk: Institution[];
-}
-
-export class CreateManyInstitutionTypeDto implements ICreateManyInstitutionTypeDto {
-    bulk: InstitutionType[];
-
-    constructor(data?: ICreateManyInstitutionTypeDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.bulk = [];
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            if (Array.isArray(_data["bulk"])) {
-                this.bulk = [] as any;
-                for (let item of _data["bulk"])
-                    this.bulk.push(InstitutionType.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): CreateManyInstitutionTypeDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new CreateManyInstitutionTypeDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.bulk)) {
-            data["bulk"] = [];
-            for (let item of this.bulk)
-                data["bulk"].push(item.toJSON());
-        }
-        return data;
-    }
-
-    clone(): CreateManyInstitutionTypeDto {
-        const json = this.toJSON();
-        let result = new CreateManyInstitutionTypeDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICreateManyInstitutionTypeDto {
-    bulk: InstitutionType[];
-}
-
 export class GetManyInstitutionCategoryResponseDto implements IGetManyInstitutionCategoryResponseDto {
     data: InstitutionCategory[];
     count: number;
@@ -19358,60 +18315,6 @@ export interface IInstitutionCategory {
     sortOrder: number;
 }
 
-export class CreateManyInstitutionCategoryDto implements ICreateManyInstitutionCategoryDto {
-    bulk: InstitutionCategory[];
-
-    constructor(data?: ICreateManyInstitutionCategoryDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.bulk = [];
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            if (Array.isArray(_data["bulk"])) {
-                this.bulk = [] as any;
-                for (let item of _data["bulk"])
-                    this.bulk.push(InstitutionCategory.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): CreateManyInstitutionCategoryDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new CreateManyInstitutionCategoryDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.bulk)) {
-            data["bulk"] = [];
-            for (let item of this.bulk)
-                data["bulk"].push(item.toJSON());
-        }
-        return data;
-    }
-
-    clone(): CreateManyInstitutionCategoryDto {
-        const json = this.toJSON();
-        let result = new CreateManyInstitutionCategoryDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICreateManyInstitutionCategoryDto {
-    bulk: InstitutionCategory[];
-}
-
 export class CreateIndicatorDto implements ICreateIndicatorDto {
 
     constructor(data?: ICreateIndicatorDto) {
@@ -19484,168 +18387,6 @@ export class UpdateIndicatorDto implements IUpdateIndicatorDto {
 }
 
 export interface IUpdateIndicatorDto {
-}
-
-export class CreateManyProjectApprovalStatusDto implements ICreateManyProjectApprovalStatusDto {
-    bulk: ProjectApprovalStatus[];
-
-    constructor(data?: ICreateManyProjectApprovalStatusDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.bulk = [];
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            if (Array.isArray(_data["bulk"])) {
-                this.bulk = [] as any;
-                for (let item of _data["bulk"])
-                    this.bulk.push(ProjectApprovalStatus.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): CreateManyProjectApprovalStatusDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new CreateManyProjectApprovalStatusDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.bulk)) {
-            data["bulk"] = [];
-            for (let item of this.bulk)
-                data["bulk"].push(item.toJSON());
-        }
-        return data;
-    }
-
-    clone(): CreateManyProjectApprovalStatusDto {
-        const json = this.toJSON();
-        let result = new CreateManyProjectApprovalStatusDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICreateManyProjectApprovalStatusDto {
-    bulk: ProjectApprovalStatus[];
-}
-
-export class CreateManyUserTypeDto implements ICreateManyUserTypeDto {
-    bulk: UserType[];
-
-    constructor(data?: ICreateManyUserTypeDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.bulk = [];
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            if (Array.isArray(_data["bulk"])) {
-                this.bulk = [] as any;
-                for (let item of _data["bulk"])
-                    this.bulk.push(UserType.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): CreateManyUserTypeDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new CreateManyUserTypeDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.bulk)) {
-            data["bulk"] = [];
-            for (let item of this.bulk)
-                data["bulk"].push(item.toJSON());
-        }
-        return data;
-    }
-
-    clone(): CreateManyUserTypeDto {
-        const json = this.toJSON();
-        let result = new CreateManyUserTypeDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICreateManyUserTypeDto {
-    bulk: UserType[];
-}
-
-export class CreateManyLearningMaterialDto implements ICreateManyLearningMaterialDto {
-    bulk: LearningMaterial[];
-
-    constructor(data?: ICreateManyLearningMaterialDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.bulk = [];
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            if (Array.isArray(_data["bulk"])) {
-                this.bulk = [] as any;
-                for (let item of _data["bulk"])
-                    this.bulk.push(LearningMaterial.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): CreateManyLearningMaterialDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new CreateManyLearningMaterialDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.bulk)) {
-            data["bulk"] = [];
-            for (let item of this.bulk)
-                data["bulk"].push(item.toJSON());
-        }
-        return data;
-    }
-
-    clone(): CreateManyLearningMaterialDto {
-        const json = this.toJSON();
-        let result = new CreateManyLearningMaterialDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICreateManyLearningMaterialDto {
-    bulk: LearningMaterial[];
 }
 
 export enum CountryStatus {
