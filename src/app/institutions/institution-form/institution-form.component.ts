@@ -14,14 +14,15 @@ export class InstitutionFormComponent implements OnInit {
 
   //selectedTypeList: string[] = [];
   selectedTypeList: Institution[] = [];
-  
-  
+
+
 
   institution: Institution = new Institution();
 
   country: Country = new Country();
 
-  countryList: Country[];
+  countryList: Country[] = [];
+  oldCountryList: Country[] = [];
 
   listc: Country[] = [];//not assigned list
 
@@ -44,7 +45,7 @@ export class InstitutionFormComponent implements OnInit {
     private router: Router,
     private messageService: MessageService) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
 
     const token = localStorage.getItem('access_token')!;
     const tokenPayload = decode<any>(token);
@@ -64,39 +65,33 @@ export class InstitutionFormComponent implements OnInit {
         0,
         0
       ).subscribe((res: any) => {
-        //this.selectedTypeList[0] = res.data[1];
         this.selectedTypeList = res.data;
-
-        console.log('institutionTypes======', res.data[0]);
-
       });
+    let countryFilter: string[] = [];
+    countryFilter.push('Country.IsSystemUse||$eq||' + 1);
 
-    this.serviceProxy
+    await this.serviceProxy
       .getManyBaseCountryControllerCountry(
         undefined,
         undefined,
+        countryFilter,
         undefined,
-        undefined,
-        undefined,
+        ["name,ASC"],
         undefined,
         1000,
         0,
         0,
         0
-
       ).subscribe((res: any) => {
-
         this.countryList = res.data;
 
-        console.log("countryList======", this.countryList)
-
         for (let i in this.countryList) {
-          if (this.countryList[i].institution?.id == null) {
+          if (this.countryList[i].institution?.id == this.editInstitutionId && this.editInstitutionId > 0) {
 
             this.listc.push(this.countryList[i]);
           }
         }
-
+        console.log(this.listc)
 
       });
 
@@ -108,17 +103,19 @@ export class InstitutionFormComponent implements OnInit {
       if (this.editInstitutionId > 0) {
         this.isNewInstitution = false;
 
-        this.serviceProxy
-          .getOneBaseInstitutionControllerInstitution(
-            this.editInstitutionId,
-            undefined,
-            undefined,
-            0
-          ).subscribe((res) => {
-            this.institution = res;
-            console.log('rrrr', res);
-            this.listc = res.countries
-          });
+        this.institutionProxy.getInstitutionDetails(
+          this.editInstitutionId
+
+        ).subscribe((res) => {
+          this.institution = res;
+          this.oldCountryList =res.countries;
+          this.listc = res.countries;
+
+          for (let co in this.listc) {
+            this.countryList.push(this.listc[co]);
+          }
+          console.log(this.countryList)
+        });
 
       }
     })
@@ -127,11 +124,11 @@ export class InstitutionFormComponent implements OnInit {
 
   }
 
-  saveForm(formData: NgForm) {
+  async saveForm(formData: NgForm) {
 
     if (formData.valid) {
       if (this.isNewInstitution) {
-        console.log("KKK", this.institution)
+        this.institution.countries = this.listc;
         this.serviceProxy
           .createOneBaseInstitutionControllerInstitution(this.institution)
           .subscribe(
@@ -163,11 +160,26 @@ export class InstitutionFormComponent implements OnInit {
 
       } else {
 
+        await this.oldCountryList.forEach(async (old) => {
+          let ins= new Institution();
+          let co =new Array();
+          ins.countries=co;
+          ins.type =new InstitutionType()
+
+          old.institution = null;
+          console.log(old)
+          this.serviceProxy
+            .updateOneBaseCountryControllerCountry(old.id, old)
+            .subscribe((res) => {});
+        });
+
+
+        this.institution.countries = this.listc;
         this.serviceProxy
           .updateOneBaseInstitutionControllerInstitution(this.institution.id, this.institution)
           .subscribe(
             (res) => {
-              console.log("PPPP111", );
+              console.log("PPPP111",);
               this.messageService.add({
                 severity: 'success',
                 summary: 'Success',
@@ -235,15 +247,15 @@ export class InstitutionFormComponent implements OnInit {
 
           reject: () => { },
         });
-          // this.messageService.add({
-          //   severity: 'success',
-          //   summary: 'Success',
-          //   detail:
+        // this.messageService.add({
+        //   severity: 'success',
+        //   summary: 'Success',
+        //   detail:
 
-          //     this.institution.status === 0 ? this.institution.name + ' is Activated' : this.institution.name + ' is Deactivated'
-          //   ,
-          //   closable: true,
-          // });
+        //     this.institution.status === 0 ? this.institution.name + ' is Activated' : this.institution.name + ' is Deactivated'
+        //   ,
+        //   closable: true,
+        // });
       },
         (err) => {
           console.log('error............'),

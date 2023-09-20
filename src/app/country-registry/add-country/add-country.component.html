@@ -74,7 +74,7 @@
             </div>
           </div>
     
-          <div class="p-grid p-fluid col-md-9 col-sm-12">
+          <!-- <div class="p-grid p-fluid col-md-9 col-sm-12">
             <div class="row p-2">
               <div class="col-12 col-md-10">
     
@@ -89,14 +89,14 @@
     
               </div>
             </div>
-          </div>
+          </div> -->
     
           <div class="p-grid p-fluid col-md-9 col-sm-12">
             <div class="row p-2">
               <div class="col-12 col-md-10">
     
                 <div class="p-field">
-                  <label for="AssignSectors">Assign Modules*</label>
+                  <label for="AssignSectors">Assign tools*</label>
                   <p-multiSelect appendTo="body" name="modules" #fmodules="ngModel" [options]="accessmodules" optionLabel="name"
                     [(ngModel)]="selectedModules" (ngModelChange)="selectmod($event)" [filter]="true"
                     placeholder="select modules">

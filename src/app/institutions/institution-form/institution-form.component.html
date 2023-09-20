@@ -68,11 +68,22 @@
           </div>
         </div>
 
-        <div class="row p-2">
+        <div  *ngIf="isNewInstitution" class="row p-2">
           <div class="col-12 col-md-12">
             <div class="p-field">
               <label for="objective">Assign countries</label>
-              <p-multiSelect name="countries" [options]="listc" [(ngModel)]="institution.countries"
+              <p-multiSelect appendTo="body" name="countries" [options]="countryList" [(ngModel)]="listc"
+                #fcountries="ngModel" [filter]="true" optionLabel="name" (ngModelChange)="getSelectedApproach()">
+              </p-multiSelect>
+            </div>
+          </div>
+        </div>
+
+        <div  *ngIf="!isNewInstitution" class="row p-2">
+          <div class="col-12 col-md-12">
+            <div class="p-field">
+              <label for="objective">Assign countries</label>
+              <p-multiSelect appendTo="body" name="countries" [options]="countryList" [(ngModel)]="listc"
                 #fcountries="ngModel" [filter]="true" optionLabel="name" (ngModelChange)="getSelectedApproach()">
               </p-multiSelect>
             </div>
@@ -105,9 +116,9 @@
           <div class="col-12 col-md-12">
             <div class="p-field">
               <label for="objective">Contact Number*</label>
-              <!-- <input type="text" placeholder="+xx xxx xxxx xxx" name="telephoneNumber" #telephoneNumber="ngModel"
-                class="p-inputtext" [(ngModel)]="institution.contactNumber" #ffc="ngModel" pInputText required /> -->
-                <p-inputMask
+              <input type="text" placeholder="+xx xxx xxxx xxx" name="telephoneNumber" #telephoneNumber="ngModel"
+                class="p-inputtext" [(ngModel)]="institution.contactNumber" #fmobile="ngModel" pInputText required />
+                <!-- <p-inputMask
                 type="text"
                 name="mobile"
                 mask="+99 99-999-9999"
@@ -116,11 +127,11 @@
                 [(ngModel)]="institution.contactNumber"
                 [styleClass]="'form-control'"
                 #fmobile="ngModel"
-              ></p-inputMask>
+              ></p-inputMask> -->
                 <p
                 class="info-message text-danger"
                 *ngIf="
-                  !institution.name &&
+                  !institution.contactNumber &&
                   (fData.submitted || fmobile.touched || fmobile.dirty)
                 "
               >
