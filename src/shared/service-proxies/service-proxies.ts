@@ -12707,6 +12707,59 @@ export class InstitutionControllerServiceProxy {
         return _observableOf(<any>null);
     }
 
+    getInstitutionDetails(countryId: number): Observable<any> {
+        let url_ = this.baseUrl + "/institution/institution/institutiId?";
+        if (countryId === undefined || countryId === null)
+            throw new Error("The parameter 'countryId' must be defined and cannot be null.");
+        else
+            url_ += "countryId=" + encodeURIComponent("" + countryId) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetInstitutionDetails(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetInstitutionDetails(<any>response_);
+                } catch (e) {
+                    return <Observable<any>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<any>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetInstitutionDetails(response: HttpResponseBase): Observable<any> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(<any>null);
+    }
+
     getPmuAdminAssignInstitution(): Observable<any> {
         let url_ = this.baseUrl + "/institution/institution/institutioninfopmu";
         url_ = url_.replace(/[?&]$/, "");
@@ -14053,7 +14106,7 @@ export class Country implements ICountry {
     region: string;
     uniqueIdentification: string;
     countrysector: CountrySector[];
-    institution: Institution;
+    institution: Institution | null;
     climateActionModule: boolean;
     ghgModule: boolean;
     macModule: boolean;
@@ -14100,7 +14153,7 @@ export class Country implements ICountry {
                 for (let item of _data["countrysector"])
                     this.countrysector.push(CountrySector.fromJS(item));
             }
-            this.institution = _data["institution"] ? Institution.fromJS(_data["institution"]) : <any>undefined;
+            this.institution = _data["institution"] ? Institution.fromJS(_data["institution"]) : <any>null;
             this.climateActionModule = _data["climateActionModule"];
             this.ghgModule = _data["ghgModule"];
             this.macModule = _data["macModule"];
@@ -14144,7 +14197,7 @@ export class Country implements ICountry {
             for (let item of this.countrysector)
                 data["countrysector"].push(item.toJSON());
         }
-        data["institution"] = this.institution ? this.institution.toJSON() : <any>undefined;
+        data["institution"] = this.institution ? this.institution.toJSON() : <any>null;
         data["climateActionModule"] = this.climateActionModule;
         data["ghgModule"] = this.ghgModule;
         data["macModule"] = this.macModule;
@@ -14184,7 +14237,7 @@ export interface ICountry {
     region: string;
     uniqueIdentification: string;
     countrysector: CountrySector[];
-    institution: Institution;
+    institution: Institution | null;
     climateActionModule: boolean;
     ghgModule: boolean;
     macModule: boolean;

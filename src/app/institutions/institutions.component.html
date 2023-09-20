@@ -74,16 +74,21 @@
             </ng-template>
 
 
+
+            <!-- <td>
+              <i class="pi pi-eye" style="font-size: 1.5rem; color: #000; margin-left: 17%"  (click)="editInstitution(institution)"></i>
+            </td> -->
+            
+            
+
             <!-- <td>
               <i class="pi pi-eye" style="font-size: 1.5rem; color: #000; margin-left: 17%"  (click)="editInstitution(institution)"></i>
             </td> -->
             
             <td>{{institution.name}}</td>
-
-            <!--country names-->
-            <td   >
-              
-              {{institution.countries !== undefined? institution.countries.length !== 0 ? institution.countries[0].name : "Not Applicable":""}}
+            <td>
+              {{getCountryname(institution)}}
+              {{institution.countries !== undefined? institution.countries.length !== 0 ?  countryName : "Not Applicable":""}}
      
    
       <div *ngIf="institution.countries === undefined" type="button"    class="has-details"  (mouseenter)="getCountries(institution.id);"><i class="pi pi-list " style="font-size: 2rem;color: #337ab7">

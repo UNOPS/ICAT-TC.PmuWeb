@@ -45,11 +45,9 @@ export class AddCountryComponent implements OnInit, AfterViewInit {
   sectorList: Sector[] = [];
 
   accessmodules: any[] = [
-    { id: 1, name: "Climate Action" },
+    { id: 1, name: "Carbon Market Tool" },
     { id: 2, name: "GHG Impact" },
     { id: 3, name: "MAC" },
-    { id: 4, name: "Data Collection" },
-    { id: 5, name: "Data Collection - GHG"  }
   ]
 
   selectedModules: any[] = [];
@@ -121,7 +119,7 @@ position:string = 'top-right';
         undefined,
         countryFilter,
         undefined,
-        ["editedOn,DESC"],
+        ["name,ASC"],
         undefined,
         1000,
         0,
@@ -306,10 +304,7 @@ position:string = 'top-right';
 
 
       if (this.isNewCountry) {
-        console.log("new country")
-
-        // console.log("clicked");
-        // let cou = new Country();
+        console.log("new country");
 
         this.cou.id = this.cou.id;
         this.cou.description = this.cou.description
