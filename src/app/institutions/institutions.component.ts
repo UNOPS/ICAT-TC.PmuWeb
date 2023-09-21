@@ -138,8 +138,11 @@ export class InstitutionsComponent implements OnInit, AfterViewInit {
           countryId,
 
         ).subscribe((a) => {
-          this.institutions = a.items;
-          this.totalRecords = a.meta.totalItems;
+          console.log(a)
+          this.institutions = a["1"];
+          
+          this.totalRecords = a["0"];
+
           this.loading = false;
         });
     }, 1);
