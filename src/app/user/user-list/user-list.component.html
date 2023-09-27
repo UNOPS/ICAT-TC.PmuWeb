@@ -239,6 +239,7 @@
           <th>Institution | Country</th>
           <th>Telephone</th>
           <th>Mobile</th>
+          <th>Status</th>
           <th>Email</th>
         </tr>
       </ng-template>
@@ -275,6 +276,7 @@
 
           <td>{{ customer.telephone }}</td>
           <td>{{ customer.mobile }}</td>
+          <td>{{ customer.status ==1?'DEACTIVE':"ACTIVE" }}</td>
           <td
             pTooltip="{{ customer.email }}"
             tooltipPosition="top"

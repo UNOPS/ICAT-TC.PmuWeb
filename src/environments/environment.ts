@@ -10,10 +10,7 @@ export const environment = {
   baseUrlCountryAPI: 'http://localhost:7081',
   baseUrlAuditlog :  'http://65.0.7.85:7000',
 
-  baseSyncAPI: 'http://localhost:3001',
-  // baseUrlCountryAPI: 'http://3.110.47.158:7080',//	3.110.108.98
-  //baseUrlCountryAPI: 'http://3.110.108.98:7081'
-  // baseUrlCountryAPI: 'https://icat-ca-tool.climatesi.com/web-api',
+  baseSyncAPI: 'http://localhost:7090',
 
 };
 // baseUrlAPI: 'http://3.110.188.89:7080',
