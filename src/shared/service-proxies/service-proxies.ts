@@ -14107,11 +14107,9 @@ export class Country implements ICountry {
     uniqueIdentification: string;
     countrysector: CountrySector[];
     institution: Institution | null;
-    climateActionModule: boolean;
-    ghgModule: boolean;
-    macModule: boolean;
-    dataCollectionModule: boolean;
-    dataCollectionGhgModule: boolean;
+    carboneMarketTool: boolean;
+    portfoloaTool: boolean;
+    investmentTool: boolean;
     isSingleCountry: number;
     domain: string;
 
@@ -14154,11 +14152,9 @@ export class Country implements ICountry {
                     this.countrysector.push(CountrySector.fromJS(item));
             }
             this.institution = _data["institution"] ? Institution.fromJS(_data["institution"]) : <any>null;
-            this.climateActionModule = _data["climateActionModule"];
-            this.ghgModule = _data["ghgModule"];
-            this.macModule = _data["macModule"];
-            this.dataCollectionModule = _data["dataCollectionModule"];
-            this.dataCollectionGhgModule = _data["dataCollectionGhgModule"];
+            this.carboneMarketTool = _data["carboneMarketTool"];
+            this.portfoloaTool = _data["portfoloaTool"];
+            this.investmentTool = _data["investmentTool"];
             this.isSingleCountry = _data["isSingleCountry"];
             this.domain = _data["domain"];
         }
@@ -14198,11 +14194,9 @@ export class Country implements ICountry {
                 data["countrysector"].push(item.toJSON());
         }
         data["institution"] = this.institution ? this.institution.toJSON() : <any>null;
-        data["climateActionModule"] = this.climateActionModule;
-        data["ghgModule"] = this.ghgModule;
-        data["macModule"] = this.macModule;
-        data["dataCollectionModule"] = this.dataCollectionModule;
-        data["dataCollectionGhgModule"] = this.dataCollectionGhgModule;
+        data["carboneMarketTool"] = this.carboneMarketTool;
+        data["portfoloaTool"] = this.portfoloaTool;
+        data["investmentTool"] = this.investmentTool;
         data["isSingleCountry"] = this.isSingleCountry;
         data["domain"] = this.domain;
         return data;
@@ -14238,11 +14232,9 @@ export interface ICountry {
     uniqueIdentification: string;
     countrysector: CountrySector[];
     institution: Institution | null;
-    climateActionModule: boolean;
-    ghgModule: boolean;
-    macModule: boolean;
-    dataCollectionModule: boolean;
-    dataCollectionGhgModule: boolean;
+    carboneMarketTool: boolean;
+    portfoloaTool: boolean;
+    investmentTool: boolean;
     isSingleCountry: number;
     domain: string;
 }

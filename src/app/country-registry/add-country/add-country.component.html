@@ -74,22 +74,6 @@
             </div>
           </div>
     
-          <!-- <div class="p-grid p-fluid col-md-9 col-sm-12">
-            <div class="row p-2">
-              <div class="col-12 col-md-10">
-    
-    
-                <div class="p-field">
-                  <label for="AssignSectors">Assign Sectors*</label>
-                  <p-multiSelect appendTo="body" name="sectors" #fmodules="ngModel" [options]="sectorList" optionLabel="name"
-                    [(ngModel)]="selectedSectors" (ngModelChange)="selectmod($event)" [filter]="true"
-                    placeholder="Select Sector">
-                  </p-multiSelect>
-                </div>
-    
-              </div>
-            </div>
-          </div> -->
     
           <div class="p-grid p-fluid col-md-9 col-sm-12">
             <div class="row p-2">
@@ -138,32 +122,13 @@
                 </div>
               </div>
             </div>
-            <!-- <div class="p-grid p-fluid col-md-6 col-sm-12">
-          
-              <div *ngIf="!isNewCountry">
-                <button pButton pRipple class="btn btn-primary btn-block text-uppercase" type='button'
-                  (click)="activateCountry(cou)">
-                  {{cstaus == 0 ? "Activate" : "Deactivate"}}
-                </button>
-              </div>
-            </div> -->
           </div>
          
-    
-          
-    
-    
-    
         </div>
         <div class="col-6"  >
-          <!-- <div class="p-grid p-fluid col-md-12 col-sm-12" style="size: 100%;"> -->
-            <!-- <div> -->
               <countries-map [data]="mapData1" maxColor='#046312' noDataColor='grey' backgroundColor='white' minColor="blue"
                 [showCaption]=false >
               </countries-map>
-            <!-- </div> -->
-    
-          <!-- </div> -->
         </div>
       </div>
  

@@ -46,10 +46,9 @@ export class ViewCountryComponent implements OnInit, AfterViewInit {
   sectorList: Sector[] = [];
 
   accessmodules: any[] = [
-    { id: 1, name: "Climate Action Module" },
-    { id: 2, name: "GHG Module" },
-    { id: 3, name: "MAC Module" },
-    { id: 4, name: "Data Collection Module" }
+    { id: 1, name: "Carbon Market Tool" },
+    { id: 2, name: "Portfolio Tool" },
+    { id: 3, name: "Investment and Private Sector Tool" },
   ]
 
   selectedModules: any[] = [];
@@ -173,40 +172,20 @@ export class ViewCountryComponent implements OnInit, AfterViewInit {
             this.secNames = this.secNames + " " + tempSecName;
             
           }
-
-    
-
-
-
             this.cou.description = res.description
             this.onStatusChange(this.cou)
 
-            // if (this.cou.countryStatus == CountryStatus.Active) {
-            //   this.cstaus = 1;
-
-            // }
-            // else {
-
-            //   this.cstaus = 0;
-            // }
-            if (this.cou.climateActionModule) {
-              this.selectedModules.push({ id: 1, name: "Climate Action" })
+           
+            if (this.cou.carboneMarketTool) {
+              this.selectedModules.push({ id: 1, name: "Carbon Market Tool" })
 
             }
-            if (this.cou.macModule) {
-              this.selectedModules.push({ id: 3, name: "MAC" })
+            if (this.cou.portfoloaTool) {
+              this.selectedModules.push({ id: 3, name: "Portfolio Tool" })
 
             }
-            if (this.cou.ghgModule) {
-              this.selectedModules.push({ id: 2, name: "GHG Impact" })
-
-            }
-            if (this.cou.dataCollectionModule) {
-              this.selectedModules.push({ id: 4, name: "Data Collection" })
-
-            }
-            if (this.cou.dataCollectionGhgModule) {
-              this.selectedModules.push({ id: 5, name: "Data Collection - GHG" })
+            if (this.cou.investmentTool) {
+              this.selectedModules.push({ id: 2, name: "Investment and Private Sector Tool" })
 
             }
 
