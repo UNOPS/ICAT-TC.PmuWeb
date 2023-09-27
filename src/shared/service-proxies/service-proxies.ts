@@ -18030,50 +18030,50 @@ export interface IAuthCredentialDto {
     password: string;
 }
 
-export class ResetPassword implements IResetPassword {
-    email: string;
-    token: string;
-    password: string;
+// export class ResetPassword implements IResetPassword {
+//     email: string;
+//     token: string;
+//     password: string;
 
-    constructor(data?: IResetPassword) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
+//     constructor(data?: IResetPassword) {
+//         if (data) {
+//             for (var property in data) {
+//                 if (data.hasOwnProperty(property))
+//                     (<any>this)[property] = (<any>data)[property];
+//             }
+//         }
+//     }
 
-    init(_data?: any) {
-        if (_data) {
-            this.email = _data["email"];
-            this.token = _data["token"];
-            this.password = _data["password"];
-        }
-    }
+//     init(_data?: any) {
+//         if (_data) {
+//             this.email = _data["email"];
+//             this.token = _data["token"];
+//             this.password = _data["password"];
+//         }
+//     }
 
-    static fromJS(data: any): ResetPassword {
-        data = typeof data === 'object' ? data : {};
-        let result = new ResetPassword();
-        result.init(data);
-        return result;
-    }
+//     static fromJS(data: any): ResetPassword {
+//         data = typeof data === 'object' ? data : {};
+//         let result = new ResetPassword();
+//         result.init(data);
+//         return result;
+//     }
 
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["email"] = this.email;
-        data["token"] = this.token;
-        data["password"] = this.password;
-        return data;
-    }
+//     toJSON(data?: any) {
+//         data = typeof data === 'object' ? data : {};
+//         data["email"] = this.email;
+//         data["token"] = this.token;
+//         data["password"] = this.password;
+//         return data;
+//     }
 
-    clone(): ResetPassword {
-        const json = this.toJSON();
-        let result = new ResetPassword();
-        result.init(json);
-        return result;
-    }
-}
+//     clone(): ResetPassword {
+//         const json = this.toJSON();
+//         let result = new ResetPassword();
+//         result.init(json);
+//         return result;
+//     }
+// }
 
 export interface IResetPassword {
     email: string;
@@ -18448,6 +18448,53 @@ export enum DocumentsDocumentOwner {
     Project = <any>"Project",
     Country = <any>"Country",
     LearningMaterial = <any>"LearningMaterial",
+}
+export class ResetPassword implements IResetPassword {
+    email: string;
+    token: string;
+    password: string;
+    code: string;
+
+    constructor(data?: IResetPassword) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.email = _data["email"];
+            this.token = _data["token"];
+            this.password = _data["password"];
+            this.code = _data["code"];
+        }
+    }
+
+    static fromJS(data: any): ResetPassword {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResetPassword();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["email"] = this.email;
+        data["token"] = this.token;
+        data["password"] = this.password;
+        data["code"] = this.code;
+        return data;
+    }
+
+    clone(): ResetPassword {
+        const json = this.toJSON();
+        let result = new ResetPassword();
+        result.init(json);
+        return result;
+    }
 }
 
 export class ApiException extends Error {
