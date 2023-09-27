@@ -8,5 +8,5 @@ export const environment = {
   baseUrlCountryAPI: 'http://3.108.9.184:7081',
   baseUrlAuditlog :  'http://3.108.9.184:7000',
 
-  baseSyncAPI: 'http://3.108.9.184:3001',
+  baseSyncAPI: 'http://3.108.9.184:7090',
 };
