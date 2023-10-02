@@ -84,17 +84,20 @@ export class UserFormComponent implements OnInit {
     const institutionId = tokenPayload.institutionId;
 
     this.uid = event;
+    console.log(event);
+    console.log(institutionId)
 
     this.filter = [];
-
+    this.filter.push('status||$ne||' + 1)
     if (this.uid?.id === 5) {
-      this.filter.push('id||$eq||' + 6);
+      this.filter.push('id||$eq||' + 1);
     } else {
       if (institutionId) {
         this.filter.push('id||$eq||' + institutionId);
-      } else {
-        this.filter.push('id||$ne||' + 6);
-      }
+      } 
+      // else {
+      //   this.filter.push('id||$ne||' + 1);
+      // }
     }
 
     this.serviceProxy
@@ -127,33 +130,37 @@ export class UserFormComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-
+    let filter1 = [];
+    filter1.push('status||$ne||' + 1)
     await this.serviceProxy
-    .getManyBaseInstitutionControllerInstitution(
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      1000,
-      0,
-      1,
-      0,
-    )
-    .subscribe((res) => {
-      this.institutions = res.data;
-      if (this.user?.institution) {
-        this.institutions.forEach((ins) => {
-          if (ins.id == this.user.institution.id) {
-            this.user.institution = ins;
-            console.log(ins)
-          }
-        });
-      }
-    });
+      .getManyBaseInstitutionControllerInstitution(
+        undefined,
+        undefined,
+        filter1,
+        undefined,
+        undefined,
+        undefined,
+        1000,
+        0,
+        1,
+        0,
+      )
+      .subscribe((res) => {
+        this.institutions = res.data;
+        if (this.user?.institution) {
+          this.institutions.forEach((ins) => {
+            if (ins.id == this.user.institution.id) {
+              this.user.institution = ins;
+              console.log(ins)
+            }
+          });
+        }
+      });
 
     await this.route.queryParams.subscribe(async (params) => {
+      let filter2 = [];
+      filter2.push('status||$ne||' + 1);
+      this.filter2.push('id||$ne||' + 4)
       this.serviceProxy
       .getManyBaseUserTypeControllerUserType(
         undefined,
@@ -172,36 +179,36 @@ export class UserFormComponent implements OnInit {
       });
 
       await this.serviceProxy
-      .getManyBaseInstitutionControllerInstitution(
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        1000,
-        0,
-        1,
-        0,
-      )
-      .subscribe((res) => {
-        this.institutions = res.data;
-        if (this.user?.institution) {
-          this.institutions.forEach((ins) => {
-            if (ins.id == this.user.institution.id) {
-              this.user.institution = ins;
-            }
-          });
-        }
-      });
+        .getManyBaseInstitutionControllerInstitution(
+          undefined,
+          undefined,
+          filter2,
+          undefined,
+          undefined,
+          undefined,
+          1000,
+          0,
+          1,
+          0,
+        )
+        .subscribe((res) => {
+          this.institutions = res.data;
+          if (this.user?.institution) {
+            this.institutions.forEach((ins) => {
+              if (ins.id == this.user.institution.id) {
+                this.user.institution = ins;
+              }
+            });
+          }
+        });
 
       this.editUserId = params['id'];
-      
+
       this.uid = this.editUserId;
       if (this.editUserId && this.editUserId > 0) {
-        
+
         this.isNewUser = false;
-         this.serviceProxy
+        this.serviceProxy
           .getOneBaseUsersControllerUser(
             this.editUserId,
             undefined,
@@ -213,12 +220,12 @@ export class UserFormComponent implements OnInit {
             this.user.institution = res.institution;
             this.user.userType = res.userType;
             this.userTypes.push(res.userType)
-            this.userTypes.forEach((userlist) => {              
+            this.userTypes.forEach((userlist) => {
               if (userlist.id == res.userType.id) {
                 this.user.userType = userlist;
               }
             });
-            this.institutions.forEach((ins) => {              
+            this.institutions.forEach((ins) => {
               if (ins.id == res.institution.id) {
                 this.user.institution = ins;
               }
@@ -250,7 +257,7 @@ export class UserFormComponent implements OnInit {
       this.filter2.push('id||$ne||' + 4);
     }
 
-   
+
 
     this.serviceProxy
       .getManyBaseUserTypeControllerUserType(
@@ -269,7 +276,7 @@ export class UserFormComponent implements OnInit {
         this.userTypes = res.data;
       });
 
-    
+
 
     const countryFilter: string[] = [];
     countryFilter.push('Country.IsSystemUse||$eq||' + 1);
@@ -527,10 +534,10 @@ export class UserFormComponent implements OnInit {
         this.user = res;
       });
 
-      if(this.user.userType.id==2){
-        this.user.status == 0 ? this.user.status =1 :this.user.status = 0;
-        this.http.post<any[]>(url, this.user).subscribe();
-      }
-   
+    if (this.user.userType.id == 2) {
+      this.user.status == 0 ? this.user.status = 1 : this.user.status = 0;
+      this.http.post<any[]>(url, this.user).subscribe();
+    }
+
   }
 }

@@ -152,19 +152,9 @@
           <div class="col-12 col-md-8">
             <div class="p-field">
               <label for="institution">Landline</label>
-              <input  type="text" name="mrvInstitution" class="form-control"
-                [(ngModel)]="user.telephone" #ftelephone="ngModel" placeholder="+99 999 999-9999"
+              <input  type="number" name="Landline" class="form-control"
+                [(ngModel)]="user.telephone" #ftelephone="ngModel" placeholder="0000000000"
                  />
-              <!-- <p-input type="text" name="telephone" 
-                placeholder="+99 999 999-9999" [(ngModel)]="user.telephone" #ftelephone="ngModel"
-                 required>
-              </p-input> -->
-              <!-- <p class="info-message text-danger" *ngIf="
-                  (!user.telephone ) &&
-                  (fLogin.submitted || ftelephone.touched || ftelephone.dirty)
-                ">
-                This is a mandatory field
-              </p> -->
             </div>
           </div>
         </div>
@@ -174,11 +164,14 @@
         <div class="row p-2">
           <div class="col-12 col-md-8">
             <div class="p-field">
-              <label for="mobile">Mobile</label>
+              <label for="mobile">Mobile *</label>
+              <input  type="number" name="Mobile" class="form-control"
+              [(ngModel)]="user.mobile" #ftelephone="ngModel" placeholder="0000000000"
+               />
 
-              <p-inputMask type="text" name="mobile" mask="+99 99-999-9999" [autoClear]="false"
+              <!-- <p-inputMask type="text" name="mobile" mask="+99 99-999-9999" [autoClear]="false"
                 placeholder="+99 999 999-999" [(ngModel)]="user.mobile" [styleClass]="'form-control'"
-                #fmobile="ngModel"></p-inputMask>
+                #fmobile="ngModel"></p-inputMask> -->
               <p class="info-message text-danger" *ngIf="
                   user.mobile !== undefined && user?.mobile!.indexOf('_') > 0
                 ">

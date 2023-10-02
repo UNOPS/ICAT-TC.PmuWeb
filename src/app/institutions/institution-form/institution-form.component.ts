@@ -68,7 +68,7 @@ export class InstitutionFormComponent implements OnInit {
         this.selectedTypeList = res.data;
       });
     let countryFilter: string[] = [];
-    countryFilter.push('Country.IsSystemUse||$eq||' + 1);
+    // countryFilter.push('Country.IsSystemUse||$eq||' + 1);
 
     await this.serviceProxy
       .getManyBaseCountryControllerCountry(
@@ -91,8 +91,6 @@ export class InstitutionFormComponent implements OnInit {
             this.listc.push(this.countryList[i]);
           }
         }
-        console.log(this.listc)
-
       });
 
 
@@ -114,7 +112,6 @@ export class InstitutionFormComponent implements OnInit {
           for (let co in this.listc) {
             this.countryList.push(this.listc[co]);
           }
-          console.log(this.countryList)
         });
 
       }

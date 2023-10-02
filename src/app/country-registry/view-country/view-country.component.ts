@@ -160,18 +160,6 @@ export class ViewCountryComponent implements OnInit, AfterViewInit {
           console.log('editCountry-------', res);
           this.cou = res;
 
-          for(let x=0 ; x < this.cou.countrysector.length;x++){
-            this.selectedSectors.push(this.cou.countrysector[x].sector);
-          }
-          console.log("selectedSectors-----",this.selectedSectors)
-
-        
-
-          for(let x =0; x<this.selectedSectors.length; x++){
-            let tempSecName = this.selectedSectors[x].name;
-            this.secNames = this.secNames + " " + tempSecName;
-            
-          }
             this.cou.description = res.description
             this.onStatusChange(this.cou)
 
@@ -181,19 +169,17 @@ export class ViewCountryComponent implements OnInit, AfterViewInit {
 
             }
             if (this.cou.portfoloaTool) {
-              this.selectedModules.push({ id: 3, name: "Portfolio Tool" })
+              this.selectedModules.push({ id: 2, name: "Portfolio Tool" })
 
             }
             if (this.cou.investmentTool) {
-              this.selectedModules.push({ id: 2, name: "Investment and Private Sector Tool" })
+              this.selectedModules.push({ id: 3, name: "Investment and Private Sector Tool" })
 
             }
 
-            console.log("selectedModulesxxxxxxxxxxxx====", this.selectedModules)
-
             for(let x =0; x<this.selectedModules.length; x++){
               let tempModName = this.selectedModules[x].name;
-              this.modNames = this.modNames + "  " + tempModName;
+              this.modNames = this.modNames + ",  " + tempModName;
               
             }
 

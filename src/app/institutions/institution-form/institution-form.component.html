@@ -71,11 +71,21 @@
         <div  *ngIf="isNewInstitution" class="row p-2">
           <div class="col-12 col-md-12">
             <div class="p-field">
-              <label for="objective">Assign countries</label>
+              <label for="objective">Assign countries *</label>
               <p-multiSelect appendTo="body" name="countries" [options]="countryList" [(ngModel)]="listc"
-                #fcountries="ngModel" [filter]="true" optionLabel="name" (ngModelChange)="getSelectedApproach()">
+                #fcountries="ngModel" [filter]="true" optionLabel="name" (ngModelChange)="getSelectedApproach()" required>
               </p-multiSelect>
             </div>
+             <p
+                class="info-message text-danger"
+                *ngIf="                
+                  (fData.submitted ||
+                  fcountries.touched ||
+                  fcountries.dirty)
+                "
+              >
+                This is a mandatory field
+              </p>
           </div>
         </div>
 
@@ -116,7 +126,7 @@
           <div class="col-12 col-md-12">
             <div class="p-field">
               <label for="objective">Contact Number*</label>
-              <input type="text" placeholder="+xx xxx xxxx xxx" name="telephoneNumber" #telephoneNumber="ngModel"
+              <input type="number" placeholder="xx xxx xxxx xxx" name="telephoneNumber" #telephoneNumber="ngModel"
                 class="p-inputtext" [(ngModel)]="institution.contactNumber" #fmobile="ngModel" pInputText required />
                 <!-- <p-inputMask
                 type="text"
