@@ -126,6 +126,7 @@ import { SharedDataService } from 'shared/shared-data-services';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CommonModule } from '@angular/common';
 import { AssignMethodologyComponent } from './methodologies/assign-methodology/assign-methodology.component';
+import { SetPasswordComponent } from './login/set-password/set-password.component';
 
 export function getRemoteServiceBaseUrl(): string {
   return environment.baseUrlAPI;
@@ -162,6 +163,7 @@ export function getRemoteServiceBaseUrl(): string {
     SectorComponent,
     AddSectorComponent,
     AssignMethodologyComponent,
+    SetPasswordComponent,
   
     // ResultComponent,
     // ProposedResultComponent,

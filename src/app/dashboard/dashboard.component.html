@@ -149,40 +149,40 @@
           </div>
 
         </div>
-        <div class="col-6">
+        <!-- <div class="col-6">
           <div class="card">
 
-            <h5>Methodology Usage</h5>
+            <h5>Methodology Usage</h5> -->
     
-            <div class="row">
+            <!-- <div class="row">
               <div class="col-2 d-flex align-items-center">
                 <label class="font-weight-bold">Country</label>
               </div>
-              <div class="col-6">
+              <div class="col-6"> -->
                 <!-- {{user.userType | json}} -->
-                <p-dropdown [options]="countryList" name="country" [(ngModel)]="selectedCountryForMethology"
+                <!-- <p-dropdown [options]="countryList" name="country" [(ngModel)]="selectedCountryForMethology"
                   placeholder="All" optionLabel="name" [showClear]="true"
                   (onChange)="getMethologyUsageChart(selectedCountryForMethology?selectedCountryForMethology.id:0)">
-                </p-dropdown>
+                </p-dropdown> -->
                 <!-- {{fut.errors | json}} {{fLogin.errors | json}} -->
-              </div>
+              <!-- </div>
             </div>
             
             <div class="row" >
               <p-chart type="pie" [data]="methologyChartData" [options]="methologychartOptions" [style]="{'width': '100%'}"></p-chart>
               <div *ngIf="this.isusemeth" class="col">
                 <p-messages severity="warn" >
-                  <ng-template pTemplate>
+                  <ng-template pTemplate> -->
                       <!-- <img src="assets/showcase/images/primeng.svg" width="32" /> -->
-                      <i class="pi pi-info-circle mr-20" style="font-size: 2rem"></i>
-                      <div class="ml-2">There is no data to show</div>
-                  </ng-template>
+                      <!-- <i class="pi pi-info-circle mr-20" style="font-size: 2rem"></i>
+                      <div class="ml-2">There is no data to show</div> -->
+                  <!-- </ng-template>
               </p-messages> 
             </div>
-             </div>
+             </div> -->
             
-          </div>
-        </div>
+          <!-- </div> -->
+        <!-- </div> -->
       </div>
 
       
