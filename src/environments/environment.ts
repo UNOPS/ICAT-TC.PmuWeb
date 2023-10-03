@@ -11,6 +11,7 @@ export const environment = {
   baseUrlAuditlog :  'http://65.0.7.85:7000',
 
   baseSyncAPI: 'http://localhost:7090',
+  baseMainSyncAPI: 'http://3.108.9.184/web-api',
 
 };
 // baseUrlAPI: 'http://3.110.188.89:7080',

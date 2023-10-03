@@ -63,7 +63,7 @@ export class ViewCountryComponent implements OnInit, AfterViewInit {
   editCountryId: any;
   isNewCountry: boolean = true;
   arr: any[] = []
-  url = environment.baseSyncAPI + '/country';
+  url = environment.baseMainSyncAPI + '/country/synccountry';
   selectCountry: string = "Select a Country";
 
   cou: Country = new Country();
