@@ -258,6 +258,7 @@ export class AddCountryComponent implements OnInit, AfterViewInit {
               });
               setTimeout(() => {
                 this.onBackClick();
+                this.http.post<any[]>(this.url, this.cou).subscribe();
               },500)
 
             });
@@ -356,7 +357,7 @@ export class AddCountryComponent implements OnInit, AfterViewInit {
 
           reject: () => { },
         });
-        await axios.get(this.url)
+        this.http.post<any[]>(this.url, this.cou).subscribe();
       },
         (err) => {
           this.messageService.add({
@@ -367,7 +368,7 @@ export class AddCountryComponent implements OnInit, AfterViewInit {
           });
         }
       );
-    await axios.get(this.url)
+      this.http.post<any[]>(this.url, this.cou).subscribe();
   }
 
   onBackClick() {
