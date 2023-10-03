@@ -9,4 +9,5 @@ export const environment = {
   baseUrlAuditlog :  'http://3.108.9.184:7000',
 
   baseSyncAPI: 'http://3.108.9.184:3001',
+  baseMainSyncAPI: 'http://3.108.9.184/web-api',
 };
