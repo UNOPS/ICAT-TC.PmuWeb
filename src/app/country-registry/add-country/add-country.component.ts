@@ -97,22 +97,22 @@ export class AddCountryComponent implements OnInit, AfterViewInit {
     let countryFilter: string[] = [];
     countryFilter.push('Country.IsSystemUse||$eq||' + 0);
     await this.serviceProxy
-    .getManyBaseCountryControllerCountry(
-      undefined,
-      undefined,
-      countryFilter,
-      undefined,
-      ["name,ASC"],
-      undefined,
-      1000,
-      0,
-      0,
-      0
-    ).subscribe((res: any) => {
-      this.countryList = res.data;
-    });
+      .getManyBaseCountryControllerCountry(
+        undefined,
+        undefined,
+        countryFilter,
+        undefined,
+        ["name,ASC"],
+        undefined,
+        1000,
+        0,
+        0,
+        0
+      ).subscribe((res: any) => {
+        this.countryList = res.data;
+      });
 
-    
+
     if (institutionId != undefined) {
       countryFilter.push('institution.id||$eq||' + institutionId);
     }
@@ -256,10 +256,13 @@ export class AddCountryComponent implements OnInit, AfterViewInit {
                 detail: 'Successfully created the country',
 
               });
+              setTimeout(() => {
+                this.onBackClick();
+              },500)
 
             });
-        }, 1000);
-        this.onBackClick();
+        }, 500);
+
       } else {
 
         for (let x = 0; x < this.selectedModules.length; x++) {
@@ -290,9 +293,9 @@ export class AddCountryComponent implements OnInit, AfterViewInit {
 
         }
 
-        let countrysectr: CountrySector[] = []; 
+        let countrysectr: CountrySector[] = [];
         this.cou.countrysector = countrysectr;
-console.log(this.cou)
+        console.log(this.cou)
         this.serviceProxy.updateOneBaseCountryControllerCountry(this.cou.id, this.cou)
           .subscribe(
 
@@ -340,28 +343,28 @@ console.log(this.cou)
       .subscribe(async (res) => {
 
 
-          this.confirmationService.confirm({
-            message: this.cou.countryStatus === CountryStatus.Active ? 'Are you sure you want to activate ' + res.name + '?' : 'Are you sure you want to deactivate ' + res.name + '?',
-            header: 'Confirmation',
-            rejectIcon: 'icon-not-visible',
-            rejectVisible: true,
-            acceptLabel: 'Yes',
-            rejectLabel: 'No',
-            accept: () => {
-              this.onBackClick();
-            },
+        this.confirmationService.confirm({
+          message: this.cou.countryStatus === CountryStatus.Active ? 'Are you sure you want to activate ' + res.name + '?' : 'Are you sure you want to deactivate ' + res.name + '?',
+          header: 'Confirmation',
+          rejectIcon: 'icon-not-visible',
+          rejectVisible: true,
+          acceptLabel: 'Yes',
+          rejectLabel: 'No',
+          accept: () => {
+            this.onBackClick();
+          },
 
-            reject: () => { },
-          });
+          reject: () => { },
+        });
         await axios.get(this.url)
       },
         (err) => {
-            this.messageService.add({
-              severity: 'error',
-              summary: 'Error.',
-              detail: 'Failed Deactiavted, please try again.',
-              sticky: true,
-            });
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error.',
+            detail: 'Failed Deactiavted, please try again.',
+            sticky: true,
+          });
         }
       );
     await axios.get(this.url)
