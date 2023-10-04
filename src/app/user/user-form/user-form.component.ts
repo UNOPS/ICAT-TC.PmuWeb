@@ -160,7 +160,11 @@ export class UserFormComponent implements OnInit {
     await this.route.queryParams.subscribe(async (params) => {
       let filter2 = [];
       filter2.push('status||$ne||' + 1);
-      this.filter2.push('id||$ne||' + 4)
+      this.filter2.push('id||$ne||' + 4);
+      if (['PMU Admin'].includes(tokenPayload.roles[0])) {
+        this.filter2.push('id||$ne||' + 5);
+        this.filter2.push('id||$ne||' + 1);
+      }
       this.serviceProxy
       .getManyBaseUserTypeControllerUserType(
         undefined,

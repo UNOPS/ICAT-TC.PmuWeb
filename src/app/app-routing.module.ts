@@ -65,6 +65,8 @@ import { AddSectorComponent } from './sector/add-sector/add-sector.component';
 import { RoleGuardService } from './auth/role-guard.service';
 import { ViewCountryComponent } from './country-registry/view-country/view-country.component';
 import { AssignMethodologyComponent } from './methodologies/assign-methodology/assign-methodology.component';
+import { SetPasswordComponent } from './login/set-password/set-password.component';
+// import { SetPasswordComponent } from './login/set-password/set-password.component';
 
 
 
@@ -74,11 +76,6 @@ export enum UserRoles {
   ICAT_USER = 'ICAT User',
   PMU_ADMIN = 'PMU Admin',
   PMU_USER = 'PMU User',
-  // TT = 'Technical Team',
-  // DCT = 'Data Collection Team',
-  // QC = 'QC Team',
-  // INS_ADMIN = 'Institution Admin', 
-  // DEO = 'Data Entry Operator',
 }
 const routes: Routes = [
   {
@@ -95,6 +92,7 @@ const routes: Routes = [
       ],
     },
   },
+  { path: 'reset-password', component: SetPasswordComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 //  { path: '', redirectTo: '/dashboard', pathMatch: 'full' }, // redirect to `first-component`
   { path: 'login', component: LoginLayoutComponent },
