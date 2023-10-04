@@ -190,15 +190,26 @@
             >
               <div class=""></div>
               Activity log
-            </div>
-            
-
-           
-
-           
-        
+            </div>           
           </div>
         </div>
+        <div *ngIf="
+        userRole.role == 1 ||
+        userRole.role == 5 ||
+        userRole.role == 3 ||
+        userRole.role == 4 " class="sidebar-items--link align-items-start " [routerLink]="['/reset-password']"
+          routerLinkActive="selected">
+          <div class=""></div>
+          Reset Your Password
+          <i class="pi pi-cog pass-icon" (click)="['/reset-password']"></i>
+        </div>
+        <!-- <div class="sidebar--footer">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div class="ml-2 mr-2"></div>
+        </div>
+      </div> -->
 
         <div class="sidebar--footer">
           <div></div>
