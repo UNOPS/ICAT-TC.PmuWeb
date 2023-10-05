@@ -130,6 +130,11 @@ export class UserFormComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+
+    const token = localStorage.getItem('access_token')!;
+    const tokenPayload = decode<any>(token);
+    const institutionId = tokenPayload.institutionId;
+
     let filter1 = [];
     filter1.push('status||$ne||' + 1)
     await this.serviceProxy
@@ -243,10 +248,10 @@ export class UserFormComponent implements OnInit {
     this.user.mobile = '';
     this.user.telephone = '';
 
-    const token = localStorage.getItem('access_token')!;
-    const tokenPayload = decode<any>(token);
+    // const token = localStorage.getItem('access_token')!;
+    // const tokenPayload = decode<any>(token);
 
-    const institutionId = tokenPayload.institutionId;
+    // const institutionId = tokenPayload.institutionId;
 
     if (tokenPayload.roles[0] == 'PMU Admin') {
       this.filter2.push('id||$ne||' + 4) &

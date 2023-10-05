@@ -96,6 +96,9 @@ export class AddCountryComponent implements OnInit, AfterViewInit {
 
     let countryFilter: string[] = [];
     countryFilter.push('Country.IsSystemUse||$eq||' + 0);
+    if(institutionId != undefined){
+      countryFilter.push('institution.id||$eq||' +institutionId);  
+     }
     await this.serviceProxy
       .getManyBaseCountryControllerCountry(
         undefined,
@@ -113,9 +116,9 @@ export class AddCountryComponent implements OnInit, AfterViewInit {
       });
 
 
-    if (institutionId != undefined) {
-      countryFilter.push('institution.id||$eq||' + institutionId);
-    }
+    // if (institutionId != undefined) {
+    //   countryFilter.push('institution.id||$eq||' + institutionId);
+    // }
 
     this.route.queryParams.subscribe(async (params) => {
       this.editCountryId = params['id'];
