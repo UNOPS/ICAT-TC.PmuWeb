@@ -5,6 +5,7 @@ import { AuthenticationService } from '../login-layout/authentication.service';
 import {  FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import decode from 'jwt-decode';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-set-password',
@@ -90,7 +91,7 @@ export class SetPasswordComponent implements OnInit {
   }
 
   toLanding() {
-    this.router.navigate(['/landing-page'])
+    window.location.href = environment.baseUrlLandingPage;
   }
 
   // onPasswordChange(event: any) {

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrlAPI: 'http://localhost:7081',
+  baseUrlAPI: 'http://15.206.202.183:7081',
   baseUrlAPIDocUploadAPI: 'http://localhost:7081/document/upload2',
   baseUrlAPIDocdownloadAPI: 'http://localhost:7081/document/downloadDocument',
   baseUrlCountryAPI: 'http://localhost:7081',
@@ -12,6 +12,7 @@ export const environment = {
 
   baseSyncAPI: 'http://localhost:7090',
   baseMainSyncAPI: 'http://3.108.9.184/web-api',
+  baseUrlLandingPage : 'http://15.206.202.183/country/landing-page',
 
 };
 // baseUrlAPI: 'http://3.110.188.89:7080',
