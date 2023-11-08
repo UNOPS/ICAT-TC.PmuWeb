@@ -29,6 +29,7 @@ export class InstitutionsComponent implements OnInit, AfterViewInit {
   rows: number = 10;
   last: number;
   event: any;
+  countryName : string;
 
   searchBy: any = {
     text: null,
@@ -95,7 +96,6 @@ export class InstitutionsComponent implements OnInit, AfterViewInit {
 
         this.countryList = res.data;
         this.countryList = this.countryList.filter(a=>a.institution&&a.institution.id)
-        console.log("this.countryList",this.countryList)
       });
 
   }
@@ -138,11 +138,11 @@ export class InstitutionsComponent implements OnInit, AfterViewInit {
           countryId,
 
         ).subscribe((a) => {
-          console.log('VVVV',a)
-          this.institutions = a.items;
-          // console.log('VVVV',this.institutions)
-          this.totalRecords = a.meta.totalItems;
-          console.log('totalrecords==',this.totalRecords)
+          console.log(a)
+          this.institutions = a["1"];
+          
+          this.totalRecords = a["0"];
+
           this.loading = false;
         });
     }, 1);
@@ -177,26 +177,25 @@ export class InstitutionsComponent implements OnInit, AfterViewInit {
 
   }
 
-  // isLastPage(): boolean {
-  //   return this.institutions
-  //     ? this.first === this.institutions.length - this.rows
-  //     : true;
-  // }
-
-  // isFirstPage(): boolean {
-  //   return this.institutions ? this.first === 0 : true;
-  // }
 
   new() {
     this.router.navigate(['/instituion-new']);
   }
+  getCountryname(institution:Institution){
+    this.countryName=""
+    for(let co of institution.countries){
+      if(this.countryName){
+        this.countryName = this.countryName + ", ";
+      }     
+      let name = co.name;
+      this.countryName = this.countryName + name;
+    }
+  }
 
   editInstitution(institution: Institution) {
     console.log('edit institution', institution);
-   // let isedit:boolean = true;
-
-    // this.router.navigate(['/instituion'], { queryParams: { id: institution.id , isEdit:isedit} });
     this.router.navigate(['/instituion-new'], { queryParams: { id: institution.id} });
+  
   }
 
   testfun(){

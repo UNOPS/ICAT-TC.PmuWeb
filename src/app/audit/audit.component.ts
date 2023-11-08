@@ -1,6 +1,8 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
+import { HttpClient } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 import { LazyLoadEvent } from 'primeng/api';
 import decode from 'jwt-decode';
 import {
@@ -9,6 +11,8 @@ import {
   ServiceProxy,
   User,
 } from 'shared/service-proxies/service-proxies';
+
+import {Audit as audit,AuditControllerServiceProxy as auditControllerServiceProxy} from 'shared/service-proxies-auditlog/service-proxies'
 
 @Component({
   selector: 'app-audit',
@@ -26,6 +30,7 @@ export class AuditComponent implements OnInit {
   status: string[] = [];
   activityList: string[] = [];
   userTypeList: string[] = [];
+  
   searchBy: any = {
     text: null,
     usertype: null,
@@ -34,7 +39,7 @@ export class AuditComponent implements OnInit {
   };
 
   first = 0;
-  activities: Audit[];
+  activities: audit[];
   dateList: Date[] = [];
   loggedusers: User[];
   institutionId: number;
@@ -43,7 +48,9 @@ export class AuditComponent implements OnInit {
     private router: Router,
     private serviceProxy: ServiceProxy,
     private auditproxy: AuditControllerServiceProxy,
-    private cdr: ChangeDetectorRef
+    private auditserviceproxy:auditControllerServiceProxy,
+    private cdr: ChangeDetectorRef,
+    private http: HttpClient
   ) { }
   ngAfterViewInit(): void {
     this.cdr.detectChanges();
@@ -166,8 +173,11 @@ export class AuditComponent implements OnInit {
         ? 1
         : event.first / (event.rows === undefined ? 1 : event.rows) + 1;
     this.rows = event.rows === undefined ? 10 : event.rows;
+    console.log("work1")
+
+
     setTimeout(() => {
-      this.auditproxy
+      this.auditserviceproxy
         .getAuditDetails(
           pageNumber,
           this.rows,
@@ -179,9 +189,12 @@ export class AuditComponent implements OnInit {
         )
 
         .subscribe((a) => {
+          console.log("work2 :")
+          console.log(a)
+
           this.activities = a.items;
 
-          console.log("aaaaasssss--", this.activities)
+          console.log("aaaaasssss22--", this.activities)
 
           console.log(a, 'kk');
           this.totalRecords = a.meta.totalItems;

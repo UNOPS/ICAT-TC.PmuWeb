@@ -51,8 +51,8 @@
             <label for="projStatus">Date</label>
             <p-calendar
                
-                placeholder="DD/MM/YYYY"
-                dateFormat="dd/mm/yy"
+                placeholder="MM/DD/YYYY"
+                dateFormat="mm/dd/yy"
                 [maxDate]="Date"
                 #propsedDate="ngModel"
                 [(ngModel)]="searchBy.editedOn"
@@ -135,7 +135,7 @@
               <th>USER TYPE</th>
               <th>ACTIVITY</th>
               <th>DATE</th>
-              <th>TIME</th>
+           <th>TIME</th> 
               <th>STATUS</th>
             </tr>
           </ng-template>
@@ -143,12 +143,15 @@
             <tr>
              
   
-              <td>{{ activities.user.username }}</td>
+              <td>{{ activities.userName }}</td>
               <td>{{ activities.userType }}</td>
-              <td>{{ activities.action }}</td>
-              <td>{{ activities.editedOn | date: "dd-MM-yyyy " }}</td>
-              <td>{{ activities.editedOn | date: "h:mm:ss " }}</td>
-              <td>{{  activities.actionStatus }}</td>
+              <td>{{ activities.actionStatus }}</td>
+              <td>{{ activities.logDate}}</td>
+              <td>{{ activities.logTime}}</td>
+
+         <!--      <td>{{ activities.editedOn | date: "dd-MM-yyyy " }}</td> -->
+      <!--         <td>{{ activities.editedOn | date: "h:mm:ss " }}</td> -->
+              <td>{{  activities.description}}</td>
             </tr>
           </ng-template>
         </p-table>
