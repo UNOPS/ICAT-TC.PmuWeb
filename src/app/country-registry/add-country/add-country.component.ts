@@ -268,14 +268,17 @@ export class AddCountryComponent implements OnInit, AfterViewInit {
         }, 500);
 
       } else {
-
+        this.cou.carboneMarketTool =false
+        this.cou.investmentTool =false
+        this.cou.portfoloaTool =false
         for (let x = 0; x < this.selectedModules.length; x++) {
+          console.log("this.selectedModules",this.selectedModules)
           let selectModId = this.selectedModules[x].id;
 
           this.arr.push(selectModId);
 
         }
-
+        console.log(this.arr)
         if (this.arr.includes(1)) {
 
           this.cou.carboneMarketTool = true;
@@ -293,6 +296,7 @@ export class AddCountryComponent implements OnInit, AfterViewInit {
           this.cou.portfoloaTool = false;
         }
         if (this.arr.includes(3)) {
+        
           this.cou.investmentTool = true;
 
         }

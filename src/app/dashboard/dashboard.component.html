@@ -116,7 +116,7 @@
 
 
       <div class="row">
-        <div class="col-6">
+        <!-- <div class="col-6">
           <div class="card">
 
             <h5>Login Frequency</h5>
@@ -125,12 +125,10 @@
                 <label class="font-weight-bold">Country</label>
               </div>
               <div class="col-6">
-                <!-- {{user.userType | json}} -->
                 <p-dropdown [options]="countryList" name="country" [(ngModel)]="slectedCountryForUsertype"
                   placeholder="All" optionLabel="name" [showClear]="true"
                   (onChange)="getUserUsageChart(slectedCountryForUsertype?slectedCountryForUsertype.id:0)">
                 </p-dropdown>
-                <!-- {{fut.errors | json}} {{fLogin.errors | json}} -->
               </div>
             </div>
             <div class="row" >
@@ -138,7 +136,6 @@
               <div *ngIf="this.isuse" class="col">
                 <p-messages severity="warn" >
                   <ng-template pTemplate>
-                      <!-- <img src="assets/showcase/images/primeng.svg" width="32" /> -->
                       <i class="pi pi-info-circle mr-20" style="font-size: 2rem"></i>
                       <div class="ml-2">There is no data to show</div>
                   </ng-template>
@@ -148,7 +145,7 @@
     
           </div>
 
-        </div>
+        </div> -->
         <!-- <div class="col-6">
           <div class="card">
 
