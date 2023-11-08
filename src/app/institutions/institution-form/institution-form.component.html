@@ -78,11 +78,8 @@
             </div>
              <p
                 class="info-message text-danger"
-                *ngIf="                
-                  (fData.submitted ||
-                  fcountries.touched ||
-                  fcountries.dirty)
-                "
+                *ngIf=" (listc.length ==0) &&         
+                  (fData.submitted || fcountries.touched || fcountries.dirty) "
               >
                 This is a mandatory field
               </p>

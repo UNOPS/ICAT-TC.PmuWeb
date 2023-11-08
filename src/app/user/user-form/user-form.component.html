@@ -111,7 +111,7 @@
               <label for="mrvInstitution">MRV Institution *</label>
 
               <input [disabled]="!isNewUser" type="text" name="mrvInstitution" class="form-control"
-                [(ngModel)]="user.mrvInstitution" #fmrvInstitution="ngModel" placeholder="Enter the Designation"
+                [(ngModel)]="user.mrvInstitution" #fmrvInstitution="ngModel" placeholder="Enter the Institution"
                 required />
               <p class="info-message text-danger" *ngIf="
                   (!user.mrvInstitution || fmrvInstitution.invalid) &&

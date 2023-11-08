@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LoginLayoutService } from './login-layout.service';
+import { environment } from 'environments/environment';
 @Component({
   selector: 'app-login-layout',
   templateUrl: './login-layout.component.html',
@@ -47,5 +48,9 @@ export class LoginLayoutComponent implements OnInit {
 
 
   }
+  toLanding(){
+    window.location.href = environment.baseUrlLandingPage;
+  }
+ 
 
 }
