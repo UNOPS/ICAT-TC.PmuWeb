@@ -10,13 +10,9 @@ import {
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { Message } from 'primeng//api';
-import { Router } from '@angular/router';
-import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { flatten } from '@angular/compiler';
+import { Router } from '@angular/router';;
 import decode from 'jwt-decode';
 import { environment } from 'environments/environment';
-import axios from 'axios';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -84,8 +80,6 @@ export class UserFormComponent implements OnInit {
     const institutionId = tokenPayload.institutionId;
 
     this.uid = event;
-    console.log(event);
-    console.log(institutionId)
 
     this.filter = [];
     this.filter.push('status||$ne||' + 1)
@@ -95,9 +89,6 @@ export class UserFormComponent implements OnInit {
       if (institutionId) {
         this.filter.push('id||$eq||' + institutionId);
       } 
-      // else {
-      //   this.filter.push('id||$ne||' + 1);
-      // }
     }
 
     this.serviceProxy
@@ -121,7 +112,6 @@ export class UserFormComponent implements OnInit {
             if (ins.id == this.user.institution.id) {
               if (['PMU Admin'].includes(tokenPayload.roles[0])) {
                 this.institutions = [ins];
-                console.log(this.institutions)
               }
             }
           });
@@ -130,6 +120,11 @@ export class UserFormComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+
+    const token = localStorage.getItem('access_token')!;
+    const tokenPayload = decode<any>(token);
+    const institutionId = tokenPayload.institutionId;
+
     let filter1 = [];
     filter1.push('status||$ne||' + 1)
     await this.serviceProxy
@@ -151,7 +146,6 @@ export class UserFormComponent implements OnInit {
           this.institutions.forEach((ins) => {
             if (ins.id == this.user.institution.id) {
               this.user.institution = ins;
-              console.log(ins)
             }
           });
         }
@@ -160,7 +154,11 @@ export class UserFormComponent implements OnInit {
     await this.route.queryParams.subscribe(async (params) => {
       let filter2 = [];
       filter2.push('status||$ne||' + 1);
-      this.filter2.push('id||$ne||' + 4)
+      this.filter2.push('id||$ne||' + 4);
+      if (['PMU Admin'].includes(tokenPayload.roles[0])) {
+        this.filter2.push('id||$ne||' + 5);
+        this.filter2.push('id||$ne||' + 1);
+      }
       this.serviceProxy
       .getManyBaseUserTypeControllerUserType(
         undefined,
@@ -239,10 +237,6 @@ export class UserFormComponent implements OnInit {
     this.user.mobile = '';
     this.user.telephone = '';
 
-    const token = localStorage.getItem('access_token')!;
-    const tokenPayload = decode<any>(token);
-
-    const institutionId = tokenPayload.institutionId;
 
     if (tokenPayload.roles[0] == 'PMU Admin') {
       this.filter2.push('id||$ne||' + 4) &

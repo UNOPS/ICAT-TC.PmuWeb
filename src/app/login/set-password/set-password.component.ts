@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { LoginLayoutService } from '../login-layout/login-layout.service';
 import { AuthControllerServiceProxy, ResetPassword } from 'shared/service-proxies/service-proxies';
 import { AuthenticationService } from '../login-layout/authentication.service';
+import {  FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import decode from 'jwt-decode';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-set-password',
@@ -12,38 +13,33 @@ import decode from 'jwt-decode';
   styleUrls: ['./set-password.component.css']
 })
 export class SetPasswordComponent implements OnInit {
-
   @ViewChild('fSetPassword') form: NgForm;
-  showLoginForm = false;
-  showForgotPassword = false;
-  showSetPassword = true;
-  restToken: string;
+  form1: any;
   email: string = "";
+  showEmail: boolean = false;
+  passwordConfirm: string = "";
   resetPasswordDto = new ResetPassword;
   islSuccessPopup: boolean;
   isErrorPopup: boolean;
   setPasswordForm: FormGroup;
   isPasswordType: boolean = true;
   isConfirmPasswordType?: boolean = true;
-  passwordConfirm: string = "";
-  showEmail: boolean = false;
   public isSubmitted: boolean = false;
-  form1: any;
 
   constructor(public loginLayoutService: LoginLayoutService,
     private appServiceProxy: AuthControllerServiceProxy,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private fb: FormBuilder,
+    // private fb: FormBuilder,
     private route: ActivatedRoute) {
 
     this.authenticationService.authenticate(false, true);
     let regEx = new RegExp("^(?=.*[a-z])(?=.*[A-Z])((?=.*[0-9])|(?=.*[!@#$%^&*]))(?=.{6,})");
 
-    this.form1 = this.fb.group({
-      password: ['', [Validators.required, Validators.pattern(regEx)]],
-      confirmPassword: ['', Validators.required],
-    });
+    // this.form1 = this.fb.group({
+    //   password: ['', [Validators.required, Validators.pattern(regEx)]],
+    //   confirmPassword: ['', Validators.required],
+    // });
   }
 
   ngOnInit(): void {
@@ -74,16 +70,6 @@ export class SetPasswordComponent implements OnInit {
     }
   }
 
-  onPasswordChange(event: any) {
-    let x = this.fb.group({
-      password: ['', [
-        Validators.required,
-        Validators.pattern('/^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\D*\d)[A-Za-z\d!$%@#£€*?&]{8,}$')
-      ]]
-    }
-    )
-  }
-
   get password() {
     return this.setPasswordForm.get('password');
   }
@@ -105,7 +91,17 @@ export class SetPasswordComponent implements OnInit {
   }
 
   toLanding() {
-    this.router.navigate(['/landing-page'])
+    window.location.href = environment.baseUrlLandingPage;
   }
-}
 
+  // onPasswordChange(event: any) {
+  //   let x = this.fb.group({
+  //     password: ['', [
+  //       Validators.required,
+  //       Validators.pattern('/^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\D*\d)[A-Za-z\d!$%@#£€*?&]{8,}$')
+  //     ]]
+  //   }
+  //   )
+  // }
+
+}

@@ -53,7 +53,7 @@ export class AddCountryComponent implements OnInit, AfterViewInit {
   editCountryId: any;
   isNewCountry: boolean = true;
   arr: any[] = []
-  url = environment.baseSyncAPI + '/country/synccountry';
+  url = environment.baseMainSyncAPI + '/country/synccountry';
   selectCountry: string = "Select a Country";
 
 
@@ -96,26 +96,29 @@ export class AddCountryComponent implements OnInit, AfterViewInit {
 
     let countryFilter: string[] = [];
     countryFilter.push('Country.IsSystemUse||$eq||' + 0);
+    if(institutionId != undefined){
+      countryFilter.push('institution.id||$eq||' +institutionId);  
+     }
     await this.serviceProxy
-    .getManyBaseCountryControllerCountry(
-      undefined,
-      undefined,
-      countryFilter,
-      undefined,
-      ["name,ASC"],
-      undefined,
-      1000,
-      0,
-      0,
-      0
-    ).subscribe((res: any) => {
-      this.countryList = res.data;
-    });
+      .getManyBaseCountryControllerCountry(
+        undefined,
+        undefined,
+        countryFilter,
+        undefined,
+        ["name,ASC"],
+        undefined,
+        1000,
+        0,
+        0,
+        0
+      ).subscribe((res: any) => {
+        this.countryList = res.data;
+      });
 
-    
-    if (institutionId != undefined) {
-      countryFilter.push('institution.id||$eq||' + institutionId);
-    }
+
+    // if (institutionId != undefined) {
+    //   countryFilter.push('institution.id||$eq||' + institutionId);
+    // }
 
     this.route.queryParams.subscribe(async (params) => {
       this.editCountryId = params['id'];
@@ -256,19 +259,26 @@ export class AddCountryComponent implements OnInit, AfterViewInit {
                 detail: 'Successfully created the country',
 
               });
+              setTimeout(() => {
+                this.onBackClick();
+                this.http.post<any[]>(this.url, this.cou).subscribe();
+              },500)
 
             });
-        }, 1000);
-        this.onBackClick();
-      } else {
+        }, 500);
 
+      } else {
+        this.cou.carboneMarketTool =false
+        this.cou.investmentTool =false
+        this.cou.portfoloaTool =false
         for (let x = 0; x < this.selectedModules.length; x++) {
+          console.log("this.selectedModules",this.selectedModules)
           let selectModId = this.selectedModules[x].id;
 
           this.arr.push(selectModId);
 
         }
-
+        console.log(this.arr)
         if (this.arr.includes(1)) {
 
           this.cou.carboneMarketTool = true;
@@ -286,13 +296,14 @@ export class AddCountryComponent implements OnInit, AfterViewInit {
           this.cou.portfoloaTool = false;
         }
         if (this.arr.includes(3)) {
+        
           this.cou.investmentTool = true;
 
         }
 
-        let countrysectr: CountrySector[] = []; 
+        let countrysectr: CountrySector[] = [];
         this.cou.countrysector = countrysectr;
-console.log(this.cou)
+        console.log(this.cou)
         this.serviceProxy.updateOneBaseCountryControllerCountry(this.cou.id, this.cou)
           .subscribe(
 
@@ -340,31 +351,31 @@ console.log(this.cou)
       .subscribe(async (res) => {
 
 
-          this.confirmationService.confirm({
-            message: this.cou.countryStatus === CountryStatus.Active ? 'Are you sure you want to activate ' + res.name + '?' : 'Are you sure you want to deactivate ' + res.name + '?',
-            header: 'Confirmation',
-            rejectIcon: 'icon-not-visible',
-            rejectVisible: true,
-            acceptLabel: 'Yes',
-            rejectLabel: 'No',
-            accept: () => {
-              this.onBackClick();
-            },
+        this.confirmationService.confirm({
+          message: this.cou.countryStatus === CountryStatus.Active ? 'Are you sure you want to activate ' + res.name + '?' : 'Are you sure you want to deactivate ' + res.name + '?',
+          header: 'Confirmation',
+          rejectIcon: 'icon-not-visible',
+          rejectVisible: true,
+          acceptLabel: 'Yes',
+          rejectLabel: 'No',
+          accept: () => {
+            this.onBackClick();
+          },
 
-            reject: () => { },
-          });
-        await axios.get(this.url)
+          reject: () => { },
+        });
+        this.http.post<any[]>(this.url, this.cou).subscribe();
       },
         (err) => {
-            this.messageService.add({
-              severity: 'error',
-              summary: 'Error.',
-              detail: 'Failed Deactiavted, please try again.',
-              sticky: true,
-            });
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error.',
+            detail: 'Failed Deactiavted, please try again.',
+            sticky: true,
+          });
         }
       );
-    await axios.get(this.url)
+      this.http.post<any[]>(this.url, this.cou).subscribe();
   }
 
   onBackClick() {

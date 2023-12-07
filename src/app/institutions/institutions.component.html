@@ -93,12 +93,6 @@
 
     <td>{{ institution.address }}</td>
 
-    <!-- <td>
-      <ng-container *ngFor="let usr of institution.user">
-    <td>
-      {{ usr?.firstName + ' ' }}{{ usr?.lastName + ', '  }}
-    </td></ng-container>
-    </td> -->
     <td>
       {{ institution.user[0]? (institution.user[0].firstName + ' ' + institution.user[0].lastName)  :"" }}
     </td>

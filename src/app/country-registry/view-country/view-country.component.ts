@@ -14,7 +14,7 @@ import { environment } from 'environments/environment';
 import * as moment from 'moment';
 import decode from 'jwt-decode';
 
-
+import { HttpClient } from '@angular/common/http';
 
 import { LazyLoadEvent, ConfirmationService, MessageService } from 'primeng/api';
 
@@ -63,7 +63,7 @@ export class ViewCountryComponent implements OnInit, AfterViewInit {
   editCountryId: any;
   isNewCountry: boolean = true;
   arr: any[] = []
-  url = environment.baseSyncAPI + '/country';
+  url = environment.baseMainSyncAPI + '/country/synccountry';
   selectCountry: string = "Select a Country";
 
   cou: Country = new Country();
@@ -76,7 +76,7 @@ export class ViewCountryComponent implements OnInit, AfterViewInit {
 
     private router: Router,
     private route: ActivatedRoute,
-
+    private http: HttpClient,
 
     private serviceProxy: ServiceProxy,
     private projectProxy: ProjectControllerServiceProxy,
@@ -485,7 +485,7 @@ export class ViewCountryComponent implements OnInit, AfterViewInit {
 
             reject: () => { },
           });
-          await axios.get(this.url)
+          this.http.post<any[]>(this.url, this.cou).subscribe();
       },
         (err) => {
           console.log('error............'),

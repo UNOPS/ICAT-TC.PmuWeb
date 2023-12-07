@@ -111,7 +111,7 @@
               <label for="mrvInstitution">MRV Institution *</label>
 
               <input [disabled]="!isNewUser" type="text" name="mrvInstitution" class="form-control"
-                [(ngModel)]="user.mrvInstitution" #fmrvInstitution="ngModel" placeholder="Enter the Designation"
+                [(ngModel)]="user.mrvInstitution" #fmrvInstitution="ngModel" placeholder="Enter the Institution"
                 required />
               <p class="info-message text-danger" *ngIf="
                   (!user.mrvInstitution || fmrvInstitution.invalid) &&
@@ -165,18 +165,18 @@
           <div class="col-12 col-md-8">
             <div class="p-field">
               <label for="mobile">Mobile *</label>
-              <input  type="number" name="Mobile" class="form-control"
+              <input  type="number" name="Mobile" class="form-control" required
               [(ngModel)]="user.mobile" #ftelephone="ngModel" placeholder="0000000000"
                />
 
               <!-- <p-inputMask type="text" name="mobile" mask="+99 99-999-9999" [autoClear]="false"
                 placeholder="+99 999 999-999" [(ngModel)]="user.mobile" [styleClass]="'form-control'"
                 #fmobile="ngModel"></p-inputMask> -->
-              <p class="info-message text-danger" *ngIf="
+              <!-- <p class="info-message text-danger" *ngIf="
                   user.mobile !== undefined && user?.mobile!.indexOf('_') > 0
                 ">
                 A valid mobile number is required.
-              </p>
+              </p> -->
             </div>
           </div>
         </div>
