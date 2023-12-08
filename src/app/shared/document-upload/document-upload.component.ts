@@ -43,7 +43,7 @@ export class DocumentUploadComponent implements OnInit, OnChanges {
   
   loading: boolean;
   uploadedFiles: any[] = [];
-  SERVER_URL = environment.baseUrlAPIDocUploadAPI; //"http://localhost:7080/document/upload2";
+  SERVER_URL = environment.baseUrlAPI + "/document/upload2";
   uploadURL: string;
 
   constructor(
@@ -52,7 +52,7 @@ export class DocumentUploadComponent implements OnInit, OnChanges {
     private confirmationService: ConfirmationService,
     private serviceProxy: ServiceProxy,
   ) {
-    // this.showDeleteButton = false;
+    
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -79,8 +79,6 @@ export class DocumentUploadComponent implements OnInit, OnChanges {
         '/' +
         this.documentOwner.toString();
     }
-
-    console.log('============' + this.showDeleteButton + '==============');
   }
 
   loadDocments(event: LazyLoadEvent) {
@@ -97,22 +95,16 @@ export class DocumentUploadComponent implements OnInit, OnChanges {
           (res) => {
             this.doucmentList = res;
 
-            
-           console.log("1111....this.doucmentList",this.doucmentList);
-
-           
-
 
             this.loading = false;
           },
-          (err: any) => console.log(err)
+          
         );
     
   }
 
   onUploadComplete(event: any) {
   
-   // console.log(event);
     this.load();
     this.newItemEvent.emit();
     
@@ -152,7 +144,7 @@ export class DocumentUploadComponent implements OnInit, OnChanges {
         (res) => {
           this.load();
         },
-        (err) => console.log(err)
+        
       );
     }
   }
@@ -167,11 +159,9 @@ export class DocumentUploadComponent implements OnInit, OnChanges {
           async (res: any) => {
             await this.load();
           },
-          (err: any) => console.log(err)
         );
       },
       reject: () => {
-        //this.messageService.add({severity:'info', summary:'Rejected', detail:'You have rejected'});
       },
     });
   }

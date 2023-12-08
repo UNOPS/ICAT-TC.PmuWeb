@@ -88,13 +88,10 @@ export class AddSectorComponent implements OnInit,AfterViewInit {
     sctr.name = this.typedSector;
     sctr.description = this.typedSectorDescription;
     sctr.subSector = this.subSectorList;
-    console.log("my subsss",sctr);
-    //let subSctr: SubSector[] = [];
 
         this.serviceProxy
     .createOneBaseSectorControllerSector(sctr)
     .subscribe((res: any) => {
-    //alert('Saved Successfully');
     this.messageService.add({severity:'success', summary:'Confirmed', detail:'You have successfully added.'});
 
       });

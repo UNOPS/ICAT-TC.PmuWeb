@@ -61,7 +61,6 @@ export class AuditComponent implements OnInit {
     const token = localStorage.getItem('access_token')!;
     const tokenPayload = decode<any>(token);
     const username = tokenPayload.usr;
-    console.log('username=========', tokenPayload.usr);
 
     let filters: string[] = [];
     filters.push('username||$eq||' + username);
@@ -70,37 +69,6 @@ export class AuditComponent implements OnInit {
 
 
 
-    // this.serviceProxy
-    //   .getManyBaseAuditControllerAudit(
-    //     undefined,
-    //     undefined,
-    //     undefined,
-    //     undefined,
-    //     ['editedOn,DESC'],
-    //     undefined,
-    //     1000,
-    //     0,
-    //     0,
-    //     0
-    //   )
-    //   .subscribe((res) => {
-    //    this.activities = res.data;
-
-    //     console.log("activiiessss----",this.activities)
-    //     // this.totalRecords = res.totalRecords;
-    //     // if (res.totalRecords !== null) {
-    //     //   this.last = res.count;
-    //     // } else {
-    //     //   this.last = 0;
-    //     // }
-    //     for (let d of res.data) {
-    //       this.activityList.push(d.action);
-    //       this.dateList.push(d.editedOn.toDate());
-    //       this.userTypeList.push(d.userType);
-    //       console.log(this.dateList);
-    //     }
-    //     console.log('activities', this.activityList);
-    //   });
 
 
     this.serviceProxy
@@ -119,9 +87,7 @@ export class AuditComponent implements OnInit {
       )
       .subscribe((res) => {
         this.loggedusers = res.data;
-        console.log("loggeduser-----", this.loggedusers)
         this.institutionId = this.loggedusers[0].institution.id;
-        console.log("institutionId-----", this.institutionId)
       });
 
 
@@ -148,7 +114,6 @@ export class AuditComponent implements OnInit {
 
 
   loadgridData = (event: LazyLoadEvent) => {
-    console.log('event Date', event);
     this.loading = true;
     this.totalRecords = 0;
 
@@ -156,14 +121,8 @@ export class AuditComponent implements OnInit {
     let usertype = this.searchBy.usertype ? this.searchBy.usertype : '';
     let action = this.searchBy.activity ? this.searchBy.activity : '';
     let filtertext = this.searchBy.text ? this.searchBy.text : '';
-    console.log("iiiiiiiii", this.institutionId)
 
 
-
-    console.log(
-      moment(this.searchBy.editedOn).format('YYYY-MM-DD'),
-      'jjjjjjjjjjjjjjjj'
-    );
     let editedOn = this.searchBy.editedOn
       ? moment(this.searchBy.editedOn).format('YYYY-MM-DD')
       : '';
@@ -173,8 +132,6 @@ export class AuditComponent implements OnInit {
         ? 1
         : event.first / (event.rows === undefined ? 1 : event.rows) + 1;
     this.rows = event.rows === undefined ? 10 : event.rows;
-    console.log("work1")
-
 
     setTimeout(() => {
       this.auditserviceproxy
@@ -189,14 +146,9 @@ export class AuditComponent implements OnInit {
         )
 
         .subscribe((a) => {
-          console.log("work2 :")
-          console.log(a)
 
           this.activities = a.items;
 
-          console.log("aaaaasssss22--", this.activities)
-
-          console.log(a, 'kk');
           this.totalRecords = a.meta.totalItems;
           this.loading = false;
 
@@ -208,8 +160,6 @@ export class AuditComponent implements OnInit {
             if (!this.userTypeList.includes(d.userType)) {
               this.userTypeList.push(d.userType);
             }
-
-            console.log(this.dateList);
           }
         });
     }, 1000);

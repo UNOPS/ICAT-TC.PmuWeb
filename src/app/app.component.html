@@ -14,8 +14,6 @@
           <i class="pi pi-arrow-left" *ngIf="togglemenu"></i>
         </div>
         <div class="sidebar--header" style="background-color: #5393e0;">
-          <!-- <img src="../../../assets/images/logo.png" width="33" />  -->
-          <!-- <img src="./assets/images/logo-new.png" /> -->
 
           <div  class="row mb-2">
             <div  class="col-6 col-md-3">
@@ -27,13 +25,7 @@
           </div>
           
         </div>
-        <!-- <div class="m-0 ml-2">
-          <div class="p-text-left p-text-nowrap p-text-truncate m-1">
-            <p class="m-0"><small>{{userType}}</small></p>
-          </div>    
-        </div> -->
         <div class="sidebar-items flex-grow-1" style="background-color: #5393e0;">
-          <!-- <div data-ccs-admin-menu *ngIf="userRole.role == 1"> -->
           <div data-ccs-admin-menu>
             <div
               *ngIf="
@@ -50,14 +42,6 @@
               Dashboard
             </div>
 
-            <!-- <div
-              class="sidebar-items--link align-items-start"
-              [routerLink]="['/landing-page']"
-              routerLinkActive="selected"
-            >
-              <div class=""></div>
-              Landing Page
-            </div> -->
 
             <div
             *ngIf="
@@ -112,51 +96,7 @@
 
 
 
-            <!-- <div
-            *ngIf="
-            
-            userRole.role == 5 ||
-        
-            userRole.role == 4 
-          "
-              class="sidebar-items--link align-items-start"
-              [routerLink]="['/view-sectors']"
-              routerLinkActive="selected"
-            >
-              <div class=""></div>
-              Sector
-            </div> -->
 
-
-            <!-- <div
-            *ngIf="
-                userRole.role == 1 ||
-                userRole.role == 5 ||
-                userRole.role == 3 ||
-                userRole.role == 4 
-              "
-            class="sidebar-items--link align-items-start"
-            [routerLink]="['/methodologies']"
-            routerLinkActive="selected"
-          >
-            <div class=""></div>
-            Methodologies
-          </div> -->
-
-          <!-- <div
-          *ngIf="
-              userRole.role == 1 ||
-              userRole.role == 5 ||
-              userRole.role == 3 ||
-              userRole.role == 4 
-            "
-          class="sidebar-items--link align-items-start"
-          [routerLink]="['/assign-methodologies']"
-          routerLinkActive="selected"
-        >
-          <div class=""></div>
-          Assign Methodologies
-        </div> -->
 
 
           <div
@@ -208,24 +148,14 @@
           <div></div>
           <div></div>
           <div></div>
-          <!-- <div class="sidebar-items--link" [routerLink]="['/settings']" routerLinkActive="router-link-active">
-            <i class="pi pi-cog"></i> Settings
-          </div> -->
           <div class="ml-2 mr-2">
-            <!-- <p-dropdown [disabled]="true" [options]="userRoles" [(ngModel)]="userRole" placeholder="Select a City"
-              optionLabel="name">
-            </p-dropdown> -->
           </div>
 
-          <!-- <div class="sidebar-items--link" (click)="logout()" [routerLink]="['/login']" routerLinkActive="router-link-active">
-            <i class="pi pi-sign-out"></i> Logout
-          </div> -->
         </div>
       </div>
       <div class="main d-flex flex-column flex-grow-1">
         <div class="d-flex flex-column justify-content-end">
           <div class="p-text-nowrap p-text-truncate m-0 pr-2 text-right">
-            <!-- <small><b>{{useremail}}</b></small> -->
             <div class="top-panel d-flex justify-content-end" *ngIf="showTopMenu" >
               <div class="d-flex mt-15 mr-20">
                 <span class="mr-10">
@@ -254,19 +184,13 @@
             </div>
           </div>
           <div class="p-text-nowrap p-text-truncate m-0 mb-1 pr-2 text-right">
-            <!-- <small><b>{{userInstitution}}</b></small> -->
           </div>
         </div>
         <router-outlet></router-outlet>
       </div>
     </div>
-    <!-- 
-    <div  class="d-flex flex-column flex-grow-1"  *ngIf="hideSidebar">
-      <router-outlet></router-outlet>
-    </div> -->
   </nb-layout-column>
 
   <nb-layout-footer fixed>
-    <!-- Insert footer here -->
   </nb-layout-footer>
 </nb-layout>

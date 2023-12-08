@@ -37,15 +37,6 @@
                 <div class="row p-2">
                     <div class="col-12 col-md-8">
 
-                   <!--      <div class="p-field">
-                            <label for="indicator">Indicator *</label>
-                            <p-dropdown name="indicator" appendTo="body" [options]="selectedIndicators" optionLabel="name"
-                                placeholder="Select .." [(ngModel)]="indicator" [showClear]="true" #sec="ngModel"
-                                (ngModelChange)="selectMeth($event)">
-                            </p-dropdown>
-                        </div>
- -->
-
                       <div class="p-field">
                             <label for="indicator">Indicator *</label>
                             <p-multiSelect name="indicator" appendTo="body" [options]="indicatorList" optionLabel="name"
@@ -53,18 +44,7 @@
                                 (ngModelChange)="selectMeth($event)">
                             </p-multiSelect>
                           </div> 
-
-
-                <!--           <div class="p-field">
-                            <label for="indicator">Indicator *</label>
-                            <p-multiSelect [options]="indicatorList" [(ngModel)]="selectedIndicators" optionLabel="name" 
-                            placeholder="Select Indicator(s) .." multiple="true" [showClear]="true" #sec="ngModel"
-                            (ngModelChange)="selectMeth($event)">
-                          </p-multiSelect>
-                          </div>
-
- -->
-                         
+    
 
                           
 

@@ -8,16 +8,9 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import {
   Country,
   CountryControllerServiceProxy,
-  CountrySector,
-  CountryStatus,
   Indicator,
   Methodology,
   MethodologyData,
-  Project,
-  ProjectApprovalStatus,
-  ProjectControllerServiceProxy,
-  ProjectOwner,
-  ProjectStatus,
   Sector,
   ServiceProxy,
   SectorControllerServiceProxy
@@ -72,14 +65,10 @@ export class AssignMethodologyComponent implements OnInit, AfterViewInit {
   ) {
 
   }
-  // ngAfterViewInit(): void {
-  //   throw new Error('Method not implemented.');
-  // }
   ngAfterViewInit(): void {
     this.cdr.detectChanges();
   }
   select(event: any) {
-    console.log("selectmod=====", event)
   }
   selectCoun(event: any) {
 
@@ -108,8 +97,6 @@ export class AssignMethodologyComponent implements OnInit, AfterViewInit {
 
     this.sectorproxy.getSector(event.id).subscribe((res: any) => {
       this.sec = res;
-      console.log("seccccccccccccc")
-      console.log(this.sec)
       this.selectedIndicators = [];
        for (let x = 0; x < this.sec.sectorindicator.length; x++) {
         this.selectedIndicators.push(this.sec.sectorindicator[x].indicator);
@@ -123,30 +110,16 @@ export class AssignMethodologyComponent implements OnInit, AfterViewInit {
 
 
   async selectMeth(event: any) {
-    console.log("eventssssssssssss")
-    console.log(event)
-
-    console.log("eventssssssssssss iddd")
-    console.log(event[0].id)
-
-    
-
-   // this.indicatorId = event[0].id
     let methFilter: string[] = [];
     this.methodologyList = [];
     let filter: string[] = new Array();
     filter.push('Methodology.countryId||$eq||' + this.countryId);
-    console.log("filterrrr")
-    console.log(filter)
 
 for(let i=0; i<event.length; i++){
 
   this.indicatorId = event[i].id
 
-   // methFilter.push('MethodologyData.sectorId||$eq||' + event.id);
    methFilter.push('MethodologyData.indicatorId||$eq||' + this.indicatorId);
-   console.log("meth filterr")
-   console.log(methFilter)
 
     await this.serviceProxy.getManyBaseMethodologyDataControllerMethodologyData(
       undefined,
@@ -162,7 +135,6 @@ for(let i=0; i<event.length; i++){
     ).subscribe((res: any) => {
      
       this.methodologyList = res.data;
-      console.log("methlisttt : ",  this.methodologyList)
     });
     
  
@@ -180,7 +152,7 @@ for(let i=0; i<event.length; i++){
       0
     ).subscribe((ress: any) => {
       this.selectedMethodSelected = [];
-      this.countryMethList = []; //////////////////////////////
+      this.countryMethList = []; 
       this.oldCountryMeth = ress.data;
       this.oldCountryMeth.forEach(a => {
         if (!this.oldMethName.includes(a.name)) {
@@ -189,10 +161,7 @@ for(let i=0; i<event.length; i++){
         if (a.indicator) {
           this.selectedIndicators.forEach(b => {
             if (a.indicator.id == b.id && a.isActive == 1) {
-              this.countryMethList.push(a)
-
-          //    console.log("countryMethList")
-           //   console.log(this.countryMethList)
+              this.countryMethList.push(a);
             }
           })
         }
@@ -204,8 +173,6 @@ for(let i=0; i<event.length; i++){
             if (a.id == p1.method.id) {
               this.selectedMethodSelected.push(a);
 
-           ///   console.log("selectedMethodSelected")
-            //  console.log(this.selectedMethodSelected)
             }
           })
         }
@@ -213,7 +180,6 @@ for(let i=0; i<event.length; i++){
 
     });
 
-    // await 
   }
 
 }
@@ -230,8 +196,7 @@ for(let i=0; i<event.length; i++){
     await this.oldCountryMeth.forEach(async old => {
       old.isActive = 2;
       this.serviceProxy.updateOneBaseMethodologyControllerMethodology(old.id, old).subscribe((res) => {
-        console.log('doneeee')
-        console.log(res)
+      
       });
 
     });
@@ -264,17 +229,16 @@ for(let i=0; i<event.length; i++){
 
           newone.method = a;
           await this.serviceProxy.createOneBaseMethodologyControllerMethodology(newone).subscribe((res) => {
-            console.log("done")
+            
 
           });
-          // await axios.get(url)
         }
         else {
           await this.oldCountryMeth.forEach(async old => {
             if (old.name == a.name && old.country.id == this.country.id) {
               old.isActive = 1;
               await this.serviceProxy.updateOneBaseMethodologyControllerMethodology(old.id, old).subscribe((res) => {
-                console.log("done")
+                
               })
 
             }
@@ -320,7 +284,6 @@ for(let i=0; i<event.length; i++){
         0
       ).subscribe((res: any) => {
         this.countryList = res.data;
-        // console.log("country", this.countryList);
 
 
       });

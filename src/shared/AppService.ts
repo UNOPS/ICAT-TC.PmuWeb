@@ -16,9 +16,9 @@ export class AppService {
     private usersControllerServiceProxy: UsersControllerServiceProxy,
     private auditControllerServiceProxy : AuditControllerServiceProxy
   ) {
-    //this.update();
+   
 
-    this.userProfile.username = localStorage.getItem('user_name'); // get the username
+    this.userProfile.username = localStorage.getItem('user_name'); 
   }
 
   update() {

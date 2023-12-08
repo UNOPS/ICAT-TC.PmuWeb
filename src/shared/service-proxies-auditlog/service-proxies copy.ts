@@ -558,8 +558,6 @@ export class AuditControllerServiceProxy {
 
     getAuditDetails(page: number, limit: number, userType: string, actionStatus: string, logDate: string, filterText: string, institutionId: number): Observable<any> {
         this.baseUrl = baseURLEnv;
-        console.log("baseURL :")
-        console.log(this.baseUrl)
         let url_ = this.baseUrl + "/audit/audit/auditinfo/{page}/{limit}/{userType}/{actionStatus}/{logDate}/{filterText}/{institutionId}?";
         if (page === undefined || page === null)
             throw new Error("The parameter 'page' must be defined and cannot be null.");

@@ -11,8 +11,6 @@ import {
 } from 'primeng/api';
 
 import {
-  Project,
-  ProjectApprovalStatus,
   ProjectControllerServiceProxy,
   ProjectOwner,
   ProjectStatus,
@@ -58,19 +56,6 @@ searchBy: any = {
 
   ngOnInit(): void {
 
-/*
-    let pageNumber = 1;
-    let filtertext ='';
-    this.sectorProxy
-    .getSectorDetails(pageNumber, this.rows, filtertext)
-    .subscribe((a) => {
-      this.sectorsList = a.items;
-      this.totalRecords = a.meta.totalItems;
-      this.loading = false;
-     console.log('second time climation',this.sectorsList);
-      //console.log('my staus...',this.climateaction.projectApprovalStatus?.name);
-    });
-    */
     let event: any = {};
     event.rows = this.rows;
     event.first = 0;
@@ -80,8 +65,6 @@ searchBy: any = {
 
 
   loadgridData = (event: LazyLoadEvent) => {
-    //console.log("below loarding data")
-   // this.loading = true;
     this.totalRecords = 0;
     
     let filtertext = this.searchBy.text ? this.searchBy.text : '';
@@ -97,9 +80,6 @@ searchBy: any = {
         .subscribe((a) => {
           this.sectorsList = a.items;
           this.totalRecords = a.items.length;
-        //  this.loading = false;
-         // console.log('second time climation',this.climateactions);
-          //console.log('my staus...',this.climateaction.projectApprovalStatus?.name);
         });
     });
   };

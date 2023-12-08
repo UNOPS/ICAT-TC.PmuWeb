@@ -53,7 +53,7 @@ export class AddCountryComponent implements OnInit, AfterViewInit {
   editCountryId: any;
   isNewCountry: boolean = true;
   arr: any[] = []
-  url = environment.baseMainSyncAPI + '/country/synccountry';
+  url = environment.baseUrlCountryAPI + '/country/synccountry';
   selectCountry: string = "Select a Country";
 
 
@@ -115,10 +115,6 @@ export class AddCountryComponent implements OnInit, AfterViewInit {
         this.countryList = res.data;
       });
 
-
-    // if (institutionId != undefined) {
-    //   countryFilter.push('institution.id||$eq||' + institutionId);
-    // }
 
     this.route.queryParams.subscribe(async (params) => {
       this.editCountryId = params['id'];
@@ -272,13 +268,11 @@ export class AddCountryComponent implements OnInit, AfterViewInit {
         this.cou.investmentTool =false
         this.cou.portfoloaTool =false
         for (let x = 0; x < this.selectedModules.length; x++) {
-          console.log("this.selectedModules",this.selectedModules)
           let selectModId = this.selectedModules[x].id;
 
           this.arr.push(selectModId);
 
         }
-        console.log(this.arr)
         if (this.arr.includes(1)) {
 
           this.cou.carboneMarketTool = true;
@@ -303,7 +297,6 @@ export class AddCountryComponent implements OnInit, AfterViewInit {
 
         let countrysectr: CountrySector[] = [];
         this.cou.countrysector = countrysectr;
-        console.log(this.cou)
         this.serviceProxy.updateOneBaseCountryControllerCountry(this.cou.id, this.cou)
           .subscribe(
 

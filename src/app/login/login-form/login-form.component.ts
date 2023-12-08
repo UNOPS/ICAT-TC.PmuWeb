@@ -43,20 +43,12 @@ export class LoginFormComponent implements OnInit {
     private roleGuardService: RoleGuardService,
     private sharedDataService: SharedDataService
   ) {
-    console.log('LoginFormComponent ctor');
   }
 
   ngOnInit(): void {
-    console.log('LoginFormComponent ngOnInit');
-    // this._loginApiService.findAll().subscribe(result => {
-    //   // console.log(result);
-    // });
 
     this.authenticationService.authenticate(false, true);
 
-    // this._investorsControllerServiceProxy.findAll().subscribe(result => {
-    //   console.log(result);
-    // });
   }
 
   showPasswordResetForm() {
@@ -67,7 +59,7 @@ export class LoginFormComponent implements OnInit {
       this.showLoginForm,
       this.showForgotPassword,
       this.showSetPassword
-    ); // call login layout service
+    ); 
   }
 
   resetError() {
@@ -75,8 +67,6 @@ export class LoginFormComponent implements OnInit {
   }
 
   login() {
-     console.log("click");
-    // this.display = true;
     this.isSubmitLogin = true;
     if (!this.fLogin.valid) {
       return;
@@ -85,41 +75,22 @@ export class LoginFormComponent implements OnInit {
       .login(this.logiLayoutService.authCredentialDot)
       .subscribe(
         (token) => {
-          console.log(token);
           if (token && token.access_token) {
             this.isInvalidCredential = false;
 
             this.isLoggedIn = true;
             this.hideSideBar = false;
             this.WMServiceService.steToken(token.access_token);
-            localStorage.setItem('access_token', token.access_token); // store the tocken
+            localStorage.setItem('access_token', token.access_token); 
             localStorage.setItem(
               'user_name',
               this.logiLayoutService.authCredentialDot.username
-            ); // store the username
+            ); 
             this.WMServiceService.userProfile = {
               username: this.logiLayoutService.authCredentialDot.username,
             };
 
-            //this.authenticationService.authenticate(this.isLoggedIn, this.hideSideBar);
-
-            // if (this.roleGuardService.checkRoles(['Institution Admin'])) {
-             
-            //   this.userRole = this.userRoles[7];
-            //   this.router.navigate(['/ia-dashboard']);
-              
-            // } 
-
-            
-
-             //this.router.navigate(['/dashboard']);
-
-            // this.appControllServiceProxy.getProfile().subscribe(res=> {
-
-            // });
-             console.log("near...")
             if (this.roleGuardService.checkRoles(['ICAT Admin'])) {
-              console.log("inside icat admin....")
               this.userRole = this.userRoles[0];
               this.router.navigate(['/dashboard']);
             } else if (this.roleGuardService.checkRoles(['ICAT User'])) {
@@ -134,7 +105,7 @@ export class LoginFormComponent implements OnInit {
               this.userRole = this.userRoles[3];
               this.router.navigate(['/dashboard']);
             } 
-             //Set value in AppComponent
+             
              this.sharedDataService.changeMessage('login_success');
 
 
@@ -143,7 +114,6 @@ export class LoginFormComponent implements OnInit {
           }
         },
         (error) => {
-          console.log(error);
           this.isInvalidCredential = true;
         }
       );

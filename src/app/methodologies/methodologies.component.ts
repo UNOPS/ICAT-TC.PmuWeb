@@ -1,10 +1,8 @@
 import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ConfirmationService, FilterService, LazyLoadEvent, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
-import { filter } from 'rxjs/operators';
 import { Methodology, MethodologyControllerServiceProxy, ServiceProxy, Sector, } from 'shared/service-proxies/service-proxies';
 import decode from 'jwt-decode';
-// import { environment } from 'environments/environment.prod';
 import axios from "axios";
 import { environment } from 'environments/environment';
 @Component({
@@ -16,13 +14,11 @@ export class MethodologiesComponent implements OnInit, AfterViewInit {
 
   sectors: Sector[];
   sectorName: string[] = [];
-  //sector: Sector = new Sector();
 
   mlist: Methodology[] = [];
   developper: string[] = [];
   methodologies: Methodology[];
   sectorList: Sector[] = [];
-  // developerList:Developer[]=[];
   searchText: string;
   countryId: any = 1;
 
@@ -86,14 +82,12 @@ export class MethodologiesComponent implements OnInit, AfterViewInit {
       )
       .subscribe((res: any) => {
         this.mlist = res.data;
-        console.log('mlist===', this.mlist);
 
         for (let x of this.mlist) {
 
           if (!this.developper.includes(x.developedBy)) {
             this.developper.push(x.developedBy)
           }
-          // console.log("developerlist====", this.developper)
 
         }
       })
@@ -114,11 +108,8 @@ export class MethodologiesComponent implements OnInit, AfterViewInit {
         0
       )
       .subscribe((res: any) => {
-        // for(let x of res.data){
-        //   console.log("sectornames"+x)
-        // }
+       
         this.sectorList = res.data;
-        console.log('sectorList', this.sectorList);
       });
 
 
@@ -136,14 +127,11 @@ export class MethodologiesComponent implements OnInit, AfterViewInit {
   }
 
   loadgridData = (event: LazyLoadEvent) => {
-    console.log('ioio', event);
     this.loading = true;
     this.totalRecords = 0;
 
     let sectorId = this.searchBy.sector ? this.searchBy.sector.id : 0;
-    console.log("ssecId----", sectorId)
     let developedBy = this.searchBy.developedBy ? this.searchBy.developedBy : 0;
-    console.log("sdevID----", developedBy)
     let filtertext = this.searchBy.text ? this.searchBy.text : '';
 
     let pageNumber =
@@ -163,7 +151,6 @@ export class MethodologiesComponent implements OnInit, AfterViewInit {
           developedBy
         ).subscribe((a) => {
           this.methodologies = a.items;
-          console.log("metho", this.methodologies)
 
           this.totalRecords = a.meta.totalItems;
           this.loading = false;
@@ -175,12 +162,8 @@ export class MethodologiesComponent implements OnInit, AfterViewInit {
 
 
     let url = environment.baseSyncAPI + '/methodology';
-    // let status = this.projectApprovalStatus.find((a) => a.id === aprovalStatus);
-    // project.status =
-    //   status === undefined ? (null as any) : status;
     if (aprovalStatus === 1) {
      
-      console.log("xxxxxxxxxxx" + meth.id, aprovalStatus);
       await this.confirmationService.confirm({
 
         message:
@@ -188,7 +171,6 @@ export class MethodologiesComponent implements OnInit, AfterViewInit {
           ' ?',
         accept: async () => {
           meth.isActive = aprovalStatus;
-          console.log(aprovalStatus + "ddddddddddddd")
           await this.updateStatus(meth, aprovalStatus);
 
         },
@@ -206,26 +188,22 @@ export class MethodologiesComponent implements OnInit, AfterViewInit {
           ' ?',
         accept: async () => {
           meth.isActive = aprovalStatus;
-          console.log(aprovalStatus + "ddddddddddddd")
           await this.updateStatus(meth, aprovalStatus);
 
         },
         reject: () => {}
       });;
-      await axios.get(url)
-      // this.overlay.hide();
+      await axios.get(url);
     }
     await axios.get(url)
   }
 
   async updateStatus(meth: Methodology, aprovalStatus: number) {
     let url = environment.baseSyncAPI + '/methodology';
-    console.log("sssssssss" + meth, aprovalStatus)
     await this.serviceProxy
       .updateOneBaseMethodologyControllerMethodology(meth.id, meth)
       .subscribe(
         async (res) => {
-          console.log(res);
           this.messageService.add({
             severity: 'success',
             summary: 'Success',
@@ -275,10 +253,8 @@ export class MethodologiesComponent implements OnInit, AfterViewInit {
   }
 
   onRedirect(meth: Methodology) {
-    let docPath = meth.documents
-    console.log("docPath...", docPath)
+    let docPath = meth.documents;
     window.location.href = docPath;
-    // this.object_array[0][8].document;
 
   }
 

@@ -54,8 +54,8 @@ export class AllClimateActionComponent implements OnInit,AfterViewInit {
     
   };
 
-  countryId: number = 0;  // should assign particular country id from login
-  sectorId: number = 0;  // should assign particular sector id from login
+  countryId: number = 0;
+  sectorId: number = 0;  
 
   
   selectedProject: Project;
@@ -100,7 +100,6 @@ export class AllClimateActionComponent implements OnInit,AfterViewInit {
        0
       ).subscribe((res: any) => {
        this.projectStatusList = res.data;
-      // console.log("projectStatusList",res.data)
      });
 
    this.serviceProxy
@@ -118,11 +117,9 @@ export class AllClimateActionComponent implements OnInit,AfterViewInit {
      )
      .subscribe((res: any) => {
        this.projectApprovalStatus = res.data;
-      // console.log("projectapprStatusList",res.data)
      });
  
     let statusId = this.searchBy.status ? this.searchBy.status.id : 0;
-   // let currentProgress = this.searchBy.currentProgress ? this.searchBy.currentProgress : '';
     let projectApprovalStatusId = this.searchBy.ApprovalStatus ? this.searchBy.ApprovalStatus.id : 0;
     let filtertext = this.searchBy.text ? this.searchBy.text : '';
     let pageNumber = 1
@@ -132,7 +129,6 @@ export class AllClimateActionComponent implements OnInit,AfterViewInit {
       .subscribe((a) => {
         this.climateactions = a.items;
         this.totalRecords = a.meta.totalItems;
-        console.log('first time climation',this.climateactions);
       });
     
   }
@@ -146,14 +142,10 @@ export class AllClimateActionComponent implements OnInit,AfterViewInit {
 
 
   loadgridData = (event: LazyLoadEvent) => {
-    //console.log("below loarding data")
-    //this.loading = true;
     this.totalRecords = 0;
     let statusId = this.searchBy.status ? this.searchBy.status.id : 0;
-   // let currentProgress = this.searchBy.currentProgress ? this.searchBy.currentProgress : '';
-   // console.log("status",statusId)
     let projectApprovalStatusId = this.searchBy.ApprovalStatus ? this.searchBy.ApprovalStatus.id : 0;
-   // console.log("projectApprovalStatusId",projectApprovalStatusId)
+   
     let filtertext = this.searchBy.text ? this.searchBy.text : '';
     let pageNumber =
       event.first === 0 || event.first === undefined
@@ -167,18 +159,12 @@ export class AllClimateActionComponent implements OnInit,AfterViewInit {
       .subscribe((a) => {
         this.climateactions = a.items;
         this.totalRecords = a.meta.totalItems;
-        console.log('first time climation',this.climateactions);
       });
     });
   };
   
   projectSummery() {
-    this.router.navigate(['']);  //should insert summery page link
+    this.router.navigate(['']); 
   }
 
-  // detail(climateactions: Project) {
-  //   this.router.navigate(['/propose-project'], {
-  //     queryParams: { id: climateactions.id },
-  //   });
-  // } 
 }

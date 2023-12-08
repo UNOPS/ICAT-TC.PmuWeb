@@ -12,9 +12,6 @@ import { Country, IInstitution, Institution, InstitutionControllerServiceProxy, 
 export class InstitutionsComponent implements OnInit, AfterViewInit {
 
 
- // getSkillNames = (user: any): string =>  user.map(({firstName}:{firstName:string}) => firstName).join(', ');
-  
-  
   name:string;
 
  
@@ -49,35 +46,6 @@ export class InstitutionsComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     
 
-    
-    // this.serviceProxy
-    //   .getManyBaseInstitutionControllerInstitution(
-    //     undefined,
-    //     undefined,
-    //     undefined,
-    //     undefined,
-    //     undefined,
-    //     undefined,
-    //     1000,
-    //     0,
-    //     0,
-    //     0
-    //   ).subscribe((res: any) => {
-    //      this.institutions = res.data;
-    //     console.log("ccccc",res.data)
-
-    //     console.log("UUUU", this.institutions[0].countries)
-
-    //     this.totalRecords = res.totalRecords;
-
-    //     console.log('institutions=====', this.institutions)
-
-    //     if (res.totalRecords !== null) {
-    //       this.last = res.count;
-    //     } else {
-    //       this.last = 0;
-    //     }
-    //   });
 
     this.serviceProxy
       .getManyBaseCountryControllerCountry(
@@ -138,7 +106,6 @@ export class InstitutionsComponent implements OnInit, AfterViewInit {
           countryId,
 
         ).subscribe((a) => {
-          console.log(a)
           this.institutions = a["1"];
           
           this.totalRecords = a["0"];
@@ -172,7 +139,6 @@ export class InstitutionsComponent implements OnInit, AfterViewInit {
         
       ).subscribe((res: any) => {
         this.insCountryList=res.countries;
-        console.log('work',res)
       })
 
   }
@@ -193,13 +159,11 @@ export class InstitutionsComponent implements OnInit, AfterViewInit {
   }
 
   editInstitution(institution: Institution) {
-    console.log('edit institution', institution);
     this.router.navigate(['/instituion-new'], { queryParams: { id: institution.id} });
   
   }
 
   testfun(){
-    console.log('ekjkkjk');
 
   }
 

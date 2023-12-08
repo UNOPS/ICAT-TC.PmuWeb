@@ -12,7 +12,6 @@ import decode from 'jwt-decode';
 })
 export class InstitutionFormComponent implements OnInit {
 
-  //selectedTypeList: string[] = [];
   selectedTypeList: Institution[] = [];
 
 
@@ -24,7 +23,7 @@ export class InstitutionFormComponent implements OnInit {
   countryList: Country[] = [];
   oldCountryList: Country[] = [];
 
-  listc: Country[] = [];//not assigned list
+  listc: Country[] = [];
 
   editInstitutionId: number = 0;
 
@@ -49,7 +48,6 @@ export class InstitutionFormComponent implements OnInit {
 
     const token = localStorage.getItem('access_token')!;
     const tokenPayload = decode<any>(token);
-    console.log('tokenPayload=========', tokenPayload);
     let institutionId = tokenPayload.institutionId;
 
     this.serviceProxy
@@ -68,7 +66,6 @@ export class InstitutionFormComponent implements OnInit {
         this.selectedTypeList = res.data;
       });
     let countryFilter: string[] = [];
-    // countryFilter.push('Country.IsSystemUse||$eq||' + 1);
 
     await this.serviceProxy
       .getManyBaseCountryControllerCountry(
@@ -93,8 +90,6 @@ export class InstitutionFormComponent implements OnInit {
         }
       });
 
-
-    //edit institute
     this.route.queryParams.subscribe((params) => {
       this.editInstitutionId = params['id'];
 
@@ -152,8 +147,6 @@ export class InstitutionFormComponent implements OnInit {
           );
 
 
-        console.log("PPPP", formData);
-
 
       } else {
 
@@ -164,7 +157,6 @@ export class InstitutionFormComponent implements OnInit {
           ins.type =new InstitutionType()
 
           old.institution = null;
-          console.log(old)
           this.serviceProxy
             .updateOneBaseCountryControllerCountry(old.id, old)
             .subscribe((res) => {});
@@ -176,7 +168,6 @@ export class InstitutionFormComponent implements OnInit {
           .updateOneBaseInstitutionControllerInstitution(this.institution.id, this.institution)
           .subscribe(
             (res) => {
-              console.log("PPPP111",);
               this.messageService.add({
                 severity: 'success',
                 summary: 'Success',
@@ -212,8 +203,6 @@ export class InstitutionFormComponent implements OnInit {
 
   activateInstitution(instituion: Institution) {
 
-    console.log('sta', this.institution.status)
-
     if (this.institution.status == 1) {
 
       let statusUpdate = 0;
@@ -225,16 +214,13 @@ export class InstitutionFormComponent implements OnInit {
 
     }
 
-    console.log("ACC", this.institution.status)
 
     this.serviceProxy
       .updateOneBaseInstitutionControllerInstitution(this.institution.id, this.institution)
       .subscribe((res) => {
-        console.log("PPPP111222");
         this.confirmationService.confirm({
           message: this.institution.status === 0 ? this.institution.name + ' is Activated' : this.institution.name + ' is Deactivated',
           header: 'Confirmation',
-          //acceptIcon: 'icon-not-visible',
           rejectIcon: 'icon-not-visible',
           rejectVisible: false,
           acceptLabel: 'Ok',
@@ -244,18 +230,8 @@ export class InstitutionFormComponent implements OnInit {
 
           reject: () => { },
         });
-        // this.messageService.add({
-        //   severity: 'success',
-        //   summary: 'Success',
-        //   detail:
-
-        //     this.institution.status === 0 ? this.institution.name + ' is Activated' : this.institution.name + ' is Deactivated'
-        //   ,
-        //   closable: true,
-        // });
       },
         (err) => {
-          console.log('error............'),
             this.messageService.add({
               severity: 'error',
               summary: 'Error.',

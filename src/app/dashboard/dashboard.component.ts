@@ -15,8 +15,8 @@ import { Chart } from 'chart.js';
 })
 export class DashboardComponent implements OnInit {
   basicData: any;
-  horizontalOptions: any//{ indexAxis: string; plugins: { legend: { labels: { color: string; }; }; }; scales: { x: { ticks: { color: string; }; grid: { color: string; }; }; y: { ticks: { color: string; }; grid: { color: string; }; }; }; };
-  options: any;
+  horizontalOptions: any
+   options: any;
   displayPosition: boolean = false;
 
   overlays: any[];
@@ -59,8 +59,6 @@ export class DashboardComponent implements OnInit {
     const tokenPayload = decode<any>(token);
     let institutionId = tokenPayload.institutionId;
 
-    console.log("institutionId==", institutionId)
-
     this.horizontalOptions = {
       indexAxis: 'y',
       plugins: {
@@ -91,35 +89,6 @@ export class DashboardComponent implements OnInit {
   };
 
 
-    // this.horizontalOptions = {
-    //   indexAxis: 'x',
-    //   plugins: {
-    //     legend: {
-    //       labels: {
-    //         color: '#495057'
-    //       }
-    //     }
-    //   },
-    //   scales: {
-    //     x: {
-    //       ticks: {
-    //         color: '#495057'
-    //       },
-    //       grid: {
-    //         color: '#ebedef'
-    //       }
-    //     },
-    //     y: {
-    //       ticks: {
-    //         color: '#495057'
-    //       },
-    //       grid: {
-    //         color: '#ebedef'
-    //       }
-    //     }
-    //   }
-    // };
-
     this.getUserUsageChart(0);
     this.getMethologyUsageChart(0);
 
@@ -143,15 +112,10 @@ export class DashboardComponent implements OnInit {
       0
     ).subscribe((res => {
       this.countryList = res.data;
-      console.log("country-list====", this.countryList)
       let count = 0;
       for (let c of res.data) {
 
         this.src1 = c.flagPath;
-        //   this.mapData1 = {
-
-        //       [c.code] : {value : 1, extra : {'sectorname': 'Transport', 'registeredDate' : String([c.createdOn])}}
-        //   }
 
         this.mapData2[c.code] = { value: 1 };
 
@@ -178,7 +142,6 @@ export class DashboardComponent implements OnInit {
       ).subscribe((res => {
         countmem = res.data.length;
         this.res(countmem);
-        console.log('resss', countmem);
         this.basicData = {
           labels: [''],
           datasets: [
@@ -220,7 +183,6 @@ export class DashboardComponent implements OnInit {
       0,
       0)
       .subscribe(res => {
-        console.log('res333333', res)
         this.countries = res.data;
       })
 
@@ -231,10 +193,8 @@ export class DashboardComponent implements OnInit {
 
   getUserUsageChart(countryId: number): void {
     let chart_url = environment.baseUrlCountryAPI + `/audit/userCount?countryId=${countryId}`;
-    console.log('chart_url', chart_url)
+    
     this.http.get<any[]>(chart_url).subscribe(res => {
-      console.log('res=====', res)
-      // this.userChartData = res;
 
       if(res.length>0){
         this.isuse=false
@@ -286,9 +246,9 @@ export class DashboardComponent implements OnInit {
 
   getMethologyUsageChart(countryId: number): void {
     let chart_url = environment.baseUrlCountryAPI + `/assesment/methologyCount?countryId=${countryId}`;
-    console.log('countryId', countryId)
+   
     this.http.get<any[]>(chart_url).subscribe(res => {
-      console.log('res', res)
+      
       let labels: any[] = []
       let data: any[] = []
 
@@ -299,9 +259,6 @@ export class DashboardComponent implements OnInit {
         this.isusemeth=true
       }
       res.map(a => {
-        // if(a.name.length >10){
-        //   a.name = a.name.substring(0,20)+"..."
-        // }
         labels.push(a.name)
         data.push(a.data)
 
@@ -339,12 +296,8 @@ export class DashboardComponent implements OnInit {
         
           legend: {
           
-            // display:false,
-            // align:'start',
               labels: {
-                // color: 'rgb(255, 99, 132)',
                 generateLabels:  function(chart: any){
-                  console.log('work',chart)
                   var data = chart.data;
                   if (data.labels.length && data.datasets.length) {
                     return data.labels.map(function(label: any, i: string | number) {
@@ -356,7 +309,6 @@ export class DashboardComponent implements OnInit {
                         strokeStyle: style.borderColor,
                         lineWidth: style.borderWidth,
                         hidden: isNaN(data.datasets[0].data[i]) || meta.data[i].hidden,
-                        // Extra data used for toggling the correct item
                         index: i
                       };
                     });
@@ -380,22 +332,15 @@ export class DashboardComponent implements OnInit {
 
 
   errorLoading = null;
-  //   mapError(error: ChartErrorEvent): void {
-  //     this.errorLoading = error;
-  //   }
   mapReady(): void {
-    console.log('Map ready');
   }
   onclick() {
-    console.log('Mapppppp');
     this.src = this.src1;
   }
 
   selectedCountry(event: any) {
     this.selectedCountryCode = event.country;
     if (this.selectedCountryCode != null) {
-      //  this.selectedMapCountry = this.countryList.find((obj: { code: any; })=>obj.code == this.selectedCountryCode);
-      console.log("my selcted country", this.selectedCountryCode);
       let filter: string[] = new Array();
       filter.push('code||$eq||' + this.selectedCountryCode);
       this.serviceproxy.getManyBaseCountryControllerCountry(
@@ -415,8 +360,6 @@ export class DashboardComponent implements OnInit {
       }))
     }
 
-    console.log("my selcted country", event.country);
-    // this.displayBasic = true;
     this.position = 'right';
     this.displayPosition = true;
 

@@ -1,4 +1,4 @@
-import { Route } from '@angular/compiler/src/core';
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
@@ -13,7 +13,6 @@ import { Country, Ndc, Sector, ServiceProxy, SubNdc } from 'shared/service-proxi
 export class AddNdcComponent implements OnInit {
   
   subndc: any;
-//  subndcs: { createdBy: any;createdOn: any;editedBy: any;editedOn: any;status: any;id: any; name: any;description: any;sortOrder: any; ndcId:any }[];
  subndcs: SubNdc[]=new Array();
   subndcval:any;
   values: { testvalue: any; }[];
@@ -38,15 +37,11 @@ export class AddNdcComponent implements OnInit {
   country: Country;
   ngOnInit(): void {
     this.newndc = new Ndc();
-    // this.subndc =[
-    //   { "testvalucreatedBy" : "test", "createdOn":new Date(), "editedBy":"ted", "editedOn":new Date(), "status":0,"id":1,"description":"test":}
-    //   ];
 
     this.activerouter.queryParams.subscribe((params=>{
       this.countryId=params['countryId'];
       this.sectorId=params['sectorId'];
       this.ndcsetid=params['ndcsetid'];
-      console.log('dddd',this.countryId,   this.sectorId)
       this.selectedtypeId = params['ndcsetid'];
     }));
     
@@ -55,7 +50,6 @@ export class AddNdcComponent implements OnInit {
       undefined,
       undefined,
       undefined).subscribe((res=>{
-        console.log('coou',res)
         this.country = res;
       }))
   
@@ -64,7 +58,6 @@ export class AddNdcComponent implements OnInit {
         undefined,
         undefined,
         undefined).subscribe((res=>{
-          console.log('coou',res)
           this.sector = res;
         }))
     
@@ -96,19 +89,14 @@ export class AddNdcComponent implements OnInit {
     this.newndc.country = this.country;
     this.newndc.sector = this.sector;
     this.newndc.subNdc = this.subndcs;
-    //console.log("999v",this.newndc)
-   
-    // newndc.subNdc;
    
     this.serviceproxy.createOneBaseNdcControllerNdc(this.newndc).subscribe((res=>{
-      console.log(res,"99991")
       this.selectedtypeId =  res.id;
       for(let s of this.subndcs){
         s.ndc=res;
         
 
         this.serviceproxy.createOneBaseSubNdcControllerSubNdc(s).subscribe((res=>{
-          console.log('tttt',res)
         
         }))
       }
@@ -121,23 +109,18 @@ export class AddNdcComponent implements OnInit {
     this.confirm4=true;
   }
      
-    // this.router.navigate(['/ndc']);
 }
 addnewsub(){
   
   let sub = new SubNdc();
-  //sub.name = this.subndc;
   sub.description="des";
   sub.createdOn = moment();
-  this.subndcs.push(sub);
-     console.log(this.subndcs,'lll') ;  
+  this.subndcs.push(sub); 
   this.values.push({"testvalue" : "FS1201"})
-  console.log('333', this.subndc)
   this.rowIndex=this.rowIndex+1;
   
 }
 sub(event:any){
-  console.log('cdc', event.value)
 }
 OnInput(event:any){
 
@@ -146,10 +129,8 @@ OnInput(event:any){
 removesub(){
   
   this.subndcs.splice(-1);
-  console.log(this.subndcs,'xsxsxssssssssssssssssss')
 }
 test(){
-  console.log("testtttt")
 
       window.location.reload();
   

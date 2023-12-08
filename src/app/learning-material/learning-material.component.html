@@ -29,8 +29,6 @@
     <br>
     <div class="grid">
 
-      <!-- <div class="grid" fxLayout="column" fxLayoutGap="20px" > -->
-      <!-- <div class="cardWrap" fxLayout="row" fxLayoutAlign="start" fxLayoutGap="10px" > -->
       <div *ngFor="let item of learnigMaterials">
         <ng-container *ngIf="item.documentType =='Learning Material' ">
 
@@ -44,8 +42,6 @@
 
 
         </ng-container>
-        <!-- </div> -->
-        <!-- </div> -->
 
       </div>
 
@@ -122,9 +118,6 @@
                 <p-toggleButton [(ngModel)]="checked" onLabel="YES" offLabel="NO" onIcon="pi pi-check"
                   offIcon="pi pi-times" [style]="{'width': '5em' ,'color': 'white'}"></p-toggleButton>
               </div>
-              <!-- <div class="col-md-4">
-    
-                    </div> -->
 
             </div>
 

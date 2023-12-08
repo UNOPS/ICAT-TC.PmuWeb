@@ -28,12 +28,11 @@ export class EditNdcComponent implements OnInit {
 
   ngOnInit(): void {
     this.activateroute.queryParams.subscribe(params=>{
-          console.log("param",params)
           this.ndcname = params['ndcname'];
           this.ndcid = params['ndcid'];
     });
 
-let filter: string[] = new Array();  // countryFilter.push(this.countryId); 
+let filter: string[] = new Array(); 
         filter.push('ndc.id||$eq||' + this.ndcid);  
 
   this.serviceproxy.getManyBaseSubNdcControllerSubNdc(
@@ -48,8 +47,6 @@ let filter: string[] = new Array();  // countryFilter.push(this.countryId); 
         0,
         0
   ).subscribe((res=>{
-    console.log('222',res.data);
-    //this.subndcname = res.data.
     this.data = res.data;
   }));
 
@@ -66,28 +63,21 @@ let filter: string[] = new Array();  // countryFilter.push(this.countryId); 
     ndc.name = this.ndcname;
     ndc.subNdc=this.data;
     this.serviceproxy.updateOneBaseNdcControllerNdc(this.ndcid, ndc).subscribe((res=>{
-      console.log(res,'res')
 
     }))
 
    
     for(let sub of this.data){
-      //console.log(sub, 'subbbb')
       sub.ndc.id = this.ndcid;
-      console.log(ndc.id, 'subbbb')
       if(sub.id!=undefined){
       this.serviceproxy.updateOneBaseSubNdcControllerSubNdc(sub.id,sub).subscribe((res=>{
-        console.log(res, '77')
       }))
     }else{
-      console.log('tttt')
       this.serviceproxy.createOneBaseSubNdcControllerSubNdc(sub).subscribe((res=>{
-        console.log('tttt',res)
       }))
     }
     }
     this.visibility3=true;
-    //this.router.navigate(['/ndc']);
   }
 
   Back(){
@@ -99,29 +89,24 @@ let filter: string[] = new Array();  // countryFilter.push(this.countryId); 
     
   }
   addsub(){
-   // this.subndcs.push(this.subndc)
    let ndc = new SubNdc();
    this.data.push(ndc);
   }
 
   deletendc(){
    let ndc = new Ndc();
-    console.log("ggg",this.data)
     this.serviceproxy.getOneBaseNdcControllerNdc(this.ndcid,undefined,undefined,undefined).subscribe((res=>{
       if(res.status!=1){
       ndc=res;
       if(res.subNdc.length!=0){
         for(let d of this.data){
           this.serviceproxy.deleteOneBaseSubNdcControllerSubNdc(d.id).subscribe((res=>{
-            console.log(res,'res')
             this.serviceproxy.deleteOneBaseNdcControllerNdc(this.ndcid).subscribe((res=>{
-              console.log(res),'example';
             }))
           }))
         }
       }else {
         this.serviceproxy.deleteOneBaseNdcControllerNdc(this.ndcid).subscribe((res=>{
-          console.log(res),'example';
         }))
       }  this.visibility2 = true;
     }else{
@@ -129,8 +114,7 @@ let filter: string[] = new Array();  // countryFilter.push(this.countryId); 
         this.serviceproxy.getOneBaseNdcControllerNdc(this.ndcid, undefined, undefined, undefined).subscribe((res=>{
           res.status  = 0;
           this.serviceproxy.updateOneBaseNdcControllerNdc(this.ndcid,res).subscribe((res=>{
-            console.log('done')
-            //update sub ndcs status
+           
             this.serviceproxy.getManyBaseSubNdcControllerSubNdc(
               undefined,
               undefined,
@@ -143,11 +127,10 @@ let filter: string[] = new Array();  // countryFilter.push(this.countryId); 
               0,
               0
             ).subscribe((res=>{
-              console.log(res, 'oooooooooooooo')
               for(let sub of res.data){
                 sub.status = 0;
                 this.serviceproxy.updateOneBaseSubNdcControllerSubNdc(sub.id,sub).subscribe((res=>{
-                  console.log("don sub ndc")
+                
                 }))
               }
             }))
@@ -158,22 +141,18 @@ let filter: string[] = new Array();  // countryFilter.push(this.countryId); 
     }))
     
   
-    //this.router.navigate(['/ndc']);
   }
 
   deletesub(){
-    console.log(this.data[this.data.length-1],'88888')
     this.serviceproxy.deleteOneBaseSubNdcControllerSubNdc(this.data[this.data.length-1].id).subscribe((res=>{
-      console.log(res)
+   
     }));
     
     this.data.splice(-1);
-    console.log(this.data,'88888')
     this.visibility1 = true;
   }
 
   test(){
-    console.log("testtttt")
     this.router.navigate(['/ndc']).then(() => {
         window.location.reload();
       });

@@ -98,7 +98,6 @@
             <label class="font-weight-bold">User Type</label>
           </div>
           <div class="col-8">
-            <!-- {{user.userType | json}} -->
             <p-dropdown
               [options]="userTypes"
               name="usertype"
@@ -110,7 +109,6 @@
               (ngModelChange)="onKeydown($event)"
             >
             </p-dropdown>
-            <!-- {{fut.errors | json}} {{fLogin.errors | json}} -->
           </div>
         </div>
       </div>
@@ -189,16 +187,6 @@
           "
         >
           <div class="col-2">
-            <!-- <div>
-              <button
-                type="button"
-                (click)="searchGain()"
-                pButton
-                pRipple
-                icon="pi pi-search"
-                styleClass="p-button-warn"
-              ></button>
-            </div> -->
           </div>
         </div>
       </div>
@@ -265,14 +253,12 @@
           >
             {{  customer.institution?.name }}
           </td>
-          <!--hhhh-->
           <ng-template #loggedOut>
             <td>
             {{ customer.country?.name }}
             </td>
           </ng-template>
           
-          <!--hhhh-->
 
           <td>{{ customer.telephone }}</td>
           <td>{{ customer.mobile }}</td>

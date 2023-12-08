@@ -62,13 +62,10 @@ export class UserListComponent implements OnInit {
     this.userrole = tokenPayload.roles[0];
     this.username =tokenPayload.usr;
     this.userInsId = tokenPayload.institutionId;
-    console.log('user-tokenPayload=========', tokenPayload);
-    console.log("urole====",this.userrole)
 
    this.filter2 =[];
 
    if(this.userrole == "PMU Admin" || this.userrole === "PMU User"){
-    //  this.filter2.push('mrvInstitution||$notnull||'+'')
       this.pmuFilter.push(...['userType.id||$ne||'+ 5, 'userType.id||$ne||'+ 4, 'userType.id||$ne||'+ 1])
    }
 
@@ -88,9 +85,7 @@ export class UserListComponent implements OnInit {
     )
     .subscribe((res) => {
       this.users = res.data;
-      console.log("filteredUser-----",this.users)
       this.institutionId = this.users[0].institution.id;
-      console.log("currentInstitutionID-----",this.institutionId)
 
     });
 
@@ -109,7 +104,6 @@ export class UserListComponent implements OnInit {
       )
       .subscribe((res) => {
         this.instuitutionList = res.data;
-        console.log("institutionlists-----",this.instuitutionList)
       });
 
       if(this.userrole == "PMU Admin" || this.userrole == "PMU User"){
@@ -128,9 +122,7 @@ export class UserListComponent implements OnInit {
           0
         )
         .subscribe((res) => {
-          console.log("institutionlists-----",res.data)
           res.data[0].countries.forEach(c => {
-            console.log("coutry", c.id)
             this.userCountries.push(c.id)})
           });
       }
@@ -168,7 +160,6 @@ export class UserListComponent implements OnInit {
       )
       .subscribe((res) => {
         this.countrylists = res.data;
-        console.log("countrylists-----",this.countrylists)
       });
   }
 
@@ -185,7 +176,6 @@ export class UserListComponent implements OnInit {
         filters.push(...this.pmuFilter)
          &  filters.push('institution.id||$eq||'+this.userInsId);
       }
-       console.log("log as pmu")
     }
 
     if (this.searchText && this.searchText.length > 0) {
@@ -210,66 +200,32 @@ export class UserListComponent implements OnInit {
     }
     if(this.selectedCountry){
       let filter = 'country.id||$eq||' + this.selectedCountry.id;
-      //let filter = 'mrvInstitution||$ne||'+"ii";
       filters.push(filter)
-      //  & filters.push('mrvInstitution||$ne||'+ "ii");
 
     }
-   //  filters.push('institution.id||eq||'+1);
-
-    console.log("Filter=====",filters);
 
     return filters;
   }
 
-  // getFilterOr() {
-  //   let filters: string[] = [];
-
-  //   // if (this.searchText && this.searchText.length > 0) {
-  //   //   filters.push('email||$cont||' + this.searchText);
-  //   //   filters.push('lastName||$cont||' + this.searchText);
-  //   //   filters.push('firstName||$cont||' + this.searchText);
-  //   // }
-
-  //   // console.log(filters);
-
-  //   return filters;
-  // }
-
- 
 
   
   onKeydown(event: any) {
-  // if (event.key === 'Enter') {
-      console.log("ooooopssss===",event);
-     // this.loadCustomers(event);
      
      this.searchGain();
- //  }
   }
 
-  //  onSearch() {
-  //   let event: any = {};
-  //   event.rows = this.rows;
-  //   event.first = 0;
-
-  //   console.log("EEEE",event)
-
-  //   this.loadCustomers(event);
-  // }
+ 
 
 
   searchGain() {
     let a: any = {};
     a.rows = this.rows;
     a.first = 0;
-    console.log("aa==",a)
 
     this.loadCustomers(a);
   }
 
   loadCustomers(event: LazyLoadEvent) {
-    console.log('loadCustomers===', event);
     this.loading = true;
 
     let orFilter:string[] = []
@@ -279,11 +235,6 @@ export class UserListComponent implements OnInit {
       orFilter.push(...this.pmuFilter, 'country.id||$in||'+ this.userCountries)
     }
 
-    //event.first = First row offset
-    //event.rows = Number of rows per page
-    //event.sortField = Field name to sort with
-    //event.sortOrder = Sort order as number, 1 for asc and -1 for dec
-    //filters: FilterMetadata object having field as key and filter value, filter matchMode as value
     this.serviceProxy
       .getManyBaseUsersControllerUser(
         undefined,
@@ -298,16 +249,13 @@ export class UserListComponent implements OnInit {
         0
       )
       .subscribe((res) => {
-        console.log("users================",res);
         this.totalRecords = res.total;
         this.customers = res.data;
         this.loading = false;
-        console.log("users================",this.customers);
       });
   }
 
   editUser(user: User) {
-    console.log('edit user', user);
 
     this.router.navigate(['/user'], { queryParams: { id: user.id } });
   }

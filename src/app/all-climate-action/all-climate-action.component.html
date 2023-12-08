@@ -37,7 +37,6 @@
     </div>
 
 
-    <!-- <div> {{climateactions|json}} </div> -->
     <div class="row p-2">
       <p-table [value]="climateactions" [lazy]="true" (onLazyLoad)="loadgridData($event)" [paginator]="true"
         [rows]="rows" [showCurrentPageReport]="true"
@@ -65,38 +64,6 @@
             <th>Updated Date</th>
           </tr>
         </ng-template>
-        <!-- <ng-template pTemplate="body" let-climateaction>
-         
-        
-
-            <tr>
-              <td style="text-align: center"> 
-                <div *ngIf="climateaction.assessement.length !='0'; else elseBlock">
-                  <i
-                  class="pi pi-eye"
-                  style="font-size: 1.5rem; color: #000; margin-left: 17%"
-                  (click)="projectSummery()"
-                ></i>
-                </div>
-                <ng-template #elseBlock>   
-                  <i
-                  class="pi pi-eye"
-                  style="font-size: 1.5rem; color: #000; margin-left: 17%"
-                  (click)="detail(climateaction)"
-                ></i>
-                </ng-template> 
-                
-              </td>
-                <td>{{ climateaction.climateActionName }}</td>
-                <td>{{ climateaction.projectStatus?.name }}</td> 
-                <td>{{ climateaction.institution }}</td> 
-                <td>{{ climateaction.projectApprovalStatus?.name }}</td> 
-                <td>{{ climateaction.createdOn | date: "yyyy-MM-dd "}}</td> 
-                <td>{{ climateaction.acceptedDate | date: "yyyy-MM-dd "}}</td> 
-                <td>{{ climateaction.editedOn | date: "yyyy-MM-dd "}}</td> 
-            </tr>
-         
-        </ng-template> -->
       </p-table>
     </div>
   </div>

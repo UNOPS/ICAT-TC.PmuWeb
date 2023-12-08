@@ -54,16 +54,13 @@ export class ViewCountryComponent implements OnInit, AfterViewInit {
   selectedModules: any[] = [];
 
   selectedSectors: Sector[] = [];
-  //selectedCountry:Country = new Country();
   mapData1: CountriesData = {};
   mapData2: CountriesData = {};
   flagPath: string;
-  //description:string;
-  // region:string;
   editCountryId: any;
   isNewCountry: boolean = true;
   arr: any[] = []
-  url = environment.baseMainSyncAPI + '/country/synccountry';
+  url = environment.baseUrlCountryAPI + '/country/synccountry';
   selectCountry: string = "Select a Country";
 
   cou: Country = new Country();
@@ -98,7 +95,6 @@ export class ViewCountryComponent implements OnInit, AfterViewInit {
 
     const token = localStorage.getItem('access_token')!;
     const tokenPayload = decode<any>(token);
-    console.log('user-tokenPayload=========', tokenPayload);
     let institutionId = tokenPayload.institutionId;
 
 
@@ -122,7 +118,6 @@ export class ViewCountryComponent implements OnInit, AfterViewInit {
         0
       ).subscribe((res: any) => {
         this.countryList = res.data;
-        //  console.log("country listb is...",this.countryList);
 
 
       });
@@ -143,7 +138,6 @@ export class ViewCountryComponent implements OnInit, AfterViewInit {
         0
       ).subscribe((res: any) => {
         this.sectorList = res.data;
-        console.log("sector listb is...", this.sectorList);
 
 
       });
@@ -157,7 +151,6 @@ export class ViewCountryComponent implements OnInit, AfterViewInit {
         
         this.countryProxy.getCountry(this.editCountryId)
         .subscribe((res: any) => {
-          console.log('editCountry-------', res);
           this.cou = res;
 
             this.cou.description = res.description
@@ -186,12 +179,9 @@ export class ViewCountryComponent implements OnInit, AfterViewInit {
 
 
             if (this.editCountryId) {
-
-              console.log("yyyyyyy",this.editCountryId)
               this.selectCountry = this.cou.name;
             }
             else {
-              // console.log("yyyyyyy")
 
               this.selectCountry = "Select Country"
             }
@@ -210,16 +200,12 @@ export class ViewCountryComponent implements OnInit, AfterViewInit {
   }
 
   onStatusChange(event: any) {
-    console.log("eeeeee",event)
     if (this.editCountryId != undefined) {
-      console.log("cname111===", event.description)
 
       if (event != null || event != undefined) {
 
         let mapData2: CountriesData = {};
-        //console.log(event);
         mapData2[event.code] = { value: 1000 };
-        // console.log(mapData2);
         this.mapData1 = mapData2;
         this.cou.flagPath = event.flagPath;
         this.cou.description = event.description;
@@ -229,8 +215,6 @@ export class ViewCountryComponent implements OnInit, AfterViewInit {
       else {
         this.mapData1 = {};
         this.flagPath = '';
-        // this.region='';
-        // this.description='';
       }
     }
 
@@ -238,219 +222,18 @@ export class ViewCountryComponent implements OnInit, AfterViewInit {
 
 
   selectmod(event: any) {
-    console.log("selectmod=====", event)
   }
 
 
-
-
-  // async saveCountry(userForm: NgForm) {
-  //   {
-  //     console.log('userForm================', userForm);
-  //     this.messageService.add({
-  //       severity: 'success',
-  //       summary: 'Service Message',
-  //       detail: 'Via MessageService',
-  //     });
-
-
-  //     if (this.isNewCountry) {
-  //       console.log("new country")
-
-  //       // console.log("clicked");
-  //       // let cou = new Country();
-
-  //       this.cou.id = this.cou.id;
-  //       this.cou.description = this.cou.description
-  //       this.cou.isSystemUse = true;
-  //       this.cou.countryStatus = CountryStatus.Active;
-  //       this.cou.registeredDate = moment(new Date());
-
-  //       console.log("aaaaaaaaaaaaaaa", this.selectedModules)
-
-  //       for (let x = 0; x < this.selectedModules.length; x++) {
-  //         let selectModId = this.selectedModules[x].id;
-
-  //         this.arr.push(selectModId);
-  //       }
-  //       console.log("selectedModArry===", this.arr)
-
-
-  //       if (this.arr.includes(1)) {
-
-  //         this.cou.climateActionModule = true;
-  //       }
-  //       else if (!this.arr.includes(1)) {
-
-  //         this.cou.climateActionModule = false;
-
-  //       }
-  //       if (this.arr.includes(2)) {
-  //         this.cou.ghgModule = true;
-
-  //       }
-  //       else if (!this.arr.includes(2)) {
-  //         this.cou.ghgModule = false;
-  //       }
-  //       if (this.arr.includes(3)) {
-  //         this.cou.macModule = true;
-
-  //       }
-  //       else if (!this.arr.includes(3)) {
-  //         this.cou.macModule = false;
-
-  //       } if (this.arr.includes(4)) {
-  //         this.cou.dataCollectionModule = true;
-  //       }
-  //       else if (!this.arr.includes(4)) {
-  //         this.cou.dataCollectionModule = false;
-  //       }
-
-  //       /////////////////////////
-
-  //       let countrysectr: CountrySector[] = [];
-  //       for (let x = 0; x < this.cou.countrysector.length; x++) {
-  //         console.log("yyyyyy")
-  //         let cst = new CountrySector();
-  //         cst.sector.id = this.cou.countrysector[x].id;
-  //         cst.country.id = this.cou.id;
-  //         countrysectr.push(cst);
-  //       }
-  //       //////////////////////////// 
-  //       this.cou.countrysector = countrysectr;
-  //       console.log("countrysector====", this.cou.countrysector)
-
-  //       console.log("pass-cou-----", this.cou);
-
-  //       setTimeout(() => {
-  //         this.serviceProxy
-  //           .createOneBaseCountryControllerCountry(this.cou)
-  //           .subscribe(async (res: any) => {
-
-  //             console.log("savecountryRes===", res)
-  //             this.confirmationService.confirm({
-  //               message: 'User is created successfully!',
-  //               header: 'Confirmation',
-  //               //acceptIcon: 'icon-not-visible',
-  //               rejectIcon: 'icon-not-visible',
-  //               rejectVisible: false,
-  //               acceptLabel: 'Ok',
-  //               accept: () => {
-  //                 this.onBackClick();
-  //               },
-
-  //               reject: () => { },
-  //             });
-
-  //             //  this.messageService.add({severity:'success', summary:'Confirmed', detail:'You have successfully registered!.'});
-  //             // alert('Saved Successfully');
-  //             await axios.get(this.url)
-  //           });
-  //       }, 1000);
-
-  //     } else {
-
-  //       console.log("edit countryyyyyyyyy")
-  //       for (let x = 0; x < this.selectedModules.length; x++) {
-  //         let selectModId = this.selectedModules[x].id;
-
-  //         this.arr.push(selectModId);
-
-  //       }
-
-  //       console.log("selectedModArry===", this.arr)
-  //       if (this.arr.includes(1)) {
-
-  //         this.cou.climateActionModule = true;
-  //       }
-  //       else if (!this.arr.includes(1)) {
-
-  //         this.cou.climateActionModule = false;
-
-  //       }
-  //       if (this.arr.includes(2)) {
-  //         this.cou.ghgModule = true;
-
-  //       }
-  //       else if (!this.arr.includes(2)) {
-  //         this.cou.ghgModule = false;
-  //       }
-  //       if (this.arr.includes(3)) {
-  //         this.cou.macModule = true;
-
-  //       }
-  //       else if (!this.arr.includes(3)) {
-  //         this.cou.macModule = false;
-
-  //       } if (this.arr.includes(4)) {
-  //         this.cou.dataCollectionModule = true;
-  //       }
-  //       else if (!this.arr.includes(4)) {
-  //         this.cou.dataCollectionModule = false;
-
-  //       }
-
-
-  //       let countrysectr: CountrySector[] = [];
-  //       for (let x = 0; x < this.cou.countrysector.length; x++) {
-  //         console.log("yyyyyy")
-  //         let cst = new CountrySector();
-  //         cst.sector.id = this.cou.countrysector[x].id;
-  //         cst.country.id = this.cou.id;
-  //         countrysectr.push(cst);
-  //       }
-  //       //////////////////////////// 
-  //       this.cou.countrysector = countrysectr;
-  //       console.log("edit countryr==", this.cou)
-
-  //       this.serviceProxy.updateOneBaseCountryControllerCountry(this.cou.id, this.cou)
-  //         .subscribe(
-
-  //           async (res) => {
-  //             this.confirmationService.confirm({
-  //               message: 'country is updated successfully!',
-  //               header: 'Confirmation',
-  //               //acceptIcon: 'icon-not-visible',
-  //               rejectIcon: 'icon-not-visible',
-  //               rejectVisible: false,
-  //               acceptLabel: 'Ok',
-  //               accept: () => {
-  //                 //this.onBackClick();
-  //               },
-
-  //               reject: () => { },
-  //             });
-  //             await axios.get(this.url)
-
-  //           },
-  //           (error) => {
-  //             alert('An error occurred, please try again.');
-  //             // this.DisplayAlert('An error occurred, please try again.', AlertType.Error);
-
-  //             console.log('Error', error);
-  //           }
-  //         );
-
-
-  //     }
-
-
-
-  //   }
-
-
-  // }
 
 
 
   activateCountry(cou: Country) {
 
     if (this.cou.countryStatus == CountryStatus.Active) {
-      console.log("accstatus", this.cou.countryStatus)
 
 
       this.cou.countryStatus = CountryStatus.Deactivated;
-      console.log("accstatus", this.cou.countryStatus)
 
     } else if (this.cou.countryStatus == CountryStatus.Deactivated) {
       this.cou.countryStatus = CountryStatus.Active;
@@ -459,23 +242,9 @@ export class ViewCountryComponent implements OnInit, AfterViewInit {
     }
     this.serviceProxy.updateOneBaseCountryControllerCountry(this.cou.id, this.cou)
       .subscribe(async (res) => {
-        console.log('done............', res),
-          // this.messageService.add({
-
-          //   severity: 'Deactivated',
-          //   summary: 'Country',
-          //   detail:
-
-          //     this.cou.countryStatus === CountryStatus.Active ?  ' is Activated' :  ' is Deactivated'
-          //   ,
-          //   closable: true
-          // });
-
-
           this.confirmationService.confirm({
             message: this.cou.countryStatus === CountryStatus.Active ? 'Country is Activated' : 'Country is Deactivated',
             header: 'Confirmation',
-            //acceptIcon: 'icon-not-visible',
             rejectIcon: 'icon-not-visible',
             rejectVisible: false,
             acceptLabel: 'Ok',
@@ -488,7 +257,6 @@ export class ViewCountryComponent implements OnInit, AfterViewInit {
           this.http.post<any[]>(this.url, this.cou).subscribe();
       },
         (err) => {
-          console.log('error............'),
             this.messageService.add({
               severity: 'error',
               summary: 'Error.',
@@ -500,7 +268,6 @@ export class ViewCountryComponent implements OnInit, AfterViewInit {
   }
 
   onBackClick() {
-    console.log("kkkkkkkkkkkkkkkkkkkk")
     this.router.navigate(['/country-registry']);
   }
 }

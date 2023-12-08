@@ -37,27 +37,15 @@ export class DocumentComponent implements OnInit,AfterViewInit {
 this.doc_name.push(this.object_array[0][7].documentName);
 this.doc_name.push(this.object_array[0][3].editedOn);
 this.doc_name.push(this.object_array[0][5].id);
-//console.log("modified item",this.doc_name)
-//console.log('Object=',this.object_array[0])  
-//console.log('object_arrayay=',this.object_array) 
-console.log("pdf----",this.object_array[0][8])
   }
 
   onRedirect()
   {
-   console.log("downloaded...",this.object_array[0][8].document)
-   window.location.href = this.object_array[0][8].document; //"https://www.orimi.com/pdf-test.pdf"; // this.object_array[0][8].document
-  // console.log("pdf----",this.object_array)
-   //window.location.href =  "https://www.orimi.com/pdf-test.pdf";
+   window.location.href = this.object_array[0][8].document; 
   }
 
   toDelete(doc:any)
   {
-  //console.log("deleted");
- // console.log(doc_name);
- 
-  //this.newItemEvent.emit(doc_name);
-
   this.confirmationService.confirm({
     message: `Are you sure Do you want to delete this document ?`,
     header: 'Delete Confirmation',

@@ -30,16 +30,11 @@ export class SetPasswordComponent implements OnInit {
     private appServiceProxy: AuthControllerServiceProxy,
     private router: Router,
     private authenticationService: AuthenticationService,
-    // private fb: FormBuilder,
     private route: ActivatedRoute) {
 
     this.authenticationService.authenticate(false, true);
     let regEx = new RegExp("^(?=.*[a-z])(?=.*[A-Z])((?=.*[0-9])|(?=.*[!@#$%^&*]))(?=.{6,})");
 
-    // this.form1 = this.fb.group({
-    //   password: ['', [Validators.required, Validators.pattern(regEx)]],
-    //   confirmPassword: ['', Validators.required],
-    // });
   }
 
   ngOnInit(): void {
@@ -94,14 +89,5 @@ export class SetPasswordComponent implements OnInit {
     window.location.href = environment.baseUrlLandingPage;
   }
 
-  // onPasswordChange(event: any) {
-  //   let x = this.fb.group({
-  //     password: ['', [
-  //       Validators.required,
-  //       Validators.pattern('/^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\D*\d)[A-Za-z\d!$%@#£€*?&]{8,}$')
-  //     ]]
-  //   }
-  //   )
-  // }
 
 }

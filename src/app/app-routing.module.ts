@@ -5,12 +5,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { EditCountryComponent } from './country-profile/edit-country/edit-country.component';
 import { ClimateActionComponent } from './climate-action/climate-action/climate-action.component';
-//import { ViewCountryComponent } from './country-profile/view-country/view-country.component';
 import { CountryNdcComponent } from './country-ndc/country-ndc.component';
 import { MethodologiesComponent } from './methodologies/methodologies.component';
-import { ProjectInformationComponent } from './climate-action/project-information/project-information.component';
-import { AddNdcComponent } from './country-ndc/add-ndc/add-ndc.component';
-import { EditNdcComponent } from './country-ndc/edit-ndc/edit-ndc.component';
 
 
 import { LoginLayoutComponent } from './login/login-layout/login-layout.component';
@@ -27,13 +23,6 @@ import { LearningMaterialComponent } from './learning-material/learning-material
 
 
 
-
-
-
-
-import { IaDashboardComponent } from './dashboard/ia-dashboard/ia-dashboard.component';
-//import { LandingPageComponent } from './landing-page/landing-page.component';
-//import { LoardMoreComponent } from './landing-page/loard-more/loard-more.component';
 
 
 
@@ -66,7 +55,6 @@ import { RoleGuardService } from './auth/role-guard.service';
 import { ViewCountryComponent } from './country-registry/view-country/view-country.component';
 import { AssignMethodologyComponent } from './methodologies/assign-methodology/assign-methodology.component';
 import { SetPasswordComponent } from './login/set-password/set-password.component';
-// import { SetPasswordComponent } from './login/set-password/set-password.component';
 
 
 
@@ -94,7 +82,6 @@ const routes: Routes = [
   },
   { path: 'reset-password', component: SetPasswordComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-//  { path: '', redirectTo: '/dashboard', pathMatch: 'full' }, // redirect to `first-component`
   { path: 'login', component: LoginLayoutComponent },
   {
     path: 'user-list',
@@ -134,14 +121,6 @@ const routes: Routes = [
       ],
     },
   },
-  // {
-  //   path: 'qc',
-  //   component: QualityCheckComponent,
-  //   canActivate: [RoleGuardService],
-  //   data: {
-  //     expectedRoles: ['ccs-admin', 'ins-admin'],
-  //   },
-  // },
   {
     path: 'methodologies',
     component: MethodologiesComponent,
@@ -301,26 +280,6 @@ const routes: Routes = [
       ],
     },
   },
-
-
-  // {
-  //   path: 'all-climate-action',
-  //   component: AllClimateActionComponent,
-  //  canActivate: [RoleGuardService],
-  //   data: {
-  //     expectedRoles: [
-  //       UserRoles.ICAT_ADMIN,
-  //       UserRoles.ICAT_USER,
-  //       UserRoles.PMU_ADMIN,
-  //       UserRoles.PMU_USER,
-  //     ],
-  //   },
-  // },
-  
-  // { path: 'project-information', component: ProjectInformationComponent },
-
-
-  // { path: 'ndc', component: CountryNdcComponent },
   {
     path: 'activity',
     component: AuditComponent,
@@ -334,25 +293,6 @@ const routes: Routes = [
       ],
     },
   },
-  // { path: 'addndc', component: AddNdcComponent },
-  // { path: 'editndc', component: EditNdcComponent },
-  // {
-  //   path: 'methodologies',
-  //   component: MethodologiesComponent,
-  //   canActivate: [RoleGuardService],
-  //   data: {
-  //     expectedRoles: [
-  //       UserRoles.COUNTRY_ADMIN,
-  //       UserRoles.SECTOR_ADMIN,
-  //       UserRoles.MRV_ADMIN,
-  //       UserRoles.TT,
-  //     ],
-  //   },
-  // },
-
-  // { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  
-  
  
  
   
@@ -370,38 +310,6 @@ const routes: Routes = [
       ],
     },
   },
- 
-  // { path: 'ca-result', component: CaResultComponent},
-  
-  
-  
- // { path: 'landing-page', component: LandingPageComponent },
- // { path: 'loard-more', component: LoardMoreComponent },
- 
-  
-  // { path: 'ia-dashboard', component: IaDashboardComponent},
-  
-  // {
-  //   path: 'ia-dashboard',
-  //   component: IaDashboardComponent,
-  //   canActivate: [RoleGuardService],
-  //   data: {
-  //     expectedRoles: [UserRoles.INS_ADMIN, UserRoles.DEO],
-  //   },
-  // },
-  // { path: 'ia-dashboard', component: IaDashboardComponent},
-  
-  // {
-  //   path: 'ia-dashboard',
-  //   component: IaDashboardComponent,
-  //   canActivate: [RoleGuardService],
-  //   data: {
-  //     expectedRoles: [UserRoles.INS_ADMIN, UserRoles.DEO],
-  //   },
-  // },
-  
- 
- 
  
 
  

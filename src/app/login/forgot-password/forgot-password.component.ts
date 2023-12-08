@@ -37,7 +37,7 @@ export class ForgotPasswordComponent implements OnInit {
       this.showLoginForm,
       this.showForgotPassword,
       this.showSetPassword
-    ); // call login layout service
+    ); 
   }
 
   showSetPasswordForm() {
@@ -48,11 +48,10 @@ export class ForgotPasswordComponent implements OnInit {
       this.showLoginForm,
       this.showForgotPassword,
       this.showSetPassword
-    ); // call login layout service
+    ); 
   }
 
   resetPassword() {
-    // this.display = true;
     this.isSubmitLogin = true;
     if (!this.fFP.valid) {
       return;
@@ -62,12 +61,10 @@ export class ForgotPasswordComponent implements OnInit {
     this.jobDone = false;
     this.appControllServiceProxy.forgotPassword(request).subscribe(
       (res) => {
-        console.log(res);
         this.jobDone = true;
       },
       (error) => {
-        console.log(error);
-        this.jobDone = true; // user should not know invalis email issues
+        this.jobDone = true; 
       }
     );
   }

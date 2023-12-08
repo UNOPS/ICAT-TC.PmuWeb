@@ -7,7 +7,6 @@ import {
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { LazyLoadEvent } from 'primeng/api';
-// import { strictEqual } from 'assert';
 import {
   MitigationActionType,
   Project,
@@ -34,7 +33,6 @@ export class ClimateActionComponent implements OnInit, AfterViewInit {
   cols: any;
   columns: any;
   options: any;
-  // sectorList: string[] = new Array();
   sectorList: Sector[] = [];
   projectStatusList: ProjectStatus[] = [];
   mitigationActionList: MitigationActionType[] = [];
@@ -65,16 +63,7 @@ export class ClimateActionComponent implements OnInit, AfterViewInit {
     { name: 'test 2', id: 2 },
   ];
 
-  // migrationActionList: string[] = new Array();
   statusList: string[] = new Array();
-  // migrationAction: any;
-
-  // products: { code: string; name: string }[] = [
-  //   { code: 'test A', name: 'test 2' },
-  //   { code: 'test B', name: 'test 3' },
-  //   { code: 'test C', name: 'test 4' },
-  // ];
-
   constructor(
     private router: Router,
     private serviceProxy: ServiceProxy,
@@ -86,7 +75,6 @@ export class ClimateActionComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    // this.totalRecords = 0;
 
     this.serviceProxy
       .getManyBaseProjectControllerProject(
@@ -110,14 +98,6 @@ export class ClimateActionComponent implements OnInit, AfterViewInit {
           this.last = 0;
         }
 
-        console.log('climateactions', res.data);
-        // for(let project of res.data){
-        //   this.migrationActionList.push(project.migrationAction);
-        //   console.log("111",this.migrationActionList)
-        //   console.log("222",project.migrationAction)
-        //   // console.log("M-action",project.migrationAction)
-        // }
-        // this.migrationActionList.map(this.climateaction)
       });
 
     this.serviceProxy
@@ -134,11 +114,7 @@ export class ClimateActionComponent implements OnInit, AfterViewInit {
         0
       )
       .subscribe((res: any) => {
-        // for(let x of res.data){
-        //   console.log("sectornames"+x)
-        // }
         this.sectorList = res.data;
-        console.log('sectorList', this.sectorList);
       });
 
     this.serviceProxy
@@ -156,7 +132,6 @@ export class ClimateActionComponent implements OnInit, AfterViewInit {
       )
       .subscribe((res: any) => {
         this.projectStatusList = res.data;
-        console.log('projectStatusList', res.data);
       });
 
     this.serviceProxy
@@ -174,37 +149,9 @@ export class ClimateActionComponent implements OnInit, AfterViewInit {
       )
       .subscribe((res: any) => {
         this.mitigationActionList = res.data;
-        console.log('mitigationList', this.mitigationActionList);
       });
   }
 
-  // getFilter(){
-
-  //   let selectedMitigationType = undefined;
-
-  //   let filter: string[] = [];
-
-  //   if(this.selectedSectorType){
-  //     let id = this.selectedSectorType.id;
-
-  //     filter.push('sector.id||$eq||' + id);
-  //   }
-
-  //   if(this.selectedMitigationType !== undefined){
-
-  //     // console.log("aaaaaaaaaaa",this.selectedMitigationType.id)
-  //     selectedMitigationType = 'mitigationAction.id||$eq||'+this.selectedMitigationType.id;
-  //     // console.log("fileter......",filter.push(selectedMitigationType));
-  //   }
-
-  //   if(this.selectedstatustype){
-  //     filter.push('climateActionStatus||$eq||'+this.selectedstatustype);
-  //   }
-
-  //   console.log("filter"+filter);
-
-  //   return filter;
-  // }
 
   onMAChange(event: any) {
     this.onSearch();
@@ -218,17 +165,8 @@ export class ClimateActionComponent implements OnInit, AfterViewInit {
     this.onSearch();
   }
 
-  // onChange(event: any) {
-  //   console.log("111",event)
-  //       if (event!==null) {
-  //         console.log(event);
-  //         this.search();
-  //       }
-  //     }
-
   onSearchClick(event: any) {
     let words = this.searchText.split(' ');
-    // Date date = this.searchText;
 
     let searchfilter: string[] = new Array();
 
@@ -274,7 +212,6 @@ export class ClimateActionComponent implements OnInit, AfterViewInit {
         0
       )
       .subscribe((res) => {
-        console.log('selected list1' + res);
         this.climateactions = res.data;
       });
   }
@@ -287,10 +224,7 @@ export class ClimateActionComponent implements OnInit, AfterViewInit {
     this.loadgridData(event);
   }
 
-  // /////////////////////////////////////////////
-
   loadgridData = (event: LazyLoadEvent) => {
-    console.log('event Date', event);
     this.loading = true;
     this.totalRecords = 0;
 
@@ -328,68 +262,8 @@ export class ClimateActionComponent implements OnInit, AfterViewInit {
         });
     }, 1);
   };
-  // let name = this.searchBy.name ? this.searchBy.name : "";
-  // let formulatonInstitute = this.searchBy.formulationinstitution ? this.searchBy.formulationinstitution : "";
 
-  // let instutionId = this.searchBy.institution ? this.searchBy.institution.id : 0;
-  // let searcSector = this.searchBy.sector ? this.searchBy.sector.id : 0;
-  // let ccdCatagary = this.searchBy.climateChangeDataCategory ? this.searchBy.climateChangeDataCategory.id : 0;
 
-  // let pageNumber = event.first === 0 ? 1 : 1;
-  // let pagePerRow = event.rows;
-  // let isApprove = this.searchApproveType ? this.searchApproveType.id : -1;
-
-  // console.log(this.searchApproveType);
-  // console.log(isApprove);
-
-  // this.policyService.getPolicyList(pageNumber, pagePerRow, name, searcSector, ccdCatagary, instutionId, formulatonInstitute, isApprove).subscribe(res => {
-  //   this.policyList = res.items;
-  //   this.totalRecords = res.meta.totalItems;
-  //   this.loading = false;
-
-  // this.serviceProxy
-  // .getManyBaseProjectControllerProject(
-  //   pageNumber,
-
-  // )
-
-  // }
-  // );
-  // }
-
-  // let filters = this.getSearchFilter();
-
-  // this.serviceProxy
-  //   .getManyBasePolicyControllerPolicy(
-  //     undefined,
-  //     undefined,
-  //     filters.length > 0 ? filters : undefined,
-  //     undefined,
-  //     ["name,ASC"],
-  //     undefined,
-  //     event.rows,
-  //     event.first,
-  //     0,
-  //     0
-  //   )
-  //   .subscribe((res) => {
-  //     if (res && res.data && res.data.length > 0) {
-  //       this.totalRecords = res.total;
-  //       this.policyList = res.data;
-  //     }
-
-  //     this.loading = false;
-  //   });
-
-  ////////////////////////////////////////
-
-  // addproject() {
-  //   this.router.navigate(['/propose-project']);
-  // }
-
-  // applyFilterGlobal($event, stringVal) {
-  //   this.dt.filterGlobal(($event.target as HTMLInputElement).value, 'contains');
-  // }
 
   detail() {
     this.router.navigate(['/project-information']);
@@ -422,7 +296,6 @@ export class ClimateActionComponent implements OnInit, AfterViewInit {
     a.rows = this.rows;
     a.first = 0;
 
-    // this.onClimateActionStatusChange(a);
   }
 
   removeFromString(arr: string[], str: string) {
