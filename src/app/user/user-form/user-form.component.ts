@@ -48,6 +48,7 @@ export class UserFormComponent implements OnInit {
   isNewUser = true;
   editUserId: number;
   isEmailUsed = false;
+  isEmailCountryUsed = false;
   usedEmail = '';
 
   alertHeader = 'User';
@@ -88,7 +89,7 @@ export class UserFormComponent implements OnInit {
     } else {
       if (institutionId) {
         this.filter.push('id||$eq||' + institutionId);
-      } 
+      }
     }
 
     this.serviceProxy
@@ -160,21 +161,21 @@ export class UserFormComponent implements OnInit {
         this.filter2.push('id||$ne||' + 1);
       }
       this.serviceProxy
-      .getManyBaseUserTypeControllerUserType(
-        undefined,
-        undefined,
-        this.filter2,
-        undefined,
-        ['name,ASC'],
-        undefined,
-        1000,
-        0,
-        0,
-        0,
-      )
-      .subscribe((res: any) => {
-        this.userTypes = res.data;
-      });
+        .getManyBaseUserTypeControllerUserType(
+          undefined,
+          undefined,
+          this.filter2,
+          undefined,
+          ['name,ASC'],
+          undefined,
+          1000,
+          0,
+          0,
+          0,
+        )
+        .subscribe((res: any) => {
+          this.userTypes = res.data;
+        });
 
       await this.serviceProxy
         .getManyBaseInstitutionControllerInstitution(
@@ -371,6 +372,27 @@ export class UserFormComponent implements OnInit {
         });
     }
 
+  }
+
+  onEmailChange(event: any) {
+    this.isEmailUsed = false;
+    this.isEmailCountryUsed = false;
+    const url = environment.baseSyncAPI + '/login-profile/isUserAvailable/' + event ;
+
+    this.userProxy.isUserAvailable(event).subscribe((res) => {
+      if (res) {
+        this.isEmailUsed = true;
+      }
+    });
+    if(this.user.userType?.id == 2){
+      this.http.get<any[]>(url, event).subscribe((res) => {
+        console.log(res)
+        if (res) {
+          this.isEmailCountryUsed = true;
+        }
+      });
+    }
+   
   }
 
   async saveUser(userForm: NgForm) {
