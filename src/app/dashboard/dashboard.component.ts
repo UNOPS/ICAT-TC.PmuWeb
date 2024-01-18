@@ -245,7 +245,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getMethologyUsageChart(countryId: number): void {
-    let chart_url = environment.baseUrlCountryAPI + `/assesment/methologyCount?countryId=${countryId}`;
+    let chart_url = environment.baseUrlCountryAPI + `/assessment/methologyCount?countryId=${countryId}`;
    
     this.http.get<any[]>(chart_url).subscribe(res => {
       
