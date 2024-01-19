@@ -48,7 +48,7 @@ export class UserFormComponent implements OnInit {
   isNewUser = true;
   editUserId: number;
   isEmailUsed = false;
-  isEmailCountryUsed = false;
+  isEmailCountryUsed =false;
   usedEmail = '';
 
   alertHeader = 'User';
