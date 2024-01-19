@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { LoginLayoutService } from '../login-layout/login-layout.service';
 import { AuthControllerServiceProxy, ResetPassword } from 'shared/service-proxies/service-proxies';
 import { AuthenticationService } from '../login-layout/authentication.service';
-import {  FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import {  FormBuilder, UntypedFormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import decode from 'jwt-decode';
 import { environment } from 'environments/environment';
@@ -21,7 +21,7 @@ export class SetPasswordComponent implements OnInit {
   resetPasswordDto = new ResetPassword;
   islSuccessPopup: boolean;
   isErrorPopup: boolean;
-  setPasswordForm: FormGroup;
+  setPasswordForm: UntypedFormGroup;
   isPasswordType: boolean = true;
   isConfirmPasswordType?: boolean = true;
   public isSubmitted: boolean = false;
