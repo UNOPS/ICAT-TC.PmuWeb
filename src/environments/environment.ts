@@ -5,7 +5,7 @@ export const environment = {
   // baseUrlAuditlog :  'http://localhot:7000',
   // baseUrlAPI: 'http://localhost:7081',
   // baseSyncAPI: 'http://localhost:7090',
-  // baseUrlLandingPage : 'http://localhost/4200/landing-page',
+  baseUrlLandingPage : 'http://localhost/4200/landing-page',
   baseUrlAPI: 'http://15.206.202.183:7081',
   baseUrlAPIDocUploadAPI: 'http://15.206.202.183:7081/document/upload2',
   baseUrlAPIDocdownloadAPI: 'http://15.206.202.183:7081/document/downloadDocument',
@@ -14,6 +14,6 @@ export const environment = {
 
   baseSyncAPI: 'http://15.206.202.183:3001',
   baseMainSyncAPI: 'http://15.206.202.183/web-api',
-  baseUrlLandingPage : 'http://15.206.202.183/country/landing-page',
+  // baseUrlLandingPage : 'http://15.206.202.183/country/landing-page',
 
 };
