@@ -4,11 +4,11 @@ Front-end service for TC PMU portal - TC-Tool.
 
 Supported by [Initiative for Climate Action Transparency - ICAT](https://climateactiontransparency.org/).
 
-Built using [Node.js 18](https://nodejs.org/dist/latest-v16.x/docs/api/) and [Angular 17.0.0](https://github.com/angular/angular-cli) framework.
+Built using [Node.js 18 LTS version](https://nodejs.org/dist/latest-v16.x/docs/api/) and [Angular 17.0.0](https://github.com/angular/angular-cli) framework.
 
 ## Manual Installation
 
-1. Download and install the [Node.js 16 LTS version](https://nodejs.org/en/download) for your operational system.
+1. Download and install the [Node.js 18 LTS version](https://nodejs.org/en/download) for your operational system.
 
 2. Download or clone this repository.
 
