@@ -1,12 +1,12 @@
 export const environment = {
   production: true,
-    baseUrlLandingPage : '',
-   baseUrlAPI: '',
-   baseUrlAPIDocUploadAPI: '',
-   baseUrlAPIDocdownloadAPI: '',
-   baseUrlCountryAPI: '',
-   baseUrlAuditlog :  '',
- 
-   baseSyncAPI: '',
-   baseMainSyncAPI: '',
+  baseUrlLandingPage: 'https://tc-pmu.climatesi.com',
+  baseUrlAPI: 'htts://tc-pmu-be.climatesi.com',
+  baseUrlAPIDocUploadAPI: '',
+  baseUrlAPIDocdownloadAPI: '',
+  baseUrlCountryAPI: 'htts://tc-main.climatesi.com',
+  baseUrlAuditlog: 'https://tc-audit.climatesi.com',
+
+  baseSyncAPI: '',
+  baseMainSyncAPI: '',
 };
