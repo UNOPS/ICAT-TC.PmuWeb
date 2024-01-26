@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   baseUrlLandingPage: 'https://tc-pmu.climatesi.com',
-  baseUrlAPI: 'htts://tc-pmu-be.climatesi.com',
+  baseUrlAPI: 'https://tc-pmu-be.climatesi.com',
   baseUrlAPIDocUploadAPI: '',
   baseUrlAPIDocdownloadAPI: '',
   baseUrlCountryAPI: 'htts://tc-main.climatesi.com',
