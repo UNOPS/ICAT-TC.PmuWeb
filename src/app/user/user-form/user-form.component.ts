@@ -386,7 +386,6 @@ export class UserFormComponent implements OnInit {
     });
     if(this.user.userType?.id == 2){
       this.http.get<any[]>(url, event).subscribe((res) => {
-        console.log(res)
         if (res) {
           this.isEmailCountryUsed = true;
         }

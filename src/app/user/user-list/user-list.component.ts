@@ -90,7 +90,13 @@ export class UserListComponent implements OnInit {
     this.insProxy.getAllIns().subscribe(res => {
       this.instuitutionList = res;
     })
-
+    this.userProxy.getUserType(this.userrole).subscribe(a=>{
+      this.userTypes = a;
+    })
+    this.countryProxy.getActiveCountry()
+    .subscribe((res) => {
+      this.countrylists = res;
+    });
     if (this.userrole == "PMU Admin" || this.userrole == "PMU User") {
       this.filter2 = []
       this.insProxy.getInstitutionDetails(this.userInsId)
@@ -102,15 +108,10 @@ export class UserListComponent implements OnInit {
     }
 
 
-    this.userProxy.getUserType(this.userrole).subscribe(a=>{
-      this.userTypes = a;
-    })
+    
 
 
-      this.countryProxy.getActiveCountry()
-      .subscribe((res) => {
-        this.countrylists = res;
-      });
+     
 
   }
 
@@ -182,9 +183,9 @@ export class UserListComponent implements OnInit {
     let orFilter: string[] = []
     let andFilter: string[] = this.getFilterand()
 
-    // if ((this.userrole === "PMU Admin" || this.userrole === "PMU User") && this.userCountries.length > 0 && andFilter.length === 4) {
-    //   orFilter.push(...this.pmuFilter, 'country.id =' + this.userCountries)
-    // }
+    if ((this.userrole === "PMU Admin" || this.userrole === "PMU User") && this.userCountries.length > 0 && andFilter.length === 4) {
+      orFilter.push(...this.pmuFilter, 'country.id in' + this.userCountries)
+    }
     let str1 = andFilter.join(' and ');
     let str2 = orFilter.join(' or ');
     let req=new ReqUserDto();
@@ -193,7 +194,6 @@ export class UserListComponent implements OnInit {
     req.first= 1;
     req.row =event.rows;
     this.userProxy.getUserByCountry(req).subscribe(res=>{
-      console.log(res);
       this.customers = res.items;
       this.totalRecords = res.meta.totalItems;
       this.loading = false;
