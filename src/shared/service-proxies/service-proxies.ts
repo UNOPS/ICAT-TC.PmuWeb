@@ -11838,8 +11838,8 @@ export class CountryControllerServiceProxy {
         return _observableOf(null as any);
     }
 
-    getAllCountry(page: number, limit: number, insId: number): Observable<void> {
-        let url_ = this.baseUrl + "/country/get-country?";
+    getAllCountry(page: number, limit: number, insId: number): Observable<any> {
+        let url_ = this.baseUrl + "/country/get-country/{page}/{limit}/{insId}?";
         if (page === undefined || page === null)
             throw new Error("The parameter 'page' must be defined and cannot be null.");
         else
@@ -11858,6 +11858,7 @@ export class CountryControllerServiceProxy {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Accept": "application/json"
             })
         };
 
@@ -11868,14 +11869,14 @@ export class CountryControllerServiceProxy {
                 try {
                     return this.processGetAllCountry(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<void>;
+                    return _observableThrow(e) as any as Observable<any>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<void>;
+                return _observableThrow(response_) as any as Observable<any>;
         }));
     }
 
-    protected processGetAllCountry(response: HttpResponseBase): Observable<void> {
+    protected processGetAllCountry(response: HttpResponseBase): Observable<any> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -11884,7 +11885,11 @@ export class CountryControllerServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return _observableOf(null as any);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -12838,12 +12843,12 @@ export class UsersControllerServiceProxy {
         return _observableOf(null as any);
     }
 
-    filterByIns(insId: number): Observable<any> {
-        let url_ = this.baseUrl + "/users/filterByIns/{insId}?";
-        if (insId === undefined || insId === null)
-            throw new Error("The parameter 'insId' must be defined and cannot be null.");
+    getUserType(type: string): Observable<any[]> {
+        let url_ = this.baseUrl + "/users/user-type/{type}?";
+        if (type === undefined || type === null)
+            throw new Error("The parameter 'type' must be defined and cannot be null.");
         else
-            url_ += "insId=" + encodeURIComponent("" + insId) + "&";
+            url_ += "type=" + encodeURIComponent("" + type) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -12855,20 +12860,20 @@ export class UsersControllerServiceProxy {
         };
 
         return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processFilterByIns(response_);
+            return this.processGetUserType(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processFilterByIns(response_ as any);
+                    return this.processGetUserType(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<any>;
+                    return _observableThrow(e) as any as Observable<any[]>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<any>;
+                return _observableThrow(response_) as any as Observable<any[]>;
         }));
     }
 
-    protected processFilterByIns(response: HttpResponseBase): Observable<any> {
+    protected processGetUserType(response: HttpResponseBase): Observable<any[]> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -12879,9 +12884,68 @@ export class UsersControllerServiceProxy {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                result200 = resultData200 !== undefined ? resultData200 : <any>null;
-    
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200.push(item);
+            }
+            else {
+                result200 = <any>null;
+            }
             return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    getUserByCountry(body: ReqUserDto): Observable<any> {
+        let url_ = this.baseUrl + "/users/user-country";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetUserByCountry(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetUserByCountry(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<any>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<any>;
+        }));
+    }
+
+    protected processGetUserByCountry(response: HttpResponseBase): Observable<any> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 201) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result201: any = null;
+            let resultData201 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result201 = resultData201 !== undefined ? resultData201 : <any>null;
+    
+            return _observableOf(result201);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -19231,6 +19295,73 @@ export interface ICreateUserDto {
     mobile: string;
     nic: string;
     country: number;
+
+    [key: string]: any;
+}
+
+export class ReqUserDto implements IReqUserDto {
+    andoprator: string;
+    oroprator: string;
+    row: any;
+    first: any;
+
+    [key: string]: any;
+
+    constructor(data?: IReqUserDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            this.andoprator = _data["andoprator"];
+            this.oroprator = _data["oroprator"];
+            this.row = _data["row"];
+            this.first = _data["first"];
+        }
+    }
+
+    static fromJS(data: any): ReqUserDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new ReqUserDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        data["andoprator"] = this.andoprator;
+        data["oroprator"] = this.oroprator;
+        data["row"] = this.row;
+        data["first"] = this.first;
+        return data;
+    }
+
+    clone(): ReqUserDto {
+        const json = this.toJSON();
+        let result = new ReqUserDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IReqUserDto {
+    andoprator: string;
+    oroprator: string;
+    row: any;
+    first: any;
 
     [key: string]: any;
 }

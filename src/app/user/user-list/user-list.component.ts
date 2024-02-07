@@ -4,6 +4,7 @@ import {
   CountryControllerServiceProxy,
   Institution,
   InstitutionControllerServiceProxy,
+  ReqUserDto,
   ServiceProxy,
   User,
   UserType,
@@ -74,13 +75,13 @@ export class UserListComponent implements OnInit {
 
     this.filter2 = [];
 
+
     if (this.userrole == "PMU Admin" || this.userrole === "PMU User") {
-      this.pmuFilter.push(...['userType.id||$ne||' + 5, 'userType.id||$ne||' + 4, 'userType.id||$ne||' + 1])
+      this.pmuFilter.push(...[' not userType.id =5 ', 'not userType.id=4', 'not userType.id=1'])
     }
 
     this.userProxy.allUserDetails(1, 10, this.username, 0)
       .subscribe((res) => {
-        console.log(res)
         this.users = res.items;
         this.institutionId = this.users[0].institution.id;
 
@@ -101,23 +102,10 @@ export class UserListComponent implements OnInit {
     }
 
 
+    this.userProxy.getUserType(this.userrole).subscribe(a=>{
+      this.userTypes = a;
+    })
 
-    this.serviceProxy
-      .getManyBaseUserTypeControllerUserType(
-        undefined,
-        undefined,
-        [...this.pmuFilter],
-        undefined,
-        ['name,ASC'],
-        undefined,
-        1000,
-        0,
-        1,
-        0
-      )
-      .subscribe((res) => {
-        this.userTypes = res.data;
-      });
 
       this.countryProxy.getActiveCountry()
       .subscribe((res) => {
@@ -137,32 +125,32 @@ export class UserListComponent implements OnInit {
         filters.push(...this.pmuFilter)
       } else {
         filters.push(...this.pmuFilter)
-          & filters.push('institution.id||$eq||' + this.userInsId);
+          & filters.push('institution.id =' + this.userInsId);
       }
     }
 
     if (this.searchText && this.searchText.length > 0) {
-      filters.push('firstName||$cont||' + this.searchText);
+      filters.push('firstName like "%' + this.searchText +'%"');
     }
 
     if (this.searchLastText && this.searchLastText.length > 0) {
-      filters.push('lastName||$cont||' + this.searchLastText);
+      filters.push('lastName like "%' + this.searchLastText +'%"');
     }
 
     if (this.searchEmailText && this.searchEmailText.length > 0) {
-      filters.push('email||$cont||' + this.searchEmailText);
+      filters.push('email like "%' + this.searchEmailText +'%"');
     }
 
     if (this.selctedUserType) {
-      filters.push('userType.id||$cont||' + this.selctedUserType.id);
+      filters.push('userType.id =' + this.selctedUserType.id);
     }
 
     if (this.selctedInstuitution) {
-      let filter = 'institution.id||$eq||' + this.selctedInstuitution.id;
+      let filter = 'institution.id =' + this.selctedInstuitution.id;
       filters.push(filter);
     }
     if (this.selectedCountry) {
-      let filter = 'country.id||$eq||' + this.selectedCountry.id;
+      let filter = 'country.id =' + this.selectedCountry.id;
       filters.push(filter)
 
     }
@@ -194,28 +182,41 @@ export class UserListComponent implements OnInit {
     let orFilter: string[] = []
     let andFilter: string[] = this.getFilterand()
 
-    if ((this.userrole === "PMU Admin" || this.userrole === "PMU User") && this.userCountries.length > 0 && andFilter.length === 4) {
-      orFilter.push(...this.pmuFilter, 'country.id||$in||' + this.userCountries)
-    }
+    // if ((this.userrole === "PMU Admin" || this.userrole === "PMU User") && this.userCountries.length > 0 && andFilter.length === 4) {
+    //   orFilter.push(...this.pmuFilter, 'country.id =' + this.userCountries)
+    // }
+    let str1 = andFilter.join(' and ');
+    let str2 = orFilter.join(' or ');
+    let req=new ReqUserDto();
+    req.andoprator = str1;
+    req.oroprator =str2;
+    req.first= 1;
+    req.row =event.rows;
+    this.userProxy.getUserByCountry(req).subscribe(res=>{
+      console.log(res);
+      this.customers = res.items;
+      this.totalRecords = res.meta.totalItems;
+      this.loading = false;
+    })
 
-    this.serviceProxy
-      .getManyBaseUsersControllerUser(
-        undefined,
-        undefined,
-        andFilter,
-        orFilter,
-        ['firstName,ASC'],
-        ['institution'],
-        event.rows,
-        event.first,
-        0,
-        0
-      )
-      .subscribe((res) => {
-        this.totalRecords = res.total;
-        this.customers = res.data;
-        this.loading = false;
-      });
+    // this.serviceProxy
+    //   .getManyBaseUsersControllerUser(
+    //     undefined,
+    //     undefined,
+    //     andFilter,
+    //     orFilter,
+    //     ['firstName,ASC'],
+    //     ['institution'],
+    //     event.rows,
+    //     event.first,
+    //     0,
+    //     0
+    //   )
+    //   .subscribe((res) => {
+    //     this.totalRecords = res.total;
+    //     this.customers = res.data;
+    //     this.loading = false;
+    //   });
   }
 
   editUser(user: User) {

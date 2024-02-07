@@ -89,15 +89,14 @@ export class CountryRegistryComponent implements OnInit, AfterViewInit {
         : event.first / (event.rows === undefined ? 1 : event.rows) + 1;
     this.rows = event.rows === undefined ? 10 : event.rows;
 
-    await this.countryProxy.getAllCountry(
+    this.countryProxy.getAllCountry(
       pageNumber,
       this.rows,
       this.institutionId,
-    ).subscribe(async (data:any) => {
-      console.log(await data)
-      this.pcountryList = data.item;
+    ).subscribe(data => {
+      this.pcountryList = data.items;
 
-      this.totalRecords = data.meta.totalItem;
+      this.totalRecords = data.meta.totalItems;
       this.loading = false;
 
       for (let c of this.countryList) {
