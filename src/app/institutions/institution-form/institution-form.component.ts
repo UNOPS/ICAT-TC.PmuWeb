@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { Country, Institution, InstitutionControllerServiceProxy, InstitutionType, ServiceProxy } from 'shared/service-proxies/service-proxies';
+import { Country, CountryControllerServiceProxy, Institution, InstitutionControllerServiceProxy, InstitutionType, InstitutionTypeControllerServiceProxy, ServiceProxy } from 'shared/service-proxies/service-proxies';
 import decode from 'jwt-decode';
 
 @Component({
@@ -41,7 +41,9 @@ export class InstitutionFormComponent implements OnInit {
   constructor(private serviceProxy: ServiceProxy, private confirmationService: ConfirmationService,
     private route: ActivatedRoute,
     private institutionProxy: InstitutionControllerServiceProxy,
+    private insTypeProxy : InstitutionTypeControllerServiceProxy,
     private router: Router,
+    private countryProxy: CountryControllerServiceProxy,
     private messageService: MessageService) { }
 
   async ngOnInit(): Promise<void> {
@@ -50,37 +52,14 @@ export class InstitutionFormComponent implements OnInit {
     const tokenPayload = decode<any>(token);
     let institutionId = tokenPayload.institutionId;
 
-    this.serviceProxy
-      .getManyBaseInstitutionTypeControllerInstitutionType(
-        undefined,
-        undefined,
-        ['id||$eq||1'],
-        undefined,
-        ['name,ASC'],
-        undefined,
-        1000,
-        0,
-        0,
-        0
-      ).subscribe((res: any) => {
-        this.selectedTypeList = res.data;
-      });
-    let countryFilter: string[] = [];
+    this.insTypeProxy.getAllCo().subscribe((res)=>{
+      this.selectedTypeList = res;
+    })
 
-    await this.serviceProxy
-      .getManyBaseCountryControllerCountry(
-        undefined,
-        undefined,
-        countryFilter,
-        undefined,
-        ["name,ASC"],
-        undefined,
-        1000,
-        0,
-        0,
-        0
-      ).subscribe((res: any) => {
-        this.countryList = res.data;
+
+this.countryProxy.getAllCo()
+    .subscribe(async (res)=>{
+      this.countryList = res;
 
         for (let i in this.countryList) {
           if (this.countryList[i].institution?.id == this.editInstitutionId && this.editInstitutionId > 0) {
@@ -88,7 +67,7 @@ export class InstitutionFormComponent implements OnInit {
             this.listc.push(this.countryList[i]);
           }
         }
-      });
+    })
 
     this.route.queryParams.subscribe((params) => {
       this.editInstitutionId = params['id'];

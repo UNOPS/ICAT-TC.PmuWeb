@@ -21,13 +21,8 @@ import { LazyLoadEvent, ConfirmationService, MessageService } from 'primeng/api'
 import {
   Country,
   CountryControllerServiceProxy,
-  CountrySector,
   CountryStatus,
-  Project,
-  ProjectApprovalStatus,
   ProjectControllerServiceProxy,
-  ProjectOwner,
-  ProjectStatus,
   Sector,
   ServiceProxy,
 
@@ -43,7 +38,6 @@ import {
 export class ViewCountryComponent implements OnInit, AfterViewInit {
 
   countryList: Country[] = [];
-  sectorList: Sector[] = [];
 
   accessmodules: any[] = [
     { id: 1, name: "Carbon Market Tool" },
@@ -104,43 +98,20 @@ export class ViewCountryComponent implements OnInit, AfterViewInit {
       countryFilter.push('institution.id||$eq||' +institutionId);
      }
 
-    this.serviceProxy
-      .getManyBaseCountryControllerCountry(
-        undefined,
-        undefined,
-        countryFilter,
-        undefined,
-        ["editedOn,DESC"],
-        undefined,
-        1000,
-        0,
-        0,
-        0
-      ).subscribe((res: any) => {
-        this.countryList = res.data;
+     this.countryProxy.getAllCountry(
+      1,
+      1000,
+      institutionId,
+    ).subscribe(data => {
+      for(let co of data.items){
+        if(co.isSystemUse==false){
+          this.countryList.push(co)
+        }
+      }
+    });
+    
 
 
-      });
-
-
-
-    this.serviceProxy
-      .getManyBaseSectorControllerSector(
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        ["editedOn,DESC"],
-        undefined,
-        1000,
-        0,
-        0,
-        0
-      ).subscribe((res: any) => {
-        this.sectorList = res.data;
-
-
-      });
 
 
     this.cou = new Country();

@@ -16,13 +16,7 @@ import {
 import {
   Country,
   CountryControllerServiceProxy,
-  Project,
-  ProjectApprovalStatus,
   ProjectControllerServiceProxy,
-  ProjectOwner,
-  ProjectStatus,
-  Sector,
-  ServiceProxy,
 } from 'shared/service-proxies/service-proxies';
 
 
@@ -59,7 +53,6 @@ export class CountryRegistryComponent implements OnInit, AfterViewInit {
 
   constructor(
     private router: Router,
-    // private serviceProxy: ServiceProxy,
     private projectProxy: ProjectControllerServiceProxy,
     private countryProxy: CountryControllerServiceProxy,
     private cdr: ChangeDetectorRef,

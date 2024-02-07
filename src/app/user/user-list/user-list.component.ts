@@ -5,16 +5,14 @@ import {
   Institution,
   InstitutionControllerServiceProxy,
   ReqUserDto,
-  ServiceProxy,
   User,
   UserType,
   UsersControllerServiceProxy,
 } from 'shared/service-proxies/service-proxies';
 import { Table, TableModule } from 'primeng/table';
-import { LazyLoadEvent, MessageService, SelectItem } from 'primeng/api';
+import { LazyLoadEvent, } from 'primeng/api';
 import { Router } from '@angular/router';
 import decode from 'jwt-decode';
-import { filter } from 'rxjs/operators';
 
 
 
@@ -53,7 +51,6 @@ export class UserListComponent implements OnInit {
   pmuFilter: string[] = [];
 
   constructor(
-    private serviceProxy: ServiceProxy,
     private userProxy: UsersControllerServiceProxy,
     private insProxy: InstitutionControllerServiceProxy,
     private countryProxy: CountryControllerServiceProxy,
@@ -199,24 +196,6 @@ export class UserListComponent implements OnInit {
       this.loading = false;
     })
 
-    // this.serviceProxy
-    //   .getManyBaseUsersControllerUser(
-    //     undefined,
-    //     undefined,
-    //     andFilter,
-    //     orFilter,
-    //     ['firstName,ASC'],
-    //     ['institution'],
-    //     event.rows,
-    //     event.first,
-    //     0,
-    //     0
-    //   )
-    //   .subscribe((res) => {
-    //     this.totalRecords = res.total;
-    //     this.customers = res.data;
-    //     this.loading = false;
-    //   });
   }
 
   editUser(user: User) {

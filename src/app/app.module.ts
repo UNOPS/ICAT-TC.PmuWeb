@@ -59,6 +59,7 @@ import {
   AuditControllerServiceProxy,
   SectorControllerServiceProxy,
   CountryControllerServiceProxy,
+  InstitutionTypeControllerServiceProxy,
 } from 'shared/service-proxies/service-proxies';
 
 import {AuditControllerServiceProxy as auditControllerServiceProxy} from 'shared/service-proxies-auditlog/service-proxies' 
@@ -216,6 +217,7 @@ export function getRemoteServiceBaseUrl(): string {
     RoleGuardService,
     SharedDataService,
     auditControllerServiceProxy,
+    InstitutionTypeControllerServiceProxy,
 
     { provide: API_BASE_URL, useFactory: getRemoteServiceBaseUrl },
     HttpClientModule,

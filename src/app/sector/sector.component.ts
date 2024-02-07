@@ -11,12 +11,8 @@ import {
 } from 'primeng/api';
 
 import {
-  ProjectControllerServiceProxy,
-  ProjectOwner,
-  ProjectStatus,
   Sector,
   SectorControllerServiceProxy,
-  ServiceProxy,
 } from 'shared/service-proxies/service-proxies';
 
 @Component({
@@ -44,8 +40,6 @@ searchBy: any = {
   @ViewChild('op') overlay: any;
   constructor(
     private router: Router,
-    private serviceProxy: ServiceProxy,
-    private projectProxy: ProjectControllerServiceProxy,
     private sectorProxy: SectorControllerServiceProxy,
     private cdr: ChangeDetectorRef,
   ) { }

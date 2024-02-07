@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {
   Country,
   Institution,
+  InstitutionControllerServiceProxy,
   ServiceProxy,
   User,
   UsersControllerServiceProxy,
@@ -72,6 +73,7 @@ export class UserFormComponent implements OnInit {
     private router: Router,
     private confirmationService: ConfirmationService,
     private userProxy: UsersControllerServiceProxy,
+    private insProxy: InstitutionControllerServiceProxy,
     private http: HttpClient,
   ) { }
 
@@ -128,6 +130,8 @@ export class UserFormComponent implements OnInit {
 
     let filter1 = [];
     filter1.push('status||$ne||' + 1)
+
+  
     await this.serviceProxy
       .getManyBaseInstitutionControllerInstitution(
         undefined,
@@ -160,6 +164,20 @@ export class UserFormComponent implements OnInit {
         this.filter2.push('id||$ne||' + 5);
         this.filter2.push('id||$ne||' + 1);
       }
+
+      this.userProxy.getUserType("ICAT Admin").subscribe((res)=>{
+        for(let a of res){
+          if(a.status !=1 && a.id !=4){
+            if (['PMU Admin'].includes(tokenPayload.roles[0]) && a.id !=5) {
+            
+                this.userTypes.push(a);
+            }
+            else{
+              this.userTypes.push(a)
+            }
+          }
+        }
+      })
       this.serviceProxy
         .getManyBaseUserTypeControllerUserType(
           undefined,

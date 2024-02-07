@@ -11838,6 +11838,55 @@ export class CountryControllerServiceProxy {
         return _observableOf(null as any);
     }
 
+    getAllCo(): Observable<any> {
+        let url_ = this.baseUrl + "/country/all-co";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAllCo(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAllCo(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<any>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<any>;
+        }));
+    }
+
+    protected processGetAllCo(response: HttpResponseBase): Observable<any> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
     getAllCountry(page: number, limit: number, insId: number): Observable<any> {
         let url_ = this.baseUrl + "/country/get-country/{page}/{limit}/{insId}?";
         if (page === undefined || page === null)
@@ -11877,6 +11926,67 @@ export class CountryControllerServiceProxy {
     }
 
     protected processGetAllCountry(response: HttpResponseBase): Observable<any> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    getAllCountryByFilter(page: number, limit: number, filter: string): Observable<any> {
+        let url_ = this.baseUrl + "/country/get-bycountry/{page}/{limit}/{filter}?";
+        if (page === undefined || page === null)
+            throw new Error("The parameter 'page' must be defined and cannot be null.");
+        else
+            url_ += "page=" + encodeURIComponent("" + page) + "&";
+        if (limit === undefined || limit === null)
+            throw new Error("The parameter 'limit' must be defined and cannot be null.");
+        else
+            url_ += "limit=" + encodeURIComponent("" + limit) + "&";
+        if (filter === undefined || filter === null)
+            throw new Error("The parameter 'filter' must be defined and cannot be null.");
+        else
+            url_ += "filter=" + encodeURIComponent("" + filter) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAllCountryByFilter(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAllCountryByFilter(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<any>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<any>;
+        }));
+    }
+
+    protected processGetAllCountryByFilter(response: HttpResponseBase): Observable<any> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -13285,6 +13395,55 @@ export class InstitutionTypeControllerServiceProxy {
     }
 
     protected processFindInstitutionTypeByUserType(response: HttpResponseBase): Observable<any> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    getAllCo(): Observable<any> {
+        let url_ = this.baseUrl + "/institution-type/type";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAllCo(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAllCo(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<any>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<any>;
+        }));
+    }
+
+    protected processGetAllCo(response: HttpResponseBase): Observable<any> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :

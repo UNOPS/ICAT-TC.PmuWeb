@@ -1,16 +1,10 @@
-import { async } from '@angular/core/testing';
+
 import { LazyLoadEvent, ConfirmationService } from 'primeng/api';
 import { HttpClient } from '@angular/common/http';
 import {
   DocumentControllerServiceProxy,
   Documents,
   DocumentsDocumentOwner,
-  LearningMaterial,
-  LearningMaterialSector,
-  LearningMaterialUserType,
-  Sector,
-  ServiceProxy,
-  UserType,
 } from './../../../shared/service-proxies/service-proxies';
 import {
   Component,
@@ -50,7 +44,6 @@ export class DocumentUploadComponent implements OnInit, OnChanges {
     private docService: DocumentControllerServiceProxy,
     private httpClient: HttpClient,
     private confirmationService: ConfirmationService,
-    private serviceProxy: ServiceProxy,
   ) {
     
   }

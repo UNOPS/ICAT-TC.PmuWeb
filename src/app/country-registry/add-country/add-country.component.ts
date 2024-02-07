@@ -99,21 +99,16 @@ export class AddCountryComponent implements OnInit, AfterViewInit {
     if(institutionId != undefined){
       countryFilter.push('institution.id||$eq||' +institutionId);  
      }
-    await this.serviceProxy
-      .getManyBaseCountryControllerCountry(
-        undefined,
-        undefined,
-        countryFilter,
-        undefined,
-        ["name,ASC"],
-        undefined,
-        1000,
-        0,
-        0,
-        0
-      ).subscribe((res: any) => {
-        this.countryList = res.data;
-      });
+     this.countryProxy.getAllCountry(
+      1,
+      1000,
+      institutionId,
+    ).subscribe(data => {
+      for(let co of data.items){
+        if(co.isSystemUse==false){
+          this.countryList.push(co)
+        }
+      }})
 
 
     this.route.queryParams.subscribe(async (params) => {
