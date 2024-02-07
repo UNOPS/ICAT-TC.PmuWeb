@@ -11740,6 +11740,55 @@ export class CountryControllerServiceProxy {
         return _observableOf(null as any);
     }
 
+    getActiveCountry(): Observable<any> {
+        let url_ = this.baseUrl + "/country/getActiveCountry";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetActiveCountry(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetActiveCountry(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<any>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<any>;
+        }));
+    }
+
+    protected processGetActiveCountry(response: HttpResponseBase): Observable<any> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
     getCountrySector(): Observable<any> {
         let url_ = this.baseUrl + "/country/country-sector";
         url_ = url_.replace(/[?&]$/, "");
@@ -11789,7 +11838,7 @@ export class CountryControllerServiceProxy {
         return _observableOf(null as any);
     }
 
-    getAllCountry(page: number, limit: number, filterText: number): Observable<void> {
+    getAllCountry(page: number, limit: number, insId: number): Observable<void> {
         let url_ = this.baseUrl + "/country/get-country?";
         if (page === undefined || page === null)
             throw new Error("The parameter 'page' must be defined and cannot be null.");
@@ -11799,10 +11848,10 @@ export class CountryControllerServiceProxy {
             throw new Error("The parameter 'limit' must be defined and cannot be null.");
         else
             url_ += "limit=" + encodeURIComponent("" + limit) + "&";
-        if (filterText === undefined || filterText === null)
-            throw new Error("The parameter 'filterText' must be defined and cannot be null.");
+        if (insId === undefined || insId === null)
+            throw new Error("The parameter 'insId' must be defined and cannot be null.");
         else
-            url_ += "filterText=" + encodeURIComponent("" + filterText) + "&";
+            url_ += "insId=" + encodeURIComponent("" + insId) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -12724,7 +12773,7 @@ export class UsersControllerServiceProxy {
         return _observableOf(null as any);
     }
 
-    getUserList(page: number, limit: number, userTypeIdQuery: string): Observable<any> {
+    allUserDetails(page: number, limit: number, filterText: string, userTypeId: number): Observable<any> {
         let url_ = this.baseUrl + "/users/AllUserDetails/userDetalils/{page}/{limit}/{filterText}/{userTypeId}?";
         if (page === undefined || page === null)
             throw new Error("The parameter 'page' must be defined and cannot be null.");
@@ -12734,10 +12783,14 @@ export class UsersControllerServiceProxy {
             throw new Error("The parameter 'limit' must be defined and cannot be null.");
         else
             url_ += "limit=" + encodeURIComponent("" + limit) + "&";
-        if (userTypeIdQuery === undefined || userTypeIdQuery === null)
-            throw new Error("The parameter 'userTypeIdQuery' must be defined and cannot be null.");
+        if (filterText === undefined || filterText === null)
+            throw new Error("The parameter 'filterText' must be defined and cannot be null.");
         else
-            url_ += "userTypeId=" + encodeURIComponent("" + userTypeIdQuery) + "&";
+            url_ += "filterText=" + encodeURIComponent("" + filterText) + "&";
+        if (userTypeId === undefined || userTypeId === null)
+            throw new Error("The parameter 'userTypeId' must be defined and cannot be null.");
+        else
+            url_ += "userTypeId=" + encodeURIComponent("" + userTypeId) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -12749,11 +12802,11 @@ export class UsersControllerServiceProxy {
         };
 
         return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processGetUserList(response_);
+            return this.processAllUserDetails(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processGetUserList(response_ as any);
+                    return this.processAllUserDetails(response_ as any);
                 } catch (e) {
                     return _observableThrow(e) as any as Observable<any>;
                 }
@@ -12762,7 +12815,60 @@ export class UsersControllerServiceProxy {
         }));
     }
 
-    protected processGetUserList(response: HttpResponseBase): Observable<any> {
+    protected processAllUserDetails(response: HttpResponseBase): Observable<any> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    filterByIns(insId: number): Observable<any> {
+        let url_ = this.baseUrl + "/users/filterByIns/{insId}?";
+        if (insId === undefined || insId === null)
+            throw new Error("The parameter 'insId' must be defined and cannot be null.");
+        else
+            url_ += "insId=" + encodeURIComponent("" + insId) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processFilterByIns(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processFilterByIns(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<any>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<any>;
+        }));
+    }
+
+    protected processFilterByIns(response: HttpResponseBase): Observable<any> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -12954,6 +13060,61 @@ export class InstitutionControllerServiceProxy {
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
                 result200 = resultData200 !== undefined ? resultData200 : <any>null;
     
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    getAllIns(): Observable<Institution[]> {
+        let url_ = this.baseUrl + "/institution/allIns";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAllIns(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAllIns(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<Institution[]>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<Institution[]>;
+        }));
+    }
+
+    protected processGetAllIns(response: HttpResponseBase): Observable<Institution[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200.push(Institution.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {

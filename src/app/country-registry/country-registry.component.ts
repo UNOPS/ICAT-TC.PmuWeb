@@ -75,13 +75,12 @@ export class CountryRegistryComponent implements OnInit, AfterViewInit {
 
     const token = localStorage.getItem('access_token')!;
     const tokenPayload = decode<any>(token);
-    this.institutionId = tokenPayload.institutionId;
-
+    this.institutionId = tokenPayload.institutionId ?tokenPayload.institutionId:0;
 
 
   }
 
-  loadCustomers(event: LazyLoadEvent) {
+  async loadCustomers(event: LazyLoadEvent) {
 
     this.loading = true;
     let pageNumber =
@@ -90,14 +89,15 @@ export class CountryRegistryComponent implements OnInit, AfterViewInit {
         : event.first / (event.rows === undefined ? 1 : event.rows) + 1;
     this.rows = event.rows === undefined ? 10 : event.rows;
 
-    this.countryProxy.getAllCountry(
+    await this.countryProxy.getAllCountry(
       pageNumber,
       this.rows,
       this.institutionId,
-    ).subscribe((res: any) => {
-      this.pcountryList = res.data;
+    ).subscribe(async (data:any) => {
+      console.log(await data)
+      this.pcountryList = data.item;
 
-      this.totalRecords = res.total;
+      this.totalRecords = data.meta.totalItem;
       this.loading = false;
 
       for (let c of this.countryList) {
