@@ -155,7 +155,7 @@ export class InstitutionFormComponent implements OnInit {
           let co =new Array();
           ins.countries=co;
           ins.type =new InstitutionType()
-
+ //@ts-ignore
           old.institution = null;
           this.serviceProxy
             .updateOneBaseCountryControllerCountry(old.id, old)

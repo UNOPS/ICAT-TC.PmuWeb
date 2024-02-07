@@ -1,7 +1,7 @@
 import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Country, Sector, ServiceProxy } from 'shared/service-proxies/service-proxies';
+import { Country, CountryControllerServiceProxy, Sector, ServiceProxy } from 'shared/service-proxies/service-proxies';
 
 @Component({
   selector: 'app-view-country',
@@ -17,6 +17,7 @@ export class ViewCountryComponent implements OnInit {
 
   constructor(private router: Router,
     private activateroute: ActivatedRoute,
+    private countryProxy: CountryControllerServiceProxy,
     private serviceProxy: ServiceProxy) { }
 
   ngOnInit(): void {
@@ -27,16 +28,12 @@ export class ViewCountryComponent implements OnInit {
         this.countryId = 1;
       }
     })
-  this.serviceProxy
-  .getOneBaseCountryControllerCountry(
-    this.countryId,                     
-    undefined,
-    undefined,
-    0,
-  ).subscribe((res: any) => {
-    this.country = res;
-    this.countryId = this.country.id;
-  });
+this.countryProxy.getCountry(this.countryId)
+.subscribe((res: any) => {
+  this.country = res;
+  this.countryId = this.country.id;
+})
+
 
 
 
