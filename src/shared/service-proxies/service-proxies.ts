@@ -588,7 +588,7 @@ export class ServiceProxy {
      * Create multiple FinancingSchemes
      * @return Get create many base response
      */
-    createManyBaseFinancingSchemeControllerFinancingScheme(body: BulkDto): Observable<FinancingScheme[]> {
+    createManyBaseFinancingSchemeControllerFinancingScheme(body: CreateManyFinancingSchemeDto): Observable<FinancingScheme[]> {
         let url_ = this.baseUrl + "/financing-scheme/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1048,7 +1048,7 @@ export class ServiceProxy {
      * Create multiple MethodologyData
      * @return Get create many base response
      */
-    createManyBaseMethodologyDataControllerMethodologyData(body: BulkDto): Observable<MethodologyData[]> {
+    createManyBaseMethodologyDataControllerMethodologyData(body: CreateManyMethodologyDataDto): Observable<MethodologyData[]> {
         let url_ = this.baseUrl + "/methodology-data/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1508,7 +1508,7 @@ export class ServiceProxy {
      * Create multiple Methodologies
      * @return Get create many base response
      */
-    createManyBaseMethodologyControllerMethodology(body: BulkDto): Observable<Methodology[]> {
+    createManyBaseMethodologyControllerMethodology(body: CreateManyMethodologyDto): Observable<Methodology[]> {
         let url_ = this.baseUrl + "/methodology/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1968,7 +1968,7 @@ export class ServiceProxy {
      * Create multiple EmissionReductioDraftDataEntities
      * @return Get create many base response
      */
-    createManyBaseEmissionReductionDraftdataControllerEmissionReductioDraftDataEntity(body: BulkDto): Observable<EmissionReductioDraftDataEntity[]> {
+    createManyBaseEmissionReductionDraftdataControllerEmissionReductioDraftDataEntity(body: CreateManyEmissionReductioDraftDataEntityDto): Observable<EmissionReductioDraftDataEntity[]> {
         let url_ = this.baseUrl + "/emission-reduction-draftdata/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -2428,7 +2428,7 @@ export class ServiceProxy {
      * Create multiple Reports
      * @return Get create many base response
      */
-    createManyBaseReportControllerReport(body: BulkDto): Observable<Report[]> {
+    createManyBaseReportControllerReport(body: CreateManyReportDto): Observable<Report[]> {
         let url_ = this.baseUrl + "/report/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -2888,7 +2888,7 @@ export class ServiceProxy {
      * Create multiple ApplicabilityEntities
      * @return Get create many base response
      */
-    createManyBaseApplicabilityControllerApplicabilityEntity(body: BulkDto): Observable<ApplicabilityEntity[]> {
+    createManyBaseApplicabilityControllerApplicabilityEntity(body: CreateManyApplicabilityEntityDto): Observable<ApplicabilityEntity[]> {
         let url_ = this.baseUrl + "/applicability/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -3348,7 +3348,7 @@ export class ServiceProxy {
      * Create multiple Audits
      * @return Get create many base response
      */
-    createManyBaseAuditControllerAudit(body: BulkDto): Observable<Audit[]> {
+    createManyBaseAuditControllerAudit(body: CreateManyAuditDto): Observable<Audit[]> {
         let url_ = this.baseUrl + "/audit/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -3809,7 +3809,7 @@ export class ServiceProxy {
      * Create multiple Projects
      * @return Get create many base response
      */
-    createManyBaseProjectControllerProject(body: BulkDto): Observable<Project[]> {
+    createManyBaseProjectControllerProject(body: CreateManyProjectDto): Observable<Project[]> {
         let url_ = this.baseUrl + "/project/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -4274,7 +4274,7 @@ export class ServiceProxy {
      * Create multiple Countries
      * @return Get create many base response
      */
-    createManyBaseCountryControllerCountry(body: BulkDto): Observable<Country[]> {
+    createManyBaseCountryControllerCountry(body: CreateManyCountryDto): Observable<Country[]> {
         let url_ = this.baseUrl + "/country/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -4734,7 +4734,7 @@ export class ServiceProxy {
      * Create multiple Ndcs
      * @return Get create many base response
      */
-    createManyBaseNdcControllerNdc(body: BulkDto): Observable<Ndc[]> {
+    createManyBaseNdcControllerNdc(body: CreateManyNdcDto): Observable<Ndc[]> {
         let url_ = this.baseUrl + "/ndc/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -5194,7 +5194,7 @@ export class ServiceProxy {
      * Create multiple NdcSets
      * @return Get create many base response
      */
-    createManyBaseNdcSetControllerNdcSet(body: BulkDto): Observable<NdcSet[]> {
+    createManyBaseNdcSetControllerNdcSet(body: CreateManyNdcSetDto): Observable<NdcSet[]> {
         let url_ = this.baseUrl + "/ndc-set/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -5654,7 +5654,7 @@ export class ServiceProxy {
      * Create multiple SubNdcs
      * @return Get create many base response
      */
-    createManyBaseSubNdcControllerSubNdc(body: BulkDto): Observable<SubNdc[]> {
+    createManyBaseSubNdcControllerSubNdc(body: CreateManySubNdcDto): Observable<SubNdc[]> {
         let url_ = this.baseUrl + "/sub-ndc/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -6114,7 +6114,7 @@ export class ServiceProxy {
      * Create multiple MitigationActionTypes
      * @return Get create many base response
      */
-    createManyBaseMitigationActionControllerMitigationActionType(body: BulkDto): Observable<MitigationActionType[]> {
+    createManyBaseMitigationActionControllerMitigationActionType(body: CreateManyMitigationActionTypeDto): Observable<MitigationActionType[]> {
         let url_ = this.baseUrl + "/mitigation-action/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -6574,7 +6574,7 @@ export class ServiceProxy {
      * Create multiple ProjectOwners
      * @return Get create many base response
      */
-    createManyBaseProjectOwnerControllerProjectOwner(body: BulkDto): Observable<ProjectOwner[]> {
+    createManyBaseProjectOwnerControllerProjectOwner(body: CreateManyProjectOwnerDto): Observable<ProjectOwner[]> {
         let url_ = this.baseUrl + "/project-owner/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -7040,7 +7040,7 @@ export class ServiceProxy {
      * Create multiple Sectors
      * @return Get create many base response
      */
-    createManyBaseSectorControllerSector(body: BulkDto): Observable<Sector[]> {
+    createManyBaseSectorControllerSector(body: CreateManySectorDto): Observable<Sector[]> {
         let url_ = this.baseUrl + "/sector/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -7500,7 +7500,7 @@ export class ServiceProxy {
      * Create multiple ProjectStatuses
      * @return Get create many base response
      */
-    createManyBaseProjectStatusControllerProjectStatus(body: BulkDto): Observable<ProjectStatus[]> {
+    createManyBaseProjectStatusControllerProjectStatus(body: CreateManyProjectStatusDto): Observable<ProjectStatus[]> {
         let url_ = this.baseUrl + "/project-status/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -7960,7 +7960,7 @@ export class ServiceProxy {
      * Create multiple Documents
      * @return Get create many base response
      */
-    createManyBaseDocumentControllerDocuments(body: BulkDto): Observable<Documents[]> {
+    createManyBaseDocumentControllerDocuments(body: CreateManyDocumentsDto): Observable<Documents[]> {
         let url_ = this.baseUrl + "/document/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -8010,164 +8010,6 @@ export class ServiceProxy {
                 result201 = <any>null;
             }
             return _observableOf(result201);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf(null as any);
-    }
-
-    /**
-     * Create a single User
-     * @return Get create one base response
-     */
-    createOneBaseUsersControllerUser(body: User): Observable<User> {
-        let url_ = this.baseUrl + "/users";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(body);
-
-        let options_ : any = {
-            body: content_,
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            })
-        };
-
-        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processCreateOneBaseUsersControllerUser(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processCreateOneBaseUsersControllerUser(response_ as any);
-                } catch (e) {
-                    return _observableThrow(e) as any as Observable<User>;
-                }
-            } else
-                return _observableThrow(response_) as any as Observable<User>;
-        }));
-    }
-
-    protected processCreateOneBaseUsersControllerUser(response: HttpResponseBase): Observable<User> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (response as any).error instanceof Blob ? (response as any).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 201) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            let result201: any = null;
-            let resultData201 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result201 = User.fromJS(resultData201);
-            return _observableOf(result201);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf(null as any);
-    }
-
-    /**
-     * Retrieve multiple Users
-     * @param fields (optional) Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>
-     * @param s (optional) Adds search condition. <a href="https://github.com/nestjsx/crud/wiki/Requests#search" target="_blank">Docs</a>
-     * @param filter (optional) Adds filter condition. <a href="https://github.com/nestjsx/crud/wiki/Requests#filter" target="_blank">Docs</a>
-     * @param or (optional) Adds OR condition. <a href="https://github.com/nestjsx/crud/wiki/Requests#or" target="_blank">Docs</a>
-     * @param sort (optional) Adds sort by field. <a href="https://github.com/nestjsx/crud/wiki/Requests#sort" target="_blank">Docs</a>
-     * @param join (optional) Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>
-     * @param limit (optional) Limit amount of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#limit" target="_blank">Docs</a>
-     * @param offset (optional) Offset amount of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#offset" target="_blank">Docs</a>
-     * @param page (optional) Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>
-     * @param cache (optional) Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
-     */
-    getManyBaseUsersControllerUser(fields: string[] | undefined, s: string | undefined, filter: string[] | undefined, or: string[] | undefined, sort: string[] | undefined, join: string[] | undefined, limit: number | undefined, offset: number | undefined, page: number | undefined, cache: number | undefined): Observable<any> {
-        let url_ = this.baseUrl + "/users?";
-        if (fields === null)
-            throw new Error("The parameter 'fields' cannot be null.");
-        else if (fields !== undefined)
-            fields && fields.forEach(item => { url_ += "fields=" + encodeURIComponent("" + item) + "&"; });
-        if (s === null)
-            throw new Error("The parameter 's' cannot be null.");
-        else if (s !== undefined)
-            url_ += "s=" + encodeURIComponent("" + s) + "&";
-        if (filter === null)
-            throw new Error("The parameter 'filter' cannot be null.");
-        else if (filter !== undefined)
-            filter && filter.forEach(item => { url_ += "filter=" + encodeURIComponent("" + item) + "&"; });
-        if (or === null)
-            throw new Error("The parameter 'or' cannot be null.");
-        else if (or !== undefined)
-            or && or.forEach(item => { url_ += "or=" + encodeURIComponent("" + item) + "&"; });
-        if (sort === null)
-            throw new Error("The parameter 'sort' cannot be null.");
-        else if (sort !== undefined)
-            sort && sort.forEach(item => { url_ += "sort=" + encodeURIComponent("" + item) + "&"; });
-        if (join === null)
-            throw new Error("The parameter 'join' cannot be null.");
-        else if (join !== undefined)
-            join && join.forEach(item => { url_ += "join=" + encodeURIComponent("" + item) + "&"; });
-        if (limit === null)
-            throw new Error("The parameter 'limit' cannot be null.");
-        else if (limit !== undefined)
-            url_ += "limit=" + encodeURIComponent("" + limit) + "&";
-        if (offset === null)
-            throw new Error("The parameter 'offset' cannot be null.");
-        else if (offset !== undefined)
-            url_ += "offset=" + encodeURIComponent("" + offset) + "&";
-        if (page === null)
-            throw new Error("The parameter 'page' cannot be null.");
-        else if (page !== undefined)
-            url_ += "page=" + encodeURIComponent("" + page) + "&";
-        if (cache === null)
-            throw new Error("The parameter 'cache' cannot be null.");
-        else if (cache !== undefined)
-            url_ += "cache=" + encodeURIComponent("" + cache) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ : any = {
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Accept": "application/json"
-            })
-        };
-
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processGetManyBaseUsersControllerUser(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processGetManyBaseUsersControllerUser(response_ as any);
-                } catch (e) {
-                    return _observableThrow(e) as any as Observable<any>;
-                }
-            } else
-                return _observableThrow(response_) as any as Observable<any>;
-        }));
-    }
-
-    protected processGetManyBaseUsersControllerUser(response: HttpResponseBase): Observable<any> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (response as any).error instanceof Blob ? (response as any).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                result200 = resultData200 !== undefined ? resultData200 : <any>null;
-    
-            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -8417,10 +8259,168 @@ export class ServiceProxy {
     }
 
     /**
+     * Retrieve multiple Users
+     * @param fields (optional) Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>
+     * @param s (optional) Adds search condition. <a href="https://github.com/nestjsx/crud/wiki/Requests#search" target="_blank">Docs</a>
+     * @param filter (optional) Adds filter condition. <a href="https://github.com/nestjsx/crud/wiki/Requests#filter" target="_blank">Docs</a>
+     * @param or (optional) Adds OR condition. <a href="https://github.com/nestjsx/crud/wiki/Requests#or" target="_blank">Docs</a>
+     * @param sort (optional) Adds sort by field. <a href="https://github.com/nestjsx/crud/wiki/Requests#sort" target="_blank">Docs</a>
+     * @param join (optional) Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>
+     * @param limit (optional) Limit amount of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#limit" target="_blank">Docs</a>
+     * @param offset (optional) Offset amount of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#offset" target="_blank">Docs</a>
+     * @param page (optional) Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>
+     * @param cache (optional) Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
+     */
+    getManyBaseUsersControllerUser(fields: string[] | undefined, s: string | undefined, filter: string[] | undefined, or: string[] | undefined, sort: string[] | undefined, join: string[] | undefined, limit: number | undefined, offset: number | undefined, page: number | undefined, cache: number | undefined): Observable<any> {
+        let url_ = this.baseUrl + "/users?";
+        if (fields === null)
+            throw new Error("The parameter 'fields' cannot be null.");
+        else if (fields !== undefined)
+            fields && fields.forEach(item => { url_ += "fields=" + encodeURIComponent("" + item) + "&"; });
+        if (s === null)
+            throw new Error("The parameter 's' cannot be null.");
+        else if (s !== undefined)
+            url_ += "s=" + encodeURIComponent("" + s) + "&";
+        if (filter === null)
+            throw new Error("The parameter 'filter' cannot be null.");
+        else if (filter !== undefined)
+            filter && filter.forEach(item => { url_ += "filter=" + encodeURIComponent("" + item) + "&"; });
+        if (or === null)
+            throw new Error("The parameter 'or' cannot be null.");
+        else if (or !== undefined)
+            or && or.forEach(item => { url_ += "or=" + encodeURIComponent("" + item) + "&"; });
+        if (sort === null)
+            throw new Error("The parameter 'sort' cannot be null.");
+        else if (sort !== undefined)
+            sort && sort.forEach(item => { url_ += "sort=" + encodeURIComponent("" + item) + "&"; });
+        if (join === null)
+            throw new Error("The parameter 'join' cannot be null.");
+        else if (join !== undefined)
+            join && join.forEach(item => { url_ += "join=" + encodeURIComponent("" + item) + "&"; });
+        if (limit === null)
+            throw new Error("The parameter 'limit' cannot be null.");
+        else if (limit !== undefined)
+            url_ += "limit=" + encodeURIComponent("" + limit) + "&";
+        if (offset === null)
+            throw new Error("The parameter 'offset' cannot be null.");
+        else if (offset !== undefined)
+            url_ += "offset=" + encodeURIComponent("" + offset) + "&";
+        if (page === null)
+            throw new Error("The parameter 'page' cannot be null.");
+        else if (page !== undefined)
+            url_ += "page=" + encodeURIComponent("" + page) + "&";
+        if (cache === null)
+            throw new Error("The parameter 'cache' cannot be null.");
+        else if (cache !== undefined)
+            url_ += "cache=" + encodeURIComponent("" + cache) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetManyBaseUsersControllerUser(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetManyBaseUsersControllerUser(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<any>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<any>;
+        }));
+    }
+
+    protected processGetManyBaseUsersControllerUser(response: HttpResponseBase): Observable<any> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * Create a single User
+     * @return Get create one base response
+     */
+    createOneBaseUsersControllerUser(body: User): Observable<User> {
+        let url_ = this.baseUrl + "/users";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreateOneBaseUsersControllerUser(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreateOneBaseUsersControllerUser(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<User>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<User>;
+        }));
+    }
+
+    protected processCreateOneBaseUsersControllerUser(response: HttpResponseBase): Observable<User> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 201) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result201: any = null;
+            let resultData201 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result201 = User.fromJS(resultData201);
+            return _observableOf(result201);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
      * Create multiple Users
      * @return Get create many base response
      */
-    createManyBaseUsersControllerUser(body: BulkDto): Observable<User[]> {
+    createManyBaseUsersControllerUser(body: CreateManyUserDto): Observable<User[]> {
         let url_ = this.baseUrl + "/users/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -8885,7 +8885,7 @@ export class ServiceProxy {
      * Create multiple Institutions
      * @return Get create many base response
      */
-    createManyBaseInstitutionControllerInstitution(body: BulkDto): Observable<Institution[]> {
+    createManyBaseInstitutionControllerInstitution(body: CreateManyInstitutionDto): Observable<Institution[]> {
         let url_ = this.baseUrl + "/institution/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -9345,7 +9345,7 @@ export class ServiceProxy {
      * Create multiple InstitutionTypes
      * @return Get create many base response
      */
-    createManyBaseInstitutionTypeControllerInstitutionType(body: BulkDto): Observable<InstitutionType[]> {
+    createManyBaseInstitutionTypeControllerInstitutionType(body: CreateManyInstitutionTypeDto): Observable<InstitutionType[]> {
         let url_ = this.baseUrl + "/institution-type/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -9805,7 +9805,7 @@ export class ServiceProxy {
      * Create multiple InstitutionCategories
      * @return Get create many base response
      */
-    createManyBaseInstitutionCategoryControllerInstitutionCategory(body: BulkDto): Observable<InstitutionCategory[]> {
+    createManyBaseInstitutionCategoryControllerInstitutionCategory(body: CreateManyInstitutionCategoryDto): Observable<InstitutionCategory[]> {
         let url_ = this.baseUrl + "/institution-category/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -10265,7 +10265,7 @@ export class ServiceProxy {
      * Create multiple ProjectApprovalStatuses
      * @return Get create many base response
      */
-    createManyBaseProjectApprovalStatusControllerProjectApprovalStatus(body: BulkDto): Observable<ProjectApprovalStatus[]> {
+    createManyBaseProjectApprovalStatusControllerProjectApprovalStatus(body: CreateManyProjectApprovalStatusDto): Observable<ProjectApprovalStatus[]> {
         let url_ = this.baseUrl + "/project-approval-status/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -10725,7 +10725,7 @@ export class ServiceProxy {
      * Create multiple UserTypes
      * @return Get create many base response
      */
-    createManyBaseUserTypeControllerUserType(body: BulkDto): Observable<UserType[]> {
+    createManyBaseUserTypeControllerUserType(body: CreateManyUserTypeDto): Observable<UserType[]> {
         let url_ = this.baseUrl + "/usertype/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -11195,7 +11195,7 @@ export class ServiceProxy {
      * Create multiple LearningMaterials
      * @return Get create many base response
      */
-    createManyBaseLearningMaterialControllerLearningMaterial(body: BulkDto): Observable<LearningMaterial[]> {
+    createManyBaseLearningMaterialControllerLearningMaterial(body: CreateManyLearningMaterialDto): Observable<LearningMaterial[]> {
         let url_ = this.baseUrl + "/learning-material/bulk";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -12167,6 +12167,65 @@ export class CountryControllerServiceProxy {
         }
         return _observableOf(null as any);
     }
+
+    getManyFilteredCountries(filter: string): Observable<Country[]> {
+        let url_ = this.baseUrl + "/country/get-many-filtered-countries?";
+        if (filter === undefined || filter === null)
+            throw new Error("The parameter 'filter' must be defined and cannot be null.");
+        else
+            url_ += "filter=" + encodeURIComponent("" + filter) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetManyFilteredCountries(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetManyFilteredCountries(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<Country[]>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<Country[]>;
+        }));
+    }
+
+    protected processGetManyFilteredCountries(response: HttpResponseBase): Observable<Country[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200.push(Country.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
 }
 
 @Injectable()
@@ -12838,6 +12897,58 @@ export class UsersControllerServiceProxy {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
+    create(body: CreateUserDto): Observable<User> {
+        let url_ = this.baseUrl + "/users/create-user";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreate(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<User>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<User>;
+        }));
+    }
+
+    protected processCreate(response: HttpResponseBase): Observable<User> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 201) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result201: any = null;
+            let resultData201 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result201 = User.fromJS(resultData201);
+            return _observableOf(result201);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
     changeStatus(id: number, status: number): Observable<User> {
         let url_ = this.baseUrl + "/users/changeStatus?";
         if (id === undefined || id === null)
@@ -13223,8 +13334,115 @@ export class UsersControllerServiceProxy {
         }
         return _observableOf(null as any);
     }
-}
 
+    getFilteredUsers(filter: string): Observable<any> {
+        let url_ = this.baseUrl + "/users/filtered-users/{filter}";
+        if (filter === undefined || filter === null)
+            throw new Error("The parameter 'filter' must be defined.");
+        url_ = url_.replace("{filter}", encodeURIComponent("" + filter));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetFilteredUsers(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetFilteredUsers(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<any>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<any>;
+        }));
+    }
+
+    protected processGetFilteredUsers(response: HttpResponseBase): Observable<any> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    updateOneUser(id: number, body: User): Observable<void> {
+        let url_ = this.baseUrl + "/users/update-one-user/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("patch", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processUpdateOneUser(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processUpdateOneUser(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processUpdateOneUser(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+}
+export enum DocumentsDocumentOwner {
+    Project = <any>"Project",
+    Country = <any>"Country",
+    LearningMaterial = <any>"LearningMaterial",
+}
 @Injectable()
 export class InstitutionControllerServiceProxy {
     private http: HttpClient;
@@ -13489,6 +13707,59 @@ export class InstitutionControllerServiceProxy {
     }
 
     protected processDeactivateInstitution(response: HttpResponseBase): Observable<any> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    getFilteredInstitution(filter: string): Observable<any> {
+        let url_ = this.baseUrl + "/institution/get-filtered-institutions?";
+        if (filter === undefined || filter === null)
+            throw new Error("The parameter 'filter' must be defined and cannot be null.");
+        else
+            url_ += "filter=" + encodeURIComponent("" + filter) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetFilteredInstitution(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetFilteredInstitution(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<any>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<any>;
+        }));
+    }
+
+    protected processGetFilteredInstitution(response: HttpResponseBase): Observable<any> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -13843,6 +14114,77 @@ export class IndicatorControllerServiceProxy {
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
                 result200 = resultData200 !== undefined ? resultData200 : <any>null;
     
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+}
+
+@Injectable()
+export class UserTypeControllerServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    getManyUserTypes(filter: string[]): Observable<UserType[]> {
+        let url_ = this.baseUrl + "/usertype/get-many-user-types?";
+        if (filter === undefined || filter === null)
+            throw new Error("The parameter 'filter' must be defined and cannot be null.");
+        else
+            filter && filter.forEach(item => { url_ += "filter=" + encodeURIComponent("" + item) + "&"; });
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetManyUserTypes(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetManyUserTypes(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<UserType[]>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<UserType[]>;
+        }));
+    }
+
+    protected processGetManyUserTypes(response: HttpResponseBase): Observable<UserType[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200.push(UserType.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -14222,16 +14564,20 @@ export interface IFinancingScheme {
     [key: string]: any;
 }
 
-export class BulkDto implements IBulkDto {
+export class CreateManyFinancingSchemeDto implements ICreateManyFinancingSchemeDto {
+    bulk: FinancingScheme[];
 
     [key: string]: any;
 
-    constructor(data?: IBulkDto) {
+    constructor(data?: ICreateManyFinancingSchemeDto) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.bulk = [];
         }
     }
 
@@ -14241,12 +14587,17 @@ export class BulkDto implements IBulkDto {
                 if (_data.hasOwnProperty(property))
                     this[property] = _data[property];
             }
+            if (Array.isArray(_data["bulk"])) {
+                this.bulk = [] as any;
+                for (let item of _data["bulk"])
+                    this.bulk.push(FinancingScheme.fromJS(item));
+            }
         }
     }
 
-    static fromJS(data: any): BulkDto {
+    static fromJS(data: any): CreateManyFinancingSchemeDto {
         data = typeof data === 'object' ? data : {};
-        let result = new BulkDto();
+        let result = new CreateManyFinancingSchemeDto();
         result.init(data);
         return result;
     }
@@ -14257,18 +14608,24 @@ export class BulkDto implements IBulkDto {
             if (this.hasOwnProperty(property))
                 data[property] = this[property];
         }
+        if (Array.isArray(this.bulk)) {
+            data["bulk"] = [];
+            for (let item of this.bulk)
+                data["bulk"].push(item.toJSON());
+        }
         return data;
     }
 
-    clone(): BulkDto {
+    clone(): CreateManyFinancingSchemeDto {
         const json = this.toJSON();
-        let result = new BulkDto();
+        let result = new CreateManyFinancingSchemeDto();
         result.init(json);
         return result;
     }
 }
 
-export interface IBulkDto {
+export interface ICreateManyFinancingSchemeDto {
+    bulk: FinancingScheme[];
 
     [key: string]: any;
 }
@@ -16651,6 +17008,72 @@ export interface IMethodologyData {
     [key: string]: any;
 }
 
+export class CreateManyMethodologyDataDto implements ICreateManyMethodologyDataDto {
+    bulk: MethodologyData[];
+
+    [key: string]: any;
+
+    constructor(data?: ICreateManyMethodologyDataDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.bulk = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            if (Array.isArray(_data["bulk"])) {
+                this.bulk = [] as any;
+                for (let item of _data["bulk"])
+                    this.bulk.push(MethodologyData.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): CreateManyMethodologyDataDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateManyMethodologyDataDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        if (Array.isArray(this.bulk)) {
+            data["bulk"] = [];
+            for (let item of this.bulk)
+                data["bulk"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): CreateManyMethodologyDataDto {
+        const json = this.toJSON();
+        let result = new CreateManyMethodologyDataDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreateManyMethodologyDataDto {
+    bulk: MethodologyData[];
+
+    [key: string]: any;
+}
+
 export class GetManyMethodologyResponseDto implements IGetManyMethodologyResponseDto {
     data: Methodology[];
     count: number;
@@ -16747,7 +17170,7 @@ export class Methodology implements IMethodology {
     parentId: number;
     applicableSector: string;
     documents: string;
-    isActive: MethodologyIsActive;
+    isActive: number;
     easenessOfDataCollection: string;
     transportSubSector: string;
     upstream_downstream: string;
@@ -16868,7 +17291,7 @@ export interface IMethodology {
     parentId: number;
     applicableSector: string;
     documents: string;
-    isActive: MethodologyIsActive;
+    isActive: number;
     easenessOfDataCollection: string;
     transportSubSector: string;
     upstream_downstream: string;
@@ -16880,6 +17303,72 @@ export interface IMethodology {
     mitigationActionType: MitigationActionType;
     applicability: ApplicabilityEntity;
     method: MethodologyData;
+
+    [key: string]: any;
+}
+
+export class CreateManyMethodologyDto implements ICreateManyMethodologyDto {
+    bulk: Methodology[];
+
+    [key: string]: any;
+
+    constructor(data?: ICreateManyMethodologyDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.bulk = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            if (Array.isArray(_data["bulk"])) {
+                this.bulk = [] as any;
+                for (let item of _data["bulk"])
+                    this.bulk.push(Methodology.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): CreateManyMethodologyDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateManyMethodologyDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        if (Array.isArray(this.bulk)) {
+            data["bulk"] = [];
+            for (let item of this.bulk)
+                data["bulk"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): CreateManyMethodologyDto {
+        const json = this.toJSON();
+        let result = new CreateManyMethodologyDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreateManyMethodologyDto {
+    bulk: Methodology[];
 
     [key: string]: any;
 }
@@ -17089,6 +17578,72 @@ export interface IEmissionReductioDraftDataEntity {
     [key: string]: any;
 }
 
+export class CreateManyEmissionReductioDraftDataEntityDto implements ICreateManyEmissionReductioDraftDataEntityDto {
+    bulk: EmissionReductioDraftDataEntity[];
+
+    [key: string]: any;
+
+    constructor(data?: ICreateManyEmissionReductioDraftDataEntityDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.bulk = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            if (Array.isArray(_data["bulk"])) {
+                this.bulk = [] as any;
+                for (let item of _data["bulk"])
+                    this.bulk.push(EmissionReductioDraftDataEntity.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): CreateManyEmissionReductioDraftDataEntityDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateManyEmissionReductioDraftDataEntityDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        if (Array.isArray(this.bulk)) {
+            data["bulk"] = [];
+            for (let item of this.bulk)
+                data["bulk"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): CreateManyEmissionReductioDraftDataEntityDto {
+        const json = this.toJSON();
+        let result = new CreateManyEmissionReductioDraftDataEntityDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreateManyEmissionReductioDraftDataEntityDto {
+    bulk: EmissionReductioDraftDataEntity[];
+
+    [key: string]: any;
+}
+
 export class GetManyReportResponseDto implements IGetManyReportResponseDto {
     data: Report[];
     count: number;
@@ -17269,6 +17824,138 @@ export interface IReport {
     description: string;
     isPublish: number;
     thumbnail: string;
+
+    [key: string]: any;
+}
+
+export class CreateManyReportDto implements ICreateManyReportDto {
+    bulk: Report[];
+
+    [key: string]: any;
+
+    constructor(data?: ICreateManyReportDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.bulk = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            if (Array.isArray(_data["bulk"])) {
+                this.bulk = [] as any;
+                for (let item of _data["bulk"])
+                    this.bulk.push(Report.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): CreateManyReportDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateManyReportDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        if (Array.isArray(this.bulk)) {
+            data["bulk"] = [];
+            for (let item of this.bulk)
+                data["bulk"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): CreateManyReportDto {
+        const json = this.toJSON();
+        let result = new CreateManyReportDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreateManyReportDto {
+    bulk: Report[];
+
+    [key: string]: any;
+}
+
+export class CreateManyApplicabilityEntityDto implements ICreateManyApplicabilityEntityDto {
+    bulk: ApplicabilityEntity[];
+
+    [key: string]: any;
+
+    constructor(data?: ICreateManyApplicabilityEntityDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.bulk = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            if (Array.isArray(_data["bulk"])) {
+                this.bulk = [] as any;
+                for (let item of _data["bulk"])
+                    this.bulk.push(ApplicabilityEntity.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): CreateManyApplicabilityEntityDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateManyApplicabilityEntityDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        if (Array.isArray(this.bulk)) {
+            data["bulk"] = [];
+            for (let item of this.bulk)
+                data["bulk"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): CreateManyApplicabilityEntityDto {
+        const json = this.toJSON();
+        let result = new CreateManyApplicabilityEntityDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreateManyApplicabilityEntityDto {
+    bulk: ApplicabilityEntity[];
 
     [key: string]: any;
 }
@@ -17737,6 +18424,72 @@ export interface IAudit {
     comment: string;
     actionStatus: string;
     userType: string;
+
+    [key: string]: any;
+}
+
+export class CreateManyAuditDto implements ICreateManyAuditDto {
+    bulk: Audit[];
+
+    [key: string]: any;
+
+    constructor(data?: ICreateManyAuditDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.bulk = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            if (Array.isArray(_data["bulk"])) {
+                this.bulk = [] as any;
+                for (let item of _data["bulk"])
+                    this.bulk.push(Audit.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): CreateManyAuditDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateManyAuditDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        if (Array.isArray(this.bulk)) {
+            data["bulk"] = [];
+            for (let item of this.bulk)
+                data["bulk"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): CreateManyAuditDto {
+        const json = this.toJSON();
+        let result = new CreateManyAuditDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreateManyAuditDto {
+    bulk: Audit[];
 
     [key: string]: any;
 }
@@ -19152,6 +19905,600 @@ export interface IProject {
     [key: string]: any;
 }
 
+export class CreateManyProjectDto implements ICreateManyProjectDto {
+    bulk: Project[];
+
+    [key: string]: any;
+
+    constructor(data?: ICreateManyProjectDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.bulk = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            if (Array.isArray(_data["bulk"])) {
+                this.bulk = [] as any;
+                for (let item of _data["bulk"])
+                    this.bulk.push(Project.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): CreateManyProjectDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateManyProjectDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        if (Array.isArray(this.bulk)) {
+            data["bulk"] = [];
+            for (let item of this.bulk)
+                data["bulk"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): CreateManyProjectDto {
+        const json = this.toJSON();
+        let result = new CreateManyProjectDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreateManyProjectDto {
+    bulk: Project[];
+
+    [key: string]: any;
+}
+
+export class CreateManyCountryDto implements ICreateManyCountryDto {
+    bulk: Country[];
+
+    [key: string]: any;
+
+    constructor(data?: ICreateManyCountryDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.bulk = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            if (Array.isArray(_data["bulk"])) {
+                this.bulk = [] as any;
+                for (let item of _data["bulk"])
+                    this.bulk.push(Country.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): CreateManyCountryDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateManyCountryDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        if (Array.isArray(this.bulk)) {
+            data["bulk"] = [];
+            for (let item of this.bulk)
+                data["bulk"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): CreateManyCountryDto {
+        const json = this.toJSON();
+        let result = new CreateManyCountryDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreateManyCountryDto {
+    bulk: Country[];
+
+    [key: string]: any;
+}
+
+export class CreateManyNdcDto implements ICreateManyNdcDto {
+    bulk: Ndc[];
+
+    [key: string]: any;
+
+    constructor(data?: ICreateManyNdcDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.bulk = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            if (Array.isArray(_data["bulk"])) {
+                this.bulk = [] as any;
+                for (let item of _data["bulk"])
+                    this.bulk.push(Ndc.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): CreateManyNdcDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateManyNdcDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        if (Array.isArray(this.bulk)) {
+            data["bulk"] = [];
+            for (let item of this.bulk)
+                data["bulk"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): CreateManyNdcDto {
+        const json = this.toJSON();
+        let result = new CreateManyNdcDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreateManyNdcDto {
+    bulk: Ndc[];
+
+    [key: string]: any;
+}
+
+export class CreateManyNdcSetDto implements ICreateManyNdcSetDto {
+    bulk: NdcSet[];
+
+    [key: string]: any;
+
+    constructor(data?: ICreateManyNdcSetDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.bulk = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            if (Array.isArray(_data["bulk"])) {
+                this.bulk = [] as any;
+                for (let item of _data["bulk"])
+                    this.bulk.push(NdcSet.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): CreateManyNdcSetDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateManyNdcSetDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        if (Array.isArray(this.bulk)) {
+            data["bulk"] = [];
+            for (let item of this.bulk)
+                data["bulk"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): CreateManyNdcSetDto {
+        const json = this.toJSON();
+        let result = new CreateManyNdcSetDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreateManyNdcSetDto {
+    bulk: NdcSet[];
+
+    [key: string]: any;
+}
+
+export class CreateManySubNdcDto implements ICreateManySubNdcDto {
+    bulk: SubNdc[];
+
+    [key: string]: any;
+
+    constructor(data?: ICreateManySubNdcDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.bulk = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            if (Array.isArray(_data["bulk"])) {
+                this.bulk = [] as any;
+                for (let item of _data["bulk"])
+                    this.bulk.push(SubNdc.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): CreateManySubNdcDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateManySubNdcDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        if (Array.isArray(this.bulk)) {
+            data["bulk"] = [];
+            for (let item of this.bulk)
+                data["bulk"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): CreateManySubNdcDto {
+        const json = this.toJSON();
+        let result = new CreateManySubNdcDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreateManySubNdcDto {
+    bulk: SubNdc[];
+
+    [key: string]: any;
+}
+
+export class CreateManyMitigationActionTypeDto implements ICreateManyMitigationActionTypeDto {
+    bulk: MitigationActionType[];
+
+    [key: string]: any;
+
+    constructor(data?: ICreateManyMitigationActionTypeDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.bulk = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            if (Array.isArray(_data["bulk"])) {
+                this.bulk = [] as any;
+                for (let item of _data["bulk"])
+                    this.bulk.push(MitigationActionType.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): CreateManyMitigationActionTypeDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateManyMitigationActionTypeDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        if (Array.isArray(this.bulk)) {
+            data["bulk"] = [];
+            for (let item of this.bulk)
+                data["bulk"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): CreateManyMitigationActionTypeDto {
+        const json = this.toJSON();
+        let result = new CreateManyMitigationActionTypeDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreateManyMitigationActionTypeDto {
+    bulk: MitigationActionType[];
+
+    [key: string]: any;
+}
+
+export class CreateManyProjectOwnerDto implements ICreateManyProjectOwnerDto {
+    bulk: ProjectOwner[];
+
+    [key: string]: any;
+
+    constructor(data?: ICreateManyProjectOwnerDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.bulk = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            if (Array.isArray(_data["bulk"])) {
+                this.bulk = [] as any;
+                for (let item of _data["bulk"])
+                    this.bulk.push(ProjectOwner.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): CreateManyProjectOwnerDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateManyProjectOwnerDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        if (Array.isArray(this.bulk)) {
+            data["bulk"] = [];
+            for (let item of this.bulk)
+                data["bulk"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): CreateManyProjectOwnerDto {
+        const json = this.toJSON();
+        let result = new CreateManyProjectOwnerDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreateManyProjectOwnerDto {
+    bulk: ProjectOwner[];
+
+    [key: string]: any;
+}
+
+export class CreateManySectorDto implements ICreateManySectorDto {
+    bulk: Sector[];
+
+    [key: string]: any;
+
+    constructor(data?: ICreateManySectorDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.bulk = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            if (Array.isArray(_data["bulk"])) {
+                this.bulk = [] as any;
+                for (let item of _data["bulk"])
+                    this.bulk.push(Sector.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): CreateManySectorDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateManySectorDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        if (Array.isArray(this.bulk)) {
+            data["bulk"] = [];
+            for (let item of this.bulk)
+                data["bulk"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): CreateManySectorDto {
+        const json = this.toJSON();
+        let result = new CreateManySectorDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreateManySectorDto {
+    bulk: Sector[];
+
+    [key: string]: any;
+}
+
+export class CreateManyProjectStatusDto implements ICreateManyProjectStatusDto {
+    bulk: ProjectStatus[];
+
+    [key: string]: any;
+
+    constructor(data?: ICreateManyProjectStatusDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.bulk = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            if (Array.isArray(_data["bulk"])) {
+                this.bulk = [] as any;
+                for (let item of _data["bulk"])
+                    this.bulk.push(ProjectStatus.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): CreateManyProjectStatusDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateManyProjectStatusDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        if (Array.isArray(this.bulk)) {
+            data["bulk"] = [];
+            for (let item of this.bulk)
+                data["bulk"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): CreateManyProjectStatusDto {
+        const json = this.toJSON();
+        let result = new CreateManyProjectStatusDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreateManyProjectStatusDto {
+    bulk: ProjectStatus[];
+
+    [key: string]: any;
+}
+
 export class GetManyDocumentsResponseDto implements IGetManyDocumentsResponseDto {
     data: Documents[];
     count: number;
@@ -19241,7 +20588,7 @@ export class Documents implements IDocuments {
     editedOn: moment.Moment;
     status: number;
     id: number;
-    documentOwner: DocumentsDocumentOwner;
+    documentOwner: number;
     documentOwnerId: number;
     mimeType: string;
     fileName: string;
@@ -19323,12 +20670,78 @@ export interface IDocuments {
     editedOn: moment.Moment;
     status: number;
     id: number;
-    documentOwner: DocumentsDocumentOwner;
+    documentOwner: number;
     documentOwnerId: number;
     mimeType: string;
     fileName: string;
     relativePath: string;
     url: string;
+
+    [key: string]: any;
+}
+
+export class CreateManyDocumentsDto implements ICreateManyDocumentsDto {
+    bulk: Documents[];
+
+    [key: string]: any;
+
+    constructor(data?: ICreateManyDocumentsDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.bulk = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            if (Array.isArray(_data["bulk"])) {
+                this.bulk = [] as any;
+                for (let item of _data["bulk"])
+                    this.bulk.push(Documents.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): CreateManyDocumentsDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateManyDocumentsDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        if (Array.isArray(this.bulk)) {
+            data["bulk"] = [];
+            for (let item of this.bulk)
+                data["bulk"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): CreateManyDocumentsDto {
+        const json = this.toJSON();
+        let result = new CreateManyDocumentsDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreateManyDocumentsDto {
+    bulk: Documents[];
 
     [key: string]: any;
 }
@@ -19684,6 +21097,204 @@ export interface IReqUserDto {
     [key: string]: any;
 }
 
+export class CreateManyUserDto implements ICreateManyUserDto {
+    bulk: User[];
+
+    [key: string]: any;
+
+    constructor(data?: ICreateManyUserDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.bulk = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            if (Array.isArray(_data["bulk"])) {
+                this.bulk = [] as any;
+                for (let item of _data["bulk"])
+                    this.bulk.push(User.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): CreateManyUserDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateManyUserDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        if (Array.isArray(this.bulk)) {
+            data["bulk"] = [];
+            for (let item of this.bulk)
+                data["bulk"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): CreateManyUserDto {
+        const json = this.toJSON();
+        let result = new CreateManyUserDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreateManyUserDto {
+    bulk: User[];
+
+    [key: string]: any;
+}
+
+export class CreateManyInstitutionDto implements ICreateManyInstitutionDto {
+    bulk: Institution[];
+
+    [key: string]: any;
+
+    constructor(data?: ICreateManyInstitutionDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.bulk = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            if (Array.isArray(_data["bulk"])) {
+                this.bulk = [] as any;
+                for (let item of _data["bulk"])
+                    this.bulk.push(Institution.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): CreateManyInstitutionDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateManyInstitutionDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        if (Array.isArray(this.bulk)) {
+            data["bulk"] = [];
+            for (let item of this.bulk)
+                data["bulk"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): CreateManyInstitutionDto {
+        const json = this.toJSON();
+        let result = new CreateManyInstitutionDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreateManyInstitutionDto {
+    bulk: Institution[];
+
+    [key: string]: any;
+}
+
+export class CreateManyInstitutionTypeDto implements ICreateManyInstitutionTypeDto {
+    bulk: InstitutionType[];
+
+    [key: string]: any;
+
+    constructor(data?: ICreateManyInstitutionTypeDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.bulk = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            if (Array.isArray(_data["bulk"])) {
+                this.bulk = [] as any;
+                for (let item of _data["bulk"])
+                    this.bulk.push(InstitutionType.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): CreateManyInstitutionTypeDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateManyInstitutionTypeDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        if (Array.isArray(this.bulk)) {
+            data["bulk"] = [];
+            for (let item of this.bulk)
+                data["bulk"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): CreateManyInstitutionTypeDto {
+        const json = this.toJSON();
+        let result = new CreateManyInstitutionTypeDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreateManyInstitutionTypeDto {
+    bulk: InstitutionType[];
+
+    [key: string]: any;
+}
+
 export class GetManyInstitutionCategoryResponseDto implements IGetManyInstitutionCategoryResponseDto {
     data: InstitutionCategory[];
     count: number;
@@ -19853,6 +21464,72 @@ export interface IInstitutionCategory {
     [key: string]: any;
 }
 
+export class CreateManyInstitutionCategoryDto implements ICreateManyInstitutionCategoryDto {
+    bulk: InstitutionCategory[];
+
+    [key: string]: any;
+
+    constructor(data?: ICreateManyInstitutionCategoryDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.bulk = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            if (Array.isArray(_data["bulk"])) {
+                this.bulk = [] as any;
+                for (let item of _data["bulk"])
+                    this.bulk.push(InstitutionCategory.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): CreateManyInstitutionCategoryDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateManyInstitutionCategoryDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        if (Array.isArray(this.bulk)) {
+            data["bulk"] = [];
+            for (let item of this.bulk)
+                data["bulk"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): CreateManyInstitutionCategoryDto {
+        const json = this.toJSON();
+        let result = new CreateManyInstitutionCategoryDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreateManyInstitutionCategoryDto {
+    bulk: InstitutionCategory[];
+
+    [key: string]: any;
+}
+
 export class CreateIndicatorDto implements ICreateIndicatorDto {
 
     [key: string]: any;
@@ -19955,20 +21632,207 @@ export interface IUpdateIndicatorDto {
     [key: string]: any;
 }
 
+export class CreateManyProjectApprovalStatusDto implements ICreateManyProjectApprovalStatusDto {
+    bulk: ProjectApprovalStatus[];
+
+    [key: string]: any;
+
+    constructor(data?: ICreateManyProjectApprovalStatusDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.bulk = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            if (Array.isArray(_data["bulk"])) {
+                this.bulk = [] as any;
+                for (let item of _data["bulk"])
+                    this.bulk.push(ProjectApprovalStatus.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): CreateManyProjectApprovalStatusDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateManyProjectApprovalStatusDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        if (Array.isArray(this.bulk)) {
+            data["bulk"] = [];
+            for (let item of this.bulk)
+                data["bulk"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): CreateManyProjectApprovalStatusDto {
+        const json = this.toJSON();
+        let result = new CreateManyProjectApprovalStatusDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreateManyProjectApprovalStatusDto {
+    bulk: ProjectApprovalStatus[];
+
+    [key: string]: any;
+}
+
+export class CreateManyUserTypeDto implements ICreateManyUserTypeDto {
+    bulk: UserType[];
+
+    [key: string]: any;
+
+    constructor(data?: ICreateManyUserTypeDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.bulk = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            if (Array.isArray(_data["bulk"])) {
+                this.bulk = [] as any;
+                for (let item of _data["bulk"])
+                    this.bulk.push(UserType.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): CreateManyUserTypeDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateManyUserTypeDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        if (Array.isArray(this.bulk)) {
+            data["bulk"] = [];
+            for (let item of this.bulk)
+                data["bulk"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): CreateManyUserTypeDto {
+        const json = this.toJSON();
+        let result = new CreateManyUserTypeDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreateManyUserTypeDto {
+    bulk: UserType[];
+
+    [key: string]: any;
+}
+
+export class CreateManyLearningMaterialDto implements ICreateManyLearningMaterialDto {
+    bulk: LearningMaterial[];
+
+    [key: string]: any;
+
+    constructor(data?: ICreateManyLearningMaterialDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.bulk = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            if (Array.isArray(_data["bulk"])) {
+                this.bulk = [] as any;
+                for (let item of _data["bulk"])
+                    this.bulk.push(LearningMaterial.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): CreateManyLearningMaterialDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateManyLearningMaterialDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        if (Array.isArray(this.bulk)) {
+            data["bulk"] = [];
+            for (let item of this.bulk)
+                data["bulk"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): CreateManyLearningMaterialDto {
+        const json = this.toJSON();
+        let result = new CreateManyLearningMaterialDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreateManyLearningMaterialDto {
+    bulk: LearningMaterial[];
+
+    [key: string]: any;
+}
+
 export enum CountryStatus {
     Active = <any>"Active",
     Deactivated = <any>"Deactivated",
-}
-
-export enum MethodologyIsActive {
-    Active = <any>"Active",
-    DeActive = <any>"DeActive",
-}
-
-export enum DocumentsDocumentOwner {
-    Project = <any>"Project",
-    Country = <any>"Country",
-    LearningMaterial = <any>"LearningMaterial",
 }
 
 export class ApiException extends Error {
