@@ -6,7 +6,7 @@
       <div class="col-md-4">
         <label class="font-weight-bold">Country</label>
 
-        <p-dropdown name="instDD" [options]="countryList" [(ngModel)]="searchBy.country" #fsector="ngModel"
+        <p-dropdown name="instDD" [options]="countryList" [(ngModel)]="searchBy.country" #fcountry="ngModel"
           placeholder="Select .." [showClear]="true" [filter]="true" optionLabel="name"
           (ngModelChange)="onCountryChange($event)">
         </p-dropdown>

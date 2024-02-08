@@ -100,9 +100,16 @@ export class DashboardComponent implements OnInit {
 
     this.countryProxy.getAllCountryByFilter(1,1000, 'institution.id =' +institutionId)
     .subscribe(async (res)=>{
-      this.countryList = await res.items;
+      if(institutionId ==undefined){
+        this.countryList = await res;
+      }
+      else if(institutionId){
+        console.log(res)
+        this.countryList = await res.items;
+      }
+    
       let count = 0;
-      for (let c of res.items) {
+      for (let c of this.countryList) {
 
         this.src1 = c.flagPath;
 
@@ -137,9 +144,6 @@ export class DashboardComponent implements OnInit {
       let membercount = this.res(countmem);
       this.mapData1 = this.mapData2;
     })
-
-    let filter1: string[] = new Array();
-    filter1.push('isSystemUse||$eq||' + 1);
 
     this.countryProxy.getAllCountryByFilter(1,1000, 'isSystemUse =' +1)
       .subscribe(res => {

@@ -38,7 +38,9 @@ export class InstitutionFormComponent implements OnInit {
 
 
 
-  constructor(private serviceProxy: ServiceProxy, private confirmationService: ConfirmationService,
+  constructor(
+    private serviceProxy: ServiceProxy,
+    private confirmationService: ConfirmationService,
     private route: ActivatedRoute,
     private institutionProxy: InstitutionControllerServiceProxy,
     private insTypeProxy : InstitutionTypeControllerServiceProxy,
@@ -53,6 +55,7 @@ export class InstitutionFormComponent implements OnInit {
     let institutionId = tokenPayload.institutionId;
 
     this.insTypeProxy.getAllCo().subscribe((res)=>{
+      console.log(res)
       this.selectedTypeList = res;
     })
 
@@ -99,9 +102,18 @@ this.countryProxy.getAllCo()
 
     if (formData.valid) {
       if (this.isNewInstitution) {
-        this.institution.countries = this.listc;
+        let ins =new Institution();
+        ins.countries = this.listc;
+        ins.name =this.institution.name;
+        ins.address =this.institution.address;
+        ins.contactNumber =this.institution.contactNumber;
+        ins.description =this.institution.description;
+        let type = new InstitutionType()
+        type.id = this.institution.type.id
+        ins.type=type;
+
         this.serviceProxy
-          .createOneBaseInstitutionControllerInstitution(this.institution)
+          .createOneBaseInstitutionControllerInstitution(ins)
           .subscribe(
             (res) => {
               this.messageService.add({

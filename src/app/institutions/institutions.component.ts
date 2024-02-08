@@ -2,7 +2,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '
 import { Router } from '@angular/router';
 import { LazyLoadEvent } from 'primeng/api';
 import { Table } from 'primeng/table';
-import { Country, IInstitution, Institution, InstitutionControllerServiceProxy, ServiceProxy, User } from 'shared/service-proxies/service-proxies';
+import { Country, CountryControllerServiceProxy, Institution, InstitutionControllerServiceProxy } from 'shared/service-proxies/service-proxies';
 
 @Component({
   selector: 'app-institutions',
@@ -36,8 +36,12 @@ export class InstitutionsComponent implements OnInit, AfterViewInit {
 
   first = 0;
 
-  constructor(private serviceProxy: ServiceProxy,
-    private institutionProxy: InstitutionControllerServiceProxy, private cdr: ChangeDetectorRef,  private router: Router) { }
+  constructor(
+    private institutionProxy: InstitutionControllerServiceProxy, 
+    private cdr: ChangeDetectorRef,  
+    private countryProxy: CountryControllerServiceProxy,
+
+    private router: Router) { }
   ngAfterViewInit(): void {
     this.cdr.detectChanges();
   }
@@ -46,25 +50,12 @@ export class InstitutionsComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     
 
+this.countryProxy.getAllCo()
+.subscribe((res: any) => {
 
-    this.serviceProxy
-      .getManyBaseCountryControllerCountry(
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        1000,
-        0,
-        0,
-        0
-
-      ).subscribe((res: any) => {
-
-        this.countryList = res.data;
-        this.countryList = this.countryList.filter(a=>a.institution&&a.institution.id)
-      });
+  this.countryList = res;
+  this.countryList = this.countryList.filter(a=>a.institution && a.institution.id);
+});
 
   }
 
@@ -129,17 +120,10 @@ export class InstitutionsComponent implements OnInit, AfterViewInit {
   getCountries(insId:number) {
 
     this.insCountryList=[]
-     this.serviceProxy
-      .getOneBaseInstitutionControllerInstitution(
-        insId,
-        undefined,
-        undefined,
-        undefined,
-       
-        
-      ).subscribe((res: any) => {
-        this.insCountryList=res.countries;
-      })
+    this.institutionProxy.getInstitutionDetails(insId)
+    .subscribe((res: any) => {
+      this.insCountryList=res.countries;
+    })
 
   }
 

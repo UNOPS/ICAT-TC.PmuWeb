@@ -92,7 +92,7 @@ export class AddCountryComponent implements OnInit, AfterViewInit {
 
     const token = localStorage.getItem('access_token')!;
     const tokenPayload = decode<any>(token);
-    let institutionId = tokenPayload.institutionId;
+    let institutionId = tokenPayload.institutionId ? tokenPayload.institutionId :0;
 
     let countryFilter: string[] = [];
     countryFilter.push('Country.IsSystemUse||$eq||' + 0);
