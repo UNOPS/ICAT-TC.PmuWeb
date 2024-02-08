@@ -104,7 +104,6 @@ export class DashboardComponent implements OnInit {
         this.countryList = await res;
       }
       else if(institutionId){
-        console.log(res)
         this.countryList = await res.items;
       }
     

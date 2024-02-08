@@ -106,8 +106,6 @@
               <th>USER TYPE</th>
               <th>ACTIVITY</th>
               <th>DATE</th>
-           <th>TIME</th> 
-              <th>STATUS</th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-activities>
@@ -117,10 +115,7 @@
               <td>{{ activities.userName }}</td>
               <td>{{ activities.userType }}</td>
               <td>{{ activities.actionStatus }}</td>
-              <td>{{ activities.logDate}}</td>
-              <td>{{ activities.logTime}}</td>
-
-              <td>{{  activities.description}}</td>
+              <td>{{ activities.createdOn }}</td>
             </tr>
           </ng-template>
         </p-table>

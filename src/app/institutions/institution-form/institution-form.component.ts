@@ -102,8 +102,14 @@ this.countryProxy.getAllCo()
         type.id = this.institution.type.id
 
         let ins =new Institution();
+        let coArry :Country[] =[];
+        for(let data of this.listc){
+          let co = new Country;
+          co.id= data.id;
+          coArry.push(co)
+        }
 
-        ins.countries = this.listc;
+        ins.countries = coArry;
         ins.name =this.institution.name;
         ins.address =this.institution.address;
         ins.contactNumber =this.institution.contactNumber;
