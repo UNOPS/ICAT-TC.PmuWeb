@@ -99,13 +99,13 @@ export class AddCountryComponent implements OnInit, AfterViewInit {
     if(institutionId != undefined){
       countryFilter.push('institution.id||$eq||' +institutionId);  
      }
-     this.countryProxy.getAllCountry(
-      1,
-      1000,
-      institutionId,
+     this.countryProxy.getAllCo(
     ).subscribe(data => {
-      for(let co of data.items){
-        if(co.isSystemUse==false){
+      for(let co of data){
+        if(institutionId !=0 && co.isSystemUse==false ){
+          this.countryList.push(co)
+        }
+        if(institutionId ==0 && co.isSystemUse==false){
           this.countryList.push(co)
         }
       }})
