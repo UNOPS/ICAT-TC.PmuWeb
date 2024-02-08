@@ -4,7 +4,7 @@ export const environment = {
   baseUrlAPI: 'https://tc-pmu-be.climatesi.com',
   baseUrlAPIDocUploadAPI: '',
   baseUrlAPIDocdownloadAPI: '',
-  baseUrlCountryAPI: 'htts://tc-main.climatesi.com',
+  baseUrlCountryAPI: 'https://tc-main.climatesi.com',
   baseUrlAuditlog: 'https://tc-audit.climatesi.com',
 
   baseSyncAPI: 'https://tc-auth.climatesi.com',
