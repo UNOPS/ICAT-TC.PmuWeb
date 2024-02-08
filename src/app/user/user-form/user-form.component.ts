@@ -133,6 +133,39 @@ export class UserFormComponent implements OnInit {
       });
 
     await this.route.queryParams.subscribe(async (params) => {
+
+      
+      this.editUserId = params['id'];
+
+      this.uid = this.editUserId;
+      if (this.editUserId && this.editUserId > 0) {
+
+        this.isNewUser = false;
+        await this.serviceProxy
+          .getOneBaseUsersControllerUser(
+            this.editUserId,
+            undefined,
+            undefined,
+            0,
+          )
+          .subscribe(async (res: any) => {
+            this.user = await res;
+            this.user.institution = res.institution;
+            this.user.userType = res.userType;
+            this.userTypes.push(res.userType)
+            this.userTypes.forEach((userlist) => {
+              if (userlist.id == res.userType.id) {
+                this.user.userType = userlist;
+              }
+            });
+            this.institutions.forEach((ins) => {
+              if (ins.id == res.institution.id) {
+                this.user.institution = ins;
+              }
+            });
+          });
+      }
+
       let filter2 = '' 
       this.filter2.push('4');
       if (['PMU Admin'].includes(tokenPayload.roles[0])) {
@@ -165,36 +198,6 @@ export class UserFormComponent implements OnInit {
           }
         });
 
-      this.editUserId = params['id'];
-
-      this.uid = this.editUserId;
-      if (this.editUserId && this.editUserId > 0) {
-
-        this.isNewUser = false;
-        this.serviceProxy
-          .getOneBaseUsersControllerUser(
-            this.editUserId,
-            undefined,
-            undefined,
-            0,
-          )
-          .subscribe((res: any) => {
-            this.user = res;
-            this.user.institution = res.institution;
-            this.user.userType = res.userType;
-            this.userTypes.push(res.userType)
-            this.userTypes.forEach((userlist) => {
-              if (userlist.id == res.userType.id) {
-                this.user.userType = userlist;
-              }
-            });
-            this.institutions.forEach((ins) => {
-              if (ins.id == res.institution.id) {
-                this.user.institution = ins;
-              }
-            });
-          });
-      }
     });
 
 
@@ -224,11 +227,15 @@ export class UserFormComponent implements OnInit {
     if (institutionId != undefined) {
       countryFilter = countryFilter + ' AND institution.id' +institutionId
     }
-    this.countryProxy.getManyFilteredCountries(countryFilter)
-      .subscribe((res) => {
-        this.countryList = res;
+
+    setTimeout(() => {
+      this.countryProxy.getManyFilteredCountries(countryFilter)
+      .subscribe(async (res) => {
+        this.countryList = await res;
         this.countryList.push(this.user.country);
       });
+    }, 2000);
+ 
   }
 
   onChangeUser(event: any) { }
