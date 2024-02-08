@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import {
   Country,
+  CountryControllerServiceProxy,
+  CreateUserDto,
   Institution,
   InstitutionControllerServiceProxy,
   ServiceProxy,
   User,
   UsersControllerServiceProxy,
   UserType,
+  UserTypeControllerServiceProxy,
 } from 'shared/service-proxies/service-proxies';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -59,7 +62,7 @@ export class UserFormComponent implements OnInit {
   coreatingUser = false;
   uid: any;
 
-  filter: string[] = [];
+  filter: string='';
   filter2: string[] = [];
   countryUserList: any[] = [];
   instituteUserList: any[] = [];
@@ -74,41 +77,30 @@ export class UserFormComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private userProxy: UsersControllerServiceProxy,
     private insProxy: InstitutionControllerServiceProxy,
+    private userTypeControllerProxy: UserTypeControllerServiceProxy,
+    private countryProxy: CountryControllerServiceProxy,
     private http: HttpClient,
   ) { }
 
-  utypeid(event: any) {
+  async utypeid(event: any) {
     const token = localStorage.getItem('access_token')!;
     const tokenPayload = decode<any>(token);
     const institutionId = tokenPayload.institutionId;
 
     this.uid = event;
 
-    this.filter = [];
-    this.filter.push('status||$ne||' + 1)
+    this.filter = 'status !=1' 
+   
     if (this.uid?.id === 5) {
-      this.filter.push('id||$eq||' + 1);
+      this.filter = this.filter + ' AND id =' + 1
     } else {
       if (institutionId) {
-        this.filter.push('id||$eq||' + institutionId);
+        this.filter = this.filter + ' AND id =' + institutionId
       }
     }
-
-    this.serviceProxy
-      .getManyBaseInstitutionControllerInstitution(
-        undefined,
-        undefined,
-        this.filter,
-        undefined,
-        undefined,
-        undefined,
-        1000,
-        0,
-        1,
-        0,
-      )
+    await this.insProxy.getFilteredInstitution(this.filter)
       .subscribe((res) => {
-        this.institutions = res.data;
+        this.institutions = res;
 
         if (this.user?.institution) {
           this.institutions.forEach((ins) => {
@@ -127,26 +119,10 @@ export class UserFormComponent implements OnInit {
     const token = localStorage.getItem('access_token')!;
     const tokenPayload = decode<any>(token);
     const institutionId = tokenPayload.institutionId;
-
-    let filter1 = [];
-    filter1.push('status||$ne||' + 1)
-
-  
-    await this.serviceProxy
-      .getManyBaseInstitutionControllerInstitution(
-        undefined,
-        undefined,
-        filter1,
-        undefined,
-        undefined,
-        undefined,
-        1000,
-        0,
-        1,
-        0,
-      )
+    let filter1 = 'status !=1'
+    await this.insProxy.getFilteredInstitution(filter1)
       .subscribe((res) => {
-        this.institutions = res.data;
+        this.institutions = res;
         if (this.user?.institution) {
           this.institutions.forEach((ins) => {
             if (ins.id == this.user.institution.id) {
@@ -157,12 +133,11 @@ export class UserFormComponent implements OnInit {
       });
 
     await this.route.queryParams.subscribe(async (params) => {
-      let filter2 = [];
-      filter2.push('status||$ne||' + 1);
-      this.filter2.push('id||$ne||' + 4);
+      let filter2 = '' 
+      this.filter2.push('4');
       if (['PMU Admin'].includes(tokenPayload.roles[0])) {
-        this.filter2.push('id||$ne||' + 5);
-        this.filter2.push('id||$ne||' + 1);
+        this.filter2.push('5');
+        this.filter2.push('1');
       }
 
       this.userProxy.getUserType("ICAT Admin").subscribe((res)=>{
@@ -178,38 +153,9 @@ export class UserFormComponent implements OnInit {
           }
         }
       })
-      this.serviceProxy
-        .getManyBaseUserTypeControllerUserType(
-          undefined,
-          undefined,
-          this.filter2,
-          undefined,
-          ['name,ASC'],
-          undefined,
-          1000,
-          0,
-          0,
-          0,
-        )
-        .subscribe((res: any) => {
-          this.userTypes = res.data;
-        });
-
-      await this.serviceProxy
-        .getManyBaseInstitutionControllerInstitution(
-          undefined,
-          undefined,
-          filter2,
-          undefined,
-          undefined,
-          undefined,
-          1000,
-          0,
-          1,
-          0,
-        )
+      await this.insProxy.getFilteredInstitution(filter2)
         .subscribe((res) => {
-          this.institutions = res.data;
+          this.institutions = res;
           if (this.user?.institution) {
             this.institutions.forEach((ins) => {
               if (ins.id == this.user.institution.id) {
@@ -258,61 +204,29 @@ export class UserFormComponent implements OnInit {
 
 
     if (tokenPayload.roles[0] == 'PMU Admin') {
-      this.filter2.push('id||$ne||' + 4) &
-        this.filter2.push('id||$ne||' + 5) &
-        this.filter2.push('id||$ne||' + 1);
+        this.filter2.push('4') &
+        this.filter2.push('5') &
+        this.filter2.push('1');
     } else if (tokenPayload.roles[0] == 'PMU User') {
-      this.filter2.push('id||$ne||' + 4) &
-        this.filter2.push('id||$ne||' + 5) &
-        this.filter2.push('id||$ne||' + 1) &
-        this.filter2.push('id||$ne||' + 3);
+        this.filter2.push('4') &
+        this.filter2.push('5') &
+        this.filter2.push('1') &
+        this.filter2.push('3');
     } else {
-      this.filter2.push('id||$ne||' + 4);
+      this.filter2.push('4');
     }
-
-
-
-    this.serviceProxy
-      .getManyBaseUserTypeControllerUserType(
-        undefined,
-        undefined,
-        this.filter2,
-        undefined,
-        ['name,ASC'],
-        undefined,
-        1000,
-        0,
-        0,
-        0,
-      )
+    await this.userTypeControllerProxy.getManyUserTypes(this.filter2)
       .subscribe((res: any) => {
-        this.userTypes = res.data;
+        this.userTypes = res;
       });
 
-
-
-    const countryFilter: string[] = [];
-    countryFilter.push('Country.IsSystemUse||$eq||' + 1);
-    countryFilter.push('Country.IsCA||$isnull');
+    let countryFilter = 'isSystemUse =1 AND isCA IS NULL '  ;
     if (institutionId != undefined) {
-      countryFilter.push('institution.id||$eq||' + institutionId);
+      countryFilter = countryFilter + ' AND institution.id' +institutionId
     }
-
-    this.serviceProxy
-      .getManyBaseCountryControllerCountry(
-        undefined,
-        undefined,
-        countryFilter,
-        undefined,
-        ['name,ASC'],
-        undefined,
-        1000,
-        0,
-        1,
-        0,
-      )
+    this.countryProxy.getManyFilteredCountries(countryFilter)
       .subscribe((res) => {
-        this.countryList = res.data;
+        this.countryList = res;
         this.countryList.push(this.user.country);
       });
   }
@@ -320,24 +234,10 @@ export class UserFormComponent implements OnInit {
   onChangeUser(event: any) { }
 
   onChangeCountry(event: any) {
-    const countryAndUserFilter: string[] = [];
-    countryAndUserFilter.push('country.id||$eq||' + event.id) &
-      countryAndUserFilter.push('userType.id||$eq||' + this.uid.id);
-    this.serviceProxy
-      .getManyBaseUsersControllerUser(
-        undefined,
-        undefined,
-        countryAndUserFilter,
-        undefined,
-        undefined,
-        undefined,
-        1000,
-        0,
-        0,
-        0,
-      )
+    let countryAndUserFilter = 'country.id =' + event.id + ' AND userType.id = ' + this.uid.id;
+    this.userProxy.getFilteredUsers(countryAndUserFilter)
       .subscribe((res: any) => {
-        this.countryUserList = res.data;
+        this.countryUserList = res;
         if (this.countryUserList.length > 0) {
           this.message =
             'Already have, You can not add more than one Country Admin for ' +
@@ -356,24 +256,10 @@ export class UserFormComponent implements OnInit {
 
   onChangeInstitutioon(event: any) {
     if (event) {
-      const instituteAndUserFilter: string[] = [];
-      instituteAndUserFilter.push('institution.id||$eq||' + event.id) &
-        instituteAndUserFilter.push('userType.id||$eq||' + this.uid.id);
-      this.serviceProxy
-        .getManyBaseUsersControllerUser(
-          undefined,
-          undefined,
-          instituteAndUserFilter,
-          undefined,
-          undefined,
-          undefined,
-          1000,
-          0,
-          0,
-          0,
-        )
+      const instituteAndUserFilter = 'institution.id =' + event.id + ' AND userType.id = ' + this.uid.id;
+      this.userProxy.getFilteredUsers(instituteAndUserFilter)
         .subscribe((res: any) => {
-          this.instituteUserList = res.data;
+          this.instituteUserList = res;
           if (this.instituteUserList.length > 0 && this.uid.id == 1) {
             this.message =
               'Already have, You can not add more than one PMU Admin for ' +
@@ -417,24 +303,8 @@ export class UserFormComponent implements OnInit {
       if (this.isNewUser) {
         this.isEmailUsed = false;
         this.usedEmail = '';
-
-        const tempUsers = await this.serviceProxy
-          .getManyBaseUsersControllerUser(
-            undefined,
-            undefined,
-            ['email||$eq||' + this.user.email],
-            undefined,
-            ['firstName,ASC'],
-            ['institution'],
-            1,
-            0,
-            0,
-            0,
-          )
-          .subscribe((res) => {
-            if (res.data.length > 0) {
+            if (this.isEmailUsed) {
               this.isEmailUsed = true;
-              this.usedEmail = res.data[0].email;
               this.confirmationService.confirm({
                 message:
                   'Email address is already in use, please select a diffrent email address to create a new user.!',
@@ -454,11 +324,28 @@ export class UserFormComponent implements OnInit {
               const userType = new UserType();
               userType.id = this.user.userType.id;
               this.user.userType = userType;
-
               this.coreatingUser = true;
               const url = environment.baseSyncAPI + '/login-profile/syncuser';
-              this.serviceProxy
-                .createOneBaseUsersControllerUser(this.user)
+
+              let createUserDto = new CreateUserDto()
+              createUserDto.email = this.user.email
+              createUserDto.firstName = this.user.firstName
+              createUserDto.lastName = this.user.lastName
+              createUserDto.mrvInstitution = this.user.mrvInstitution
+              createUserDto.username = this.user.username
+              createUserDto.mobile = this.user.mobile
+              createUserDto.telephone = this.user.telephone
+              if(this.user.country ){
+                createUserDto.country = this.user.country.id
+              }
+              createUserDto.userType = this.user.userType.id
+              if(this.user.institution ){
+                createUserDto.institution = this.user.institution.id
+              }
+              
+
+              this.userProxy
+                .create(createUserDto)
                 .subscribe(
                   async (res) => {
                     this.messageService.add({
@@ -487,10 +374,16 @@ export class UserFormComponent implements OnInit {
                   },
                 );
             }
-          });
+          // });
       } else {
-        this.serviceProxy
-          .updateOneBaseUsersControllerUser(this.user.id, this.user)
+       
+        if(this.user.institution ){
+          let ins = new Institution()
+          ins.id = this.user.institution.id
+          this.user.institution = ins
+        }
+        this.userProxy
+          .updateOneUser(this.user.id, this.user)
           .subscribe(
             (res) => {
               this.messageService.add({
