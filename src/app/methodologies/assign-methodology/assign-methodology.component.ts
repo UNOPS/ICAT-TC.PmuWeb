@@ -3,7 +3,6 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import axios from 'axios';
 import { environment } from 'environments/environment';
-import { TreeNode } from 'primeng/api';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import {
   Country,
@@ -12,7 +11,6 @@ import {
   Methodology,
   MethodologyData,
   Sector,
-  ServiceProxy,
   SectorControllerServiceProxy
 
 } from 'shared/service-proxies/service-proxies';
@@ -56,7 +54,6 @@ export class AssignMethodologyComponent implements OnInit, AfterViewInit {
   
 
   constructor(
-    private serviceProxy: ServiceProxy,
     private countryProxy: CountryControllerServiceProxy,
     private sectorproxy :SectorControllerServiceProxy,
     private cdr: ChangeDetectorRef,
@@ -121,64 +118,10 @@ for(let i=0; i<event.length; i++){
 
    methFilter.push('MethodologyData.indicatorId||$eq||' + this.indicatorId);
 
-    await this.serviceProxy.getManyBaseMethodologyDataControllerMethodologyData(
-      undefined,
-      undefined,
-      undefined,
-      methFilter,
-      undefined,
-      undefined,
-      1000,
-      0,
-      0,
-      0
-    ).subscribe((res: any) => {
-     
-      this.methodologyList = res.data;
-    });
+    
     
  
 
-    this.serviceProxy.getManyBaseMethodologyControllerMethodology(
-      undefined,
-      undefined,
-      undefined,
-      filter,
-      undefined,
-      undefined,
-      1000,
-      0,
-      event.id,
-      0
-    ).subscribe((ress: any) => {
-      this.selectedMethodSelected = [];
-      this.countryMethList = []; 
-      this.oldCountryMeth = ress.data;
-      this.oldCountryMeth.forEach(a => {
-        if (!this.oldMethName.includes(a.name)) {
-          this.oldMethName.push(a.name)
-        }
-        if (a.indicator) {
-          this.selectedIndicators.forEach(b => {
-            if (a.indicator.id == b.id && a.isActive == 1) {
-              this.countryMethList.push(a);
-            }
-          })
-        }
-      })
-
-      this.countryMethList.forEach(p1 => {
-        if (p1.method) {
-          this.methodologyList.forEach(a => {
-            if (a.id == p1.method.id) {
-              this.selectedMethodSelected.push(a);
-
-            }
-          })
-        }
-      })
-
-    });
 
   }
 
@@ -195,9 +138,7 @@ for(let i=0; i<event.length; i++){
 
     await this.oldCountryMeth.forEach(async old => {
       old.isActive = 2;
-      this.serviceProxy.updateOneBaseMethodologyControllerMethodology(old.id, old).subscribe((res) => {
-      
-      });
+    
 
     });
 
@@ -228,18 +169,13 @@ for(let i=0; i<event.length; i++){
           newone.indicator = a.indicator;
 
           newone.method = a;
-          await this.serviceProxy.createOneBaseMethodologyControllerMethodology(newone).subscribe((res) => {
-            
-
-          });
+       
         }
         else {
           await this.oldCountryMeth.forEach(async old => {
             if (old.name == a.name && old.country.id == this.country.id) {
               old.isActive = 1;
-              await this.serviceProxy.updateOneBaseMethodologyControllerMethodology(old.id, old).subscribe((res) => {
-                
-              })
+             
 
             }
           })
@@ -270,23 +206,7 @@ for(let i=0; i<event.length; i++){
     let countryFilter: string[] = [];
     countryFilter.push('Country.IsSystemUse||$eq||' + 1);
 
-    this.serviceProxy
-      .getManyBaseCountryControllerCountry(
-        undefined,
-        undefined,
-        countryFilter,
-        undefined,
-        ["editedOn,DESC"],
-        undefined,
-        1000,
-        0,
-        0,
-        0
-      ).subscribe((res: any) => {
-        this.countryList = res.data;
-
-
-      });
+    
 
 
   }

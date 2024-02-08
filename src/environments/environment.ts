@@ -5,10 +5,9 @@ export const environment = {
   baseUrlAPI: 'http://localhost:7081',
   baseUrlAPIDocUploadAPI: '',
   baseUrlAPIDocdownloadAPI: '',
-  baseUrlCountryAPI: '',
+  baseUrlCountryAPI: 'htts://tc-main.climatesi.com',
   baseUrlAuditlog :  '',
 
-  baseSyncAPI: '',
-  baseMainSyncAPI: '',
+  baseSyncAPI: 'https://tc-auth.climatesi.com',
 
 };

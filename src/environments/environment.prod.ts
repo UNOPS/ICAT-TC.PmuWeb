@@ -7,6 +7,5 @@ export const environment = {
   baseUrlCountryAPI: 'htts://tc-main.climatesi.com',
   baseUrlAuditlog: 'https://tc-audit.climatesi.com',
 
-  baseSyncAPI: '',
-  baseMainSyncAPI: '',
+  baseSyncAPI: 'https://tc-auth.climatesi.com',
 };

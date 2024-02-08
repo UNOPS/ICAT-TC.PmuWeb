@@ -50,12 +50,8 @@ export class InstitutionFormComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
 
-    const token = localStorage.getItem('access_token')!;
-    const tokenPayload = decode<any>(token);
-    let institutionId = tokenPayload.institutionId;
 
     this.insTypeProxy.getAllCo().subscribe((res)=>{
-      console.log(res)
       this.selectedTypeList = res;
     })
 
@@ -102,14 +98,16 @@ this.countryProxy.getAllCo()
 
     if (formData.valid) {
       if (this.isNewInstitution) {
+        let type = new InstitutionType()
+        type.id = this.institution.type.id
+
         let ins =new Institution();
+
         ins.countries = this.listc;
         ins.name =this.institution.name;
         ins.address =this.institution.address;
         ins.contactNumber =this.institution.contactNumber;
-        ins.description =this.institution.description;
-        let type = new InstitutionType()
-        type.id = this.institution.type.id
+        ins.description =this.institution.description;        
         ins.type=type;
 
         this.serviceProxy

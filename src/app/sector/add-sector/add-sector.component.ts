@@ -11,15 +11,8 @@ import {
 } from 'primeng/api';
 
 import {
-  Project,
-  ProjectApprovalStatus,
-  ProjectControllerServiceProxy,
-  ProjectOwner,
-  ProjectStatus,
   Sector,
   
-  SectorControllerServiceProxy,
-  ServiceProxy,
   SubSector,
 } from 'shared/service-proxies/service-proxies';
 
@@ -40,10 +33,6 @@ export class AddSectorComponent implements OnInit,AfterViewInit {
 
   @ViewChild('op') overlay: any;
   constructor(
-    private router: Router,
-    private serviceProxy: ServiceProxy,
-    private projectProxy: ProjectControllerServiceProxy,
-    private sectorProxy: SectorControllerServiceProxy,
     private cdr: ChangeDetectorRef,
     private messageService :MessageService,
   ) { }
@@ -89,12 +78,7 @@ export class AddSectorComponent implements OnInit,AfterViewInit {
     sctr.description = this.typedSectorDescription;
     sctr.subSector = this.subSectorList;
 
-        this.serviceProxy
-    .createOneBaseSectorControllerSector(sctr)
-    .subscribe((res: any) => {
-    this.messageService.add({severity:'success', summary:'Confirmed', detail:'You have successfully added.'});
-
-      });
+       
 
   }
 
