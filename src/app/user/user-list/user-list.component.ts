@@ -5,16 +5,14 @@ import {
   Institution,
   InstitutionControllerServiceProxy,
   ReqUserDto,
-  ServiceProxy,
   User,
   UserType,
   UsersControllerServiceProxy,
 } from 'shared/service-proxies/service-proxies';
 import { Table, TableModule } from 'primeng/table';
-import { LazyLoadEvent, MessageService, SelectItem } from 'primeng/api';
+import { LazyLoadEvent, } from 'primeng/api';
 import { Router } from '@angular/router';
 import decode from 'jwt-decode';
-import { filter } from 'rxjs/operators';
 
 
 
@@ -53,7 +51,6 @@ export class UserListComponent implements OnInit {
   pmuFilter: string[] = [];
 
   constructor(
-    private serviceProxy: ServiceProxy,
     private userProxy: UsersControllerServiceProxy,
     private insProxy: InstitutionControllerServiceProxy,
     private countryProxy: CountryControllerServiceProxy,
@@ -183,6 +180,12 @@ export class UserListComponent implements OnInit {
     let orFilter: string[] = []
     let andFilter: string[] = this.getFilterand()
 
+    let pageNumber =
+    event.first === 0 || event.first === undefined
+      ? 1
+      : event.first / (event.rows === undefined ? 1 : event.rows) + 1;
+  this.rows = event.rows === undefined ? 10 : event.rows;
+
     if ((this.userrole === "PMU Admin" || this.userrole === "PMU User") && this.userCountries.length > 0 && andFilter.length === 4) {
       orFilter.push(...this.pmuFilter, 'country.id in' + this.userCountries)
     }
@@ -191,7 +194,7 @@ export class UserListComponent implements OnInit {
     let req=new ReqUserDto();
     req.andoprator = str1;
     req.oroprator =str2;
-    req.first= 1;
+    req.first= pageNumber;
     req.row =event.rows;
     this.userProxy.getUserByCountry(req).subscribe(res=>{
       this.customers = res.items;
@@ -199,24 +202,6 @@ export class UserListComponent implements OnInit {
       this.loading = false;
     })
 
-    // this.serviceProxy
-    //   .getManyBaseUsersControllerUser(
-    //     undefined,
-    //     undefined,
-    //     andFilter,
-    //     orFilter,
-    //     ['firstName,ASC'],
-    //     ['institution'],
-    //     event.rows,
-    //     event.first,
-    //     0,
-    //     0
-    //   )
-    //   .subscribe((res) => {
-    //     this.totalRecords = res.total;
-    //     this.customers = res.data;
-    //     this.loading = false;
-    //   });
   }
 
   editUser(user: User) {

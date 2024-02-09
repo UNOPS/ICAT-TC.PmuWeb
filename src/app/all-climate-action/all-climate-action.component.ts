@@ -17,7 +17,6 @@ import {
   ProjectOwner,
   ProjectStatus,
   Sector,
-  ServiceProxy,
 } from 'shared/service-proxies/service-proxies';
 
 @Component({
@@ -66,7 +65,6 @@ export class AllClimateActionComponent implements OnInit,AfterViewInit {
 
   constructor(
     private router: Router,
-    private serviceProxy: ServiceProxy,
     private projectProxy: ProjectControllerServiceProxy,
     private cdr: ChangeDetectorRef,
     
@@ -86,38 +84,7 @@ export class AllClimateActionComponent implements OnInit,AfterViewInit {
   }
 
   ngOnInit(): void {
-      this.serviceProxy.
-      getManyBaseProjectStatusControllerProjectStatus(
-       undefined,
-       undefined,
-       undefined,
-       undefined,
-       undefined,
-       undefined,
-       1000,
-       0,
-       0,
-       0
-      ).subscribe((res: any) => {
-       this.projectStatusList = res.data;
-     });
-
-   this.serviceProxy
-     .getManyBaseProjectApprovalStatusControllerProjectApprovalStatus(
-       undefined,
-       undefined,
-       undefined,
-       undefined,
-       undefined,
-       undefined,
-       1000,
-       0,
-       0,
-       0
-     )
-     .subscribe((res: any) => {
-       this.projectApprovalStatus = res.data;
-     });
+     
  
     let statusId = this.searchBy.status ? this.searchBy.status.id : 0;
     let projectApprovalStatusId = this.searchBy.ApprovalStatus ? this.searchBy.ApprovalStatus.id : 0;

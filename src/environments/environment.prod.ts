@@ -8,5 +8,4 @@ export const environment = {
   baseUrlAuditlog: '',
 
   baseSyncAPI: '',
-  baseMainSyncAPI: '',
 };

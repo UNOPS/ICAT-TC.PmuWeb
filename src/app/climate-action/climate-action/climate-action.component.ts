@@ -11,10 +11,8 @@ import {
   MitigationActionType,
   Project,
   ProjectControllerServiceProxy,
-  ProjectOwner,
   ProjectStatus,
   Sector,
-  ServiceProxy,
 } from 'shared/service-proxies/service-proxies';
 
 @Component({
@@ -66,7 +64,6 @@ export class ClimateActionComponent implements OnInit, AfterViewInit {
   statusList: string[] = new Array();
   constructor(
     private router: Router,
-    private serviceProxy: ServiceProxy,
     private projectProxy: ProjectControllerServiceProxy,
     private cdr: ChangeDetectorRef
   ) {}
@@ -76,80 +73,9 @@ export class ClimateActionComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
 
-    this.serviceProxy
-      .getManyBaseProjectControllerProject(
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        ['editedOn,DESC'],
-        undefined,
-        1000,
-        0,
-        0,
-        0
-      )
-      .subscribe((res: any) => {
-        this.climateactions = res.data;
-        this.totalRecords = res.totalRecords;
-        if (res.totalRecords !== null) {
-          this.last = res.count;
-        } else {
-          this.last = 0;
-        }
+   
 
-      });
-
-    this.serviceProxy
-      .getManyBaseSectorControllerSector(
-        ['name'],
-        undefined,
-        undefined,
-        undefined,
-        ['name,ASC'],
-        undefined,
-        1000,
-        0,
-        0,
-        0
-      )
-      .subscribe((res: any) => {
-        this.sectorList = res.data;
-      });
-
-    this.serviceProxy
-      .getManyBaseProjectStatusControllerProjectStatus(
-        ['name'],
-        undefined,
-        undefined,
-        undefined,
-        ['name,ASC'],
-        undefined,
-        1000,
-        0,
-        0,
-        0
-      )
-      .subscribe((res: any) => {
-        this.projectStatusList = res.data;
-      });
-
-    this.serviceProxy
-      .getManyBaseMitigationActionControllerMitigationActionType(
-        ['name'],
-        undefined,
-        undefined,
-        undefined,
-        ['name,ASC'],
-        undefined,
-        1000,
-        0,
-        0,
-        0
-      )
-      .subscribe((res: any) => {
-        this.mitigationActionList = res.data;
-      });
+  
   }
 
 
@@ -198,22 +124,6 @@ export class ClimateActionComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    this.serviceProxy
-      .getManyBaseProjectControllerProject(
-        undefined,
-        undefined,
-        undefined,
-        searchfilter,
-        undefined,
-        undefined,
-        10,
-        0,
-        0,
-        0
-      )
-      .subscribe((res) => {
-        this.climateactions = res.data;
-      });
   }
 
   onSearch() {

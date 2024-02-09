@@ -1,13 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ChartErrorEvent } from 'countries-map';
 import { } from "googlemaps";
 import { CountriesData } from 'countries-map';
-import { Country, ServiceProxy, UserType } from 'shared/service-proxies/service-proxies';
+import { Country, CountryControllerServiceProxy, } from 'shared/service-proxies/service-proxies';
 import decode from 'jwt-decode';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
-import { catchError, reduce, tap } from 'rxjs/operators';
-import { Chart } from 'chart.js';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -45,7 +42,8 @@ export class DashboardComponent implements OnInit {
   countries: Country[];
   selectedCountryForMethology: Country;
   slectedCountryForUsertype: Country;
-  constructor(private serviceproxy: ServiceProxy,
+  constructor(
+    private countryProxy: CountryControllerServiceProxy,
     private http: HttpClient) { }
 
   ngOnInit(): void {
@@ -99,21 +97,18 @@ export class DashboardComponent implements OnInit {
     if (institutionId) {
       filter.push('institution.id||$eq||' + institutionId)
     }
-    this.serviceproxy.getManyBaseCountryControllerCountry(
-      undefined,
-      undefined,
-      filter,
-      undefined,
-      undefined,
-      undefined,
-      1000,
-      0,
-      0,
-      0
-    ).subscribe((res => {
-      this.countryList = res.data;
+
+    this.countryProxy.getAllCountryByFilter(1,1000, 'institution.id =' +institutionId)
+    .subscribe(async (res)=>{
+      if(institutionId ==undefined){
+        this.countryList = await res;
+      }
+      else if(institutionId){
+        this.countryList = await res.items;
+      }
+    
       let count = 0;
-      for (let c of res.data) {
+      for (let c of this.countryList) {
 
         this.src1 = c.flagPath;
 
@@ -121,26 +116,10 @@ export class DashboardComponent implements OnInit {
 
         count++;
       }
-
-
       let countmem = 0;
-      let filternew1: string[] = new Array();
-
-
-      filternew1.push('isMember||$eq||' + 1) ;
-      this.serviceproxy.getManyBaseCountryControllerCountry(
-        undefined,
-        undefined,
-        filternew1,
-        undefined,
-        undefined,
-        undefined,
-        1000,
-        0,
-        0,
-        0
-      ).subscribe((res => {
-        countmem = res.data.length;
+      this.countryProxy.getAllCountryByFilter(1,1000, 'isMember =' +1)
+      .subscribe((re)=>{
+        countmem = re.items.length;
         this.res(countmem);
         this.basicData = {
           labels: [''],
@@ -160,31 +139,15 @@ export class DashboardComponent implements OnInit {
 
           ]
         }
-      }));
-
-
-
-      let membercount = this.isMemberCount();
+      });
+      let membercount = this.res(countmem);
       this.mapData1 = this.mapData2;
+    })
 
-
-    }))
-    let filter1: string[] = new Array();
-    filter1.push('isSystemUse||$eq||' + 1);
-    this.serviceproxy.getManyBaseCountryControllerCountry(
-      undefined,
-      undefined,
-      filter1,
-      undefined,
-      undefined,
-      undefined,
-      1000,
-      0,
-      0,
-      0)
+    this.countryProxy.getAllCountryByFilter(1,1000, 'isSystemUse =' +1)
       .subscribe(res => {
-        this.countries = res.data;
-      })
+        this.countries = res.items;
+      });
 
 
 
@@ -343,21 +306,11 @@ export class DashboardComponent implements OnInit {
     if (this.selectedCountryCode != null) {
       let filter: string[] = new Array();
       filter.push('code||$eq||' + this.selectedCountryCode);
-      this.serviceproxy.getManyBaseCountryControllerCountry(
-        undefined,
-        undefined,
-        filter,
-        undefined,
-        undefined,
-        undefined,
-        1000,
-        0,
-        0,
-        0
-      ).subscribe((res => {
-        this.selectedMapCountry = res.data.find((obj) => obj.code == this.selectedCountryCode);
-
-      }))
+      this.countryProxy.getAllCountryByFilter(1,1000, 'code = "' + this.selectedCountryCode +'"')
+      .subscribe(res => {
+        this.selectedMapCountry = res.items.find((obj:any) => obj.code == this.selectedCountryCode);
+       
+      });
     }
 
     this.position = 'right';
@@ -365,30 +318,6 @@ export class DashboardComponent implements OnInit {
 
   }
 
-
-  isMemberCount(): number {
-    let countmem = 0;
-    let filternew1: string[] = new Array();
-    filternew1.push('isMember||$eq||' + 1);
-    this.serviceproxy.getManyBaseCountryControllerCountry(
-      undefined,
-      undefined,
-      filternew1,
-      undefined,
-      undefined,
-      undefined,
-      1000,
-      0,
-      0,
-      0
-    ).subscribe((res => {
-      countmem = res.data.length;
-      this.res(countmem);
-
-    }));
-
-    return this.count;
-  }
 
   res(count: number): number {
     this.count = count;

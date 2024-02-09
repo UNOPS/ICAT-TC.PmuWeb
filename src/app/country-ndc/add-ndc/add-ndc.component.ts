@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 
-import { Country, Ndc, Sector, ServiceProxy, SubNdc } from 'shared/service-proxies/service-proxies';
+import { Country, Ndc, Sector, SubNdc } from 'shared/service-proxies/service-proxies';
 
 @Component({
   selector: 'app-add-ndc',
@@ -29,7 +29,7 @@ export class AddNdcComponent implements OnInit {
   confirm4: boolean = false;
   confirm3: boolean = false;
 
-  constructor(private router: Router, private serviceproxy:ServiceProxy, private activerouter: ActivatedRoute) { }
+  constructor(private router: Router,private activerouter: ActivatedRoute) { }
 
   confirm2: boolean = false;
   subNdc: any;
@@ -45,21 +45,7 @@ export class AddNdcComponent implements OnInit {
       this.selectedtypeId = params['ndcsetid'];
     }));
     
-    this.serviceproxy.getOneBaseCountryControllerCountry(
-      this.countryId,
-      undefined,
-      undefined,
-      undefined).subscribe((res=>{
-        this.country = res;
-      }))
-  
-      this.serviceproxy.getOneBaseSectorControllerSector(
-        this.sectorId,
-        undefined,
-        undefined,
-        undefined).subscribe((res=>{
-          this.sector = res;
-        }))
+    
     
      this.values = [
       { "testvalue" : "this.data.find('name')"}
@@ -79,31 +65,7 @@ export class AddNdcComponent implements OnInit {
    save(){
    this.confirm2 = true;
    if(this.ndc!=null || this.ndc!=undefined){
-   this.serviceproxy.getOneBaseNdcSetControllerNdcSet(this.ndcsetid,undefined,undefined,undefined).subscribe((res=>{
-    this.newndc.name=this.ndc;
-    this.newndc.set = res;
-    this.newndc.editedOn = moment();
-    this.newndc.sortOrder=1;
-    this.newndc.createdOn= moment();
-    this.newndc.description = "test";
-    this.newndc.country = this.country;
-    this.newndc.sector = this.sector;
-    this.newndc.subNdc = this.subndcs;
    
-    this.serviceproxy.createOneBaseNdcControllerNdc(this.newndc).subscribe((res=>{
-      this.selectedtypeId =  res.id;
-      for(let s of this.subndcs){
-        s.ndc=res;
-        
-
-        this.serviceproxy.createOneBaseSubNdcControllerSubNdc(s).subscribe((res=>{
-        
-        }))
-      }
-    }));
-   
-
-   }));
    this.confirm3=true;
   }else{
     this.confirm4=true;

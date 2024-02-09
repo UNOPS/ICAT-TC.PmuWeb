@@ -10,9 +10,10 @@ import {
   AuditControllerServiceProxy,
   ServiceProxy,
   User,
+  UsersControllerServiceProxy,
 } from 'shared/service-proxies/service-proxies';
 
-import {Audit as audit,AuditControllerServiceProxy as auditControllerServiceProxy} from 'shared/service-proxies-auditlog/service-proxies'
+// import {Audit as audit} from 'shared/service-proxies-auditlog/service-proxies'
 
 @Component({
   selector: 'app-audit',
@@ -25,12 +26,12 @@ export class AuditComponent implements OnInit {
   rows: number = 10;
   last: number;
   event: any;
-  Date =new Date();
+  Date = new Date();
   searchText: string;
   status: string[] = [];
   activityList: string[] = [];
   userTypeList: string[] = [];
-  
+
   searchBy: any = {
     text: null,
     usertype: null,
@@ -39,16 +40,17 @@ export class AuditComponent implements OnInit {
   };
 
   first = 0;
-  activities: audit[];
+  activities: Audit[];
   dateList: Date[] = [];
-  loggedusers: User[];
+  loggedusers: User;
   institutionId: number;
+  username:string
 
   constructor(
     private router: Router,
     private serviceProxy: ServiceProxy,
     private auditproxy: AuditControllerServiceProxy,
-    private auditserviceproxy:auditControllerServiceProxy,
+    private userproxy: UsersControllerServiceProxy,
     private cdr: ChangeDetectorRef,
     private http: HttpClient
   ) { }
@@ -60,35 +62,31 @@ export class AuditComponent implements OnInit {
 
     const token = localStorage.getItem('access_token')!;
     const tokenPayload = decode<any>(token);
-    const username = tokenPayload.usr;
-
-    let filters: string[] = [];
-    filters.push('username||$eq||' + username);
+    this.username = tokenPayload.usr;
 
 
 
 
 
 
+    // this.serviceProxy
+    //   .getManyBaseUsersControllerUser(
+    //     undefined,
+    //     undefined,
+    //     filters,
+    //     undefined,
+    //     ['editedOn,DESC'],
+    //     undefined,
+    //     1000,
+    //     0,
+    //     0,
+    //     0
 
-    this.serviceProxy
-      .getManyBaseUsersControllerUser(
-        undefined,
-        undefined,
-        filters,
-        undefined,
-        ['editedOn,DESC'],
-        undefined,
-        1000,
-        0,
-        0,
-        0
-
-      )
-      .subscribe((res) => {
-        this.loggedusers = res.data;
-        this.institutionId = this.loggedusers[0].institution.id;
-      });
+    //   )
+    //   .subscribe((res) => {
+    //     this.loggedusers = res.data;
+    //     this.institutionId = this.loggedusers[0].institution.id;
+    //   });
 
 
 
@@ -113,7 +111,12 @@ export class AuditComponent implements OnInit {
   }
 
 
-  loadgridData = (event: LazyLoadEvent) => {
+   loadgridData = async (event: LazyLoadEvent) => {
+   await  this.userproxy.findUserByUserName(this.username)
+    .subscribe(async (res) => {
+      this.loggedusers = await res;
+      this.institutionId = this.loggedusers.institution.id;
+    });
     this.loading = true;
     this.totalRecords = 0;
 
@@ -134,7 +137,7 @@ export class AuditComponent implements OnInit {
     this.rows = event.rows === undefined ? 10 : event.rows;
 
     setTimeout(() => {
-      this.auditserviceproxy
+      this.auditproxy
         .getAuditDetails(
           pageNumber,
           this.rows,

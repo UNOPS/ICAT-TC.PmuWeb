@@ -6,11 +6,9 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { Router } from '@angular/router';
 import axios from "axios";
 import {
   LearningMaterialControllerServiceProxy,
-  ServiceProxy,
   LearningMaterial,
   ProjectOwner,
   ProjectStatus,
@@ -24,7 +22,6 @@ import {
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { environment } from 'environments/environment';
 import decode from 'jwt-decode';
-import * as moment from 'moment';
 @Component({
   selector: 'app-learning-material',
   templateUrl: './learning-material.component.html',
@@ -98,7 +95,6 @@ export class LearningMaterialComponent implements OnInit, AfterViewInit {
   constructor(
     private LearningMaterialProxy: LearningMaterialControllerServiceProxy,
     private cdr: ChangeDetectorRef,
-    private serviceProxy: ServiceProxy,
     private messageService: MessageService
   ) {
     
@@ -124,24 +120,6 @@ export class LearningMaterialComponent implements OnInit, AfterViewInit {
 
 
 
-    this.serviceProxy
-      .getManyBaseSectorControllerSector(
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        1000,
-        0,
-        0,
-        0
-      )
-      .subscribe((res: any) => {
-        this.sectorList = res.data;
-
-      });
-
     let filter: string[] = [];
     if (this.userrole == "PMU Admin") {
       filter.push('name||$in||' + ["PMU Admin", "PMU User", "Country Admin"]);
@@ -157,22 +135,6 @@ export class LearningMaterialComponent implements OnInit, AfterViewInit {
     }
 
 
-    this.serviceProxy
-      .getManyBaseUserTypeControllerUserType(
-        undefined,
-        undefined,
-        filter,
-        undefined,
-        undefined,
-        undefined,
-        1000,
-        0,
-        0,
-        0
-      )
-      .subscribe((res: any) => {
-        this.typeList = res.data;
-      });
 
     this.loadgridData();
 
@@ -195,14 +157,7 @@ export class LearningMaterialComponent implements OnInit, AfterViewInit {
 
 
   deleteItem(newItem: any) {
-    this.serviceProxy
-      .deleteOneBaseLearningMaterialControllerLearningMaterial(newItem[2])
-      .subscribe((res => {
-        setTimeout(() => {
-          this.loadgridData();
-        }, 1000);
-
-      }))
+    
   }
 
   onStatusChange(event: any) {
@@ -224,53 +179,7 @@ export class LearningMaterialComponent implements OnInit, AfterViewInit {
   getDocuments() {
     this.count++;
 
-    setTimeout(() => {
-      this.serviceProxy
-        .getManyBaseDocumentControllerDocuments(
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          ['id,DESC'],
-          undefined,
-          1000,
-          0,
-          0,
-          0
-        )
-        .subscribe((res: any) => {
-          this.documentLists = res.data;
-
-          let savedDoc = this.documentLists[0];
-          let fileName = savedDoc?.fileName;
-          let filePath = savedDoc?.relativePath;
-
-          let lm = new LearningMaterial();
-          lm.documentType = "Learning Material";
-          lm.documentName = fileName;
-          lm.document = `${this.downloadURL}/attachment/${savedDoc.id}`
-          lm.isPublish = this.checked;
-          let learningMaterialsectr: LearningMaterialSector[] = [];
-          let sct = new LearningMaterialSector();
-          sct.sector.id = this.selectedSector.id;
-          learningMaterialsectr.push(sct);
-          lm.learningMaterialsector = learningMaterialsectr;
-
-          let learningMaterialusertype: LearningMaterialUserType[] = [];
-          let ust = new LearningMaterialUserType();
-          ust.userType.id = this.selectedType.id;
-          learningMaterialusertype.push(ust);
-          lm.learningMaterialusertype = learningMaterialusertype;
-          this.serviceProxy
-            .createOneBaseLearningMaterialControllerLearningMaterial(lm)
-            .subscribe((res: any) => {
-              this.count = 0;
-              this.loadgridData();
-
-            });
-
-        });
-    }, 1000);
+   
 
   }
 

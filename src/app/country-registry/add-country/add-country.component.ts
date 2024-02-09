@@ -92,28 +92,23 @@ export class AddCountryComponent implements OnInit, AfterViewInit {
 
     const token = localStorage.getItem('access_token')!;
     const tokenPayload = decode<any>(token);
-    let institutionId = tokenPayload.institutionId;
+    let institutionId = tokenPayload.institutionId ? tokenPayload.institutionId :0;
 
     let countryFilter: string[] = [];
     countryFilter.push('Country.IsSystemUse||$eq||' + 0);
     if(institutionId != undefined){
       countryFilter.push('institution.id||$eq||' +institutionId);  
      }
-    await this.serviceProxy
-      .getManyBaseCountryControllerCountry(
-        undefined,
-        undefined,
-        countryFilter,
-        undefined,
-        ["name,ASC"],
-        undefined,
-        1000,
-        0,
-        0,
-        0
-      ).subscribe((res: any) => {
-        this.countryList = res.data;
-      });
+     this.countryProxy.getAllCo(
+    ).subscribe(data => {
+      for(let co of data){
+        if(institutionId !=0 && co.isSystemUse==false ){
+          this.countryList.push(co)
+        }
+        if(institutionId ==0 && co.isSystemUse==false){
+          this.countryList.push(co)
+        }
+      }})
 
 
     this.route.queryParams.subscribe(async (params) => {

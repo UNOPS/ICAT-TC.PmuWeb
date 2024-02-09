@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ConfirmationService, FilterService, LazyLoadEvent, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
-import { Methodology, MethodologyControllerServiceProxy, ServiceProxy, Sector, } from 'shared/service-proxies/service-proxies';
+import { Methodology, MethodologyControllerServiceProxy, Sector, } from 'shared/service-proxies/service-proxies';
 import decode from 'jwt-decode';
 import axios from "axios";
 import { environment } from 'environments/environment';
@@ -48,7 +48,6 @@ export class MethodologiesComponent implements OnInit, AfterViewInit {
 
 
   constructor(
-    private serviceProxy: ServiceProxy,
     private methodologyProxy: MethodologyControllerServiceProxy,
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
@@ -66,51 +65,7 @@ export class MethodologiesComponent implements OnInit, AfterViewInit {
 
     this.userrole = tokenPayload.roles[0];
 
-    this.serviceProxy
-      .getManyBaseMethodologyControllerMethodology(
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        1000,
-        0,
-        0,
-        0
-
-      )
-      .subscribe((res: any) => {
-        this.mlist = res.data;
-
-        for (let x of this.mlist) {
-
-          if (!this.developper.includes(x.developedBy)) {
-            this.developper.push(x.developedBy)
-          }
-
-        }
-      })
-
-
-
-    this.serviceProxy
-      .getManyBaseSectorControllerSector(
-        ['name'],
-        undefined,
-        undefined,
-        undefined,
-        ['name,ASC'],
-        undefined,
-        1000,
-        0,
-        0,
-        0
-      )
-      .subscribe((res: any) => {
-       
-        this.sectorList = res.data;
-      });
+   
 
 
   }
@@ -200,32 +155,7 @@ export class MethodologiesComponent implements OnInit, AfterViewInit {
 
   async updateStatus(meth: Methodology, aprovalStatus: number) {
     let url = environment.baseSyncAPI + '/methodology';
-    await this.serviceProxy
-      .updateOneBaseMethodologyControllerMethodology(meth.id, meth)
-      .subscribe(
-        async (res) => {
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail:
-              aprovalStatus === 1 || aprovalStatus === 2
-                ? meth.name +
-                ' is successfully ' +
-                (aprovalStatus === 1 ? 'Activate.' : 'Deactivate')
-                : 'Data request sent successfully.',
-            closable: true,
-          });
-          await axios.get(url)
-        },
-        (err) => {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Error.',
-            detail: 'Internal server error, please try again.',
-            sticky: true,
-          });
-        }
-      );
+   
 
 
   }
