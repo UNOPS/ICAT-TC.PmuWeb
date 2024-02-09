@@ -180,6 +180,12 @@ export class UserListComponent implements OnInit {
     let orFilter: string[] = []
     let andFilter: string[] = this.getFilterand()
 
+    let pageNumber =
+    event.first === 0 || event.first === undefined
+      ? 1
+      : event.first / (event.rows === undefined ? 1 : event.rows) + 1;
+  this.rows = event.rows === undefined ? 10 : event.rows;
+
     if ((this.userrole === "PMU Admin" || this.userrole === "PMU User") && this.userCountries.length > 0 && andFilter.length === 4) {
       orFilter.push(...this.pmuFilter, 'country.id in' + this.userCountries)
     }
@@ -188,7 +194,7 @@ export class UserListComponent implements OnInit {
     let req=new ReqUserDto();
     req.andoprator = str1;
     req.oroprator =str2;
-    req.first= 1;
+    req.first= pageNumber;
     req.row =event.rows;
     this.userProxy.getUserByCountry(req).subscribe(res=>{
       this.customers = res.items;
