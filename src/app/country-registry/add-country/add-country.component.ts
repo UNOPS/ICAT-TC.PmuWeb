@@ -39,9 +39,9 @@ export class AddCountryComponent implements OnInit, AfterViewInit {
   countryList: Country[] = [];
 
   accessmodules: any[] = [
-    { id: 1, name: "Carbon Market Tool" },
-    { id: 2, name: "Portfolio Tool" },
-    { id: 3, name: "Investment and Private Sector Tool" },
+    { id: 1, name: "Carbon market tool" },
+    { id: 2, name: "General tool" },
+    { id: 3, name: "Investment tool" },
   ]
 
   selectedModules: any[] = [];
@@ -127,15 +127,15 @@ export class AddCountryComponent implements OnInit, AfterViewInit {
               this.cstaus = 0;
             }
             if (this.cou.carboneMarketTool) {
-              this.selectedModules.push({ id: 1, name: "Carbon Market Tool" })
+              this.selectedModules.push({ id: 1, name: "Carbon market tool" })
 
             }
             if (this.cou.portfoloaTool) {
-              this.selectedModules.push({ id: 2, name: "Portfolio Tool" })
+              this.selectedModules.push({ id: 2, name: "General tool" })
 
             }
             if (this.cou.investmentTool) {
-              this.selectedModules.push({ id: 3, name: "Investment and Private Sector Tool" })
+              this.selectedModules.push({ id: 3, name: "Investment tool" })
 
             }
 
