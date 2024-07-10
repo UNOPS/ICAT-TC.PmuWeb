@@ -54,7 +54,7 @@ export class AddCountryComponent implements OnInit, AfterViewInit {
   isNewCountry: boolean = true;
   arr: any[] = []
   url = environment.baseUrlCountryAPI + '/country/synccountry';
-  selectCountry: string = "Select a Country";
+  selectCountry: string = "Select a country";
 
 
   selectedCountryCode: string;
