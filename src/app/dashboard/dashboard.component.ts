@@ -132,7 +132,7 @@ export class DashboardComponent implements OnInit {
               data: [59],
             },
             {
-              label: 'Number of ICAT countries using the tool',
+              label: 'Number of ICAT member countries using the tool',
               backgroundColor: '#1a069e',
               data: [count],
             },
