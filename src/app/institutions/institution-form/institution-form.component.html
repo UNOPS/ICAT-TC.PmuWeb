@@ -1,7 +1,7 @@
 <div class="container pl-20 pr-20">
   <div class="mb-12">
 
-    <h4 class="mt-4"> {{isNewInstitution ? "Add" : "Edit"}} Institution </h4>
+    <h4 class="mt-4"> {{isNewInstitution ? "Add" : "Edit"}} institution </h4>
   </div>
 
   <form #fData="ngForm" (ngSubmit)="saveForm(fData)" novalidate>
@@ -110,7 +110,7 @@
         <div class="row p-2">
           <div class="col-12 col-md-12">
             <div class="p-field">
-              <label for="objective">Contact Number*</label>
+              <label for="objective">Contact number*</label>
               <input type="number" placeholder="xx xxx xxxx xxx" name="telephoneNumber" #telephoneNumber="ngModel"
                 class="p-inputtext" [(ngModel)]="institution.contactNumber" #fmobile="ngModel" pInputText required />
               
@@ -132,18 +132,18 @@
 
     <div class="d-flex flex-row-reverse mt-3 mb-2">
 
-      <button class="btn btn-primary btn-block text-uppercase  ml-10" (click)="onBackClick()">
+      <button class="btn btn-primary btn-block ml-10" (click)="onBackClick()">
         Back
       </button>
   
-      <button pRipple class="btn btn-primary btn-block text-uppercase  ml-10" type="submit">
+      <button pRipple class="btn btn-primary btn-block  ml-10" type="submit">
         Save
       </button>
     </div>
 
     <div class="col-4">
       <div class="col" *ngIf="!isNewInstitution">
-        <button  pRipple class="btn btn-primary btn-block text-uppercase  ml-10"
+        <button  pRipple class="btn btn-primary btn-block   ml-10"
           (click)="activateInstitution(institution)">
           {{institution.status == 1 ? "Activate" : "Deactivate"}}
         </button>
