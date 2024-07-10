@@ -60,10 +60,10 @@ import { SetPasswordComponent } from './login/set-password/set-password.componen
 
 
 export enum UserRoles {
-  ICAT_ADMIN = 'ICAT Admin',
-  ICAT_USER = 'ICAT User',
-  PMU_ADMIN = 'PMU Admin',
-  PMU_USER = 'PMU User',
+  ICAT_ADMIN = 'ICAT admin',
+  ICAT_USER = 'ICAT user',
+  PMU_ADMIN = 'PMU admin',
+  PMU_USER = 'PMU user',
 }
 const routes: Routes = [
   {

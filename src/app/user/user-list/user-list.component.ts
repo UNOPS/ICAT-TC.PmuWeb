@@ -73,7 +73,7 @@ export class UserListComponent implements OnInit {
     this.filter2 = [];
 
 
-    if (this.userrole == "PMU Admin" || this.userrole === "PMU User") {
+    if (this.userrole == "PMU admin" || this.userrole === "PMU user") {
       this.pmuFilter.push(...[' not userType.id =5 ', 'not userType.id=4', 'not userType.id=1'])
     }
 
@@ -94,7 +94,7 @@ export class UserListComponent implements OnInit {
     .subscribe((res) => {
       this.countrylists = res;
     });
-    if (this.userrole == "PMU Admin" || this.userrole == "PMU User") {
+    if (this.userrole == "PMU admin" || this.userrole == "PMU user") {
       this.filter2 = []
       this.insProxy.getInstitutionDetails(this.userInsId)
       .subscribe((res) => {
@@ -118,7 +118,7 @@ export class UserListComponent implements OnInit {
   getFilterand() {
     let filters: string[] = [];
 
-    if (this.userrole == 'PMU Admin' || this.userrole == 'PMU User') {
+    if (this.userrole == 'PMU admin' || this.userrole == 'PMU user') {
       if (this.selectedCountry) {
         filters.push(...this.pmuFilter)
       } else {
@@ -186,7 +186,7 @@ export class UserListComponent implements OnInit {
       : event.first / (event.rows === undefined ? 1 : event.rows) + 1;
   this.rows = event.rows === undefined ? 10 : event.rows;
 
-    if ((this.userrole === "PMU Admin" || this.userrole === "PMU User") && this.userCountries.length > 0 && andFilter.length === 4) {
+    if ((this.userrole === "PMU admin" || this.userrole === "PMU user") && this.userCountries.length > 0 && andFilter.length === 4) {
       orFilter.push(...this.pmuFilter, 'country.id in' + this.userCountries)
     }
     let str1 = andFilter.join(' and ');
