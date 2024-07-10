@@ -105,7 +105,7 @@ export class UserFormComponent implements OnInit {
         if (this.user?.institution) {
           this.institutions.forEach((ins) => {
             if (ins.id == this.user.institution.id) {
-              if (['PMU Admin'].includes(tokenPayload.roles[0])) {
+              if (['PMU admin'].includes(tokenPayload.roles[0])) {
                 this.institutions = [ins];
               }
             }
@@ -168,15 +168,15 @@ export class UserFormComponent implements OnInit {
 
       let filter2 = '' 
       this.filter2.push('4');
-      if (['PMU Admin'].includes(tokenPayload.roles[0])) {
+      if (['PMU admin'].includes(tokenPayload.roles[0])) {
         this.filter2.push('5');
         this.filter2.push('1');
       }
 
-      this.userProxy.getUserType("ICAT Admin").subscribe((res)=>{
+      this.userProxy.getUserType("ICAT admin").subscribe((res)=>{
         for(let a of res){
           if(a.status !=1 && a.id !=4){
-            if (['PMU Admin'].includes(tokenPayload.roles[0]) && a.id !=5) {
+            if (['PMU admin'].includes(tokenPayload.roles[0]) && a.id !=5) {
             
                 this.userTypes.push(a);
             }
@@ -206,11 +206,11 @@ export class UserFormComponent implements OnInit {
     this.user.telephone = '';
 
 
-    if (tokenPayload.roles[0] == 'PMU Admin') {
+    if (tokenPayload.roles[0] == 'PMU admin') {
         this.filter2.push('4') &
         this.filter2.push('5') &
         this.filter2.push('1');
-    } else if (tokenPayload.roles[0] == 'PMU User') {
+    } else if (tokenPayload.roles[0] == 'PMU user') {
         this.filter2.push('4') &
         this.filter2.push('5') &
         this.filter2.push('1') &
@@ -269,7 +269,7 @@ export class UserFormComponent implements OnInit {
           this.instituteUserList = res;
           if (this.instituteUserList.length > 0 && this.uid.id == 1) {
             this.message =
-              'Already have, You can not add more than one PMU Admin for ' +
+              'Already have, You can not add more than one PMU admin for ' +
               this.instituteUserList[0]?.institution?.name;
             this.isDisableCuzCountry = true;
             this.messageService.add({

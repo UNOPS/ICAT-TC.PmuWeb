@@ -90,17 +90,17 @@ export class LoginFormComponent implements OnInit {
               username: this.logiLayoutService.authCredentialDot.username,
             };
 
-            if (this.roleGuardService.checkRoles(['ICAT Admin'])) {
+            if (this.roleGuardService.checkRoles(['ICAT admin'])) {
               this.userRole = this.userRoles[0];
               this.router.navigate(['/dashboard']);
-            } else if (this.roleGuardService.checkRoles(['ICAT User'])) {
+            } else if (this.roleGuardService.checkRoles(['ICAT user'])) {
               this.userRole = this.userRoles[1];
               this.router.navigate(['/dashboard']);
-            } else if (this.roleGuardService.checkRoles(['PMU Admin'])) {
+            } else if (this.roleGuardService.checkRoles(['PMU admin'])) {
               this.userRole = this.userRoles[2];
               this.router.navigate(['/dashboard']);
             } else if (
-              this.roleGuardService.checkRoles(['PMU User'])
+              this.roleGuardService.checkRoles(['PMU user'])
             ) {
               this.userRole = this.userRoles[3];
               this.router.navigate(['/dashboard']);

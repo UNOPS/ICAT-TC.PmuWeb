@@ -39,10 +39,10 @@ export class AppComponent {
 
   ) {
     this.userRoles = [
-      { name: 'ICAT Admin', role: '4' },
-      { name: 'ICAT User', role: '5' },
-      { name: 'PMU Admin', role: '1' },
-      { name: 'PMU User', role: '3' },
+      { name: 'ICAT admin', role: '4' },
+      { name: 'ICAT user', role: '5' },
+      { name: 'PMU admin', role: '1' },
+      { name: 'PMU user', role: '3' },
     ];
 
     this.router.events.subscribe((event: any) => {
@@ -104,13 +104,13 @@ export class AppComponent {
 
 
 
-    if (this.roleGuardService.checkRoles(['ICAT Admin'])) {
+    if (this.roleGuardService.checkRoles(['ICAT admin'])) {
       this.userRole = this.userRoles[0];
-    } else if (this.roleGuardService.checkRoles(['ICAT User'])) {
+    } else if (this.roleGuardService.checkRoles(['ICAT user'])) {
       this.userRole = this.userRoles[1];
-    } else if (this.roleGuardService.checkRoles(['PMU Admin'])) {
+    } else if (this.roleGuardService.checkRoles(['PMU admin'])) {
       this.userRole = this.userRoles[2];
-    } else if (this.roleGuardService.checkRoles(['PMU User'])
+    } else if (this.roleGuardService.checkRoles(['PMU user'])
     ) {
       this.userRole = this.userRoles[3];
     } 
