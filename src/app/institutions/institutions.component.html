@@ -61,7 +61,7 @@
 
             <td>
               {{getCountryname(institution)}}
-              {{institution.countries !== undefined? institution.countries.length !== 0 ?  this.countryName : "Not Applicable":""}}
+              {{institution.countries !== undefined? institution.countries.length !== 0 ?  this.countryName : "Not applicable":""}}
 
               <div *ngIf="institution.countries == undefined" type="button" class="has-details"
                 (mouseenter)="getCountries(institution.id)">
@@ -97,7 +97,7 @@
       {{ institution.user[0]? (institution.user[0].firstName + ' ' + institution.user[0].lastName)  :"" }}
     </td>
 
-    <td>{{ institution.status == 0 ? 'Active' : 'Deactive' }}</td>
+    <td>{{ institution.status == 0 ? 'Activated' : 'Deactivated' }}</td>
     </tr>
     </ng-template>
     </p-table>
