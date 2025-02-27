@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule} from '@angular/forms' 
 import {PaginatorModule} from 'primeng/paginator';
 import {ToggleButtonModule} from 'primeng/togglebutton';
 import { AppRoutingModule } from './app-routing.module';
@@ -153,6 +154,7 @@ export function getRemoteServiceBaseUrl(): string {
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     DashboardModule,
     PaginatorModule,
