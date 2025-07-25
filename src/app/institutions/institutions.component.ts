@@ -129,7 +129,7 @@ this.countryProxy.getAllCo()
 
 
   new() {
-    this.router.navigate(['/instituion-new']);
+    this.router.navigate(['/institution-new']);
   }
   getCountryname(institution:Institution){
     this.countryName=""
@@ -143,7 +143,7 @@ this.countryProxy.getAllCo()
   }
 
   editInstitution(institution: Institution) {
-    this.router.navigate(['/instituion-new'], { queryParams: { id: institution.id} });
+    this.router.navigate(['/institution-new'], { queryParams: { id: institution.id} });
   
   }
 
