@@ -192,11 +192,11 @@ this.countryProxy.getAllCo()
   }
 
   onBackClick() {
-    this.router.navigate(['/instituion']);
+    this.router.navigate(['/institution']);
   }
 
 
-  activateInstitution(instituion: Institution) {
+  activateInstitution(institution: Institution) {
 
     if (this.institution.status == 1) {
 
