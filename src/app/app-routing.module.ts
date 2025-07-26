@@ -155,9 +155,7 @@ const routes: Routes = [
     data: {
       expectedRoles: [
         UserRoles.ICAT_ADMIN,
-        UserRoles.ICAT_USER,
         UserRoles.PMU_ADMIN,
-        UserRoles.PMU_USER,
       ],
     },
   },
@@ -169,7 +167,6 @@ const routes: Routes = [
     data: {
       expectedRoles: [
         UserRoles.ICAT_ADMIN,
-        UserRoles.ICAT_USER,
         UserRoles.PMU_ADMIN,
       ],
     },

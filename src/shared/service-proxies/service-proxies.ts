@@ -13396,19 +13396,19 @@ export class InstitutionControllerServiceProxy {
         if (page === undefined || page === null)
             throw new Error("The parameter 'page' must be defined and cannot be null.");
         else
-            url_ += "page=" + encodeURIComponent("" + page) + "&";
+            url_ = url_.replace("{page}", encodeURIComponent("" + page));
         if (limit === undefined || limit === null)
             throw new Error("The parameter 'limit' must be defined and cannot be null.");
         else
-            url_ += "limit=" + encodeURIComponent("" + limit) + "&";
+            url_ = url_.replace("{limit}", encodeURIComponent("" + limit));
         if (filterText === undefined || filterText === null)
             throw new Error("The parameter 'filterText' must be defined and cannot be null.");
         else
-            url_ += "filterText=" + encodeURIComponent("" + filterText) + "&";
+            url_ = url_.replace("{filterText}", encodeURIComponent("" + filterText));
         if (countryId === undefined || countryId === null)
             throw new Error("The parameter 'countryId' must be defined and cannot be null.");
         else
-            url_ += "countryId=" + encodeURIComponent("" + countryId) + "&";
+            url_ = url_.replace("{countryId}", encodeURIComponent("" + countryId));
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
