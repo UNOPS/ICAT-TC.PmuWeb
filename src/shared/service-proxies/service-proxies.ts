@@ -13392,7 +13392,7 @@ export class InstitutionControllerServiceProxy {
     }
 
     getInstiDetails(page: number, limit: number, filterText: string, countryId: number): Observable<any> {
-        let url_ = this.baseUrl + "/institution/institution/institutioninfo/{page}/{limit}/{filterText}/{countryId}?";
+        let url_ = this.baseUrl + "/institution/get-institution/{page}/{limit}/{filterText}/{countryId}?";
         if (page === undefined || page === null)
             throw new Error("The parameter 'page' must be defined and cannot be null.");
         else
@@ -13457,7 +13457,7 @@ export class InstitutionControllerServiceProxy {
     }
 
     getInstitutionDetails(countryId: number): Observable<any> {
-        let url_ = this.baseUrl + "/institution/institution/institutiId?";
+        let url_ = this.baseUrl + "/institution/institutionId?";
         if (countryId === undefined || countryId === null)
             throw new Error("The parameter 'countryId' must be defined and cannot be null.");
         else

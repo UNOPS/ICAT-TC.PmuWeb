@@ -171,6 +171,7 @@ const routes: Routes = [
         UserRoles.ICAT_ADMIN,
         UserRoles.ICAT_USER,
         UserRoles.PMU_ADMIN,
+        UserRoles.PMU_USER,
       ],
     },
   },
