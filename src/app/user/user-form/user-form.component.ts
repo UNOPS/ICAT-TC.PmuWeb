@@ -227,9 +227,9 @@ export class UserFormComponent implements OnInit {
         this.userTypes = res;
       });
 
-    let countryFilter = 'isSystemUse =1 AND isCA IS NULL '  ;
-    if (institutionId != undefined) {
-      countryFilter = countryFilter + ' AND institution.id' +institutionId
+    let countryFilter = 'isSystemUse = 1 AND isCA IS NULL';
+    if (!isAdmin && institutionId != undefined) {
+      countryFilter = countryFilter + ' AND institution.id = ' + institutionId;
     }
 
     setTimeout(() => {
