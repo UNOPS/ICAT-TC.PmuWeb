@@ -46,12 +46,19 @@
         <div class="row p-2">
           <div class="col-12 col-md-12">
             <div class="p-field">
-              <label for="description">Description</label>
+              <label for="description">Description*</label>
               <textarea type="text" name="description" placeholder="" [(ngModel)]="institution.description" rows="5"
                 cols="130" pInputTextarea autoResize="autoResize" class="p-inputtext"
-                #fInstitution="ngModel"></textarea>
-
-           
+                #fInstitution="ngModel" required></textarea>
+              <p
+                class="info-message text-danger"
+                *ngIf="
+                  !institution.description &&
+                  (fData.submitted || fInstitution.touched || fInstitution.dirty)
+                "
+              >
+                This is a mandatory field
+              </p>
             </div>
           </div>
         </div>

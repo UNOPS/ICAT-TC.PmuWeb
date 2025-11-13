@@ -88,11 +88,14 @@ export class AddCountryComponent implements OnInit, AfterViewInit {
 
 
 
+  institutionId: number = 0;
+
   async ngOnInit(): Promise<void> {
 
     const token = localStorage.getItem('access_token')!;
     const tokenPayload = decode<any>(token);
-    let institutionId = tokenPayload.institutionId ? tokenPayload.institutionId :0;
+    this.institutionId = tokenPayload.institutionId ? tokenPayload.institutionId :0;
+    let institutionId = this.institutionId;
 
     let countryFilter: string[] = [];
     countryFilter.push('Country.IsSystemUse||$eq||' + 0);
@@ -204,6 +207,10 @@ export class AddCountryComponent implements OnInit, AfterViewInit {
         this.cou.isSystemUse = true;
         this.cou.countryStatus = CountryStatus.Active;
         this.cou.registeredDate = moment(new Date());
+        
+        if (this.institutionId && this.institutionId > 0) {
+          this.cou.institution = { id: this.institutionId } as any;
+        }
 
         for (let x = 0; x < this.selectedModules.length; x++) {
           let selectModId = this.selectedModules[x].id;

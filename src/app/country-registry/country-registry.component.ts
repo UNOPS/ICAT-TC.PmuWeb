@@ -85,7 +85,7 @@ export class CountryRegistryComponent implements OnInit, AfterViewInit {
     this.countryProxy.getAllCountry(
       pageNumber,
       this.rows,
-      this.institutionId,
+      0,
     ).subscribe(data => {
       this.pcountryList = data.items;
 
