@@ -58,7 +58,7 @@ export class InstitutionFormComponent implements OnInit {
 
     this.countryProxy.getActiveCountry()
     .subscribe(async (res)=>{
-      this.countryList = res.filter(country => 
+      this.countryList = res.filter((country: Country) => 
         !country.institution || 
         (this.editInstitutionId > 0 && country.institution?.id == this.editInstitutionId)
       );
