@@ -89,14 +89,12 @@ export class UserFormComponent implements OnInit {
 
     this.uid = event;
 
-    this.filter = 'status !=1' 
+    const isAdmin = ['ICAT admin', 'PMU admin'].includes(tokenPayload.roles[0]);
+    
+    this.filter = 'status != 1';
    
-    if (this.uid?.id === 5) {
-      this.filter = this.filter + ' AND id =' + 1
-    } else {
-      if (institutionId) {
-        this.filter = this.filter + ' AND id =' + institutionId
-      }
+    if (!isAdmin && institutionId) {
+      this.filter = this.filter + ' AND id = ' + institutionId;
     }
     await this.insProxy.getFilteredInstitution(this.filter)
       .subscribe((res) => {
@@ -119,7 +117,13 @@ export class UserFormComponent implements OnInit {
     const token = localStorage.getItem('access_token')!;
     const tokenPayload = decode<any>(token);
     const institutionId = tokenPayload.institutionId;
-    let filter1 = 'status !=1'
+    const isAdmin = ['ICAT admin', 'PMU admin'].includes(tokenPayload.roles[0]);
+    
+    let filter1 = 'status != 1';
+    if (!isAdmin && institutionId) {
+      filter1 = filter1 + ' AND id = ' + institutionId;
+    }
+    
     await this.insProxy.getFilteredInstitution(filter1)
       .subscribe((res) => {
         this.institutions = res;

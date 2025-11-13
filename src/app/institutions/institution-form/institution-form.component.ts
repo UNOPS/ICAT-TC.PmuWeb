@@ -56,16 +56,18 @@ export class InstitutionFormComponent implements OnInit {
     })
 
 
-this.countryProxy.getAllCo()
+    this.countryProxy.getActiveCountry()
     .subscribe(async (res)=>{
-      this.countryList = res;
+      this.countryList = res.filter(country => 
+        !country.institution || 
+        (this.editInstitutionId > 0 && country.institution?.id == this.editInstitutionId)
+      );
 
-        for (let i in this.countryList) {
-          if (this.countryList[i].institution?.id == this.editInstitutionId && this.editInstitutionId > 0) {
-
-            this.listc.push(this.countryList[i]);
-          }
+      for (let i in this.countryList) {
+        if (this.countryList[i].institution?.id == this.editInstitutionId && this.editInstitutionId > 0) {
+          this.listc.push(this.countryList[i]);
         }
+      }
     })
 
     this.route.queryParams.subscribe((params) => {
