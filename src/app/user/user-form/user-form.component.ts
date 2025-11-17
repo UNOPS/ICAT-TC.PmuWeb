@@ -245,13 +245,14 @@ export class UserFormComponent implements OnInit {
   onChangeUser(event: any) { }
 
   onChangeCountry(event: any) {
-    let countryAndUserFilter = 'country.id =' + event.id + ' AND userType.id = ' + this.uid.id;
+    // Only check for active users (status = 0)
+    let countryAndUserFilter = 'country.id =' + event.id + ' AND userType.id = ' + this.uid.id + ' AND status = 0';
     this.userProxy.getFilteredUsers(countryAndUserFilter)
       .subscribe((res: any) => {
         this.countryUserList = res;
         if (this.countryUserList.length > 0) {
           this.message =
-            'Already have, You can not add more than one Country Admin for ' +
+            'Already have an active user, You can not add more than one Country Admin for ' +
             this.countryUserList[0]?.country?.name;
           this.isDisableCuzCountry = true;
           this.messageService.add({
@@ -267,13 +268,14 @@ export class UserFormComponent implements OnInit {
 
   onChangeInstitutioon(event: any) {
     if (event) {
-      const instituteAndUserFilter = 'institution.id =' + event.id + ' AND userType.id = ' + this.uid.id;
+      // Only check for active users (status = 0)
+      const instituteAndUserFilter = 'institution.id =' + event.id + ' AND userType.id = ' + this.uid.id + ' AND status = 0';
       this.userProxy.getFilteredUsers(instituteAndUserFilter)
         .subscribe((res: any) => {
           this.instituteUserList = res;
           if (this.instituteUserList.length > 0 && this.uid.id == 1) {
             this.message =
-              'Already have, You can not add more than one PMU admin for ' +
+              'Already have an active user, You can not add more than one PMU admin for ' +
               this.instituteUserList[0]?.institution?.name;
             this.isDisableCuzCountry = true;
             this.messageService.add({
