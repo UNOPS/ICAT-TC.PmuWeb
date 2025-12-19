@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, FormGroup, Validators, ValidationErrors } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ValidationErrors } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ResetPassword, AuthControllerServiceProxy } from 'shared/service-proxies/service-proxies';
+import { ResetPassword, AuthControllerServiceProxy, ForgotPasswordDto } from 'shared/service-proxies/service-proxies';
 import { AuthenticationService } from '../login-layout/authentication.service';
 import { finalize } from 'rxjs/operators';
 
@@ -13,15 +13,17 @@ export class SetPasswordComponent implements OnInit {
   resetPasswordForm: FormGroup;
   resetPasswordDto = new ResetPassword();
   token: string = '';
-  
+
   passwordVisible: boolean = false;
   confirmPasswordVisible: boolean = false;
-  
+
   isLoading: boolean = false;
   isSuccessful: boolean = false;
+  isErrorPopup: boolean = false;
+  isExpiredPopup: boolean = false;
+  isResendSuccess: boolean = false;
   errorMessage: string = '';
 
-  // Password pattern: at least 8 chars, 1 uppercase, 1 lowercase, 1 number, 1 special char
   private passwordPattern = '^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,}$';
 
   constructor(
@@ -72,19 +74,50 @@ export class SetPasswordComponent implements OnInit {
     this.authControllerService.resetPassword(this.resetPasswordDto)
       .pipe(finalize(() => this.isLoading = false))
       .subscribe(
-        (isSuccess: boolean) => {
-          this.isSuccessful = isSuccess;
-          if (isSuccess) {
-            setTimeout(() => this.router.navigate(['/login']), 3000);
+        (response: any) => {
+          if (response && response.success !== false) {
+            this.isSuccessful = true;
           } else {
+            this.isErrorPopup = true;
             this.errorMessage = 'Password reset failed. Please try again.';
           }
         },
-        (error) => {
-          this.errorMessage = 'An error occurred. Please try again later.';
-          console.error('Reset password error:', error);
+        (err: any) => {
+          if (err.status === 410 || (err.error && err.error.expired)) {
+            this.isExpiredPopup = true;
+            this.errorMessage = err.error?.message || 'Your activation code has expired. Please request a new one.';
+          } else {
+            this.isErrorPopup = true;
+            this.errorMessage = err.error?.message || 'Something went wrong. Please try again.';
+          }
         }
       );
+  }
+
+  resendActivationCode(): void {
+    const email = this.emailControl.value;
+    if (!email) {
+      return;
+    }
+    const request = new ForgotPasswordDto();
+    request.email = email;
+    this.authControllerService.forgotPassword(request).subscribe(
+      () => {
+        this.isExpiredPopup = false;
+        this.isResendSuccess = true;
+      },
+      () => {
+        this.errorMessage = 'Failed to resend activation code. Please try again.';
+      }
+    );
+  }
+
+  closeExpiredPopup(): void {
+    this.isExpiredPopup = false;
+  }
+
+  closeResendSuccessPopup(): void {
+    this.isResendSuccess = false;
   }
 
   gotoLogin(): void {
@@ -93,14 +126,8 @@ export class SetPasswordComponent implements OnInit {
 
   private initForm(): void {
     this.resetPasswordForm = this.fb.group({
-      email: ['', [
-      Validators.required,
-      Validators.email
-      ]],
-      password: ['', [
-      Validators.required,
-      Validators.pattern(this.passwordPattern)
-      ]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.pattern(this.passwordPattern)]],
       confirmPassword: ['', Validators.required]
     }, {
       validators: this.passwordMatchValidator
@@ -119,7 +146,6 @@ export class SetPasswordComponent implements OnInit {
   private passwordMatchValidator(control: any): ValidationErrors | null {
     const password = control.get('password').value;
     const confirmPassword = control.get('confirmPassword').value;
-    
     return password === confirmPassword ? null : { passwordMismatch: true };
   }
 }
