@@ -4,19 +4,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ResetPassword, AuthControllerServiceProxy, ForgotPasswordDto } from 'shared/service-proxies/service-proxies';
 import { AuthenticationService } from '../login-layout/authentication.service';
 import { finalize } from 'rxjs/operators';
-import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-set-password',
   templateUrl: './set-password.component.html',
-  styleUrls: ['../login-layout/login-layout.component.scss'],
 })
 export class SetPasswordComponent implements OnInit {
   resetPasswordForm: FormGroup;
   resetPasswordDto = new ResetPassword();
   token: string = '';
-  emailFromUrl: string = '';
-  isActivation: boolean = false;
 
   passwordVisible: boolean = false;
   confirmPasswordVisible: boolean = false;
@@ -42,7 +38,7 @@ export class SetPasswordComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.getParamsFromUrl();
+    this.getTokenFromUrl();
   }
 
   get passwordControl(): any {
@@ -55,20 +51,6 @@ export class SetPasswordComponent implements OnInit {
 
   get confirmPasswordControl(): any {
     return this.resetPasswordForm.get('confirmPassword');
-  }
-
-  get pageTitle(): string {
-    return this.isActivation ? 'Set Your Password' : 'Reset Your Password';
-  }
-
-  get pageDescription(): string {
-    return this.isActivation
-      ? 'Welcome! Please create a password to activate your account.'
-      : 'Enter your new password below.';
-  }
-
-  get submitLabel(): string {
-    return this.isActivation ? 'Activate Account' : 'Reset Password';
   }
 
   togglePasswordVisibility(field: 'password' | 'confirmPassword'): void {
@@ -87,7 +69,7 @@ export class SetPasswordComponent implements OnInit {
     this.isLoading = true;
     this.resetPasswordDto.password = this.passwordControl.value;
     this.resetPasswordDto.token = this.token;
-    this.resetPasswordDto.email = this.resetPasswordForm.getRawValue().email;
+    this.resetPasswordDto.email = this.emailControl.value;
 
     this.authControllerService.resetPassword(this.resetPasswordDto)
       .pipe(finalize(() => this.isLoading = false))
@@ -103,7 +85,7 @@ export class SetPasswordComponent implements OnInit {
         (err: any) => {
           if (err.status === 410 || (err.error && err.error.expired)) {
             this.isExpiredPopup = true;
-            this.errorMessage = err.error?.message || 'Your link has expired. Please request a new one.';
+            this.errorMessage = err.error?.message || 'Your activation code has expired. Please request a new one.';
           } else {
             this.isErrorPopup = true;
             this.errorMessage = err.error?.message || 'Something went wrong. Please try again.';
@@ -125,7 +107,7 @@ export class SetPasswordComponent implements OnInit {
         this.isResendSuccess = true;
       },
       () => {
-        this.errorMessage = 'Failed to resend. Please try again.';
+        this.errorMessage = 'Failed to resend activation code. Please try again.';
       }
     );
   }
@@ -142,34 +124,21 @@ export class SetPasswordComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  toLanding(): void {
-    window.location.href = environment.baseUrlLandingPage;
-  }
-
   private initForm(): void {
     this.resetPasswordForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.pattern(this.passwordPattern)]],
-      confirmPassword: ['', Validators.required],
+      confirmPassword: ['', Validators.required]
     }, {
-      validators: this.passwordMatchValidator,
+      validators: this.passwordMatchValidator
     });
   }
 
-  private getParamsFromUrl(): void {
+  private getTokenFromUrl(): void {
     this.route.queryParams.subscribe(params => {
       this.token = params['token'] || '';
-      this.emailFromUrl = params['email'] || '';
-      this.isActivation = params['activate'] === 'true';
-
       if (!this.token) {
         this.router.navigate(['/login']);
-        return;
-      }
-
-      if (this.emailFromUrl) {
-        this.emailControl.setValue(this.emailFromUrl);
-        this.emailControl.disable();
       }
     });
   }
