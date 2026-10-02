@@ -52,7 +52,7 @@ export class UserFormComponent implements OnInit {
   isNewUser = true;
   editUserId: number;
   isEmailUsed = false;
-  isEmailCountryUsed =false;
+  isEmailCountryUsed = false;
   usedEmail = '';
 
   alertHeader = 'User';
@@ -62,7 +62,7 @@ export class UserFormComponent implements OnInit {
   coreatingUser = false;
   uid: any;
 
-  filter: string='';
+  filter: string = '';
   filter2: string[] = [];
   countryUserList: any[] = [];
   instituteUserList: any[] = [];
@@ -90,9 +90,9 @@ export class UserFormComponent implements OnInit {
     this.uid = event;
 
     const isAdmin = ['ICAT admin', 'PMU admin'].includes(tokenPayload.roles[0]);
-    
+
     this.filter = 'status != 1';
-   
+
     if (!isAdmin && institutionId) {
       this.filter = this.filter + ' AND id = ' + institutionId;
     }
@@ -118,12 +118,12 @@ export class UserFormComponent implements OnInit {
     const tokenPayload = decode<any>(token);
     const institutionId = tokenPayload.institutionId;
     const isAdmin = ['ICAT admin', 'PMU admin'].includes(tokenPayload.roles[0]);
-    
+
     let filter1 = 'status != 1';
     if (!isAdmin && institutionId) {
       filter1 = filter1 + ' AND id = ' + institutionId;
     }
-    
+
     await this.insProxy.getFilteredInstitution(filter1)
       .subscribe((res) => {
         this.institutions = res;
@@ -138,7 +138,7 @@ export class UserFormComponent implements OnInit {
 
     await this.route.queryParams.subscribe(async (params) => {
 
-      
+
       this.editUserId = params['id'];
 
       this.uid = this.editUserId;
@@ -170,21 +170,21 @@ export class UserFormComponent implements OnInit {
           });
       }
 
-      let filter2 = '' 
+      let filter2 = ''
       this.filter2.push('4');
       if (['PMU admin'].includes(tokenPayload.roles[0])) {
         this.filter2.push('5');
         this.filter2.push('1');
       }
 
-      this.userProxy.getUserType("ICAT admin").subscribe((res)=>{
-        for(let a of res){
-          if(a.status !=1 && a.id !=4){
-            if (['PMU admin'].includes(tokenPayload.roles[0]) && a.id !=5) {
-            
-                this.userTypes.push(a);
+      this.userProxy.getUserType("ICAT admin").subscribe((res) => {
+        for (let a of res) {
+          if (a.status != 1 && a.id != 4) {
+            if (['PMU admin'].includes(tokenPayload.roles[0]) && a.id != 5) {
+
+              this.userTypes.push(a);
             }
-            else{
+            else {
               this.userTypes.push(a)
             }
           }
@@ -211,11 +211,11 @@ export class UserFormComponent implements OnInit {
 
 
     if (tokenPayload.roles[0] == 'PMU admin') {
-        this.filter2.push('4') &
+      this.filter2.push('4') &
         this.filter2.push('5') &
         this.filter2.push('1');
     } else if (tokenPayload.roles[0] == 'PMU user') {
-        this.filter2.push('4') &
+      this.filter2.push('4') &
         this.filter2.push('5') &
         this.filter2.push('1') &
         this.filter2.push('3');
@@ -234,12 +234,12 @@ export class UserFormComponent implements OnInit {
 
     setTimeout(() => {
       this.countryProxy.getManyFilteredCountries(countryFilter)
-      .subscribe(async (res) => {
-        this.countryList = await res;
-        this.countryList.push(this.user.country);
-      });
+        .subscribe(async (res) => {
+          this.countryList = await res;
+          this.countryList.push(this.user.country);
+        });
     }, 2000);
- 
+
   }
 
   onChangeUser(event: any) { }
@@ -294,21 +294,21 @@ export class UserFormComponent implements OnInit {
   onEmailChange(event: any) {
     this.isEmailUsed = false;
     this.isEmailCountryUsed = false;
-    const url = environment.baseSyncAPI + '/login-profile/isUserAvailable/' + event ;
+    const url = environment.baseSyncAPI + '/login-profile/isUserAvailable/' + event;
 
     this.userProxy.isUserAvailable(event).subscribe((res) => {
       if (res) {
         this.isEmailUsed = true;
       }
     });
-    if(this.user.userType?.id == 2){
+    if (this.user.userType?.id == 2) {
       this.http.get<any[]>(url, event).subscribe((res) => {
         if (res) {
           this.isEmailCountryUsed = true;
         }
       });
     }
-   
+
   }
 
   async saveUser(userForm: NgForm) {
@@ -316,81 +316,85 @@ export class UserFormComponent implements OnInit {
       if (this.isNewUser) {
         this.isEmailUsed = false;
         this.usedEmail = '';
-            if (this.isEmailUsed) {
-              this.isEmailUsed = true;
-              this.confirmationService.confirm({
-                message:
-                  'Email address is already in use, please select a diffrent email address to create a new user.!',
-                header: 'Error!',
-                rejectIcon: 'icon-not-visible',
-                rejectVisible: false,
-                acceptLabel: 'Ok',
-                accept: () => { },
+        if (this.isEmailUsed) {
+          this.isEmailUsed = true;
+          this.confirmationService.confirm({
+            message:
+              'Email address is already in use, please select a diffrent email address to create a new user.!',
+            header: 'Error!',
+            rejectIcon: 'icon-not-visible',
+            rejectVisible: false,
+            acceptLabel: 'Ok',
+            accept: () => { },
 
-                reject: () => { },
-              });
-            } else {
-              this.user.username = this.user.email;
+            reject: () => { },
+          });
+        } else {
+          this.user.username = this.user.email;
 
-              this.user.status = 0;
+          this.user.status = 0;
 
-              const userType = new UserType();
-              userType.id = this.user.userType.id;
-              this.user.userType = userType;
-              this.coreatingUser = true;
-              const url = environment.baseSyncAPI + '/login-profile/syncuser';
+          const userType = new UserType();
+          userType.id = this.user.userType.id;
+          this.user.userType = userType;
+          this.coreatingUser = true;
 
-              let createUserDto = new CreateUserDto()
-              createUserDto.email = this.user.email
-              createUserDto.firstName = this.user.firstName
-              createUserDto.lastName = this.user.lastName
-              createUserDto.mrvInstitution = this.user.mrvInstitution
-              createUserDto.username = this.user.username
-              createUserDto.mobile = this.user.mobile
-              createUserDto.telephone = this.user.telephone
-              if(this.user.country ){
-                createUserDto.country = this.user.country.id
-              }
-              createUserDto.userType = this.user.userType.id
-              if(this.user.institution ){
-                createUserDto.institution = this.user.institution.id
-              }
-              
+          let createUserDto = new CreateUserDto()
+          createUserDto.email = this.user.email
+          createUserDto.firstName = this.user.firstName
+          createUserDto.lastName = this.user.lastName
+          createUserDto.mrvInstitution = this.user.mrvInstitution
+          createUserDto.username = this.user.username
+          createUserDto.mobile = this.user.mobile
+          createUserDto.telephone = this.user.telephone
+          if (this.user.country) {
+            createUserDto.country = this.user.country.id
+          }
+          createUserDto.userType = this.user.userType.id
+          if (this.user.institution) {
+            createUserDto.institution = this.user.institution.id
+          }
 
-              this.userProxy
-                .create(createUserDto)
-                .subscribe(
-                  async (res) => {
-                    this.messageService.add({
-                      severity: 'success',
-                      summary: 'Success.',
-                      detail: 'User is created successfully..',
-                    });
-                    setTimeout(() => {
-                      this.router.navigate(['/user-list']);
-                    }, 2000);
 
-                    if (this.user.userType.id === 2) {
-                      this.http.post<any[]>(url, res).subscribe();
-                    }
-                  },
-                  (error) => {
-                    this.coreatingUser = false;
-                    this.messageService.add({
-                      severity: 'error',
-                      summary: 'Error.',
-                      detail: 'An error occurred, please try again.',
-                    });
-                  },
-                  () => {
-                    this.coreatingUser = false;
-                  },
-                );
-            }
-          // });
+          this.userProxy
+            .create(createUserDto)
+            .subscribe(
+              async (res) => {
+                this.messageService.add({
+                  severity: 'success',
+                  summary: 'Success.',
+                  detail: 'User is created successfully..',
+                });
+                setTimeout(() => {
+                  this.router.navigate(['/user-list']);
+                }, 2000);
+
+                if ((res as any)?.tcSync === 'failed') {
+                  this.messageService.add({
+                    severity: 'warn',
+                    summary: 'TC toolkit not updated',
+                    detail: 'The user was created in PMU, but their TC toolkit account and invite could not be created. Please contact support.',
+                    life: 15000,
+                  });
+                }
+              },
+              (error) => {
+                this.coreatingUser = false;
+                this.messageService.add({
+                  severity: 'error',
+                  summary: 'Error.',
+                  detail: 'An error occurred, please try again.',
+                });
+              },
+              () => {
+                this.coreatingUser = false;
+              },
+            );
+        }
+        // });
       } else {
-       
-        if(this.user.institution ){
+
+        if (this.user.institution) {
           let ins = new Institution()
           ins.id = this.user.institution.id
           this.user.institution = ins
@@ -460,7 +464,6 @@ export class UserFormComponent implements OnInit {
   }
 
   async deactivateUser() {
-    const url = environment.baseSyncAPI + '/login-profile/syncuser';
     await this.userProxy
       .changeStatus(this.user.id, this.user.status == 0 ? 1 : 0)
       .subscribe((res) => {
@@ -470,13 +473,15 @@ export class UserFormComponent implements OnInit {
           detail: `Successfully ${this.user.status == 0 ? 'deactivated' : 'activated'
             }`,
         });
+        if ((res as any)?.tcSync === 'failed') {
+          this.messageService.add({
+            severity: 'warn',
+            summary: 'TC toolkit not updated',
+            detail: 'The status changed in PMU, but the TC toolkit account could not be updated. Please contact support.',
+            life: 15000,
+          });
+        }
         this.user = res;
       });
-
-    if (this.user.userType.id == 2) {
-      this.user.status == 0 ? this.user.status = 1 : this.user.status = 0;
-      this.http.post<any[]>(url, this.user).subscribe();
-    }
-
   }
 }
