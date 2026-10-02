@@ -28,6 +28,7 @@ export class LoginFormComponent implements OnInit {
   hideSideBar = true;
 
   isSubmitLogin: boolean;
+  loginErrorMessage: string = 'Invalid credentials';
   isInvalidCredential: boolean;
   userRoles: any[] = [];
   userRole: any = { name: 'Guest', role: '-1' };
@@ -111,10 +112,14 @@ export class LoginFormComponent implements OnInit {
 
           } else {
             this.isInvalidCredential = true;
+            this.loginErrorMessage = 'Invalid credentials';
           }
         },
         (error) => {
           this.isInvalidCredential = true;
+          this.loginErrorMessage = error?.status === 403
+            ? 'This account has been deactivated. Please contact your PMU administrator.'
+            : 'Invalid credentials';
         }
       );
   }
